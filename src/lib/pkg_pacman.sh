@@ -39,7 +39,7 @@ CAU_PACMAN_OP_RE='^(\([[:space:]]*[0-9]+/[0-9]+\) )?(upgrading|installing|reinst
 #
 #    glibc-2.44+r24+g16be1518495f-1-x86_64_v3 downloading...
 #
-# and nothing else - no counter, no total - so the position here is counted the
+# and nothing else: no counter, no total. So the position here is counted the
 # same way the transaction is.
 #
 # The database sync a few lines earlier prints the very same shape (" core
@@ -55,7 +55,7 @@ CAU_PACMAN_DL_AWK='
 # Feeds the desktop's progress bar by watching pacman work, through the three
 # phases a pacman run has: first it works out what the upgrade consists of,
 # then everything is fetched, then everything is unpacked. Three steps on the
-# bar rather than one, because they are three stretches to sit through - and
+# bar rather than one, because they are three stretches to sit through. And
 # each one is silent in its own way.
 #
 # The first is the one that used to look like a hang. Between "starting full
@@ -73,7 +73,7 @@ CAU_PACMAN_DL_AWK='
 #
 # Only the second carries a counter, and the unattended runs that this bar
 # exists for are exactly the ones that do not get it. So the position is
-# counted here instead - one line per package - and the total taken from the
+# counted here instead (one line per package), and the total taken from the
 # "Package (218)" header pacman prints before it starts. That header is the
 # better number anyway: checkupdates counts packages with an update available
 # and knows nothing about the new dependencies pulled in alongside them.
@@ -104,9 +104,9 @@ _cau_pacman_progress_watch() {
 
 		if [[ -n $line ]]; then
 			# Unpacking has started, so whatever came before it is over. If
-			# nothing was ever retrieved - every package already sitting in the
-			# cache, which is the ordinary state of affairs after a run that was
-			# interrupted once already - then the download step never happened,
+			# nothing was ever retrieved (every package already sitting in the
+			# cache, which is normal after a run that was interrupted once
+			# already), then the download step never happened,
 			# and it is dropped rather than handed its whole share of the bar in
 			# exchange for no work at all.
 			if [[ $phase != install ]]; then
@@ -189,7 +189,7 @@ _cau_pacman_exec() {
 	fi
 
 	# Line-buffered on purpose. pacman writes to a file or through a pipe here,
-	# never to a terminal, so libc buffers it in 4KB blocks - and 4KB of
+	# never to a terminal, so libc buffers it in 4KB blocks. And 4KB of
 	# "upgrading foo..." is on the order of a hundred and sixty packages. The
 	# watcher would see nothing at all, then a hundred and sixty lines at once,
 	# which is exactly how a bar comes to sit still and then leap to the end.
@@ -321,7 +321,7 @@ cau_pacman_update() {
 	#
 	# While an upgrade runs, a shutdown request is refused by logind and the
 	# desktop answers with a polkit password prompt reading "Power off the
-	# system while an application is inhibiting this" - which never mentions
+	# system while an application is inhibiting this". That never mentions
 	# updates and, on a German system, is not even translated. Somebody who was
 	# simply told beforehand does not end up staring at that.
 	if [[ $CFG_NOTIFY_START == yes ]]; then
@@ -393,7 +393,7 @@ cau_pacman_update() {
 
 			dependency)
 				# Something installed still depends on a package the repos want
-				# to drop or replace - almost always an AUR package that has not
+				# to drop or replace, almost always an AUR package that has not
 				# caught up yet. Nothing here can fix that, and it is not worth
 				# failing over: letting one stuck package block every other
 				# update indefinitely is far worse on an unattended machine.
@@ -468,7 +468,7 @@ cau_pacman_cleanup() {
 		reclaim="$( { paccache -d --nocolor -k"$CFG_KEEP_OLD"; paccache -du --nocolor -k0; } 2>&1 \
 			| grep -oE 'disk space saved: [^)]*' | paste -sd', ' -)"
 
-		cau_info "Trimming the package cache (keeping $CFG_KEEP_OLD old version(s))${reclaim:+ - $reclaim}"
+		cau_info "Trimming the package cache (keeping $CFG_KEEP_OLD old version(s))${reclaim:+: $reclaim}"
 		cau_run_logged paccache -r --nocolor -k"$CFG_KEEP_OLD"  || cau_warn "paccache -r failed"
 		cau_run_logged paccache -ru --nocolor -k0               || cau_warn "paccache -ru failed"
 	fi

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# cachy-auto-update - unattended updates for CachyOS
+# cachy-auto-update: unattended updates for CachyOS
 #
 # The command line front end. Everything it does is either flipping a switch in
 # /etc/cachy-auto-update/cachy-auto-update.conf, driving the systemd timer, or
@@ -77,10 +77,10 @@ cau_do_enable() {
 
 	cau_config_load
 	if [[ $CFG_AUR == yes ]] && ! cau_aur_detect_quiet; then
-		cau_note "$(cau_msg "No AUR helper found - install paru or yay for AUR updates.")"
+		cau_note "$(cau_msg "No AUR helper found. Install paru or yay for AUR updates.")"
 	fi
 	if [[ $CFG_AUR == yes ]] && ! cau_have makepkg; then
-		cau_note "$(cau_msg "base-devel is missing - AUR packages cannot be built without it.")"
+		cau_note "$(cau_msg "base-devel is missing, so AUR packages cannot be built.")"
 	fi
 
 	cau_offer_disable_cachy_update
@@ -89,7 +89,7 @@ cau_do_enable() {
 
 # CachyOS ships a pacman hook that pops up "Reboot recommended!" the moment a
 # kernel, driver or systemd package is unpacked. During a manual upgrade that
-# is fine - the transaction is the last thing happening. During an unattended
+# is fine, because the transaction is the last thing happening. During an unattended
 # one it lands in the middle: the run still has AUR packages to build and
 # Flatpaks to pull, and a notification asking for a restart right then is an
 # invitation to cut the update in half.
@@ -141,7 +141,7 @@ cau_aur_detect_quiet() {
 
 # cachy-update ships an enabled user timer that only ever says "N updates
 # available". Once updates apply themselves that notification is pure noise,
-# so offer to silence it - but only ask, never decide.
+# so offer to silence it. But only ask, never decide.
 cau_offer_disable_cachy_update() {
 	local user uid answer found=0
 
@@ -163,7 +163,7 @@ cau_offer_disable_cachy_update() {
 	read -r answer || return 0
 
 	# Defaults to yes: once updates install themselves, cachy-update's "N
-	# updates available" is purely noise. "j" is accepted too - the prompt is
+	# updates available" is purely noise. "j" is accepted too: the prompt is
 	# translated, so a German user types the German letter and used to have
 	# that silently read as "no".
 	case "${answer,,}" in

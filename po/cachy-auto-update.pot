@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cachy-auto-update 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
 "POT-Creation-Date: 2026-08-08 00:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -65,7 +66,7 @@ msgstr ""
 msgid "%d days ago"
 msgstr ""
 
-msgid "The last run reported a problem - see 'cachy-auto-update log'."
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
 msgstr ""
 
 msgid "A restart is recommended to finish a kernel update."
@@ -162,19 +163,23 @@ msgstr ""
 msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
 msgstr ""
 
-msgid "No AUR helper found - install paru or yay for AUR updates."
+msgid "No AUR helper found. Install paru or yay for AUR updates."
 msgstr ""
 
-msgid "base-devel is missing - AUR packages cannot be built without it."
+msgid "base-devel is missing, so AUR packages cannot be built."
 msgstr ""
 
-msgid "cachy-update also notifies about available updates. Turn its notifications off? [Y/n]"
+msgid ""
+"cachy-update also notifies about available updates. Turn its notifications "
+"off? [Y/n]"
 msgstr ""
 
 msgid "cachy-update's update check has been disabled."
 msgstr ""
 
-msgid "CachyOS shows a \"Reboot recommended\" notification while an update is still running. Turn it off? [Y/n]"
+msgid ""
+"CachyOS shows a \"Reboot recommended\" notification while an update is still "
+"running. Turn it off? [Y/n]"
 msgstr ""
 
 #, c-format
@@ -278,13 +283,16 @@ msgstr ""
 msgid "Update failed"
 msgstr ""
 
-msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgid ""
+"Something went wrong while updating. Run 'cachy-auto-update log' for details."
 msgstr ""
 
 msgid "Package database locked"
 msgstr ""
 
-msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgid ""
+"pacman's lock file looks left over from an interrupted update. Updates are "
+"paused until it is cleared."
 msgstr ""
 
 msgid "Some packages were held back"
@@ -304,13 +312,17 @@ msgstr ""
 msgid "Finishing an interrupted update"
 msgstr ""
 
-msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgid ""
+"The last update was cut short, most likely because the machine was switched "
+"off. It is being finished now."
 msgstr ""
 
 msgid "Installing updates"
 msgstr ""
 
-msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgid ""
+"%d packages are being updated. Please leave the computer switched on until "
+"this is done."
 msgstr ""
 
 msgid "Settings"
@@ -319,7 +331,7 @@ msgstr ""
 msgid "(none)"
 msgstr ""
 
-msgid "Up/Down select - Space or Right changes - q goes back"
+msgid "Up/Down: select, Space or Right: change, q: back"
 msgstr ""
 
 msgid "Package names separated by spaces, empty to clear:"

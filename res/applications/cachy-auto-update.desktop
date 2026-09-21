@@ -1,5 +1,5 @@
 [Desktop Entry]
-# Not here to put an entry in the application menu - hence NoDisplay. This is
+# Not here to put an entry in the application menu, hence NoDisplay. This is
 # how the desktop learns what to call the update while it runs: the progress
 # bar in the notification area is labelled from the desktop entry named in the
 # job request, and without one the job is filed under whatever the helper

@@ -3,10 +3,10 @@
 # Desktop notifications from a root system service.
 #
 # Two paths exist:
-#   * live   - somebody has a graphical session, so notify-send is run inside
-#              it via runuser with the session bus address set;
-#   * queued - nobody is logged in, so the message is appended to a spool that
-#              the XDG autostart entry replays at the next login.
+#   * live:   somebody has a graphical session, so notify-send is run inside
+#             it via runuser with the session bus address set;
+#   * queued: nobody is logged in, so the message is appended to a spool that
+#             the XDG autostart entry replays at the next login.
 #
 # Messages travel as a msgid plus printf arguments rather than as finished
 # text, so a notification queued at 04:00 is still rendered in whatever locale
@@ -44,8 +44,8 @@ cau_notify_close() {
 # had to be skipped is only ever seen if it waits.
 #
 # Set explicitly rather than left to the server. Notification daemons do keep
-# critical-urgency messages up - the spec asks them to, and Plasma obliges -
-# but that is a "should", it says nothing about the normal-urgency messages
+# critical-urgency messages up (the spec asks them to, and Plasma obliges).
+# But that is a "should", it says nothing about the normal-urgency messages
 # here that still need somebody to act, and urgency separately controls sound
 # and whether do-not-disturb is overridden. Those are not the same question.
 #
@@ -136,7 +136,7 @@ cau_notify_enqueue() {
 
 	printf '%s\n' "$record" >> "$CAU_NOTIFY_QUEUE" 2>/dev/null || return 0
 
-	# keep the spool bounded - nobody wants three weeks of backlog at login
+	# keep the spool bounded: nobody wants three weeks of backlog at login
 	if (( $(wc -l < "$CAU_NOTIFY_QUEUE" 2>/dev/null || echo 0) > CAU_NOTIFY_QUEUE_MAX )); then
 		tmp="$(mktemp "${CAU_NOTIFY_QUEUE}.XXXXXX")" || return 0
 		tail -n "$CAU_NOTIFY_QUEUE_MAX" "$CAU_NOTIFY_QUEUE" > "$tmp"

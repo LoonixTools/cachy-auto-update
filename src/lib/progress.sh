@@ -3,8 +3,8 @@
 # The update's progress bar on the desktop.
 #
 # An unattended upgrade can take twenty minutes, and for most of that a user is
-# told only that "an update is running". This drives the desktop's job list -
-# the same widget that shows a bar while Dolphin copies files - so how far
+# told only that "an update is running". This drives the desktop's job list
+# (the same widget that shows a bar while Dolphin copies files), so how far
 # along the run is stays visible the whole time.
 #
 # The desktop ends the progress entry as soon as the D-Bus connection that
@@ -14,8 +14,8 @@
 # of those pipes, plus the arithmetic that turns "package 120 of 260 in the
 # repository step" into one number for the bar.
 #
-# Absent anywhere along the way - no session, no Plasma, no Python bindings -
-# this does nothing at all and the update proceeds exactly as before.
+# If anything is missing along the way (no session, no Plasma, no Python
+# bindings), this does nothing at all and the update proceeds exactly as before.
 
 CAU_PROGRESS_HELPER="${CAU_LIBEXECDIR}/cachy-auto-update-progress"
 
@@ -26,14 +26,14 @@ CAU_PROGRESS_FIFOS=()
 CAU_PROGRESS_LOCALES=()
 
 # What each step is worth on the bar. Rough shares of a typical run rather than
-# anything measured: the repositories dominate - fetching them and unpacking
-# them about equally, on a domestic line - and the cleanup is a rounding error.
-# They do not have to add up to 100 - only the steps a given run will actually
+# anything measured: the repositories dominate (fetching them and unpacking
+# them about equally, on a domestic line), and the cleanup is a rounding error.
+# They do not have to add up to 100. Only the steps a given run will actually
 # perform are counted, and the total is normalised against those.
 #
 # "resolve" is everything pacman does before it has a transaction: syncing the
 # databases and working out what the upgrade actually consists of. It is
-# usually seconds, which is why it is worth so little - but on a large backlog
+# usually seconds, which is why it is worth so little. But on a large backlog
 # it is minutes, and those minutes used to be spent looking at a bar that had
 # not moved yet.
 declare -A CAU_PROGRESS_WEIGHTS=(
@@ -147,7 +147,7 @@ cau_progress_active() {
 # turns up while it runs: nothing to download because every package was already
 # in the cache, no AUR updates pending, no Flatpaks installed. A step like that
 # keeps its whole share of the bar and then hands it over in a single jump the
-# moment the next one starts - which is precisely the stutter this is here to
+# moment the next one starts. That is precisely the stutter this is here to
 # remove. Dropping it hands its share to the steps that do have work instead,
 # so the bar advances at a steady pace rather than leaping across the gaps.
 #
@@ -243,7 +243,7 @@ _cau_progress_pct() {
 
 	# Never backwards. Two honest things can ask for that: dropping a step
 	# rescales the run against a smaller total, and the conflict-recovery loop
-	# restarts pacman - and with it the item tally - from the top. Both are
+	# restarts pacman (and with it the item tally) from the top. Both are
 	# real, neither is a reason to show somebody a bar that retreats.
 	(( pct < CAU_PROGRESS_SHOWN )) && pct=$CAU_PROGRESS_SHOWN
 
@@ -282,16 +282,16 @@ cau_progress_item() {
 # whatsoever between "starting full system upgrade" and the transaction it
 # eventually prepares; an AUR helper compiling a package prints plenty, none of
 # it countable. On a large backlog either is minutes. There is no honest number
-# to show for that - but a bar that has not moved since it appeared is read as
+# to show for that. But a bar that has not moved since it appeared is read as
 # a hang, and somebody who reads it that way reaches for the power button in
 # the middle of an update. That is the failure this is here to prevent.
 #
 # So it creeps, along a curve that approaches the end of the step without ever
 # reaching it: half the step's share after HALFLIFE seconds, three quarters
 # after three times that, the whole of it never. Nothing is claimed that is not
-# known - the item counter stays empty throughout, which is the field that
-# would be lying if it moved - and the step still finishes the instant real
-# work reports in, because every real report is further along than the creep.
+# known: the item counter stays empty throughout, and it is the field that
+# would be lying if it moved. The step still finishes the instant real work
+# reports in, because every real report is further along than the creep.
 #
 # Confined to the step's own span, so a creep can never overtake the step that
 # comes after it however long it is left running.
@@ -324,8 +324,8 @@ cau_progress_creep_start() {
 		# reason cau_progress_begin opens its fifo read-write: a pipe held open
 		# at both ends never reports end-of-file, so a timed read on it blocks
 		# for exactly the timeout and nothing else. A forked sleep would also
-		# survive the kill below - it is a child of this subshell, not this
-		# subshell - and inherit the fifo's write end, which would keep the
+		# survive the kill below (it is a child of this subshell, not this
+		# subshell) and inherit the fifo's write end, which would keep the
 		# helper from seeing the end of its input until the sleep ran out.
 		local nap
 		exec {nap}<> <(:)
@@ -345,15 +345,15 @@ cau_progress_creep_stop() {
 
 	# The ticker moved the bar from inside a subshell, so this side never saw
 	# it happen and still believes the bar is where it was left. Catching up
-	# costs one recomputation - the curve is a function of elapsed time and
-	# nothing else - and without it the next ordinary report from here would be
+	# costs one recomputation, since the curve is a function of elapsed time and
+	# nothing else. Without it the next ordinary report from here would be
 	# measured against a stale percentage and send the bar backwards.
 	cau_progress_creep $(( SECONDS - CAU_PROGRESS_CREEP_T0 ))
 }
 
 # cau_progress_detail <label-msgid> <value>
-# A labelled line under the entry's "Details" - which package is being unpacked
-# right now, say.
+# A labelled line under the entry's "Details", for example which package is
+# being unpacked right now.
 cau_progress_detail() {
 	local label="$1" value="$2" i fd
 
@@ -383,7 +383,7 @@ CAU_PROGRESS_TAIL_PID=0
 #
 # The protocol is one instruction per line, so the tail travels tab separated
 # and is put back together on the other side. Tabs inside a log line would
-# split it in two on the way, so they become spaces first - the job view
+# split it in two on the way, so they become spaces first. The job view
 # renders either as whitespace, and a line broken in half renders as nonsense.
 cau_progress_log() {
 	local label="$1" text="$2" i fd
@@ -465,12 +465,12 @@ cau_progress_end() {
 
 	# Before the descriptors go: anything still running in the background holds
 	# its own copy of them, so the helper would not see the end of its input
-	# until it exited - and it is about to be waited on.
+	# until it exited. And it is about to be waited on.
 	cau_progress_creep_stop
 	cau_progress_tail_stop
 
-	# The last step never consumes its own share - nothing reports items for
-	# the cleanup - so the bar would stop a few percent short of the end and
+	# The last step never consumes its own share (nothing reports items for
+	# the cleanup), so the bar would stop a few percent short of the end and
 	# vanish there. Only on the way out of a run that actually worked, though:
 	# filling the bar for a failed update says the opposite of what happened.
 	[[ $outcome == ok ]] && _cau_progress_line 'percent\t100'

@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cachy-auto-update 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
 "POT-Creation-Date: 2026-08-08 00:00+0200\n"
 "PO-Revision-Date: 2026-08-08 00:00+0200\n"
 "Last-Translator: Felitendo\n"
@@ -66,8 +67,8 @@ msgstr "vor %d Stunden"
 msgid "%d days ago"
 msgstr "vor %d Tagen"
 
-msgid "The last run reported a problem - see 'cachy-auto-update log'."
-msgstr "Beim letzten Lauf gab es ein Problem – siehe „cachy-auto-update log“."
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Beim letzten Lauf gab es ein Problem. Siehe „cachy-auto-update log“."
 
 msgid "A restart is recommended to finish a kernel update."
 msgstr "Ein Neustart wird empfohlen, um ein Kernel-Update abzuschließen."
@@ -161,26 +162,37 @@ msgid "Could not enable the systemd timer."
 msgstr "Der systemd-Timer konnte nicht aktiviert werden."
 
 msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
-msgstr "/etc/sudoers.d/cachy-auto-update ist fehlerhaft – wird nicht aktiviert."
+msgstr ""
+"/etc/sudoers.d/cachy-auto-update ist fehlerhaft und wird nicht aktiviert."
 
-msgid "No AUR helper found - install paru or yay for AUR updates."
-msgstr "Kein AUR-Helper gefunden – für AUR-Updates paru oder yay installieren."
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Kein AUR-Helper gefunden. Für AUR-Updates paru oder yay installieren."
 
-msgid "base-devel is missing - AUR packages cannot be built without it."
-msgstr "base-devel fehlt – ohne das lassen sich AUR-Pakete nicht bauen."
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "base-devel fehlt, daher lassen sich keine AUR-Pakete bauen."
 
-msgid "cachy-update also notifies about available updates. Turn its notifications off? [Y/n]"
-msgstr "cachy-update benachrichtigt ebenfalls über verfügbare Updates. Dessen Benachrichtigungen abschalten? [J/n]"
+msgid ""
+"cachy-update also notifies about available updates. Turn its notifications "
+"off? [Y/n]"
+msgstr ""
+"cachy-update benachrichtigt ebenfalls über verfügbare Updates. Dessen "
+"Benachrichtigungen abschalten? [J/n]"
 
 msgid "cachy-update's update check has been disabled."
 msgstr "Die Update-Prüfung von cachy-update wurde abgeschaltet."
 
-msgid "CachyOS shows a \"Reboot recommended\" notification while an update is still running. Turn it off? [Y/n]"
-msgstr "CachyOS zeigt eine Benachrichtigung \"Neustart empfohlen\", während ein Update noch läuft. Abschalten? [J/n]"
+msgid ""
+"CachyOS shows a \"Reboot recommended\" notification while an update is still "
+"running. Turn it off? [Y/n]"
+msgstr ""
+"CachyOS zeigt eine Benachrichtigung \"Neustart empfohlen\", während ein "
+"Update noch läuft. Abschalten? [J/n]"
 
 #, c-format
 msgid "The reboot notification has been turned off. Undo it by deleting %s."
-msgstr "Die Neustart-Benachrichtigung wurde abgeschaltet. Rückgängig durch Löschen von %s."
+msgstr ""
+"Die Neustart-Benachrichtigung wurde abgeschaltet. Rückgängig durch Löschen "
+"von %s."
 
 #, c-format
 msgid "Could not write %s."
@@ -279,21 +291,29 @@ msgstr "%d Updates wurden installiert."
 msgid "Update failed"
 msgstr "Update fehlgeschlagen"
 
-msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
-msgstr "Beim Update ist etwas schiefgelaufen. Details mit „cachy-auto-update log“."
+msgid ""
+"Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr ""
+"Beim Update ist etwas schiefgelaufen. Details mit „cachy-auto-update log“."
 
 msgid "Package database locked"
 msgstr "Paketdatenbank gesperrt"
 
-msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
-msgstr "Die Sperrdatei von pacman scheint von einem abgebrochenen Update übrig zu sein. Bis sie entfernt ist, pausieren die Updates."
+msgid ""
+"pacman's lock file looks left over from an interrupted update. Updates are "
+"paused until it is cleared."
+msgstr ""
+"Die Sperrdatei von pacman scheint von einem abgebrochenen Update übrig zu "
+"sein. Bis sie entfernt ist, pausieren die Updates."
 
 msgid "Some packages were held back"
 msgstr "Einige Pakete wurden zurückgehalten"
 
 #, c-format
 msgid "%s could not be updated and was skipped. Everything else is up to date."
-msgstr "%s konnte nicht aktualisiert werden und wurde übersprungen. Alles andere ist aktuell."
+msgstr ""
+"%s konnte nicht aktualisiert werden und wurde übersprungen. Alles andere ist "
+"aktuell."
 
 #, c-format
 msgid "Held back: %s"
@@ -305,15 +325,23 @@ msgstr "Der letzte Lauf wurde abgebrochen, bevor er fertig war."
 msgid "Finishing an interrupted update"
 msgstr "Abgebrochenes Update wird beendet"
 
-msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
-msgstr "Das letzte Update wurde unterbrochen, vermutlich weil der Rechner ausgeschaltet wurde. Es wird jetzt zu Ende geführt."
+msgid ""
+"The last update was cut short, most likely because the machine was switched "
+"off. It is being finished now."
+msgstr ""
+"Das letzte Update wurde unterbrochen, vermutlich weil der Rechner "
+"ausgeschaltet wurde. Es wird jetzt zu Ende geführt."
 
 msgid "Installing updates"
 msgstr "Updates werden installiert"
 
 #, c-format
-msgid "%d packages are being updated. Please leave the computer switched on until this is done."
-msgstr "%d Pakete werden gerade aktualisiert. Bitte den Rechner so lange eingeschaltet lassen."
+msgid ""
+"%d packages are being updated. Please leave the computer switched on until "
+"this is done."
+msgstr ""
+"%d Pakete werden gerade aktualisiert. Bitte den Rechner so lange "
+"eingeschaltet lassen."
 
 msgid "Settings"
 msgstr "Einstellungen"
@@ -321,8 +349,8 @@ msgstr "Einstellungen"
 msgid "(none)"
 msgstr "(keine)"
 
-msgid "Up/Down select - Space or Right changes - q goes back"
-msgstr "Hoch/Runter wählen – Leertaste oder Rechts ändert – q zurück"
+msgid "Up/Down: select, Space or Right: change, q: back"
+msgstr "Hoch/Runter: wählen, Leertaste oder Rechts: ändern, q: zurück"
 
 msgid "Package names separated by spaces, empty to clear:"
 msgstr "Paketnamen mit Leerzeichen getrennt, leer zum Löschen:"

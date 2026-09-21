@@ -15,7 +15,7 @@ think about it: repository packages, AUR packages, Flatpaks and AppImages are
 updated in the background, with no password prompt and no terminal.
 
 Run without a command it opens a small interactive menu with the two switches
-that matter - automatic updates on/off and notifications on/off - plus the
+that matter (automatic updates on/off and notifications on/off), plus the
 current status, and a settings screen covering every remaining option so the
 configuration file never has to be edited by hand. In the settings screen the
 arrow keys select, Space or Right changes a value, and _q_ goes back; every
@@ -23,8 +23,8 @@ change is written out immediately.
 
 The actual work is done by a systemd system service. The timer ticks hourly;
 whether a tick does anything is decided by _UpdateInterval_ (daily by default).
-A run that is postponed - low battery, a game running, somebody else using
-pacman - is simply retried at the next tick.
+A run that is postponed (low battery, a game running, somebody else using
+pacman) is simply retried at the next tick.
 
 # COMMANDS
 
@@ -64,7 +64,7 @@ Before anything is installed, a run is postponed when:
 - the battery is below _MinBatteryPercent_ (ignored on mains power, and on
   machines without a battery);
 - _RequireAC_ is set and the machine is not plugged in;
-- a game is running - detected via GameMode, a list of known game processes, or
+- a game is running, detected via GameMode, a list of known game processes, or
   an application holding a blocking idle inhibitor;
 - pacman's database is locked, or pacman, yay, paru, pamac or a similar tool is
   running.
@@ -84,13 +84,13 @@ A package that has to replace another one is handled silently. If pacman would
 stop to ask whether a conflicting package may be removed, the transaction is
 retried once with that question answered affirmatively, unless
 _AutoResolveConflicts_ is turned off. Files on disk that collide with a package
-are *not* forced - that stays a human decision. A signature failure triggers one
+are *not* forced. That stays a human decision. A signature failure triggers one
 keyring refresh and one retry.
 
 AUR packages are built and installed as the locked *cachy-auto-update* system
 account, because *makepkg*(8) refuses to run as root. That account has no
-password and no shell, and is allowed - through _/etc/sudoers.d/cachy-auto-update_
-- to invoke *pacman* without one. No user password is ever stored anywhere.
+password and no shell. Through _/etc/sudoers.d/cachy-auto-update_ it is allowed
+to invoke *pacman* without one. No user password is ever stored anywhere.
 
 A failed AUR build is not reported the first time it happens; only a failure
 that repeats is worth waking somebody up for.
@@ -113,7 +113,7 @@ For as long as a run is working, the notification area carries a live progress
 entry: the step being performed, how many items it has got through, an overall
 percentage, and the package currently being unpacked under "Details". This is a
 job in the sense of *org.kde.JobViewServer*, the same mechanism a file manager
-uses while copying, rather than a notification - which is what makes it a bar
+uses while copying, rather than a notification. That is what makes it a bar
 instead of a line of text.
 
 The desktop withdraws a job as soon as the D-Bus connection that requested it
@@ -134,8 +134,8 @@ for minutes at a time looking stuck.
 Expanding "Details" shows the last five lines of the run log as they are
 written, alongside the package currently being worked on. The percentage says
 the update is alive; these lines say what it is alive doing, which matters most
-during the stretches that have nothing countable to report - an AUR package
-being compiled, above all. The job interface carries exactly two description
+during the stretches that have nothing countable to report, above all an AUR
+package being compiled. The job interface carries exactly two description
 fields, so those are the two things shown.
 
 A step that turns out to have no work is dropped from the bar instead of being
@@ -147,17 +147,17 @@ with nothing pending, or a machine with no Flatpaks installed.
 Neither counted phase gets a counter from pacman on an unattended run, so both
 are counted here, a line at a time: "foo-1.2-1-x86_64 downloading..." for the
 first, "upgrading foo..." for the second. pacman's output is line-buffered
-through *stdbuf*(1) so those lines arrive as they happen - writing to a log
+through *stdbuf*(1) so those lines arrive as they happen. Writing to a log
 rather than a terminal, libc would otherwise release them in 4KB blocks, around
-a hundred and sixty packages at a time. pacman's other (n/m) sequences -
-checking keys, package integrity, loading package files - each count up to the
+a hundred and sixty packages at a time. pacman's other (n/m) sequences
+(checking keys, package integrity, loading package files) each count up to the
 same total and are deliberately ignored.
 
 # HOW LONG NOTIFICATIONS STAY
 
-A message that reports the machine still needing a person - an update that
-failed, a package database left locked, packages that had to be held back -
-stays on screen until it is dismissed. A message like that is only worth
+A message that reports the machine still needing a person stays on screen
+until it is dismissed. For example: an update that failed, a package database
+left locked, or packages that had to be held back. A message like that is only worth
 sending if it is still there when somebody comes back to the machine.
 
 Everything else times out by itself, an update that simply worked included.
@@ -188,10 +188,10 @@ _org.freedesktop.login1.power-off-ignore-inhibit_, which is _auth_admin_keep_,
 so the desktop presents an administrator password prompt reading "Power off the
 system while an application is inhibiting this". That string is shipped
 untranslated by systemd and does not mention updates, and no KDE dialog
-explains the situation either - only *systemctl*(1) names the inhibitor and its
+explains the situation either. Only *systemctl*(1) names the inhibitor and its
 reason. Hence the notification.
 
-A hard power-off - holding the power button, or losing mains power - is not
+A hard power-off (holding the power button, or losing mains power) is not
 preventable. On the next run a leftover _/var/lib/pacman/db.lck_ is removed if
 it is older than the current boot, since no process able to hold it can still
 exist; the upgrade is then repeated and pacman reinstalls whatever was caught

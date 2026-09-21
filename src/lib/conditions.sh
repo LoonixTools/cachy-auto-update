@@ -16,7 +16,7 @@ CAU_SKIP_REASON=''
 # cau_on_ac
 # True when running on mains power. systemd-ac-power also returns success when
 # the machine has neither a battery nor an adapter, which is exactly right for
-# desktops - hand-rolled sysfs globbing gets that case wrong.
+# desktops. Hand-rolled sysfs globbing gets that case wrong.
 cau_on_ac() {
 	if cau_have systemd-ac-power; then
 		systemd-ac-power > /dev/null 2>&1
@@ -41,8 +41,8 @@ cau_on_ac() {
 # cau_battery_percent
 # Average charge across the system batteries, or failure when the machine has
 # none. Peripheral batteries (mice, headsets) advertise type=Battery too and
-# are filtered out via the scope attribute; when scope is missing entirely -
-# as on many laptops - the device counts as a system battery.
+# are filtered out via the scope attribute. When scope is missing entirely (as
+# on many laptops), the device counts as a system battery.
 cau_battery_percent() {
 	local ps sum=0 count=0 cap
 
@@ -139,7 +139,7 @@ cau_gamemode_active() {
 	while read -r user uid; do
 		[[ -n $user ]] || continue
 		# timeout runs inside the runuser call because it has to be a real
-		# binary there - it cannot wrap a shell function from out here.
+		# binary there. It cannot wrap a shell function from out here.
 		out="$(cau_as_user "$user" "$uid" timeout 5 busctl --user --json=short \
 			get-property com.feralinteractive.GameMode \
 			/com/feralinteractive/GameMode \

@@ -5,7 +5,7 @@ Documentation=man:cachy-auto-update(1)
 [Timer]
 # The tick is hourly, but an actual update only happens once per
 # UpdateInterval (default: daily). That combination is what makes a postponed
-# run - low battery, a game running, somebody else using pacman - retry by
+# run (low battery, a game running, somebody else using pacman) retry by
 # itself an hour later without any backoff bookkeeping.
 OnBootSec=15min
 OnCalendar=hourly

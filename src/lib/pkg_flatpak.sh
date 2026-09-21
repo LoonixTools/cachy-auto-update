@@ -5,7 +5,7 @@
 # System-wide installations are updated directly as root. That side-steps a
 # real obstacle: the shipped polkit rule for Flatpak only grants install and
 # uninstall, and only to a subject that is active, local and in the wheel
-# group - none of which is true for an unattended service. Being root means
+# group. None of that is true for an unattended service. Being root means
 # polkit is never consulted in the first place.
 #
 # Per-user installations live in the user's home and are updated inside their
@@ -77,7 +77,7 @@ cau_flatpak_update() {
 		fi
 	done < <(cau_human_users)
 
-	# Unused runtimes are the Flatpak equivalent of orphaned packages - this is
+	# Unused runtimes are the Flatpak equivalent of orphaned packages. This is
 	# removal of installed software, not cache trimming, so it belongs behind
 	# RemoveOrphans rather than CleanCache.
 	if [[ $CFG_REMOVE_ORPHANS == yes ]]; then

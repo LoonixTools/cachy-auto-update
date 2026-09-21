@@ -4,8 +4,8 @@
 #
 # The contract this file implements: the machine's owner may run any package
 # manager at any time and must never see a lock error caused by us. We can only
-# guarantee that in one direction - by never *starting* while somebody else is
-# mid-transaction - so the checks here run before anything is touched, and a
+# guarantee that in one direction: by never *starting* while somebody else is
+# mid-transaction. So the checks here run before anything is touched, and a
 # refusal simply defers the run to the next hourly tick.
 
 # Package managers that take /var/lib/pacman/db.lck. checkupdates is absent on
@@ -65,7 +65,7 @@ cau_package_manager_busy() {
 #
 # The rigorous test is the boot time: no process that existed before the
 # current boot can still be running, so a db.lck older than boot is abandoned
-# by definition - which is exactly what a power cut during an update leaves
+# by definition. That is exactly what a power cut during an update leaves
 # behind. A lock that is merely unheld *within* this boot is not provable in
 # the same way, so it is only reported (see cau_track_stale_lock) and never
 # removed; guessing wrong there would corrupt a live transaction.
@@ -90,12 +90,12 @@ cau_pacman_lock_is_stale() {
 # cau_recover_stale_lock
 # Clears a provably abandoned lock so an interrupted update can be finished on
 # the next run. Without this, one power cut during an update stops every future
-# update permanently and silently - the worst possible outcome for a machine
-# nobody is watching.
+# update permanently and silently. That is the worst possible outcome for a
+# machine nobody is watching.
 cau_recover_stale_lock() {
 	cau_pacman_lock_is_stale || return 1
 
-	cau_warn "Found a pacman lock older than this boot - an update was cut short"
+	cau_warn "Found a pacman lock older than this boot. An update was cut short"
 	rm -f "$CAU_PACMAN_LOCK" 2>/dev/null || {
 		cau_error "Could not remove the stale pacman lock"
 		return 1

@@ -32,7 +32,7 @@ cau_ui_term_restore() {
 }
 
 # Runs an action with the terminal handed back to normal line mode, so anything
-# it prints - or prompts for - behaves the way a program expects.
+# it prints or prompts for behaves the way a program expects.
 cau_ui_cooked() {
 	cau_ui_term_restore
 	"$@"
@@ -213,8 +213,8 @@ _cau_setting_cycle() {
 # A cursor list rather than a numbered menu: there are eighteen settings, and
 # numbering them would run out of digits and force paging.
 #
-# The frame is assembled in memory and written once. Everything constant - the
-# specs, the translated labels, the clear sequence - is resolved before the
+# The frame is assembled in memory and written once. Everything constant (the
+# specs, the translated labels, the clear sequence) is resolved before the
 # loop, and the values are re-read only after something actually changes.
 # Drawing the naive way cost a command substitution per label per frame, which
 # measured 435 ms per keypress: arrow keys felt like the console was reloading,
@@ -239,7 +239,7 @@ cau_ui_settings() {
 
 	local title hint
 	cau_msg_into "$locale" "Settings"; title="$CAU_MSG_RESULT"
-	cau_msg_into "$locale" "Up/Down select - Space or Right changes - q goes back"
+	cau_msg_into "$locale" "Up/Down: select, Space or Right: change, q: back"
 	hint="$CAU_MSG_RESULT"
 
 	# the terminfo clear string, fetched once instead of forking per frame
@@ -320,8 +320,8 @@ cau_ui_edit_text() {
 # _cau_row <label> <value>
 # printf's %-28s pads by bytes, so a label containing "ü" comes out one column
 # short. ${#s} counts characters in a UTF-8 locale, so the padding is computed
-# here instead - and applied inline, because command substitution would eat the
-# trailing spaces again.
+# here instead. It is applied inline, because command substitution would eat
+# the trailing spaces again.
 _cau_row() {
 	local label="$1" value="$2" pad
 	pad=$(( 28 - ${#label} ))
@@ -389,7 +389,7 @@ cau_ui_status() {
 
 	if [[ $result == failed ]]; then
 		printf '\n  %s%s%s\n' "$CAU_C_YELLOW" \
-			"$(cau_msg "The last run reported a problem - see 'cachy-auto-update log'.")" \
+			"$(cau_msg "The last run reported a problem. See 'cachy-auto-update log'.")" \
 			"$CAU_C_RESET"
 	elif [[ $result == interrupted ]]; then
 		printf '\n  %s%s%s\n' "$CAU_C_YELLOW" \
@@ -510,7 +510,7 @@ cau_ui_menu() {
 			5) cau_ui_status_conditions; cau_pause ;;
 			6) cau_ui_settings ;;
 			q|Q) cau_ui_term_restore; trap - EXIT INT TERM; return 0 ;;
-			# Anything else - Enter, arrow keys, stray characters - just
+			# Anything else (Enter, arrow keys, stray characters) just
 			# redraws. Escape is deliberately not a quit key, so a mistyped
 			# arrow key cannot close the menu.
 			*) ;;

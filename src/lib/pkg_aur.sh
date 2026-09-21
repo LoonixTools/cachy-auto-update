@@ -2,15 +2,15 @@
 #
 # AUR packages.
 #
-# makepkg - and therefore paru and yay - refuse to run as root, so this is the
+# makepkg (and therefore paru and yay) refuse to run as root, so this is the
 # one part of the run that cannot happen in the service's own context. It is
 # executed as the locked "cachy-auto-update" system account instead, which
 # sysusers.d creates with no password and no shell. That account is granted
 # NOPASSWD access to /usr/bin/pacman through /etc/sudoers.d/cachy-auto-update,
 # which is what lets the helper install what it built without a human present.
 #
-# The alternative - stashing the user's password somewhere the daemon can read
-# it - buys nothing: whatever can decrypt it is exactly what an attacker would
+# The alternative (stashing the user's password somewhere the daemon can read
+# it) buys nothing: whatever can decrypt it is exactly what an attacker would
 # already have.
 
 CAU_AUR_COUNT=0

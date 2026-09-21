@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# cachy-auto-update-run - one unattended update pass
+# cachy-auto-update-run: one unattended update pass
 #
 # Started by cachy-auto-update.service as root. The timer fires hourly and this
 # decides whether anything should happen; that is what makes deferrals free.
@@ -43,7 +43,7 @@ fi
 # Force a neutral locale here rather than relying on the unit's Environment=,
 # so a run started by hand behaves exactly like one started by the timer.
 # pacman failures are classified by matching its output, and on a German system
-# that output is German. Text aimed at a person does not come through here - a
+# that output is German. Text aimed at a person does not come through here: a
 # notification is rendered in the recipient's own locale by cau_msg_in.
 export LC_ALL=C LANGUAGE=
 
@@ -65,7 +65,7 @@ cau_log_open
 
 # Record an interruption rather than leaving the previous run's verdict behind.
 # Without this, killing an interactive run leaves last_result at whatever it was
-# before - so the menu can keep reporting a problem from hours ago while the
+# before. Then the menu can keep reporting a problem from hours ago while the
 # machine is in fact fully up to date, which is worse than saying nothing.
 # pacman makes the commit phase itself uninterruptible, so the packages either
 # all landed or none did; only our own bookkeeping is at risk here.
@@ -193,8 +193,8 @@ progress_steps+=(cleanup)
 cau_progress_begin "${progress_steps[@]}"
 
 # And carry the run log's last lines along with it, so "Details" shows what the
-# update is doing during the stretches that have nothing to count - an AUR
-# package building for a quarter of an hour, most of all.
+# update is doing during the stretches that have nothing to count. Most of all
+# an AUR package building for a quarter of an hour.
 cau_progress_tail_start "$CAU_RUNLOG"
 
 if ! cau_pacman_update; then
@@ -273,7 +273,7 @@ fi
 
 # Recorded, deliberately not announced. The running kernel loses its module
 # tree the moment pacman unpacks the new one, so this turns true partway
-# through a run that still has AUR builds and Flatpaks ahead of it - and a
+# through a run that still has AUR builds and Flatpaks ahead of it. A
 # "restart recommended" bubble arriving then reads as an invitation to restart
 # while the update is still going. `cachy-auto-update status` and the menu say
 # so instead, where nobody is being interrupted mid-transaction.

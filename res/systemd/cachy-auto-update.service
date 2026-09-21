@@ -28,8 +28,8 @@ TimeoutStartSec=4h
 # Deliberately *not* sandboxed the way paccache.service is: this unit installs
 # packages across the whole filesystem and downloads them over the network, so
 # ProtectSystem=, PrivateNetwork= and friends would break it. NoNewPrivileges
-# in particular has to stay off - the AUR step relies on the build account
-# calling sudo.
+# in particular has to stay off, because the AUR step relies on the build
+# account calling sudo.
 NoNewPrivileges=no
 ProtectHostname=yes
 

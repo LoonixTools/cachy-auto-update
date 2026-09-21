@@ -4,14 +4,14 @@
 #
 # AppImages have no package manager of their own; Gear Lever is what tracks
 # where each one came from and how to fetch a new build. Its CLI is a first
-# class interface - `--update --all -y` is exactly the unattended entry point
+# class interface: `--update --all -y` is exactly the unattended entry point
 # we need, and it skips AppImages whose application is currently running rather
 # than pulling the file out from under it (we deliberately do not pass
 # --force).
 #
 # This only runs for users with a live graphical session: Gear Lever is a
 # Flatpak GTK application and needs the session's runtime directory. Nothing is
-# lost by waiting - the next hourly tick will catch it once they log in.
+# lost by waiting, because the next hourly tick will catch it once they log in.
 
 CAU_APPIMAGE_ID="it.mijorus.gearlever"
 CAU_APPIMAGE_COUNT=0
@@ -45,7 +45,7 @@ cau_appimage_update() {
 
 	# Is there a Gear Lever on this machine at all? Asked before the step is
 	# announced rather than discovered inside the loop: on a machine without
-	# one - the common case, it is an optional dependency - a step that exists
+	# one (the common case, it is an optional dependency), a step that exists
 	# only to hand its share of the bar straight to the next one is a jump the
 	# bar does not need. Stops at the first user who has it, so the extra probe
 	# costs anything only in the case it is there to remove.

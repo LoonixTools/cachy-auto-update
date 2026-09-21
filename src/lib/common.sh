@@ -49,8 +49,8 @@ export TEXTDOMAINDIR="${CAU_LOCALEDIR}"
 #
 # Standard POSIX precedence, deliberately: LC_ALL wins outright, and LC_ALL=C
 # really does mean English. The service sets LC_ALL=C so that pacman and upower
-# stay parseable, which makes the log English - correct, since the log is a
-# technical artefact. Anything aimed at a person (a desktop notification) does
+# stay parseable, which makes the log English. That is correct, since the log
+# is a technical artefact. Anything aimed at a person (a desktop notification) does
 # not go through here at all; it names the recipient's own locale explicitly
 # via cau_msg_in and cau_user_locale.
 cau_ui_locale() {
@@ -117,8 +117,8 @@ cau_msg_in() {
 	fi
 
 	# With no arguments the message is plain text, not a format string. Feeding
-	# it to printf anyway turns any literal percent sign in it - "Battery (%)",
-	# "100 % done" - into an invalid conversion, and that is a trap every
+	# it to printf anyway turns any literal percent sign in it (like
+	# "Battery (%)" or "100 % done") into an invalid conversion, and that is a trap every
 	# translator would eventually walk into.
 	if (( $# == 0 )); then
 		printf '%s' "$translated"
@@ -184,7 +184,7 @@ cau_log_open() {
 # Runs a command, capturing its combined output in the run log. Returns the
 # command's exit status.
 #
-# When a person is watching - `cachy-auto-update run` from a terminal - the
+# When a person is watching (`cachy-auto-update run` from a terminal), the
 # output is shown as well. Building an AUR package or pulling a few hundred
 # megabytes of Flatpak can take minutes, and silence for that long is
 # indistinguishable from a hang.
@@ -207,8 +207,8 @@ cau_run_logged() {
 # Set by cau_bad and cau_note. The menu redraws immediately after an action,
 # which would wipe the screen; this marks that something was printed that the
 # user still has to read, so only those cases wait for a keypress. A plain
-# success needs no acknowledgement - the status block at the top of the menu
-# already shows the new state.
+# success needs no acknowledgement, because the status block at the top of the
+# menu already shows the new state.
 CAU_UI_NEEDS_ACK=''
 
 cau_say()  { printf '%s\n' "$*"; }

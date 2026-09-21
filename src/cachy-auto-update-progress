@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# cachy-auto-update-progress - the update's progress bar on the desktop
+# cachy-auto-update-progress: the update's progress bar on the desktop
 #
 # Started by the update runner, once per logged-in user, inside that user's
 # session. Reads one instruction per line on stdin and turns it into the same
@@ -16,7 +16,7 @@
 #
 # Why a separate process at all: the desktop ties the progress entry to the
 # D-Bus connection that asked for it and withdraws the entry the moment that
-# connection goes away. One-shot callers - gdbus, busctl, dbus-send - therefore
+# connection goes away. One-shot callers (gdbus, busctl, dbus-send) therefore
 # cannot drive one, because each invocation is its own connection that closes
 # again immediately. So something has to sit there and hold the connection open
 # for as long as the update takes, and read its orders from somewhere else.
@@ -54,7 +54,7 @@ class Job:
         reply = self.bus.call_sync(
             JOB_SERVICE, JOB_PATH, "org.kde.JobViewServerV2", "requestView",
             # capabilities 0: no cancel and no pause button. Neither can be
-            # honoured - pacman's commit phase is not interruptible - and a
+            # honoured, because pacman's commit phase is not interruptible. A
             # button that does nothing is worse than no button.
             GLib.Variant("(sia{sv})", (DESKTOP_ENTRY, 0, {})),
             GLib.VariantType("(o)"), Gio.DBusCallFlags.NONE, -1, None)
@@ -68,8 +68,8 @@ class Job:
                 JOB_SERVICE, self.path, "org.kde.JobViewV2", method, variant,
                 None, Gio.DBusCallFlags.NONE, -1, None)
         except GLib.Error:
-            # The desktop went away mid-update - a logout, or a plasmashell
-            # restart. The update carries on without a bar.
+            # The desktop went away mid-update (a logout, or a plasmashell
+            # restart). The update carries on without a bar.
             self.path = None
 
     def close(self, message=""):
@@ -96,7 +96,7 @@ def main():
     try:
         job.open()
     except GLib.Error:
-        # No job server on this desktop - anything that is not Plasma. Same
+        # No job server on this desktop (anything that is not Plasma). Same
         # deal as a missing binding: drain stdin, stay out of the way.
         for _ in sys.stdin:
             pass

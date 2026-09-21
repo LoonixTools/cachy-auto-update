@@ -1,4 +1,4 @@
-# cachy-auto-update - build and install
+# cachy-auto-update: build and install
 #
 # Everything here is plain shell; "building" only means compiling the gettext
 # catalogs and rendering the man page. Both are optional in the sense that the
@@ -43,14 +43,14 @@ po/%.mo: po/%.po
 ifdef MSGFMT
 	$(MSGFMT) --check --output-file=$@ $<
 else
-	@echo "msgfmt not found - skipping $@"
+	@echo "msgfmt not found, skipping $@"
 endif
 
 $(MANPAGE): doc/cachy-auto-update.1.scd
 ifdef SCDOC
 	$(SCDOC) < $< > $@
 else
-	@echo "scdoc not found - skipping $@"
+	@echo "scdoc not found, skipping $@"
 endif
 
 # Syntax-check every shell file, and run shellcheck when it is available.
@@ -62,14 +62,14 @@ check:
 		shellcheck -x -e SC1090,SC1091 src/cachy-auto-update src/cachy-auto-update-run $(LIBS); \
 		echo "ok  shellcheck"; \
 	else \
-		echo "shellcheck not found - skipped"; \
+		echo "shellcheck not found, skipped"; \
 	fi
 	@if command -v python3 >/dev/null 2>&1; then \
 		python3 -m py_compile src/cachy-auto-update-progress \
 			&& echo "ok  src/cachy-auto-update-progress"; \
 		rm -rf src/__pycache__; \
 	else \
-		echo "python3 not found - skipped"; \
+		echo "python3 not found, skipped"; \
 	fi
 	@if command -v visudo >/dev/null 2>&1; then \
 		visudo -cf res/sudoers/cachy-auto-update >/dev/null && echo "ok  sudoers"; \

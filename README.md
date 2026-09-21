@@ -1,6 +1,20 @@
-# cachy-auto-update
+<p align="center">
+  <img width="200" src="res/cachy-auto-update.svg" alt="cachy-auto-update">
+</p>
 
-Unattended background updates for CachyOS (supports pacman, AUR, Flatpak and AppImages).
+<h1 align="center">cachy-auto-update</h1>
+
+<h3 align="center">Unattended background updates for CachyOS.</h3>
+
+<p align="center">
+  Supports pacman, AUR, Flatpak and AppImages.
+</p>
+
+<h5 align="center">
+  <a href="#usage">How to use</a> |
+  <a href="#install">Install</a> |
+  <a href="https://ko-fi.com/felitendo">Ko-Fi</a>
+</h5>
 
 Built for the machine you set up for somebody else and would rather not maintain.
 Stays out of the way while they are gaming or on battery, never touches the

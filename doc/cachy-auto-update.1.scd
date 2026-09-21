@@ -230,4 +230,4 @@ _/var/lib/cachy-auto-update/_
 # AUTHOR
 
 Felitendo. Source and bug reports:
-https://github.com/Felitendo/cachy-auto-update
+https://github.com/LoonixTools/cachy-auto-update

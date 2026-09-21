@@ -1,7 +1,7 @@
 [Unit]
 Description=CachyOS unattended update run
 Documentation=man:cachy-auto-update(1)
-Documentation=https://github.com/Felitendo/cachy-auto-update
+Documentation=https://github.com/LoonixTools/cachy-auto-update
 After=network-online.target
 Wants=network-online.target
 ConditionPathExists=/etc/cachy-auto-update/cachy-auto-update.conf

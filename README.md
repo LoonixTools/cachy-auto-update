@@ -13,8 +13,12 @@
 <h5 align="center">
   <a href="#usage">How to use</a> |
   <a href="#install">Install</a> |
-  <a href="https://buymeacoffee.com/felitendo">☕ Buy Me a Coffee</a>
+  <a href="https://github.com/LoonixTools/cachy-auto-update/issues">Report a bug</a>
 </h5>
+
+<p align="center">
+  <a href="https://buymeacoffee.com/felitendo"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48"></a>
+</p>
 
 Built for the machine you set up for somebody else and would rather not maintain.
 Stays out of the way while they are gaming or on battery, never touches the

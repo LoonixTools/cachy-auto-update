@@ -13,7 +13,7 @@
 <h5 align="center">
   <a href="#usage">How to use</a> |
   <a href="#install">Install</a> |
-  <a href="https://ko-fi.com/felitendo">Ko-Fi</a>
+  <a href="https://buymeacoffee.com/felitendo">☕ Buy Me a Coffee</a>
 </h5>
 
 Built for the machine you set up for somebody else and would rather not maintain.

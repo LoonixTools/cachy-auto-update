@@ -40,24 +40,9 @@ Updates are **off** until you enable them.
 sudo cachy-auto-update
 ```
 
-```
-  CachyOS Auto-Update
-
-  Automatic updates            ON
-  Notifications                ON
-
-  Last check                   3 hours ago
-  Last successful update       Sat 08 Aug 2026 04:12:03 CEST (23 packages)
-  Next scheduled run           Sat 08 Aug 2026 05:00:00 CEST
-
-  [1] Toggle automatic updates
-  [2] Toggle notifications
-  [3] Update now
-  [4] Show log
-  [5] Show current conditions
-  [6] Settings
-  [q] Quit
-```
+<p align="center">
+  <img src="res/screenshots/menu.png" alt="The cachy-auto-update menu in Konsole: automatic updates and notifications on" width="620">
+</p>
 
 Everything is configurable from **[6] Settings**.
 The interface is also translated to German (more langs coming soon (maybe)).

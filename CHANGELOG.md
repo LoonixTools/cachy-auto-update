@@ -125,16 +125,9 @@ _2026-08-08_
 
 Welcome to the very first release of cachy-auto-update! It keeps CachyOS up to date on its own: pacman, AUR, Flatpak and AppImages, installed in the background with no password prompt and nothing for you to do.
 
-```
-  CachyOS Auto-Update
-
-  Automatic updates            ON
-  Notifications                ON
-
-  Last check                   3 hours ago
-  Last successful update       Sat 08 Aug 2026 04:12:03 CEST (23 packages)
-  Next scheduled run           Sat 08 Aug 2026 05:00:00 CEST
-```
+<p align="center">
+  <img width="620" alt="The cachy-auto-update menu in Konsole" src="https://raw.githubusercontent.com/LoonixTools/cachy-auto-update/a56e804c41923d7531d578728f43d152ec275caa/res/screenshots/menu.png">
+</p>
 
 ### Highlights
 

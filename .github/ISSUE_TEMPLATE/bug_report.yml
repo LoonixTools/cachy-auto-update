@@ -1,0 +1,91 @@
+name: 🐛 Bug report
+description: Something does not work as it should.
+labels:
+- bug
+body:
+- type: markdown
+  attributes:
+    value: Thanks for taking the time! The more you fill in, the faster it can be fixed.
+- type: checkboxes
+  id: checks
+  attributes:
+    label: Before you start
+    options:
+    - label: I searched the issues and this is not reported yet.
+      required: true
+    - label: I use the latest version.
+      required: true
+- type: textarea
+  id: what
+  attributes:
+    label: What happened?
+    description: What did you do, and what went wrong?
+  validations:
+    required: true
+- type: textarea
+  id: steps
+  attributes:
+    label: Steps to reproduce
+    placeholder: |
+      1.
+      2.
+      3.
+- type: textarea
+  id: expected
+  attributes:
+    label: What did you expect?
+  validations:
+    required: true
+- type: dropdown
+  id: part
+  attributes:
+    label: What is affected?
+    multiple: true
+    options:
+    - Packages (pacman)
+    - AUR
+    - Flatpak
+    - AppImages
+    - When it runs or waits
+    - Notifications
+    - The menu
+    - Other
+  validations:
+    required: true
+- type: input
+  id: version
+  attributes:
+    label: Version
+    description: The output of `cachy-auto-update --version`.
+    placeholder: cachy-auto-update 1.3.1
+  validations:
+    required: true
+- type: dropdown
+  id: install
+  attributes:
+    label: How did you install it?
+    options:
+    - AUR
+    - Built from source
+    - Other
+  validations:
+    required: true
+- type: input
+  id: system
+  attributes:
+    label: System
+    description: Distribution, desktop, and paru or yay.
+    placeholder: CachyOS, KDE Plasma 6.4, paru
+  validations:
+    required: true
+- type: textarea
+  id: logs
+  attributes:
+    label: Status and logs
+    description: The output of `cachy-auto-update status` and `cachy-auto-update log`. If it did not run at all, also `journalctl -u cachy-auto-update`.
+    render: shell
+- type: textarea
+  id: more
+  attributes:
+    label: Anything else?
+    description: Screenshots, videos or anything else that could help.

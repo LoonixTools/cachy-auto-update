@@ -2,6 +2,12 @@
 
 What each release brings, newest first. The [GitHub releases](https://github.com/LoonixTools/cachy-auto-update/releases) add every commit that went into it.
 
+## v1.3.1
+
+_2026-09-24_
+
+A small patch. The menu now says "1 minute ago" instead of "1 minutes ago".
+
 ## v1.3.0
 
 _2026-08-20_

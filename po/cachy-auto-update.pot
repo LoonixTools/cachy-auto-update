@@ -54,12 +54,21 @@ msgstr ""
 msgid "just now"
 msgstr ""
 
+msgid "1 minute ago"
+msgstr ""
+
 #, c-format
 msgid "%d minutes ago"
 msgstr ""
 
+msgid "1 hour ago"
+msgstr ""
+
 #, c-format
 msgid "%d hours ago"
+msgstr ""
+
+msgid "1 day ago"
 msgstr ""
 
 #, c-format

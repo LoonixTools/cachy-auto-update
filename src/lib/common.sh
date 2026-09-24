@@ -281,10 +281,13 @@ cau_time_ago() {
 	delta=$(( now - ts ))
 	(( delta < 0 )) && delta=0
 
-	if   (( delta < 60 ));    then cau_msg "just now"
-	elif (( delta < 3600 ));  then cau_msg "%d minutes ago" "$(( delta / 60 ))"
-	elif (( delta < 86400 )); then cau_msg "%d hours ago" "$(( delta / 3600 ))"
-	else                           cau_msg "%d days ago" "$(( delta / 86400 ))"
+	if   (( delta < 60 ));     then cau_msg "just now"
+	elif (( delta < 120 ));    then cau_msg "1 minute ago"
+	elif (( delta < 3600 ));   then cau_msg "%d minutes ago" "$(( delta / 60 ))"
+	elif (( delta < 7200 ));   then cau_msg "1 hour ago"
+	elif (( delta < 86400 ));  then cau_msg "%d hours ago" "$(( delta / 3600 ))"
+	elif (( delta < 172800 )); then cau_msg "1 day ago"
+	else                            cau_msg "%d days ago" "$(( delta / 86400 ))"
 	fi
 	printf '\n'
 }

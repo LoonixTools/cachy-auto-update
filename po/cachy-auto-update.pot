@@ -349,6 +349,9 @@ msgstr ""
 msgid "Notify when an update starts"
 msgstr ""
 
+msgid "Start the progress bar minimized"
+msgstr ""
+
 msgid "Notify after a successful update"
 msgstr ""
 

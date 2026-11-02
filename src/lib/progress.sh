@@ -79,6 +79,30 @@ _cau_progress_line() {
 	_cau_progress_send "$line"
 }
 
+# _cau_progress_popups <user> <uid>
+# Applies MinimizeProgress. Plasma cannot open one job hidden, only switch off
+# the popups of a whole application, so this sets "Show popups" for our desktop
+# entry. Our other notifications carry no desktop entry, so only the bar is
+# affected. Written only when it differs, so the file is not touched every run.
+_cau_progress_popups() {
+	local user="$1" uid="$2" want=true have
+	local -a key=(--file plasmanotifyrc --group Applications --group "$CAU_NAME" --key ShowPopups)
+
+	[[ $CFG_MINIMIZE_PROGRESS == yes ]] && want=false
+
+	have="$(cau_as_user "$user" "$uid" kreadconfig6 "${key[@]}" --default true 2>/dev/null)" \
+		|| return 0
+	[[ $have == "$want" ]] && return 0
+
+	# --notify, so a running desktop picks it up right away
+	if [[ $want == true ]]; then
+		cau_as_user "$user" "$uid" kwriteconfig6 "${key[@]}" --delete --notify 2>/dev/null
+	else
+		cau_as_user "$user" "$uid" kwriteconfig6 "${key[@]}" --notify false 2>/dev/null
+	fi
+	return 0
+}
+
 # cau_progress_begin <step-id...>
 # Opens the progress entry in every graphical session, and records which steps
 # this run is going to perform so the bar can be scaled to them.
@@ -114,6 +138,8 @@ cau_progress_begin() {
 		cau_as_user "$user" "$uid" sh -c \
 			'command -v python3 >/dev/null 2>&1 && python3 -c "import gi" 2>/dev/null' \
 			|| continue
+
+		_cau_progress_popups "$user" "$uid"
 
 		fifo="${CAU_RUNDIR}/progress.${uid}"
 		rm -f "$fifo" 2>/dev/null

@@ -123,6 +123,12 @@ uses while copying, rather than a notification. That is what makes it a bar
 instead of a line of text. The desktop pops it up as it opens, so it follows
 _NotifyOnStart_ and is not shown when that is off.
 
+With _MinimizeProgress_ the entry stays in the notification area and does not
+pop up. Plasma has no such switch for a single job, so this sets "Show popups"
+for CachyOS Auto-Update in each user's notification settings (_plasmanotifyrc_).
+The option owns that setting: it is set again on every run. The other
+notifications carry no desktop entry and are not affected.
+
 The desktop withdraws a job as soon as the D-Bus connection that requested it
 closes, so a helper process runs inside each graphical session for the duration
 of the update and holds that connection open. It requires _python-gobject_.

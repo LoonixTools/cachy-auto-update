@@ -367,6 +367,9 @@ msgstr "Paketnamen mit Leerzeichen getrennt, leer zum Löschen:"
 msgid "Notify when an update starts"
 msgstr "Melden, wenn ein Update beginnt"
 
+msgid "Start the progress bar minimized"
+msgstr "Fortschrittsbalken minimiert starten"
+
 msgid "Notify after a successful update"
 msgstr "Melden nach erfolgreichem Update"
 

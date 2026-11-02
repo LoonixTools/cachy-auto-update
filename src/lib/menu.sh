@@ -129,6 +129,7 @@ cau_ui_read_line() {
 # type is bool, choice:<space separated values>, or text.
 CAU_SETTINGS=(
 	"NotifyOnStart|bool|yes|Notify when an update starts"
+	"MinimizeProgress|bool|no|Start the progress bar minimized"
 	"NotifyOnSuccess|bool|yes|Notify after a successful update"
 	"NotifyOnError|bool|yes|Notify when something goes wrong"
 	"UpdateInterval|choice:6h 12h 1d 2d 1w|1d|Time between update runs"

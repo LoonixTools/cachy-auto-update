@@ -45,6 +45,13 @@ While an update runs, a progress bar shows how far it is. You can **Pause** or *
   <img src="res/screenshots/progress.png" alt="The progress bar of a running update, with Pause and Cancel buttons" width="600">
 </p>
 
+To keep it out of the way, turn on **Start the progress bar minimized** in the settings. The bar then stays in the
+notification area and does not pop up. Click the notification icon to see it.
+
+<p align="center">
+  <img src="res/screenshots/settings.png" alt="The settings screen in Konsole, with Start the progress bar minimized turned on" width="620">
+</p>
+
 ## When does it update?
 
 | | |

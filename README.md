@@ -39,6 +39,12 @@ sudo cachy-auto-update
 
 Press **1** to turn automatic updates on or off. **6** has all the settings.
 
+While an update runs, a progress bar shows how far it is. You can **Pause** or **Cancel** it there.
+
+<p align="center">
+  <img src="res/screenshots/progress.png" alt="The progress bar of a running update, with Pause and Cancel buttons" width="600">
+</p>
+
 ## When does it update?
 
 | | |

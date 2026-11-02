@@ -2,6 +2,21 @@
 
 What each release brings, newest first. The [GitHub releases](https://github.com/LoonixTools/cachy-auto-update/releases) add every commit that went into it.
 
+## v1.5.0
+
+_2026-11-02_
+
+Welcome to cachy-auto-update `v1.5.0`! The progress bar can now stay out of your way: it waits in the notification area instead of popping up.
+
+<p align="center">
+  <img width="480" alt="The settings screen with Start the progress bar minimized turned on" src="https://raw.githubusercontent.com/LoonixTools/cachy-auto-update/v1.5.0/res/screenshots/settings.png">
+</p>
+
+### Highlights
+
+- New setting **Start the progress bar minimized** (`MinimizeProgress`)
+- A click on the notification icon still shows the bar, with **Pause** and **Cancel**
+
 ## v1.4.0
 
 _2026-10-10_

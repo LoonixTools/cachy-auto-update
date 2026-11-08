@@ -88,7 +88,7 @@ _cau_progress_popups() {
 	local user="$1" uid="$2" want=true have
 	local -a key=(--file plasmanotifyrc --group Applications --group "$CAU_NAME" --key ShowPopups)
 
-	[[ $CFG_MINIMIZE_PROGRESS == yes ]] && want=false
+	[[ $CFG_MINIMIZE_PROGRESS == yes && -z ${CAU_BY_HAND:-} ]] && want=false
 
 	have="$(cau_as_user "$user" "$uid" kreadconfig6 "${key[@]}" --default true 2>/dev/null)" \
 		|| return 0
@@ -118,9 +118,12 @@ cau_progress_begin() {
 	done
 	(( CAU_PROGRESS_SCALE > 0 )) || return 0
 
-	[[ $CFG_NOTIFICATIONS == yes ]] || return 0
 	# The desktop pops the bar up as it opens, which reads as a start notice.
-	[[ $CFG_NOTIFY_START == yes ]] || return 0
+	# Not so after a click on Update now: then the bar is the answer to it.
+	if [[ -z ${CAU_BY_HAND:-} ]]; then
+		[[ $CFG_NOTIFICATIONS == yes ]] || return 0
+		[[ $CFG_NOTIFY_START == yes ]] || return 0
+	fi
 	[[ -x $CAU_PROGRESS_HELPER ]] || return 0
 	mkdir -p "$CAU_RUNDIR" 2>/dev/null || return 0
 

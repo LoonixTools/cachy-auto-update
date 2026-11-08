@@ -85,6 +85,7 @@ cau_do_enable() {
 
 	cau_offer_disable_cachy_update
 	cau_offer_disable_reboot_hook
+	cau_tray_apply
 }
 
 # CachyOS ships a pacman hook that pops up "Reboot recommended!" the moment a

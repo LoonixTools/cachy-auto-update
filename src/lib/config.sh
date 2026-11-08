@@ -132,6 +132,7 @@ cau_config_load() {
 	CFG_MINIMIZE_PROGRESS=no;     cau_config_bool MinimizeProgress     no  && CFG_MINIMIZE_PROGRESS=yes
 	CFG_NOTIFY_SUCCESS=no;        cau_config_bool NotifyOnSuccess      yes && CFG_NOTIFY_SUCCESS=yes
 	CFG_NOTIFY_ERROR=no;          cau_config_bool NotifyOnError        yes && CFG_NOTIFY_ERROR=yes
+	CFG_TRAY=no;                  cau_config_bool TrayIcon             yes && CFG_TRAY=yes
 
 	CFG_INTERVAL="$(cau_config_get UpdateInterval 1w)"
 	CFG_INTERVAL_SECONDS="$(cau_duration_to_seconds "$CFG_INTERVAL" 604800)"

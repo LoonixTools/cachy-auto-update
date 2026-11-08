@@ -1,0 +1,27 @@
+[Unit]
+Description=CachyOS update, started by hand
+Documentation=man:cachy-auto-update(1)
+Documentation=https://github.com/LoonixTools/cachy-auto-update
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/etc/cachy-auto-update/cachy-auto-update.conf
+
+# Started by a click on the tray icon. Like cachy-auto-update.service, but it
+# skips the checks for battery, games and the interval, and it shows the
+# progress bar. polkit lets the person at the computer start it without a
+# password (see cachy-auto-update.rules).
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/cachy-auto-update/cachy-auto-update-run --now
+Environment=LC_ALL=C
+
+# Somebody is waiting for this one, so it does not run at idle priority. Still
+# a bit below normal, so the desktop stays smooth while AUR packages build.
+Nice=10
+OOMScoreAdjust=500
+TimeoutStartSec=4h
+
+# Same as cachy-auto-update.service: the AUR step needs sudo.
+NoNewPrivileges=no
+ProtectHostname=yes

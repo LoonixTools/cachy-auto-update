@@ -1,0 +1,757 @@
+#!/usr/bin/env python3
+#
+# cachy-auto-update-tray: the icon in the system tray
+#
+# Started by the desktop's autostart in every graphical session, as the user.
+# It shows whether updates are waiting, and a click installs them: it asks
+# systemd to start cachy-auto-update-now.service, and that run brings its own
+# progress bar. The menu can also show the log in a terminal, look for updates
+# again, or open the settings.
+#
+# It talks to the tray directly over D-Bus: StatusNotifierItem for the icon,
+# com.canonical.dbusmenu for its menu. That needs only the GLib bindings the
+# progress bar uses anyway, not a whole widget toolkit.
+#
+# Copyright (C) 2026 Felitendo
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+import gettext
+import json
+import locale
+import os
+import re
+import shutil
+import subprocess
+import sys
+import threading
+import time
+import urllib.parse
+import urllib.request
+
+try:
+    from gi.repository import Gio, GLib
+except ImportError:
+    # No GLib bindings, no icon. Updates still run on their own.
+    sys.exit(0)
+
+LOCALEDIR = "@LOCALEDIR@"
+VERSION = "@VERSION@"
+
+CONFIG = os.environ.get("CAU_CONFIG", "/etc/cachy-auto-update/cachy-auto-update.conf")
+STATEDIR = os.environ.get("CAU_STATEDIR", "/var/lib/cachy-auto-update")
+RUNDIR = os.environ.get("CAU_RUNDIR", "/run/cachy-auto-update")
+CLI = os.environ.get("CAU_CLI", "cachy-auto-update")
+NOW_UNIT = "cachy-auto-update-now.service"
+TITLE = "CachyOS Auto-Update"
+TIMER = "cachy-auto-update.timer"
+
+# Held for as long as the icon exists. A second copy (the autostart, plus one
+# started from the settings) sees it taken and leaves again.
+BUS_NAME = "io.github.loonixtools.CachyAutoUpdate.Tray"
+ITEM_PATH = "/StatusNotifierItem"
+MENU_PATH = "/MenuBar"
+WATCHER = "org.kde.StatusNotifierWatcher"
+
+# Each look for updates syncs a private copy of the package databases and asks
+# the AUR, so not more often than this. The first one waits until the desktop
+# has settled after login.
+CHECK_EVERY = 3 * 3600
+FIRST_CHECK = 60
+
+# Terminals to open the log and the settings in, best first, with the flag
+# that comes before the command.
+TERMINALS = (
+    ("konsole", ["-e"]),
+    ("xdg-terminal-exec", []),
+    ("kgx", ["-e"]),
+    ("gnome-terminal", ["--"]),
+    ("xfce4-terminal", ["-x"]),
+    ("alacritty", ["-e"]),
+    ("kitty", []),
+    ("foot", []),
+    ("xterm", ["-e"]),
+)
+
+try:
+    locale.setlocale(locale.LC_ALL, "")
+except locale.Error:
+    pass
+
+_ = gettext.translation(
+    "cachy-auto-update",
+    None if LOCALEDIR.startswith("@") else LOCALEDIR,
+    fallback=True,
+).gettext
+
+ITEM_XML = """
+<node>
+  <interface name="org.kde.StatusNotifierItem">
+    <property name="Category" type="s" access="read"/>
+    <property name="Id" type="s" access="read"/>
+    <property name="Title" type="s" access="read"/>
+    <property name="Status" type="s" access="read"/>
+    <property name="WindowId" type="i" access="read"/>
+    <property name="IconName" type="s" access="read"/>
+    <property name="IconPixmap" type="a(iiay)" access="read"/>
+    <property name="OverlayIconName" type="s" access="read"/>
+    <property name="OverlayIconPixmap" type="a(iiay)" access="read"/>
+    <property name="AttentionIconName" type="s" access="read"/>
+    <property name="AttentionIconPixmap" type="a(iiay)" access="read"/>
+    <property name="AttentionMovieName" type="s" access="read"/>
+    <property name="ToolTip" type="(sa(iiay)ss)" access="read"/>
+    <property name="ItemIsMenu" type="b" access="read"/>
+    <property name="Menu" type="o" access="read"/>
+    <method name="ContextMenu"><arg name="x" type="i" direction="in"/><arg name="y" type="i" direction="in"/></method>
+    <method name="Activate"><arg name="x" type="i" direction="in"/><arg name="y" type="i" direction="in"/></method>
+    <method name="SecondaryActivate"><arg name="x" type="i" direction="in"/><arg name="y" type="i" direction="in"/></method>
+    <method name="Scroll"><arg name="delta" type="i" direction="in"/><arg name="orientation" type="s" direction="in"/></method>
+    <signal name="NewTitle"/>
+    <signal name="NewIcon"/>
+    <signal name="NewToolTip"/>
+    <signal name="NewStatus"><arg name="status" type="s"/></signal>
+  </interface>
+</node>
+"""
+
+MENU_XML = """
+<node>
+  <interface name="com.canonical.dbusmenu">
+    <property name="Version" type="u" access="read"/>
+    <property name="TextDirection" type="s" access="read"/>
+    <property name="Status" type="s" access="read"/>
+    <property name="IconThemePath" type="as" access="read"/>
+    <method name="GetLayout">
+      <arg type="i" name="parentId" direction="in"/>
+      <arg type="i" name="recursionDepth" direction="in"/>
+      <arg type="as" name="propertyNames" direction="in"/>
+      <arg type="u" name="revision" direction="out"/>
+      <arg type="(ia{sv}av)" name="layout" direction="out"/>
+    </method>
+    <method name="GetGroupProperties">
+      <arg type="ai" name="ids" direction="in"/>
+      <arg type="as" name="propertyNames" direction="in"/>
+      <arg type="a(ia{sv})" name="properties" direction="out"/>
+    </method>
+    <method name="GetProperty">
+      <arg type="i" name="id" direction="in"/>
+      <arg type="s" name="name" direction="in"/>
+      <arg type="v" name="value" direction="out"/>
+    </method>
+    <method name="Event">
+      <arg type="i" name="id" direction="in"/>
+      <arg type="s" name="eventId" direction="in"/>
+      <arg type="v" name="data" direction="in"/>
+      <arg type="u" name="timestamp" direction="in"/>
+    </method>
+    <method name="EventGroup">
+      <arg type="a(isvu)" name="events" direction="in"/>
+      <arg type="ai" name="idErrors" direction="out"/>
+    </method>
+    <method name="AboutToShow">
+      <arg type="i" name="id" direction="in"/>
+      <arg type="b" name="needUpdate" direction="out"/>
+    </method>
+    <method name="AboutToShowGroup">
+      <arg type="ai" name="ids" direction="in"/>
+      <arg type="ai" name="updatesNeeded" direction="out"/>
+      <arg type="ai" name="idErrors" direction="out"/>
+    </method>
+    <signal name="ItemsPropertiesUpdated">
+      <arg type="a(ia{sv})" name="updatedProps"/>
+      <arg type="a(ias)" name="removedProps"/>
+    </signal>
+    <signal name="LayoutUpdated">
+      <arg type="u" name="revision"/>
+      <arg type="i" name="parent"/>
+    </signal>
+  </interface>
+</node>
+"""
+
+
+# ---------------------------------------------------------------------------
+# What the rest of cachy-auto-update has written down
+# ---------------------------------------------------------------------------
+
+def read_config():
+    """The configuration as a dict. Parsed the same way the shell side does:
+    one Key=Value per line, '#' starts a comment, the last one wins."""
+    values = {}
+    try:
+        with open(CONFIG, encoding="utf-8") as f:
+            for line in f:
+                line = line.split("#", 1)[0].strip()
+                if "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                value = value.strip().strip('"')
+                if value:
+                    values[key.strip()] = value
+    except OSError:
+        pass
+    return values
+
+
+def is_true(value):
+    return value.lower() in ("yes", "y", "true", "1", "on", "enabled")
+
+
+def option(cfg, key, default):
+    return is_true(cfg.get(key, default))
+
+
+def seconds(duration, fallback=604800):
+    m = re.fullmatch(r"(\d+)([smhdw]?)", duration)
+    if not m:
+        return fallback
+    unit = {"": 1, "s": 1, "m": 60, "h": 3600, "d": 86400, "w": 604800}
+    return int(m.group(1)) * unit[m.group(2)]
+
+
+def state(key, default=""):
+    try:
+        with open(os.path.join(STATEDIR, key), encoding="utf-8") as f:
+            return f.read().strip()
+    except OSError:
+        return default
+
+
+def timestamp(key):
+    value = state(key)
+    return int(value) if value.isdigit() else 0
+
+
+def update_running():
+    """True while an update works. The runner leaves its pid behind, so a run
+    that was killed before it could clean up does not count."""
+    try:
+        with open(os.path.join(RUNDIR, "running"), encoding="utf-8") as f:
+            pid = int(f.read().strip())
+    except (OSError, ValueError):
+        return False
+    return os.path.exists(f"/proc/{pid}")
+
+
+def run(argv, timeout):
+    try:
+        return subprocess.run(argv, capture_output=True, text=True,
+                              timeout=timeout, stdin=subprocess.DEVNULL)
+    except (OSError, subprocess.SubprocessError):
+        return None
+
+
+def time_ago(ts):
+    """Same wording as `cachy-auto-update status`."""
+    delta = max(0, int(time.time()) - ts)
+    if delta < 60:
+        return _("just now")
+    if delta < 120:
+        return _("1 minute ago")
+    if delta < 3600:
+        return _("%d minutes ago") % (delta // 60)
+    if delta < 7200:
+        return _("1 hour ago")
+    if delta < 86400:
+        return _("%d hours ago") % (delta // 3600)
+    if delta < 172800:
+        return _("1 day ago")
+    return _("%d days ago") % (delta // 86400)
+
+
+def next_update(cfg):
+    """When the next automatic update happens, or 0 when none will. The timer
+    ticks every hour, but only updates once the interval has passed."""
+    if not option(cfg, "Enabled", "no"):
+        return 0
+    last = timestamp("last_success")
+    due = last + seconds(cfg.get("UpdateInterval", "1w")) if last else 0
+    if due > time.time():
+        return due
+    r = run(["systemctl", "show", TIMER, "--property=NextElapseUSecRealtime",
+             "--value"], 10)
+    tick = r.stdout.strip() if r else ""
+    return int(tick) // 1000000 if tick.isdigit() else due
+
+
+# ---------------------------------------------------------------------------
+# Looking for updates
+# ---------------------------------------------------------------------------
+
+def count_repo(skip):
+    if not shutil.which("checkupdates"):
+        return None
+    r = run(["checkupdates", "--nocolor"], 300)
+    if r is None or r.returncode not in (0, 2):
+        return None
+    return sum(1 for line in r.stdout.splitlines()
+               if line.split() and line.split()[0] not in skip)
+
+
+def count_aur(skip):
+    """Asks the AUR directly rather than through paru or yay. While one of
+    those runs, the update service waits for it, and this check must never
+    hold an update up."""
+    r = run(["pacman", "-Qm"], 60)
+    if r is None or r.returncode not in (0, 1):
+        return None
+    installed = {}
+    for line in r.stdout.splitlines():
+        parts = line.split()
+        if len(parts) >= 2 and parts[0] not in skip:
+            installed[parts[0]] = parts[1]
+    if not installed:
+        return 0
+
+    found = {}
+    names = sorted(installed)
+    for i in range(0, len(names), 80):
+        query = urllib.parse.urlencode([("arg[]", n) for n in names[i:i + 80]])
+        request = urllib.request.Request(
+            "https://aur.archlinux.org/rpc/v5/info?" + query,
+            headers={"User-Agent": f"cachy-auto-update/{VERSION}"})
+        try:
+            with urllib.request.urlopen(request, timeout=30) as reply:
+                data = json.load(reply)
+        except (OSError, ValueError):
+            return None
+        for pkg in data.get("results", []):
+            found[pkg.get("Name")] = pkg.get("Version", "")
+
+    count = 0
+    for name, version in found.items():
+        if name not in installed or version == installed[name]:
+            continue
+        # Only newer counts. A -git package built today is ahead of the AUR.
+        r = run(["vercmp", installed[name], version], 10)
+        if r is not None and r.stdout.strip().startswith("-"):
+            count += 1
+    return count
+
+
+def count_flatpak():
+    if not shutil.which("flatpak"):
+        return None
+    r = run(["flatpak", "remote-ls", "--updates", "--columns=application"], 300)
+    if r is None or r.returncode != 0:
+        return None
+    return len({line.strip() for line in r.stdout.splitlines() if line.strip()})
+
+
+def count_updates(cfg):
+    """How many updates are waiting, or None when that is unknown (offline).
+    Ignored and held back packages are left out: a click would not install
+    them anyway."""
+    skip = set(cfg.get("IgnorePkg", "").split()) | set(state("held_back").split())
+    counts = [count_repo(skip)]
+    if option(cfg, "UpdateAUR", "yes"):
+        counts.append(count_aur(skip))
+    if option(cfg, "UpdateFlatpak", "yes"):
+        counts.append(count_flatpak())
+    known = [c for c in counts if c is not None]
+    return sum(known) if known else None
+
+
+# ---------------------------------------------------------------------------
+# Doing things
+# ---------------------------------------------------------------------------
+
+def spawn(argv):
+    """Starts a program and forgets it. A thread waits for it, so it does not
+    linger as a zombie."""
+    try:
+        child = subprocess.Popen(argv, stdin=subprocess.DEVNULL,
+                                 stdout=subprocess.DEVNULL,
+                                 stderr=subprocess.DEVNULL,
+                                 start_new_session=True)
+    except OSError:
+        return False
+    threading.Thread(target=child.wait, daemon=True).start()
+    return True
+
+
+def open_terminal(command):
+    for name, flag in TERMINALS:
+        path = shutil.which(name)
+        if path and spawn([path, *flag, *command]):
+            return True
+    return False
+
+
+# ---------------------------------------------------------------------------
+# The icon
+# ---------------------------------------------------------------------------
+
+UPDATE_NOW, SHOW_LOG, CHECK, SEPARATOR, SETTINGS = 1, 2, 3, 4, 5
+
+
+class Tray:
+    def __init__(self, bus, loop):
+        self.bus = bus
+        self.loop = loop
+        self.cfg = read_config()
+        self.pending = None          # waiting updates; None until known
+        self.checking = False
+        self.starting = False        # clicked, the run has not begun yet
+        self.running = update_running()
+        self.icon = ""
+        self.tooltip = ("", "")
+        self.menu_state = None
+        self.menu_revision = 1
+        self.refresh_queued = False
+        self.monitors = []
+
+        self.item_name = f"org.kde.StatusNotifierItem-{os.getpid()}-1"
+        self.item_info = Gio.DBusNodeInfo.new_for_xml(ITEM_XML).interfaces[0]
+        self.menu_info = Gio.DBusNodeInfo.new_for_xml(MENU_XML).interfaces[0]
+
+    # -- start-up -----------------------------------------------------------
+
+    def start(self):
+        self.update_look(signal=False)
+        self.bus.register_object(ITEM_PATH, self.item_info,
+                                 self.item_call, self.item_property, None)
+        self.bus.register_object(MENU_PATH, self.menu_info,
+                                 self.menu_call, self.menu_property, None)
+        if not request_name(self.bus, self.item_name):
+            return False
+
+        # Registered again whenever the tray comes back, after a crash or a
+        # restart of plasmashell.
+        Gio.bus_watch_name_on_connection(
+            self.bus, WATCHER, Gio.BusNameWatcherFlags.NONE,
+            self.watcher_appeared, None)
+
+        # Whatever the runner writes lands in one of these folders. A slow
+        # timer on top keeps "2 hours ago" current, and covers a folder that
+        # did not exist yet.
+        for path in (STATEDIR, RUNDIR, os.path.dirname(CONFIG)):
+            try:
+                monitor = Gio.File.new_for_path(path).monitor_directory(
+                    Gio.FileMonitorFlags.NONE, None)
+            except GLib.Error:
+                continue
+            monitor.connect("changed", lambda *_: self.queue_refresh())
+            self.monitors.append(monitor)
+        GLib.timeout_add_seconds(30, self.tick)
+        GLib.timeout_add_seconds(FIRST_CHECK, self.scheduled_check)
+        return True
+
+    def watcher_appeared(self, bus, _name, _owner):
+        bus.call(WATCHER, "/StatusNotifierWatcher", WATCHER,
+                 "RegisterStatusNotifierItem",
+                 GLib.Variant("(s)", (self.item_name,)),
+                 None, Gio.DBusCallFlags.NONE, -1, None, None)
+
+    # -- keeping up to date -------------------------------------------------
+
+    def queue_refresh(self):
+        # A run writes several files at once; one redraw is enough for them.
+        if not self.refresh_queued:
+            self.refresh_queued = True
+            GLib.timeout_add(500, self.refresh)
+
+    def tick(self):
+        self.refresh()
+        return True
+
+    def refresh(self):
+        self.refresh_queued = False
+        self.cfg = read_config()
+        if not option(self.cfg, "TrayIcon", "yes"):
+            # Switched off in the settings: go away now, not at the next login.
+            self.loop.quit()
+            return False
+
+        was_running = self.running
+        self.running = update_running()
+        if self.running:
+            self.starting = False
+        if was_running and not self.running:
+            # What is left after the update: most likely nothing.
+            GLib.timeout_add_seconds(10, self.check)
+
+        self.update_look()
+        return False
+
+    def scheduled_check(self):
+        self.check()
+        GLib.timeout_add_seconds(CHECK_EVERY, self.scheduled_check)
+        return False
+
+    def check(self):
+        if self.checking or self.busy():
+            return False
+        self.checking = True
+        self.update_look()
+        cfg = dict(self.cfg)
+
+        def work():
+            pending = count_updates(cfg)
+            GLib.idle_add(self.checked, pending)
+
+        threading.Thread(target=work, daemon=True).start()
+        return False
+
+    def checked(self, pending):
+        self.checking = False
+        if pending is not None:
+            self.pending = pending
+        self.update_look()
+        return False
+
+    def busy(self):
+        return self.running or self.starting
+
+    # -- what it looks like -------------------------------------------------
+
+    def update_look(self, signal=True):
+        if self.busy():
+            icon = "update-busy"
+        elif self.pending:
+            icon = "update-low"
+        else:
+            icon = "update-none"
+
+        tooltip = (TITLE, "\n".join(self.tooltip_lines()))
+        menu = (self.busy(), self.checking)
+
+        changed = (icon != self.icon, tooltip != self.tooltip, menu != self.menu_state)
+        self.icon, self.tooltip, self.menu_state = icon, tooltip, menu
+        if not signal:
+            return
+        if changed[0]:
+            self.emit_item("NewIcon")
+        if changed[1]:
+            self.emit_item("NewToolTip")
+        if changed[2]:
+            self.menu_revision += 1
+            self.bus.emit_signal(None, MENU_PATH, "com.canonical.dbusmenu",
+                                 "LayoutUpdated",
+                                 GLib.Variant("(ui)", (self.menu_revision, 0)))
+
+    def tooltip_lines(self):
+        lines = []
+        if self.busy():
+            lines.append(_("Installing updates"))
+        elif self.pending is None:
+            lines.append(_("Looking for updates...") if self.checking
+                         else _("Not checked for updates yet"))
+        elif self.pending == 1:
+            lines.append(_("1 update available"))
+        elif self.pending:
+            lines.append(_("%d updates available") % self.pending)
+        else:
+            lines.append(_("Everything is up to date"))
+
+        last = timestamp("last_success")
+        lines.append(_("Last update: %s") % (time_ago(last) if last else _("never")))
+
+        upcoming = next_update(self.cfg)
+        if upcoming:
+            when = time.strftime("%a %x %H:%M", time.localtime(upcoming))
+            lines.append(_("Next update: %s") % when)
+        else:
+            lines.append(_("Automatic updates are off."))
+
+        if not self.busy():
+            held = state("held_back")
+            if held:
+                lines.append(_("Held back: %s") % held)
+            if state("last_result") == "failed":
+                lines.append(_("The last update had a problem."))
+            if state("reboot_needed") == "1":
+                lines.append(_("A restart is recommended to finish a kernel update."))
+            lines.append("")
+            lines.append(_("Click to update now"))
+        else:
+            lines.append("")
+            lines.append(_("Click to see what it is doing"))
+        return lines
+
+    def emit_item(self, name):
+        self.bus.emit_signal(None, ITEM_PATH, "org.kde.StatusNotifierItem",
+                             name, None)
+
+    # -- actions ------------------------------------------------------------
+
+    def update_now(self):
+        if self.busy():
+            return
+        self.starting = True
+        self.update_look()
+
+        # Waits for the whole run: a oneshot unit's start job ends with it.
+        # polkit lets the person at the computer start this one unit without
+        # a password, see cachy-auto-update.rules.
+        def work():
+            run(["systemctl", "start", NOW_UNIT], 6 * 3600)
+            GLib.idle_add(self.started)
+
+        threading.Thread(target=work, daemon=True).start()
+
+    def started(self):
+        self.starting = False
+        self.refresh()
+        return False
+
+    def show_log(self):
+        open_terminal([CLI, "log", "-f"])
+
+    def open_settings(self):
+        open_terminal([CLI])
+
+    # -- org.kde.StatusNotifierItem ----------------------------------------
+
+    def item_property(self, _bus, _sender, _path, _iface, name):
+        values = {
+            "Category": GLib.Variant("s", "SystemServices"),
+            "Id": GLib.Variant("s", "cachy-auto-update"),
+            "Title": GLib.Variant("s", TITLE),
+            "Status": GLib.Variant("s", "Active"),
+            "WindowId": GLib.Variant("i", 0),
+            "IconName": GLib.Variant("s", self.icon),
+            "IconPixmap": GLib.Variant("a(iiay)", []),
+            "OverlayIconName": GLib.Variant("s", ""),
+            "OverlayIconPixmap": GLib.Variant("a(iiay)", []),
+            "AttentionIconName": GLib.Variant("s", ""),
+            "AttentionIconPixmap": GLib.Variant("a(iiay)", []),
+            "AttentionMovieName": GLib.Variant("s", ""),
+            "ToolTip": GLib.Variant("(sa(iiay)ss)",
+                                    (self.icon, [], self.tooltip[0], self.tooltip[1])),
+            "ItemIsMenu": GLib.Variant("b", False),
+            "Menu": GLib.Variant("o", MENU_PATH),
+        }
+        return values.get(name)
+
+    def item_call(self, _bus, _sender, _path, _iface, method, _params, invocation):
+        if method == "Activate":
+            # While an update runs, a click shows what it is doing instead
+            # of trying to start a second one.
+            if self.busy():
+                self.show_log()
+            else:
+                self.update_now()
+        elif method == "SecondaryActivate":
+            self.show_log()
+        invocation.return_value(None)
+
+    # -- com.canonical.dbusmenu --------------------------------------------
+
+    def menu_items(self):
+        return [
+            (UPDATE_NOW, {"label": _("Update now"), "icon-name": "update-low",
+                          "enabled": not self.busy()}),
+            (SHOW_LOG, {"label": _("Show log"), "icon-name": "utilities-terminal"}),
+            (CHECK, {"label": _("Check for updates"), "icon-name": "view-refresh",
+                     "enabled": not (self.checking or self.busy())}),
+            (SEPARATOR, {"type": "separator"}),
+            (SETTINGS, {"label": _("Settings"), "icon-name": "configure"}),
+        ]
+
+    @staticmethod
+    def props(values, names=()):
+        out = {}
+        for key, value in values.items():
+            if names and key not in names:
+                continue
+            if isinstance(value, bool):
+                out[key] = GLib.Variant("b", value)
+            else:
+                out[key] = GLib.Variant("s", value)
+        return out
+
+    def layout(self, names):
+        children = [GLib.Variant("(ia{sv}av)", (i, self.props(p, names), []))
+                    for i, p in self.menu_items()]
+        root = {"children-display": GLib.Variant("s", "submenu")}
+        return (0, root, children)
+
+    def menu_property(self, _bus, _sender, _path, _iface, name):
+        values = {
+            "Version": GLib.Variant("u", 3),
+            "TextDirection": GLib.Variant("s", "ltr"),
+            "Status": GLib.Variant("s", "normal"),
+            "IconThemePath": GLib.Variant("as", []),
+        }
+        return values.get(name)
+
+    def menu_call(self, _bus, _sender, _path, _iface, method, params, invocation):
+        args = params.unpack()
+        items = dict(self.menu_items())
+
+        if method == "GetLayout":
+            invocation.return_value(GLib.Variant(
+                "(u(ia{sv}av))", (self.menu_revision, self.layout(args[2]))))
+        elif method == "GetGroupProperties":
+            ids = args[0] or list(items)
+            invocation.return_value(GLib.Variant("(a(ia{sv}))", (
+                [(i, self.props(items[i], args[1])) for i in ids if i in items],)))
+        elif method == "GetProperty":
+            value = self.props(items.get(args[0], {})).get(args[1])
+            invocation.return_value(GLib.Variant("(v)", (value or GLib.Variant("s", ""),)))
+        elif method == "Event":
+            if args[1] == "clicked":
+                GLib.idle_add(self.clicked, args[0])
+            invocation.return_value(None)
+        elif method == "EventGroup":
+            for item, event, _data, _ts in args[0]:
+                if event == "clicked":
+                    GLib.idle_add(self.clicked, item)
+            invocation.return_value(GLib.Variant("(ai)", ([],)))
+        elif method == "AboutToShow":
+            invocation.return_value(GLib.Variant("(b)", (False,)))
+        elif method == "AboutToShowGroup":
+            invocation.return_value(GLib.Variant("(aiai)", ([], [])))
+        else:
+            invocation.return_dbus_error("org.freedesktop.DBus.Error.UnknownMethod",
+                                         method)
+
+    def clicked(self, item):
+        if item == UPDATE_NOW:
+            self.update_now()
+        elif item == SHOW_LOG:
+            self.show_log()
+        elif item == CHECK:
+            self.check()
+        elif item == SETTINGS:
+            self.open_settings()
+        return False
+
+
+def request_name(bus, name):
+    """Takes a name on the bus, without queueing for it. False when somebody
+    else already has it."""
+    try:
+        reply = bus.call_sync("org.freedesktop.DBus", "/org/freedesktop/DBus",
+                              "org.freedesktop.DBus", "RequestName",
+                              GLib.Variant("(su)", (name, 4)),
+                              GLib.VariantType("(u)"),
+                              Gio.DBusCallFlags.NONE, -1, None)
+    except GLib.Error:
+        return False
+    return reply.unpack()[0] == 1
+
+
+def main():
+    if not option(read_config(), "TrayIcon", "yes"):
+        return 0
+    try:
+        bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
+    except GLib.Error:
+        return 0
+    if not request_name(bus, BUS_NAME):
+        return 0     # already running in this session
+
+    loop = GLib.MainLoop()
+    tray = Tray(bus, loop)
+    if not tray.start():
+        return 0
+    try:
+        loop.run()
+    except KeyboardInterrupt:
+        pass
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

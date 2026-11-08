@@ -130,6 +130,7 @@ cau_ui_read_line() {
 # shown as "every week"), or text.
 CAU_SETTINGS=(
 	"UpdateInterval|interval:1d 2d 3d 1w 2w 4w|1w|How often to update"
+	"TrayIcon|bool|yes|Show an icon in the system tray"
 	"NotifyOnStart|bool|yes|Notify when an update starts"
 	"MinimizeProgress|bool|no|Start the progress bar minimized"
 	"NotifyOnSuccess|bool|yes|Notify after a successful update"
@@ -295,12 +296,14 @@ cau_ui_settings() {
 					cau_config_set "$name" "$(_cau_setting_cycle "$type" "${values[cursor]}" 1)" \
 						|| { cau_bad "$(cau_msg "Could not write the configuration file.")"; cau_pause; }
 				fi
+				_cau_setting_applied "$name"
 				dirty=1
 				;;
 			left|h)
 				if [[ $type != text ]]; then
 					cau_config_set "$name" "$(_cau_setting_cycle "$type" "${values[cursor]}" -1)" \
 						|| { cau_bad "$(cau_msg "Could not write the configuration file.")"; cau_pause; }
+					_cau_setting_applied "$name"
 					dirty=1
 				fi
 				;;
@@ -308,6 +311,15 @@ cau_ui_settings() {
 			*) ;;
 		esac
 	done
+}
+
+# _cau_setting_applied <key>
+# The settings that change something outside the config file take effect
+# right away, not at the next login or update.
+_cau_setting_applied() {
+	case "$1" in
+		TrayIcon) cau_tray_apply ;;
+	esac
 }
 
 # cau_ui_edit_text <key> <current>
@@ -369,6 +381,26 @@ cau_next_update() {
 	else
 		cau_msg "unknown"
 	fi
+}
+
+# cau_tray_apply
+# Shows or hides the tray icon right away, in every session, instead of at the
+# next login. An icon that is switched off notices it by itself and goes away,
+# so only starting one is needed here.
+cau_tray_apply() {
+	local user uid tray="$CAU_LIBEXECDIR/cachy-auto-update-tray"
+
+	cau_config_load
+	[[ $CFG_TRAY == yes && -x $tray ]] || return 0
+	cau_is_root || return 0
+
+	# Through the user's own service manager, so the icon gets the session's
+	# environment (the display it needs to open a terminal) and not root's.
+	while read -r user uid; do
+		[[ -n $user ]] || continue
+		cau_as_user "$user" "$uid" systemd-run --user --quiet --collect \
+			--unit=cachy-auto-update-tray "$tray" < /dev/null > /dev/null 2>&1 || true
+	done < <(cau_active_session_users)
 }
 
 # cau_ui_status

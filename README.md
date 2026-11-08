@@ -51,6 +51,17 @@ Press **1** to turn automatic updates on or off. **6** has all the settings.
 
 Updates run once a week. To change that, use **How often to update** in the settings.
 
+### Tray icon
+
+An icon in the system tray shows if updates are waiting. Click it to install them all now, no password needed.
+Right-click it for **Show log**, **Check for updates** and **Settings**.
+
+<p align="center">
+  <img src="res/screenshots/tray.png" alt="The tray icon's menu with Update now, Show log, Check for updates and Settings" width="420">
+</p>
+
+Do not want it? Turn off **Show an icon in the system tray** in the settings.
+
 While an update runs, a progress bar shows how far it is. You can **Pause** or **Cancel** it there.
 
 <p align="center">

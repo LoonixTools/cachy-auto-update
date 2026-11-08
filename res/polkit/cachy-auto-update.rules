@@ -1,0 +1,12 @@
+// Lets the person at the computer start an update from the tray icon without
+// a password. Only this one unit, only "start", and only from a local session
+// that is in front of the screen right now. Stopping it or changing anything
+// else still asks as usual.
+polkit.addRule(function (action, subject) {
+	if (action.id == "org.freedesktop.systemd1.manage-units" &&
+	    action.lookup("unit") == "cachy-auto-update-now.service" &&
+	    action.lookup("verb") == "start" &&
+	    subject.local && subject.active) {
+		return polkit.Result.YES;
+	}
+});

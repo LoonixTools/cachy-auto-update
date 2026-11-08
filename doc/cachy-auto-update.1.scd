@@ -171,6 +171,28 @@ a hundred and sixty packages at a time. pacman's other (n/m) sequences
 (checking keys, package integrity, loading package files) each count up to the
 same total and are deliberately ignored.
 
+# TRAY ICON
+
+With _TrayIcon_ (on by default) every graphical session gets an icon in the
+system tray. It shows whether updates are waiting: it looks for them every
+three hours, with *checkupdates*(8), the AUR's web interface and *flatpak*(1).
+Ignored and held packages are not counted. Its tooltip says when the last
+update was and when the next one is due.
+
+A click on the icon installs all updates right away. It starts
+_cachy-auto-update-now.service_, which runs like a forced *run*, and the
+progress bar shows how far it is, even where _NotifyOnStart_ or
+_MinimizeProgress_ would keep it out of the way. A polkit rule lets the
+person at the computer start this one unit without a password. While an update
+runs, a click opens its log in a terminal instead.
+
+The menu (right click) has *Update now*, *Show log* (the log in a terminal,
+live), *Check for updates* and *Settings* (this program's menu, in a terminal).
+
+The icon speaks the StatusNotifierItem protocol through GLib's Python bindings,
+so it needs _python-gobject_, like the progress bar. Turning _TrayIcon_ off in
+the settings removes it at once.
+
 # CANCEL AND PAUSE
 
 The progress entry has a *Cancel* and a *Pause* button. Neither ever stops
@@ -248,6 +270,9 @@ _/etc/cachy-auto-update/cachy-auto-update.conf_
 
 _/etc/sudoers.d/cachy-auto-update_
 	Lets the build account call pacman without a password.
+
+_/usr/share/polkit-1/rules.d/cachy-auto-update.rules_
+	Lets the person at the computer start an update from the tray icon.
 
 _/var/log/cachy-auto-update/last-run.log_
 	Full output of the most recent run.

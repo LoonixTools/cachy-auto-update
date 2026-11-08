@@ -23,6 +23,7 @@ SYSTEMDDIR   ?= $(PREFIX)/lib/systemd/system
 SYSUSERSDIR  ?= $(PREFIX)/lib/sysusers.d
 TMPFILESDIR  ?= $(PREFIX)/lib/tmpfiles.d
 XDGAUTOSTART ?= $(SYSCONFDIR)/xdg/autostart
+POLKITRULES  ?= $(DATADIR)/polkit-1/rules.d
 
 LINGUAS      := de
 MOFILES      := $(patsubst %,po/%.mo,$(LINGUAS))
@@ -67,6 +68,8 @@ check:
 	@if command -v python3 >/dev/null 2>&1; then \
 		python3 -m py_compile src/cachy-auto-update-progress \
 			&& echo "ok  src/cachy-auto-update-progress"; \
+		python3 -m py_compile src/cachy-auto-update-tray \
+			&& echo "ok  src/cachy-auto-update-tray"; \
 		rm -rf src/__pycache__; \
 	else \
 		echo "python3 not found, skipped"; \
@@ -82,13 +85,17 @@ install: build
 	# holds a session bus connection open so the update can drive a progress bar
 	install -Dm755 src/cachy-auto-update-progress \
 		"$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-progress"
+	# the icon in the system tray, started in every session by autostart
+	install -Dm755 src/cachy-auto-update-tray \
+		"$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-tray"
 	# the version and the resolved lib path are baked in at install time
 	sed -i -e 's|@VERSION@|$(VERSION)|g' \
 	       -e 's|@LIBDIR@|$(LIBDIR)|g' \
 	       -e 's|@LIBEXECDIR@|$(LIBEXECDIR)|g' \
 	       -e 's|@LOCALEDIR@|$(LOCALEDIR)|g' \
 	       "$(DESTDIR)$(BINDIR)/cachy-auto-update" \
-	       "$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-run"
+	       "$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-run" \
+	       "$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-tray"
 
 	# shell libraries
 	install -d "$(DESTDIR)$(LIBDIR)"
@@ -119,10 +126,18 @@ install: build
 		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.service"
 	install -Dm644 res/systemd/cachy-auto-update.timer \
 		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.timer"
+	# the update the tray icon starts, and the rule that lets it without a
+	# password
+	install -Dm644 res/systemd/cachy-auto-update-now.service \
+		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update-now.service"
+	install -Dm644 res/polkit/cachy-auto-update.rules \
+		"$(DESTDIR)$(POLKITRULES)/cachy-auto-update.rules"
 
 	# delivers notifications that were queued while nobody was logged in
 	install -Dm644 res/autostart/cachy-auto-update-notify.desktop \
 		"$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-notify.desktop"
+	install -Dm644 res/autostart/cachy-auto-update-tray.desktop \
+		"$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-tray.desktop"
 
 	# names and illustrates the progress bar; hidden from the application menu
 	install -Dm644 res/applications/cachy-auto-update.desktop \
@@ -151,7 +166,10 @@ uninstall:
 	rm -f  "$(DESTDIR)$(TMPFILESDIR)/cachy-auto-update.conf"
 	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.service"
 	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.timer"
+	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update-now.service"
+	rm -f  "$(DESTDIR)$(POLKITRULES)/cachy-auto-update.rules"
 	rm -f  "$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-notify.desktop"
+	rm -f  "$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-tray.desktop"
 	rm -f  "$(DESTDIR)$(DATADIR)/applications/cachy-auto-update.desktop"
 	rm -f  "$(DESTDIR)$(MANDIR)/man1/cachy-auto-update.1"
 

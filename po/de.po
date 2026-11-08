@@ -379,6 +379,9 @@ msgstr "Melden, wenn etwas schiefgeht"
 msgid "How often to update"
 msgstr "Wie oft aktualisieren"
 
+msgid "Show an icon in the system tray"
+msgstr "Symbol im Systemabschnitt anzeigen"
+
 msgid "Postpone while a game is running"
 msgstr "Verschieben, solange ein Spiel läuft"
 
@@ -478,3 +481,40 @@ msgstr "jede Woche"
 #, c-format
 msgid "every %d weeks"
 msgstr "alle %d Wochen"
+
+#. Tray icon
+msgid "Looking for updates..."
+msgstr "Suche nach Updates …"
+
+msgid "Not checked for updates yet"
+msgstr "Noch nicht nach Updates gesucht"
+
+msgid "1 update available"
+msgstr "1 Update verfügbar"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d Updates verfügbar"
+
+msgid "Everything is up to date"
+msgstr "Alles ist aktuell"
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Letztes Update: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Nächstes Update: %s"
+
+msgid "The last update had a problem."
+msgstr "Beim letzten Update gab es ein Problem."
+
+msgid "Click to update now"
+msgstr "Klicken, um jetzt zu aktualisieren"
+
+msgid "Click to see what it is doing"
+msgstr "Klicken, um zu sehen, was gerade passiert"
+
+msgid "Check for updates"
+msgstr "Nach Updates suchen"

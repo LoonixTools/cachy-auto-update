@@ -27,9 +27,15 @@ unset _mod
 FORCE=0
 DRY_RUN=0
 
+# --now: somebody clicked the tray icon (or "Update now") and is waiting for
+# it. Like --force, and the progress bar shows even where NotifyOnStart or
+# MinimizeProgress would keep it out of the way.
+CAU_BY_HAND=''
+
 for arg in "$@"; do
 	case "$arg" in
 		--force)   FORCE=1 ;;
+		--now)     FORCE=1; CAU_BY_HAND=1 ;;
 		--dry-run) DRY_RUN=1 ;;
 		--debug)   CAU_DEBUG=1 ;;
 	esac
@@ -183,6 +189,11 @@ fi
 cau_runlog_reset
 cau_info "Starting update run"
 failed=0
+
+# Tells the tray icon an update is running. The pid lets it notice a run that
+# was killed before it could clean up.
+printf '%s\n' "$$" > "$CAU_RUNDIR/running" 2>/dev/null || true
+trap 'rm -f "$CAU_RUNDIR/running"' EXIT
 
 # Open the desktop's progress bar, told up front which steps this run will
 # perform. Only those count towards the bar, so a machine with no Flatpaks

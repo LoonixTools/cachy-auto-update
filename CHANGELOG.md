@@ -2,6 +2,19 @@
 
 What each release brings, newest first. The [GitHub releases](https://github.com/LoonixTools/cachy-auto-update/releases) add every commit that went into it.
 
+## v1.6.0
+
+_2026-11-08_
+
+Welcome to cachy-auto-update `v1.6.0`! Updates now fix most problems on their own. One AUR package that cannot be built no longer makes every update fail.
+
+### Highlights
+
+- An AUR package that fails to build is held back, and all others still update
+- A held package is tried again when it has a new version, or after three days
+- pacman and Flatpak try again on their own after a failed update
+- `cachy-auto-update log` shows the last real update, also without root
+
 ## v1.5.0
 
 _2026-11-02_

@@ -22,10 +22,20 @@
 
 ## Install
 
-```bash
-paru -S cachy-auto-update
-sudo cachy-auto-update enable
-```
+1. Install the package from the AUR:
+
+   ```bash
+   paru -S cachy-auto-update
+   ```
+
+   paru first asks to show the build files. Press **q** to close them, then **Enter** to install.
+   No paru yet? Get it with `sudo pacman -S paru`.
+
+2. Turn automatic updates on:
+
+   ```bash
+   sudo cachy-auto-update enable
+   ```
 
 ## How to use
 

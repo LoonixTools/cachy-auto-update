@@ -358,7 +358,7 @@ msgstr ""
 msgid "Notify when something goes wrong"
 msgstr ""
 
-msgid "Time between update runs"
+msgid "How often to update"
 msgstr ""
 
 msgid "Postpone while a game is running"
@@ -423,4 +423,36 @@ msgid "Update stopped"
 msgstr ""
 
 msgid "You can switch off the computer now. The update will run again later."
+msgstr ""
+
+#. Interval
+msgid "How often"
+msgstr ""
+
+msgid "every minute"
+msgstr ""
+
+#, c-format
+msgid "every %d minutes"
+msgstr ""
+
+msgid "every hour"
+msgstr ""
+
+#, c-format
+msgid "every %d hours"
+msgstr ""
+
+msgid "every day"
+msgstr ""
+
+#, c-format
+msgid "every %d days"
+msgstr ""
+
+msgid "every week"
+msgstr ""
+
+#, c-format
+msgid "every %d weeks"
 msgstr ""

@@ -281,6 +281,38 @@ cau_duration_to_seconds() {
 	esac
 }
 
+# _cau_interval_into <locale> <duration>
+# "every day", "every 2 weeks" and so on, with the result in CAU_MSG_RESULT.
+# No command substitution, because the settings screen draws this on every
+# keypress.
+_cau_interval_into() {
+	local locale="$1" v="$2" n unit
+
+	[[ $v =~ ^([0-9]+)([smhdw]?)$ ]] || { CAU_MSG_RESULT="$v"; return 0; }
+	n=$(( 10#${BASH_REMATCH[1]} ))
+	unit="${BASH_REMATCH[2]}"
+
+	# The same length can be written more than one way: 7d is a week.
+	case "$unit" in
+		''|s) (( n % 60 == 0 )) && { n=$(( n / 60 )); unit=m; } ;;
+	esac
+	[[ $unit == m ]] && (( n % 60 == 0 )) && { n=$(( n / 60 )); unit=h; }
+	[[ $unit == h ]] && (( n % 24 == 0 )) && { n=$(( n / 24 )); unit=d; }
+	[[ $unit == d ]] && (( n % 7 == 0 ))  && { n=$(( n / 7 ));  unit=w; }
+
+	case "$unit" in
+		m) (( n == 1 )) && cau_msg_into "$locale" "every minute" || cau_msg_into "$locale" "every %d minutes" ;;
+		h) (( n == 1 )) && cau_msg_into "$locale" "every hour"   || cau_msg_into "$locale" "every %d hours" ;;
+		d) (( n == 1 )) && cau_msg_into "$locale" "every day"    || cau_msg_into "$locale" "every %d days" ;;
+		w) (( n == 1 )) && cau_msg_into "$locale" "every week"   || cau_msg_into "$locale" "every %d weeks" ;;
+		*) CAU_MSG_RESULT="$v"; return 0 ;;
+	esac
+
+	# shellcheck disable=SC2059  # the format is the translated message
+	(( n == 1 )) || printf -v CAU_MSG_RESULT "$CAU_MSG_RESULT" "$n"
+	return 0
+}
+
 # Human-readable "x minutes ago" for a unix timestamp. Empty input yields the
 # translated "never".
 cau_time_ago() {

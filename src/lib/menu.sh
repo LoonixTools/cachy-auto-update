@@ -126,13 +126,14 @@ cau_ui_read_line() {
 
 # Everything that can be changed without opening a text editor.
 # Format: Key|type|default|label-msgid
-# type is bool, choice:<space separated values>, or text.
+# type is bool, choice:<space separated values>, interval:<values> (a choice
+# shown as "every week"), or text.
 CAU_SETTINGS=(
+	"UpdateInterval|interval:1d 2d 3d 1w 2w 4w|1w|How often to update"
 	"NotifyOnStart|bool|yes|Notify when an update starts"
 	"MinimizeProgress|bool|no|Start the progress bar minimized"
 	"NotifyOnSuccess|bool|yes|Notify after a successful update"
 	"NotifyOnError|bool|yes|Notify when something goes wrong"
-	"UpdateInterval|choice:6h 12h 1d 2d 1w|1d|Time between update runs"
 	"SkipWhenGaming|bool|yes|Postpone while a game is running"
 	"RequireAC|bool|no|Only update on mains power"
 	"MinBatteryPercent|choice:0 20 30 40 50 60 70 80|30|Minimum battery level (%)"
@@ -164,6 +165,7 @@ CAU_SETTING_SHOWN=''
 CAU_LBL_ON=''
 CAU_LBL_OFF=''
 CAU_LBL_NONE=''
+CAU_LBL_LOCALE=''
 
 _cau_setting_display() {
 	local type="$1" value="$2"
@@ -183,6 +185,10 @@ _cau_setting_display() {
 				CAU_SETTING_SHOWN="${CAU_C_DIM}${CAU_LBL_NONE}${CAU_C_RESET}"
 			fi
 			;;
+		interval:*)
+			_cau_interval_into "$CAU_LBL_LOCALE" "$value"
+			CAU_SETTING_SHOWN="$CAU_MSG_RESULT"
+			;;
 		*) CAU_SETTING_SHOWN="$value" ;;
 	esac
 }
@@ -199,7 +205,7 @@ _cau_setting_cycle() {
 	fi
 
 	local -a choices
-	read -r -a choices <<< "${type#choice:}"
+	read -r -a choices <<< "${type#*:}"
 	(( ${#choices[@]} )) || { printf '%s\n' "$value"; return; }
 
 	local i idx=0
@@ -228,6 +234,7 @@ cau_ui_settings() {
 	local spec name type default label locale i key frame row pad dirty=1 cursor=0
 
 	locale="$(cau_ui_locale)"
+	CAU_LBL_LOCALE="$locale"
 	cau_msg_into "$locale" "ON";     CAU_LBL_ON="$CAU_MSG_RESULT"
 	cau_msg_into "$locale" "OFF";    CAU_LBL_OFF="$CAU_MSG_RESULT"
 	cau_msg_into "$locale" "(none)"; CAU_LBL_NONE="$CAU_MSG_RESULT"
@@ -339,20 +346,26 @@ _cau_onoff() {
 	fi
 }
 
-# cau_timer_next
-# When systemd will fire the timer next, in the user's locale.
-cau_timer_next() {
-	local raw
+# cau_next_update <last success>
+# When the next update will really happen, in the user's locale. The timer
+# ticks every hour, but a tick only updates once UpdateInterval has passed
+# since the last successful update. So that time wins, unless it is already
+# past: then the next tick does it.
+cau_next_update() {
+	local last="$1" raw due=0 tick=0
 
 	cau_have systemctl || { cau_msg "unknown"; return; }
+	[[ $CFG_ENABLED == yes ]] || { cau_msg "not scheduled"; return; }
 	systemctl is-enabled --quiet "$CAU_UNIT" 2>/dev/null || { cau_msg "not scheduled"; return; }
 
 	raw="$(systemctl show "$CAU_UNIT" --property=NextElapseUSecRealtime --value 2>/dev/null)"
+	[[ $raw =~ ^[0-9]+$ ]] && tick=$(( raw / 1000000 ))
+	[[ $last =~ ^[0-9]+$ ]] && due=$(( last + CFG_INTERVAL_SECONDS ))
 
-	if [[ $raw =~ ^[0-9]+$ ]] && (( raw > 0 )); then
-		date -d "@$(( raw / 1000000 ))" '+%c'
-	elif [[ -n $raw && $raw != 0 && $raw != n/a ]]; then
-		printf '%s' "$raw"
+	if (( due > tick )); then
+		date -d "@$due" '+%c'
+	elif (( tick > 0 )); then
+		date -d "@$tick" '+%c'
 	else
 		cau_msg "unknown"
 	fi
@@ -375,6 +388,8 @@ cau_ui_status() {
 	total=$(( pac + aur + fp + ai ))
 
 	_cau_row "$(cau_msg "Automatic updates")" "$(_cau_onoff "$CFG_ENABLED")"
+	_cau_interval_into "$(cau_ui_locale)" "$CFG_INTERVAL"
+	_cau_row "$(cau_msg "How often")"         "$CAU_MSG_RESULT"
 	_cau_row "$(cau_msg "Notifications")"     "$(_cau_onoff "$CFG_NOTIFICATIONS")"
 	printf '\n'
 
@@ -387,7 +402,7 @@ cau_ui_status() {
 		_cau_row "$(cau_msg "Last successful update")" "$(cau_msg "never")"
 	fi
 
-	_cau_row "$(cau_msg "Next scheduled run")" "$(cau_timer_next)"
+	_cau_row "$(cau_msg "Next scheduled run")" "$(cau_next_update "$last_success")"
 
 	if [[ $result == failed ]]; then
 		printf '\n  %s%s%s\n' "$CAU_C_YELLOW" \

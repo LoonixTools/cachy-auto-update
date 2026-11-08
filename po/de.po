@@ -376,8 +376,8 @@ msgstr "Melden nach erfolgreichem Update"
 msgid "Notify when something goes wrong"
 msgstr "Melden, wenn etwas schiefgeht"
 
-msgid "Time between update runs"
-msgstr "Abstand zwischen Update-Läufen"
+msgid "How often to update"
+msgstr "Wie oft aktualisieren"
 
 msgid "Postpone while a game is running"
 msgstr "Verschieben, solange ein Spiel läuft"
@@ -446,3 +446,35 @@ msgid "You can switch off the computer now. The update will run again later."
 msgstr ""
 "Der Rechner kann jetzt ausgeschaltet werden. Das Update läuft später "
 "erneut."
+
+#. Interval
+msgid "How often"
+msgstr "Wie oft"
+
+msgid "every minute"
+msgstr "jede Minute"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "alle %d Minuten"
+
+msgid "every hour"
+msgstr "jede Stunde"
+
+#, c-format
+msgid "every %d hours"
+msgstr "alle %d Stunden"
+
+msgid "every day"
+msgstr "jeden Tag"
+
+#, c-format
+msgid "every %d days"
+msgstr "alle %d Tage"
+
+msgid "every week"
+msgstr "jede Woche"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "alle %d Wochen"

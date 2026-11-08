@@ -49,6 +49,8 @@ sudo cachy-auto-update
 
 Press **1** to turn automatic updates on or off. **6** has all the settings.
 
+Updates run once a week. To change that, use **How often to update** in the settings.
+
 While an update runs, a progress bar shows how far it is. You can **Pause** or **Cancel** it there.
 
 <p align="center">
@@ -66,6 +68,7 @@ notification area and does not pop up. Click the notification icon to see it.
 
 | | |
 |---|---|
+| Once a week | ✅ Updates (change it in the settings) |
 | Battery below 30 % | ⏸️ Waits (on power it runs) |
 | A game is running | ⏸️ Waits |
 | pacman, yay or paru is running | ⏸️ Waits |

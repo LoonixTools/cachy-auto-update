@@ -22,7 +22,7 @@ arrow keys select, Space or Right changes a value, and _q_ goes back; every
 change is written out immediately.
 
 The actual work is done by a systemd system service. The timer ticks hourly;
-whether a tick does anything is decided by _UpdateInterval_ (daily by default).
+whether a tick does anything is decided by _UpdateInterval_ (weekly by default).
 A run that is postponed (low battery, a game running, somebody else using
 pacman) is simply retried at the next tick.
 

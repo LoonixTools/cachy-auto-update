@@ -2,6 +2,20 @@
 
 What each release brings, newest first. The [GitHub releases](https://github.com/LoonixTools/cachy-auto-update/releases) add every commit that went into it.
 
+## v1.7.0
+
+_2026-11-08_
+
+Welcome to cachy-auto-update `v1.7.0`! A new tray icon shows when updates are waiting and installs them all with one click.
+
+### Highlights
+
+- Tray icon: click it to update now, with a progress bar and no password
+- Its menu has **Show log**, **Check for updates** and **Settings**
+- New installs update once a week. Change it with **How often to update** in the settings
+- cachy-update and the CachyOS **Reboot recommended** pop-up are turned off while automatic updates are on
+- The log can be read without a password again
+
 ## v1.6.0
 
 _2026-11-08_

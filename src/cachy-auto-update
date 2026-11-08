@@ -238,6 +238,12 @@ cau_do_log() {
 		esac
 	done
 
+	# The log folder is for root only. Without this, a normal user was told
+	# there is no log, right after the menu told them to look at it.
+	if [[ ! -r $file && -d $CAU_LOGDIR ]] && ! cau_is_root; then
+		cau_need_root
+	fi
+
 	if [[ ! -r $file ]]; then
 		cau_note "$(cau_msg "No log yet.")"
 		return 0

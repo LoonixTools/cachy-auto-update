@@ -173,12 +173,20 @@ cau_warn()  { cau_log WARN  "$@"; }
 cau_error() { cau_log ERROR "$@"; }
 cau_debug() { [[ -n ${CAU_DEBUG:-} ]] && cau_log DEBUG "$@"; return 0; }
 
-# Opens the log files for this run. Only meaningful as root.
+# Opens the log files for this run. Only meaningful as root. The run log is
+# only emptied once a run really starts updating (cau_runlog_reset). The timer
+# fires every hour, and most of those runs do nothing; they used to wipe the
+# log of the last real run, so `log` never showed what went wrong.
 cau_log_open() {
 	mkdir -p "$CAU_LOGDIR" 2>/dev/null || return 0
 	chmod 0750 "$CAU_LOGDIR" 2>/dev/null || true
-	: > "$CAU_RUNLOG" 2>/dev/null || return 0
+	: >> "$CAU_RUNLOG" 2>/dev/null || return 0
 	CAU_LOG_OPEN=1
+}
+
+cau_runlog_reset() {
+	[[ -n ${CAU_LOG_OPEN:-} ]] || return 0
+	: > "$CAU_RUNLOG" 2>/dev/null || true
 }
 
 # Runs a command, capturing its combined output in the run log. Returns the

@@ -445,7 +445,13 @@ cau_pacman_update() {
 				;;
 
 			*)
-				break
+				# Mostly a mirror that was down or a download that broke off.
+				# A corrupt file in the cache is deleted by pacman itself, as
+				# --noconfirm answers its question. So: wait a moment, fetch
+				# fresh databases and try again.
+				cau_info "Refreshing the package databases and retrying"
+				sleep 15
+				extra+=(-y)
 				;;
 		esac
 	done

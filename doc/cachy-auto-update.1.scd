@@ -85,7 +85,8 @@ stop to ask whether a conflicting package may be removed, the transaction is
 retried once with that question answered affirmatively, unless
 _AutoResolveConflicts_ is turned off. Files on disk that collide with a package
 are *not* forced. That stays a human decision. A signature failure triggers one
-keyring refresh and one retry.
+keyring refresh and one retry. Any other failure, mostly a mirror that was down,
+gets one more try with fresh package databases.
 
 AUR packages are built and installed as the locked *cachy-auto-update* system
 account, because *makepkg*(8) refuses to run as root. That account has no
@@ -105,9 +106,10 @@ and git data stay. It runs as the owner of each cache, and not while one of
 those helpers is running.
 
 Flatpak system installations are updated directly as root, user installations
-inside each user's own account. AppImages are updated through Gear Lever, for
-users with a graphical session, and AppImages whose application is currently
-running are skipped.
+inside each user's own account. When an update fails, the installation is
+checked with *flatpak repair* and the update is tried once more. AppImages are
+updated through Gear Lever, for users with a graphical session, and AppImages
+whose application is currently running are skipped.
 
 The machine is never restarted automatically. A kernel update that makes a
 restart necessary is reported by *cachy-auto-update status*, not by a

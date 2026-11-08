@@ -32,6 +32,18 @@ _cau_flatpak_run() {
 	done
 }
 
+# _cau_flatpak_repair <command> [args...]
+# After a failed update: fix the installation, then the caller tries once more.
+# A half pulled or broken object in the repo is the usual cause, and
+# `flatpak repair` is the fix for it. Fails only when there is no point in
+# trying again.
+_cau_flatpak_repair() {
+	cau_control_cancelled && return 1
+	cau_info "Repairing the Flatpak installation and retrying"
+	cau_run_logged cau_work flatpak '' "$@" || true
+	! cau_control_cancelled
+}
+
 # cau_flatpak_update
 # Failures are reported but never abort the rest of the run.
 cau_flatpak_update() {
@@ -57,7 +69,10 @@ cau_flatpak_update() {
 		# only reports this side makes while a ticker is running are further
 		# along than the ticker ever gets.
 		cau_progress_creep_start
-		if _cau_flatpak_run flatpak update --system --noninteractive --assumeyes; then
+		if _cau_flatpak_run flatpak update --system --noninteractive --assumeyes \
+			|| { _cau_flatpak_repair flatpak repair --system \
+				&& _cau_flatpak_run flatpak update --system --noninteractive --assumeyes; }
+		then
 			cau_progress_creep_stop
 			CAU_FLATPAK_COUNT=$(( CAU_FLATPAK_COUNT + pending ))
 			cau_progress_item "$pending"
@@ -84,7 +99,10 @@ cau_flatpak_update() {
 
 		cau_info "Updating $count user Flatpak(s) for $user"
 		if _cau_flatpak_run cau_as_user "$user" "$uid" \
-			flatpak update --user --noninteractive --assumeyes
+			flatpak update --user --noninteractive --assumeyes \
+			|| { _cau_flatpak_repair cau_as_user "$user" "$uid" flatpak repair --user \
+				&& _cau_flatpak_run cau_as_user "$user" "$uid" \
+					flatpak update --user --noninteractive --assumeyes; }
 		then
 			CAU_FLATPAK_COUNT=$(( CAU_FLATPAK_COUNT + count ))
 		elif cau_control_cancelled; then

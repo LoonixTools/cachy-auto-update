@@ -177,9 +177,12 @@ cau_debug() { [[ -n ${CAU_DEBUG:-} ]] && cau_log DEBUG "$@"; return 0; }
 # only emptied once a run really starts updating (cau_runlog_reset). The timer
 # fires every hour, and most of those runs do nothing; they used to wipe the
 # log of the last real run, so `log` never showed what went wrong.
+#
+# Readable for everyone, like pacman's own log and like tmpfiles.d sets it up:
+# `log` and the tray icon's terminal show it without a password.
 cau_log_open() {
 	mkdir -p "$CAU_LOGDIR" 2>/dev/null || return 0
-	chmod 0750 "$CAU_LOGDIR" 2>/dev/null || true
+	chmod 0755 "$CAU_LOGDIR" 2>/dev/null || true
 	: >> "$CAU_RUNLOG" 2>/dev/null || return 0
 	CAU_LOG_OPEN=1
 }

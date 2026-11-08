@@ -109,6 +109,7 @@ notification area and does not pop up. Click the notification icon to see it.
 - A lock file left by a power cut is removed on the next run.
 - Package replacements are handled on their own. File conflicts are never overwritten.
 - A signature error refreshes the keyring once and tries again.
+- An AUR package that does not build is held back. Everything else still updates.
 - Old package versions and AUR build leftovers are cleaned up, so the caches do not fill the disk.
 
 </details>

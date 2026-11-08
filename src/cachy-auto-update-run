@@ -279,13 +279,15 @@ fi
 # only fires when the set changes: a blocker waiting on an upstream fix would
 # otherwise produce the same message every single day.
 prev_held="$(cau_state_read held_back '')"
-if [[ -n $CAU_PACMAN_HELD ]]; then
-	cau_state_write held_back "$CAU_PACMAN_HELD"
-	cau_warn "Held back: $CAU_PACMAN_HELD"
-	if [[ $CAU_PACMAN_HELD != "$prev_held" && $CFG_NOTIFY_ERROR == yes ]]; then
+held="$CAU_PACMAN_HELD $CAU_AUR_HELD"
+held="${held# }"; held="${held% }"
+if [[ -n $held ]]; then
+	cau_state_write held_back "$held"
+	cau_warn "Held back: $held"
+	if [[ $held != "$prev_held" && $CFG_NOTIFY_ERROR == yes ]]; then
 		cau_notify normal yes "Some packages were held back" \
 			"%s could not be updated and was skipped. Everything else is up to date." \
-			"$CAU_PACMAN_HELD"
+			"$held"
 	fi
 elif (( ! cancelled )); then
 	# A cancelled run may not have got that far, so it knows nothing new.

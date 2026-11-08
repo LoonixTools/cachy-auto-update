@@ -16,10 +16,15 @@
 CAU_AUR_COUNT=0
 CAU_AUR_HELPER=''
 
-# Notify only after this many consecutive failed AUR runs. A single failed
-# build is routine (upstream broke a tarball, a checksum moved) and self-heals
-# a day later; nagging about it on someone's parents' machine is noise.
-CAU_AUR_FAILURE_THRESHOLD=2
+# AUR packages that failed to build, space separated. They are held back, so
+# one broken package never stops the others. Some can never build on their
+# own: davinci-resolve wants a file that has to be downloaded by hand.
+CAU_AUR_HELD=''
+
+# A held package is tried again once the AUR has a new version of it, or
+# after this long. That way a build that only failed because the network
+# dropped does not stay held for months.
+CAU_AUR_RETRY_AFTER=$(( 3 * 86400 ))
 
 # cau_aur_detect
 # Resolves the helper to use, honouring AURHelper from the config.
@@ -108,21 +113,53 @@ cau_aur_helper_args() {
 	esac
 }
 
+# _cau_aur_list
+# Pending AUR updates, one "name newversion" per line. Packages that pacman.conf
+# ignores are left out: the helper would skip them anyway.
+_cau_aur_list() {
+	cau_as_build_user "$CAU_AUR_HELPER" -Qua 2>/dev/null \
+		| grep -v '\[ignored\]' \
+		| awk '$1 ~ /^[A-Za-z0-9@._+-]+$/ && NF >= 2 { print $1, $NF }'
+}
+
 # cau_aur_pending
 # Number of AUR packages with an update available.
 cau_aur_pending() {
-	local out
-	out="$(cau_as_build_user "$CAU_AUR_HELPER" -Qua 2>/dev/null | grep -c .)" || out=0
-	[[ $out =~ ^[0-9]+$ ]] || out=0
-	printf '%s\n' "$out"
+	_cau_aur_list | grep -c . || true
+}
+
+# _cau_aur_build [args...]
+# One run of the helper. After a pause it runs again: packages installed before
+# the pause are not pending any more.
+_cau_aur_build() {
+	while :; do
+		cau_run_logged cau_work aur '' \
+			cau_as_build_user "$CAU_AUR_HELPER" "$@" && return 0
+		cau_control_stopped && cau_control_wait && continue
+		return 1
+	done
+}
+
+# _cau_aur_join <name>...
+# The names as one comma separated list, the way --ignore takes them.
+_cau_aur_join() {
+	local IFS=,
+	printf '%s' "$*"
 }
 
 # cau_aur_update
-# Returns 0 on success or "nothing to do", 1 on a failure worth reporting.
-# Transient build failures are swallowed until they repeat.
+# Always returns 0. A package that fails to build is held back and the others
+# are updated. CAU_AUR_HELD names the held ones.
 cau_aur_update() {
-	local pending failures
-	local -a args
+	local name ver since now other
+	local -a args=() todo=() left=() skip=()
+	local -A want=() held=()
+
+	CAU_AUR_HELD=''
+	CAU_AUR_COUNT=0
+
+	# Left over from before packages were held back.
+	cau_state_clear aur_failures
 
 	# No helper, no base-devel, no bar: a step that cannot run should not be
 	# holding a share of it.
@@ -130,62 +167,89 @@ cau_aur_update() {
 
 	cau_progress_step aur "Updating AUR packages"
 
-	pending="$(cau_aur_pending)"
-	if (( pending == 0 )); then
+	while read -r name ver; do
+		want[$name]="$ver"
+	done < <(_cau_aur_list)
+
+	if (( ${#want[@]} == 0 )); then
 		cau_info "No AUR updates pending"
-		cau_state_clear aur_failures
+		cau_state_clear aur_held
 		cau_progress_drop aur
 		return 0
 	fi
 
-	cau_info "Updating $pending AUR package(s) with $CAU_AUR_HELPER"
+	# Still held: the same version is pending and it is not time to try again.
+	now="$(date +%s)"
+	while read -r name ver since; do
+		[[ -n $name && ${want[$name]-} == "$ver" && $since =~ ^[0-9]+$ ]] || continue
+		(( now - since < CAU_AUR_RETRY_AFTER )) && held[$name]="$ver $since"
+	done < <(cau_state_read aur_held '')
 
-	# The helper builds each package from source and prints plenty about it,
-	# none of it countable from this side. A single large package can take ten
-	# minutes, so the bar creeps through the step rather than sitting at its
-	# start for all of them; the item count stays where it is, because that is
-	# the number that would be lying if it moved.
-	cau_progress_item 0 "$pending"
-	mapfile -t args < <(cau_aur_helper_args)
-	cau_progress_creep_start
-
-	while :; do
-		if cau_run_logged cau_work aur '' \
-			cau_as_build_user "$CAU_AUR_HELPER" "${args[@]}"
-		then
-			cau_progress_creep_stop
-			CAU_AUR_COUNT="$pending"
-			cau_progress_item "$pending"
-			cau_state_clear aur_failures
-			return 0
-		fi
-
-		# Paused from the desktop: build again once it resumes. Packages
-		# that were installed before the pause are not pending any more.
-		cau_control_stopped && cau_control_wait && continue
-		break
+	for name in "${!want[@]}"; do
+		[[ -n ${held[$name]-} ]] || todo+=("$name")
 	done
 
-	cau_progress_creep_stop
-	CAU_AUR_COUNT=0
+	if (( ${#todo[@]} == 0 )); then
+		cau_progress_drop aur
+	else
+		cau_info "Updating ${#todo[@]} AUR package(s) with $CAU_AUR_HELPER"
 
-	# Cancelled, which is not a failed build.
-	if cau_control_stopped || cau_control_cancelled; then
-		cau_info "AUR update was stopped from the desktop"
+		# The helper builds each package from source and prints plenty about
+		# it, none of it countable from this side. A single large package can
+		# take ten minutes, so the bar creeps through the step rather than
+		# sitting at its start for all of them; the item count stays where it
+		# is, because that is the number that would be lying if it moved.
+		cau_progress_item 0 "${#todo[@]}"
+		mapfile -t args < <(cau_aur_helper_args)
+		(( ${#held[@]} )) && skip=(--ignore "$(_cau_aur_join "${!held[@]}")")
+		cau_progress_creep_start
+
+		# All at once first. If that fails, each package that is still pending
+		# gets a try on its own, so only the broken one is held back.
+		if _cau_aur_build "${args[@]}" "${skip[@]}"; then
+			CAU_AUR_COUNT=${#todo[@]}
+		elif cau_control_stopped || cau_control_cancelled; then
+			cau_info "AUR update was stopped from the desktop"
+		else
+			while read -r name ver; do
+				[[ -n ${want[$name]-} && -z ${held[$name]-} ]] && left+=("$name")
+			done < <(_cau_aur_list)
+			CAU_AUR_COUNT=$(( ${#todo[@]} - ${#left[@]} ))
+
+			for name in "${left[@]}"; do
+				if (( ${#left[@]} > 1 )); then
+					skip=("${!held[@]}")
+					for other in "${left[@]}"; do
+						[[ $other == "$name" || -n ${held[$other]-} ]] || skip+=("$other")
+					done
+					cau_info "Trying $name on its own"
+					if _cau_aur_build "${args[@]}" --ignore "$(_cau_aur_join "${skip[@]}")"; then
+						CAU_AUR_COUNT=$(( CAU_AUR_COUNT + 1 ))
+						continue
+					fi
+				fi
+				cau_control_cancelled && break
+				cau_warn "Could not build $name; holding it back"
+				held[$name]="${want[$name]} $now"
+			done
+		fi
+
+		cau_progress_creep_stop
+		cau_progress_item "$CAU_AUR_COUNT"
+	fi
+
+	if (( ${#held[@]} == 0 )); then
+		cau_state_clear aur_held
 		return 0
 	fi
 
-	failures="$(cau_state_read aur_failures 0)"
-	[[ $failures =~ ^[0-9]+$ ]] || failures=0
-	failures=$(( failures + 1 ))
-	cau_state_write aur_failures "$failures"
-
-	if (( failures >= CAU_AUR_FAILURE_THRESHOLD )); then
-		cau_error "AUR update failed $failures times in a row"
-		return 1
-	fi
-
-	cau_warn "AUR update failed (attempt $failures); will retry on the next run"
+	cau_state_write aur_held "$(
+		for name in "${!held[@]}"; do
+			printf '%s %s\n' "$name" "${held[$name]}"
+		done | sort
+	)"
+	CAU_AUR_HELD="$(printf '%s\n' "${!held[@]}" | sort | paste -sd ' ')"
+	cau_info "Holding back AUR package(s): $CAU_AUR_HELD"
 	return 0
 }
 

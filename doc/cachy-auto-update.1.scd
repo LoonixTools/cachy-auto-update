@@ -92,8 +92,11 @@ account, because *makepkg*(8) refuses to run as root. That account has no
 password and no shell. Through _/etc/sudoers.d/cachy-auto-update_ it is allowed
 to invoke *pacman* without one. No user password is ever stored anywhere.
 
-A failed AUR build is not reported the first time it happens; only a failure
-that repeats is worth waking somebody up for.
+An AUR package that fails to build is held back, and all the others are still
+updated. Some packages can never build on their own, for example one that needs
+a file downloaded by hand. A held package is tried again when the AUR has a new
+version of it, or after three days. Held packages are shown in the menu and in
+*cachy-auto-update status*.
 
 After each run, _CleanAURCache_ removes build leftovers from the caches of
 paru, yay and Shelly, for the build account and for every user: built packages,

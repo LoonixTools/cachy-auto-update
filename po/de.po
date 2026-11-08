@@ -180,33 +180,6 @@ msgstr "Kein AUR-Helper gefunden. Für AUR-Updates paru oder yay installieren."
 msgid "base-devel is missing, so AUR packages cannot be built."
 msgstr "base-devel fehlt, daher lassen sich keine AUR-Pakete bauen."
 
-msgid ""
-"cachy-update also notifies about available updates. Turn its notifications "
-"off? [Y/n]"
-msgstr ""
-"cachy-update benachrichtigt ebenfalls über verfügbare Updates. Dessen "
-"Benachrichtigungen abschalten? [J/n]"
-
-msgid "cachy-update's update check has been disabled."
-msgstr "Die Update-Prüfung von cachy-update wurde abgeschaltet."
-
-msgid ""
-"CachyOS shows a \"Reboot recommended\" notification while an update is still "
-"running. Turn it off? [Y/n]"
-msgstr ""
-"CachyOS zeigt eine Benachrichtigung \"Neustart empfohlen\", während ein "
-"Update noch läuft. Abschalten? [J/n]"
-
-#, c-format
-msgid "The reboot notification has been turned off. Undo it by deleting %s."
-msgstr ""
-"Die Neustart-Benachrichtigung wurde abgeschaltet. Rückgängig durch Löschen "
-"von %s."
-
-#, c-format
-msgid "Could not write %s."
-msgstr "%s konnte nicht geschrieben werden."
-
 msgid "No log yet."
 msgstr "Noch kein Protokoll vorhanden."
 
@@ -381,6 +354,12 @@ msgstr "Wie oft aktualisieren"
 
 msgid "Show an icon in the system tray"
 msgstr "Symbol im Systemabschnitt anzeigen"
+
+msgid "Also run cachy-update"
+msgstr "cachy-update auch laufen lassen"
+
+msgid "Show the CachyOS restart notice"
+msgstr "Neustart-Hinweis von CachyOS zeigen"
 
 msgid "Postpone while a game is running"
 msgstr "Verschieben, solange ein Spiel läuft"

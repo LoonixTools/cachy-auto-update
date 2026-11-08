@@ -178,27 +178,6 @@ msgstr ""
 msgid "base-devel is missing, so AUR packages cannot be built."
 msgstr ""
 
-msgid ""
-"cachy-update also notifies about available updates. Turn its notifications "
-"off? [Y/n]"
-msgstr ""
-
-msgid "cachy-update's update check has been disabled."
-msgstr ""
-
-msgid ""
-"CachyOS shows a \"Reboot recommended\" notification while an update is still "
-"running. Turn it off? [Y/n]"
-msgstr ""
-
-#, c-format
-msgid "The reboot notification has been turned off. Undo it by deleting %s."
-msgstr ""
-
-#, c-format
-msgid "Could not write %s."
-msgstr ""
-
 msgid "No log yet."
 msgstr ""
 
@@ -362,6 +341,12 @@ msgid "How often to update"
 msgstr ""
 
 msgid "Show an icon in the system tray"
+msgstr ""
+
+msgid "Also run cachy-update"
+msgstr ""
+
+msgid "Show the CachyOS restart notice"
 msgstr ""
 
 msgid "Postpone while a game is running"

@@ -133,6 +133,8 @@ cau_config_load() {
 	CFG_NOTIFY_SUCCESS=no;        cau_config_bool NotifyOnSuccess      yes && CFG_NOTIFY_SUCCESS=yes
 	CFG_NOTIFY_ERROR=no;          cau_config_bool NotifyOnError        yes && CFG_NOTIFY_ERROR=yes
 	CFG_TRAY=no;                  cau_config_bool TrayIcon             yes && CFG_TRAY=yes
+	CFG_CACHY_UPDATE=no;          cau_config_bool CachyUpdate          no  && CFG_CACHY_UPDATE=yes
+	CFG_REBOOT_NOTIFY=no;         cau_config_bool RebootNotification   no  && CFG_REBOOT_NOTIFY=yes
 
 	CFG_INTERVAL="$(cau_config_get UpdateInterval 1w)"
 	CFG_INTERVAL_SECONDS="$(cau_duration_to_seconds "$CFG_INTERVAL" 604800)"

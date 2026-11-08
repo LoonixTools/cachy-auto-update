@@ -14,7 +14,7 @@ set -uo pipefail
 
 CAU_LIBDIR="${CAU_LIBDIR:-@LIBDIR@}"
 
-for _mod in common config users conditions locks notify progress control \
+for _mod in common config users conditions locks notify quiet progress control \
             pkg_pacman pkg_aur pkg_flatpak pkg_appimage; do
 	# shellcheck source=/dev/null
 	if ! source "$CAU_LIBDIR/$_mod.sh"; then
@@ -107,6 +107,10 @@ if (( ! FORCE )); then
 		cau_debug "Automatic updates are disabled"
 		exit 0
 	fi
+
+	# Every hour, so a user who logs in later, or a cachy-update that was
+	# installed later, is quiet too. Only file checks when nothing changed.
+	cau_quiet_apply --only-off
 	if ! cau_update_due; then
 		cau_debug "Not due yet (interval $CFG_INTERVAL)"
 		exit 0

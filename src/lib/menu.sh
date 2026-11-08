@@ -131,6 +131,8 @@ cau_ui_read_line() {
 CAU_SETTINGS=(
 	"UpdateInterval|interval:1d 2d 3d 1w 2w 4w|1w|How often to update"
 	"TrayIcon|bool|yes|Show an icon in the system tray"
+	"CachyUpdate|bool|no|Also run cachy-update"
+	"RebootNotification|bool|no|Show the CachyOS restart notice"
 	"NotifyOnStart|bool|yes|Notify when an update starts"
 	"MinimizeProgress|bool|no|Start the progress bar minimized"
 	"NotifyOnSuccess|bool|yes|Notify after a successful update"
@@ -319,6 +321,7 @@ cau_ui_settings() {
 _cau_setting_applied() {
 	case "$1" in
 		TrayIcon) cau_tray_apply ;;
+		CachyUpdate|RebootNotification) cau_config_load; cau_quiet_apply ;;
 	esac
 }
 

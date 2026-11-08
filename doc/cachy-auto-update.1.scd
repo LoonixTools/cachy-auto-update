@@ -118,6 +118,23 @@ unpacks the new one, so a bubble would fire while the run is still working
 through AUR packages and Flatpaks, and reads as an invitation to restart in the
 middle of it.
 
+# OTHER UPDATE NOTICES
+
+While automatic updates are on, two things CachyOS ships are switched off, with
+no question asked:
+
+- *cachy-update*: its tray icon and its daily "updates available" check. This
+  tool installs those updates itself and has its own tray icon. The timer
+  _arch-update.timer_ is disabled for each user, and the tray is hidden with a
+  _Hidden=true_ entry in the user's own autostart folder.
+- The "Reboot recommended" notice of _cachyos-hooks_. It pops up as soon as a
+  kernel or driver is unpacked, in the middle of the run. pacman takes a link to
+  _/dev/null_ in _/etc/pacman.d/hooks_ over the hook of the same name.
+
+_CachyUpdate_ and _RebootNotification_ turn them back on, and so does
+*disable*. Only what this tool changed is undone. Each run checks again, so a
+user who logs in later, or a cachy-update installed later, is covered too.
+
 # PROGRESS
 
 For as long as a run is working, the notification area carries a live progress

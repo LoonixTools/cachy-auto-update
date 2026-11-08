@@ -84,7 +84,7 @@ notification area and does not pop up. Click the notification icon to see it.
 | A game is running | ⏸️ Waits |
 | pacman, yay or paru is running | ⏸️ Waits |
 | Shutdown or suspend during an update | 🚫 Blocked until it is done, or until you click **Cancel** |
-| Restart after an update | ❌ Never on its own, you get a notification |
+| Restart after an update | ❌ Never on its own. The menu and the tray icon say when one is due |
 
 ## More
 
@@ -128,8 +128,10 @@ journalctl -u cachy-auto-update
 <summary>cachy-update</summary>
 
 [cachy-update](https://github.com/CachyOS/cachy-update) tells you about updates, you install them.
-This installs them for you. Both work side by side, and `enable` offers to silence
-cachy-update's notification.
+This installs them for you, so cachy-update's tray icon and notifications are turned off while automatic
+updates are on. So is the **Reboot recommended** pop-up of CachyOS, because it shows up in the middle of an
+update. To keep them, turn on **Also run cachy-update** or **Show the CachyOS restart notice** in the
+settings.
 
 </details>
 

@@ -26,6 +26,15 @@ CAU_AUR_HELD=''
 # dropped does not stay held for months.
 CAU_AUR_RETRY_AFTER=$(( 3 * 86400 ))
 
+# About how long one AUR build takes, for the progress bar. Measured on real
+# runs, where most packages are a download that is packed up again. Only used
+# for a package that was never built here: after that the run knows better.
+CAU_AUR_SECONDS=45
+
+# Where the progress bar notes when each package was installed, as "name
+# seconds".
+CAU_AUR_MARKS="${CAU_RUNDIR}/aur.marks"
+
 # cau_aur_detect
 # Resolves the helper to use, honouring AURHelper from the config.
 cau_aur_detect() {
@@ -140,6 +149,166 @@ _cau_aur_build() {
 	done
 }
 
+# _cau_aur_estimate <name>...
+# About how long each of the packages will take, for the progress bar.
+#
+#   CAU_AUR_BASE  package -> the PKGBUILD it comes from
+#   CAU_AUR_EST   package -> seconds it should take
+#   CAU_AUR_WORK  all of them together
+#
+# A package should take as long as it did before (state file aur_times). One
+# that is new here gets CAU_AUR_SECONDS, shared with the other packages from
+# the same PKGBUILD: those are built in one go and installed together, so
+# they are one piece of work. pacman's local database knows the PKGBUILD.
+declare -A CAU_AUR_BASE=() CAU_AUR_EST=()
+CAU_AUR_WORK=0
+
+_cau_aur_estimate() {
+	local name ver line base took
+	local -A known=() parts=()
+
+	CAU_AUR_BASE=()
+	for name in "$@"; do
+		CAU_AUR_BASE[$name]="$name"
+	done
+
+	while read -r name ver; do
+		[[ -n ${CAU_AUR_BASE[$name]-} ]] || continue
+		while read -r line; do
+			[[ $line == %BASE% ]] || continue
+			read -r line && [[ -n $line ]] && CAU_AUR_BASE[$name]="$line"
+			break
+		done 2>/dev/null < "/var/lib/pacman/local/$name-$ver/desc"
+	done < <(pacman -Q "$@" 2>/dev/null)
+
+	while read -r name took; do
+		[[ -n $name && $took =~ ^[0-9]+$ ]] && (( took > 0 )) && known[$name]=$took
+	done < <(cau_state_read aur_times '')
+
+	for name in "$@"; do
+		base="${CAU_AUR_BASE[$name]}"
+		parts[$base]=$(( ${parts[$base]:-0} + 1 ))
+	done
+
+	CAU_AUR_EST=()
+	CAU_AUR_WORK=0
+	for name in "$@"; do
+		took=${known[$name]:-$(( CAU_AUR_SECONDS / ${parts[${CAU_AUR_BASE[$name]}]} ))}
+		(( took > 0 )) || took=1
+		CAU_AUR_EST[$name]=$took
+		CAU_AUR_WORK=$(( CAU_AUR_WORK + took ))
+	done
+}
+
+# _cau_aur_built <log-offset>
+# How far the step is, for the ticker of the progress bar: how many packages
+# are installed, how many seconds of work that was, and how many seconds the
+# build in progress should take. Also notes when each package was installed.
+#
+# The helper passes pacman's "upgrading foo..." lines on to the run log, and
+# makepkg says which PKGBUILD it is working on.
+_cau_aur_built() {
+	local line name now='' secs=0 piece=0
+	local -A built=() marked=()
+
+	while read -r name _; do
+		[[ -n $name ]] && marked[$name]=1
+	done 2>/dev/null < "$CAU_AUR_MARKS"
+
+	while read -r line; do
+		if [[ $line == '==> Making package: '* ]]; then
+			now="${line#==> Making package: }"
+			now="${now%% *}"
+			continue
+		fi
+		name="${line#* }"
+		name="${name%...}"
+		[[ -n ${CAU_AUR_EST[$name]-} ]] || continue
+		built[$name]=1
+		[[ -z ${marked[$name]-} ]] || continue
+		marked[$name]=1
+		printf '%s %s\n' "$name" "$SECONDS" 2>/dev/null >> "$CAU_AUR_MARKS"
+	done < <(tail -c "+$(( ${1:-0} + 1 ))" "$CAU_RUNLOG" 2>/dev/null \
+		| grep -aE '^(upgrading|installing) [^ ]+\.\.\.$|^==> Making package: [^ ]')
+
+	for name in "${!CAU_AUR_EST[@]}"; do
+		if [[ -n ${built[$name]-} ]]; then
+			secs=$(( secs + ${CAU_AUR_EST[$name]} ))
+		elif [[ ${CAU_AUR_BASE[$name]} == "$now" ]]; then
+			piece=$(( piece + ${CAU_AUR_EST[$name]} ))
+		fi
+	done
+
+	# Between two builds makepkg has not named the next one yet. Then it is
+	# taken to be an average one.
+	if (( piece == 0 && ${#built[@]} < ${#CAU_AUR_EST[@]} )); then
+		piece=$(( (CAU_AUR_WORK - secs) / (${#CAU_AUR_EST[@]} - ${#built[@]}) ))
+	fi
+	(( piece > 0 )) || piece=1
+
+	printf '%s %s %s\n' "${#built[@]}" "$secs" "$piece"
+}
+
+# _cau_aur_learn <log-offset> <start>
+# Remembers how long each package took, for the bar of the next run. <start>
+# is what $SECONDS was when the first build began. Packages installed in the
+# same second came from one build and share its time. Half old, half new, so
+# one slow day does not count for too much.
+_cau_aur_learn() {
+	local name at took prev="$2" i j k
+	local -a names=() ats=()
+	local -A times=()
+
+	cau_progress_active || return 0
+
+	# The ticker may have been stopped before it saw the last one.
+	_cau_aur_built "$1" > /dev/null
+
+	while read -r name took; do
+		[[ -n $name && $took =~ ^[0-9]+$ ]] && times[$name]=$took
+	done < <(cau_state_read aur_times '')
+
+	while read -r name at; do
+		[[ -n $name && $at =~ ^[0-9]+$ ]] || continue
+		names+=("$name")
+		ats+=("$at")
+	done 2>/dev/null < "$CAU_AUR_MARKS"
+
+	for (( i = 0; i < ${#names[@]}; i = j )); do
+		for (( j = i + 1; j < ${#names[@]} && ats[j] == ats[i]; j++ )); do :; done
+		took=$(( (ats[i] - prev) / (j - i) ))
+		prev=${ats[i]}
+		(( took > 0 )) || took=1
+		for (( k = i; k < j; k++ )); do
+			name="${names[k]}"
+			if [[ -n ${times[$name]-} ]]; then
+				times[$name]=$(( (${times[$name]} + took) / 2 ))
+			else
+				times[$name]=$took
+			fi
+		done
+	done
+
+	(( ${#times[@]} )) || return 0
+	cau_state_write aur_times "$(
+		for name in "${!times[@]}"; do
+			printf '%s %s\n' "$name" "${times[$name]}"
+		done | sort
+	)"
+}
+
+# cau_aur_forecast
+# How many seconds of builds are pending. Quiet and only for the progress bar.
+cau_aur_forecast() {
+	local -a names=()
+
+	cau_aur_ready || return 1
+	mapfile -t names < <(_cau_aur_list | cut -d' ' -f1)
+	(( ${#names[@]} )) || { printf '0\n'; return 0; }
+	_cau_aur_estimate "${names[@]}"
+	printf '%s\n' "$CAU_AUR_WORK"
+}
+
 # _cau_aur_join <name>...
 # The names as one comma separated list, the way --ignore takes them.
 _cau_aur_join() {
@@ -151,7 +320,7 @@ _cau_aur_join() {
 # Always returns 0. A package that fails to build is held back and the others
 # are updated. CAU_AUR_HELD names the held ones.
 cau_aur_update() {
-	local name ver since now other
+	local name ver since now other from began clean=0
 	local -a args=() todo=() left=() skip=()
 	local -A want=() held=()
 
@@ -165,11 +334,14 @@ cau_aur_update() {
 	# holding a share of it.
 	cau_aur_ready || { cau_progress_drop aur; return 0; }
 
+	cau_progress_forecast
 	cau_progress_step aur "Updating AUR packages"
+	cau_progress_tick_start
 
 	while read -r name ver; do
 		want[$name]="$ver"
 	done < <(_cau_aur_list)
+	cau_progress_tick_stop
 
 	if (( ${#want[@]} == 0 )); then
 		cau_info "No AUR updates pending"
@@ -194,20 +366,25 @@ cau_aur_update() {
 	else
 		cau_info "Updating ${#todo[@]} AUR package(s) with $CAU_AUR_HELPER"
 
-		# The helper builds each package from source and prints plenty about
-		# it, none of it countable from this side. A single large package can
-		# take ten minutes, so the bar creeps through the step rather than
-		# sitting at its start for all of them; the item count stays where it
-		# is, because that is the number that would be lying if it moved.
-		cau_progress_item 0 "${#todo[@]}"
+		# Each package gets the part of the step it should take. The bar counts
+		# the ones pacman has installed. In between it goes by the clock: a
+		# build prints plenty, none of it countable.
+		_cau_aur_estimate "${todo[@]}"
+		: 2>/dev/null > "$CAU_AUR_MARKS"
+		from="$(stat -c %s "$CAU_RUNLOG" 2>/dev/null)"
+		began=$SECONDS
+		cau_progress_weigh aur "$CAU_AUR_WORK"
+		cau_progress_step aur "Updating AUR packages" "${#todo[@]}"
+		cau_progress_tick_start "${#todo[@]}" _cau_aur_built "$from"
+
 		mapfile -t args < <(cau_aur_helper_args)
 		(( ${#held[@]} )) && skip=(--ignore "$(_cau_aur_join "${!held[@]}")")
-		cau_progress_creep_start
 
 		# All at once first. If that fails, each package that is still pending
 		# gets a try on its own, so only the broken one is held back.
 		if _cau_aur_build "${args[@]}" "${skip[@]}"; then
 			CAU_AUR_COUNT=${#todo[@]}
+			clean=1
 		elif cau_control_stopped || cau_control_cancelled; then
 			cau_info "AUR update was stopped from the desktop"
 		else
@@ -234,8 +411,13 @@ cau_aur_update() {
 			done
 		fi
 
-		cau_progress_creep_stop
-		cau_progress_item "$CAU_AUR_COUNT"
+		cau_progress_tick_stop
+		# Only a run that went through in one go says how long a build takes.
+		if (( clean )); then
+			_cau_aur_learn "$from" "$began"
+			cau_progress_item "${#todo[@]}"
+		fi
+		rm -f "$CAU_AUR_MARKS" 2>/dev/null
 	fi
 
 	if (( ${#held[@]} == 0 )); then

@@ -239,6 +239,9 @@ msgstr ""
 msgid "Updating system packages"
 msgstr ""
 
+msgid "Finishing the installation"
+msgstr ""
+
 msgid "Updating AUR packages"
 msgstr ""
 

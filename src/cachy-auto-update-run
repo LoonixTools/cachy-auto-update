@@ -202,12 +202,13 @@ trap 'rm -f "$CAU_RUNDIR/running"' EXIT
 # Open the desktop's progress bar, told up front which steps this run will
 # perform. Only those count towards the bar, so a machine with no Flatpaks
 # does not sit at 85% for the last second of the run.
-progress_steps=(resolve download repo)
+progress_steps=(resolve download repo hooks)
 [[ $CFG_AUR == yes ]]      && progress_steps+=(aur)
-[[ $CFG_FLATPAK == yes ]]  && progress_steps+=(flatpak)
+[[ $CFG_FLATPAK == yes ]]  && progress_steps+=(flatpak userflatpak)
 [[ $CFG_APPIMAGE == yes ]] && progress_steps+=(appimage)
 progress_steps+=(cleanup)
 cau_progress_begin "${progress_steps[@]}"
+cau_progress_forecast_start
 
 # And carry the run log's last lines along with it, so "Details" shows what the
 # update is doing during the stretches that have nothing to count. Most of all

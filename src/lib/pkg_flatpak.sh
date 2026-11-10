@@ -13,6 +13,40 @@
 
 CAU_FLATPAK_COUNT=0
 
+# About how long one Flatpak app takes, for the progress bar.
+CAU_FLATPAK_SECONDS=30
+
+# _cau_flatpak_part <step-id> <count>
+# The next part on the bar: this many apps, starting now. Flatpak prints
+# nothing countable, so the bar goes by the clock.
+_cau_flatpak_part() {
+	cau_progress_weigh "$1" $(( $2 * CAU_FLATPAK_SECONDS ))
+	cau_progress_step "$1" "Updating Flatpak apps" "$2"
+	cau_progress_tick_start
+}
+
+# _cau_flatpak_pending_user <user> <uid>
+_cau_flatpak_pending_user() {
+	local out
+	out="$(cau_as_user "$1" "$2" flatpak remote-ls --user --updates \
+		--columns=application 2>/dev/null | grep -c .)" || out=0
+	[[ $out =~ ^[0-9]+$ ]] || out=0
+	printf '%s\n' "$out"
+}
+
+# cau_flatpak_forecast
+# "<system> <user>": how many apps are pending. Only for the progress bar.
+cau_flatpak_forecast() {
+	local user uid home mine=0
+
+	while read -r user uid home; do
+		[[ -d "$home/.local/share/flatpak" ]] || continue
+		mine=$(( mine + $(_cau_flatpak_pending_user "$user" "$uid") ))
+	done < <(cau_human_users)
+
+	printf '%s %s\n' "$(cau_flatpak_pending_system)" "$mine"
+}
+
 # cau_flatpak_pending_system
 cau_flatpak_pending_system() {
 	local out
@@ -49,38 +83,32 @@ _cau_flatpak_repair() {
 cau_flatpak_update() {
 	local rc=0 pending user uid home count
 
-	cau_have flatpak || { cau_progress_drop flatpak; return 0; }
+	cau_have flatpak || { cau_progress_drop flatpak userflatpak; return 0; }
 
 	cau_progress_step flatpak "Updating Flatpak apps"
 
 	# refresh appstream metadata first so remote-ls sees current versions.
-	# Nothing is countable until that has finished, so the bar creeps rather
-	# than waiting at the start of the step for it.
-	cau_progress_creep_start
+	cau_progress_tick_start
 	_cau_flatpak_run flatpak update --appstream --system --noninteractive || true
-	cau_progress_creep_stop
+	cau_progress_tick_stop
 	cau_control_cancelled && return 0
 
 	pending="$(cau_flatpak_pending_system)"
 	if (( pending > 0 )); then
 		cau_info "Updating $pending system Flatpak(s)"
-		cau_progress_item 0 "$pending"
-		# Started after the count above and stopped before the one below, so the
-		# only reports this side makes while a ticker is running are further
-		# along than the ticker ever gets.
-		cau_progress_creep_start
+		_cau_flatpak_part flatpak "$pending"
 		if _cau_flatpak_run flatpak update --system --noninteractive --assumeyes \
 			|| { _cau_flatpak_repair flatpak repair --system \
 				&& _cau_flatpak_run flatpak update --system --noninteractive --assumeyes; }
 		then
-			cau_progress_creep_stop
+			cau_progress_tick_stop
 			CAU_FLATPAK_COUNT=$(( CAU_FLATPAK_COUNT + pending ))
 			cau_progress_item "$pending"
 		elif cau_control_cancelled; then
-			cau_progress_creep_stop
+			cau_progress_tick_stop
 			return 0
 		else
-			cau_progress_creep_stop
+			cau_progress_tick_stop
 			cau_warn "System Flatpak update failed"
 			rc=1
 		fi
@@ -92,22 +120,25 @@ cau_flatpak_update() {
 		cau_control_cancelled && return 0
 		[[ -d "$home/.local/share/flatpak" ]] || continue
 
-		count="$(cau_as_user "$user" "$uid" flatpak remote-ls --user --updates \
-			--columns=application 2>/dev/null | grep -c .)" || count=0
-		[[ $count =~ ^[0-9]+$ ]] || count=0
+		count="$(_cau_flatpak_pending_user "$user" "$uid")"
 		(( count > 0 )) || continue
 
 		cau_info "Updating $count user Flatpak(s) for $user"
+		_cau_flatpak_part userflatpak "$count"
 		if _cau_flatpak_run cau_as_user "$user" "$uid" \
 			flatpak update --user --noninteractive --assumeyes \
 			|| { _cau_flatpak_repair cau_as_user "$user" "$uid" flatpak repair --user \
 				&& _cau_flatpak_run cau_as_user "$user" "$uid" \
 					flatpak update --user --noninteractive --assumeyes; }
 		then
+			cau_progress_tick_stop
 			CAU_FLATPAK_COUNT=$(( CAU_FLATPAK_COUNT + count ))
+			cau_progress_item "$count"
 		elif cau_control_cancelled; then
+			cau_progress_tick_stop
 			return 0
 		else
+			cau_progress_tick_stop
 			cau_warn "User Flatpak update failed for $user"
 			rc=1
 		fi

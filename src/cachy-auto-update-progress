@@ -143,10 +143,32 @@ class Entry:
         self.note = ""
         self.paused = False
         self.held = {}
+        self.percent = 0    # what the bar shows
+        self.target = 0     # where it should be
+        self.sliding = False
 
     def show(self):
         self.job.call("setInfoMessage",
                       GLib.Variant("(s)", (self.note or self.label,)))
+
+    def slide(self):
+        """One step towards the target, a quarter of the way each time. So a
+        jump in the numbers (three packages done at once) is a short slide
+        on the bar. True while there is further to go."""
+        gap = self.target - self.percent
+        if self.paused or gap <= 0:
+            self.sliding = False
+            return False
+        self.percent += max(1, gap // 4)
+        self.job.call("setPercent", GLib.Variant("(u)", (self.percent,)))
+        self.sliding = self.percent < self.target
+        return self.sliding
+
+    def move(self, percent):
+        # Never backwards, whatever the runner says.
+        self.target = max(self.target, min(percent, 100))
+        if not self.sliding and self.slide():
+            GLib.timeout_add(100, self.slide)
 
     def progress(self, method, variant):
         if self.paused:
@@ -184,7 +206,7 @@ class Entry:
         elif cmd == "done":
             self.progress("setProcessedAmount", GLib.Variant("(ts)", (int(arg), unit)))
         elif cmd == "percent":
-            self.progress("setPercent", GLib.Variant("(u)", (int(arg),)))
+            self.move(int(arg))
         elif cmd == "suspended":
             self.paused = arg == "1"
             # The desktop marks a paused entry itself, so the note that said
@@ -196,7 +218,12 @@ class Entry:
                 for method, variant in self.held.items():
                     self.job.call(method, variant)
                 self.held.clear()
+                self.move(self.target)
         elif cmd == "end":
+            # No time left to slide: the entry is about to go.
+            if self.target > self.percent:
+                self.percent = self.target
+                self.job.call("setPercent", GLib.Variant("(u)", (self.target,)))
             self.job.close(arg)
             return False
         elif cmd == "killed":

@@ -241,6 +241,9 @@ msgstr "Updates werden heruntergeladen"
 msgid "Updating system packages"
 msgstr "Systempakete werden aktualisiert"
 
+msgid "Finishing the installation"
+msgstr "Installation wird abgeschlossen"
+
 msgid "Updating AUR packages"
 msgstr "AUR-Pakete werden aktualisiert"
 

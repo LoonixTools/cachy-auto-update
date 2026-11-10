@@ -157,14 +157,20 @@ of the update and holds that connection open. It requires _python-gobject_.
 Where that is missing, or on a desktop with no job interface, there is no
 progress entry and nothing else is affected.
 
-Working out the upgrade, fetching it and unpacking it are three steps rather
-than one. Between "Starting full system upgrade" and the transaction it
-eventually prepares, pacman prints nothing at all, and on a large backlog that
-silence runs to minutes; that stretch therefore carries a label of its own and
-deliberately no item count, because a counter frozen at "0 of 161" reads as a
-stuck update. On a domestic line the download is then the longest of the three,
-and a bar that called the whole thing "installing" would sit near its beginning
-for minutes at a time looking stuck.
+A repository upgrade is four steps on the bar: working out the upgrade,
+fetching it, unpacking it, and the hooks that run afterwards. Between "Starting
+full system upgrade" and the transaction it eventually prepares, pacman prints
+nothing at all, and on a large backlog that silence runs to minutes; that
+stretch therefore carries a label of its own and deliberately no item count,
+because a counter frozen at "0 of 161" reads as a stuck update.
+
+How much of the bar a step gets follows the work this run really has. Each step
+is weighed in seconds: the download by its size and by how fast the line was on
+the last run, unpacking and the hooks by the number of packages, Flatpak apps
+by how many are pending, and each AUR package by how long it took to build the
+last times. AUR and Flatpak are looked at while *checkupdates*(8) runs, so the
+shares are right from the start. The bar never jumps when the plan changes.
+The steps still to do share what is left of it.
 
 Expanding "Details" shows the last five lines of the run log as they are
 written, alongside the package currently being worked on. The percentage says

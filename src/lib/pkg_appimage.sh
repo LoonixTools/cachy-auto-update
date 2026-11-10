@@ -64,6 +64,7 @@ cau_appimage_update() {
 	fi
 
 	cau_progress_step appimage "Updating AppImages"
+	cau_progress_tick_start
 
 	while read -r user uid; do
 		[[ -n $user ]] || continue
@@ -98,5 +99,6 @@ cau_appimage_update() {
 		fi
 	done < <(cau_active_session_users)
 
+	cau_progress_tick_stop
 	return $rc
 }

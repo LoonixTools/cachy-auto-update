@@ -27,29 +27,16 @@ cau_pacman_flags() {
 	done
 }
 
-# The verbs pacman puts in front of a package as it works through a
-# transaction. Matched against English on purpose: the runner forces LC_ALL=C
-# precisely so pacman's output stays parseable.
-CAU_PACMAN_OP_RE='^(\([[:space:]]*[0-9]+/[0-9]+\) )?(upgrading|installing|reinstalling|downgrading|removing) [^[:space:]]+'
+# Bytes per second the downloads are taken to run at, until a run has
+# measured this machine's line (state file download_rate).
+CAU_PACMAN_RATE=6291456
 
-# Before any of that, everything has to be fetched, and on a domestic line
-# that is the longer half of the run: two hundred packages take minutes to
-# arrive and seconds to unpack. pacman prints one line per package while it
-# does it,
-#
-#    glibc-2.44+r24+g16be1518495f-1-x86_64_v3 downloading...
-#
-# and nothing else: no counter, no total. So the position here is counted the
-# same way the transaction is.
-#
-# The database sync a few lines earlier prints the very same shape (" core
-# downloading..."), and pacman strips the suffix that would tell a database
-# from a package, so the count begins only after the header that separates the
-# two phases.
-CAU_PACMAN_DL_AWK='
-	/^:: Retrieving packages/ { retrieving = 1; next }
-	retrieving && / downloading\.\.\.$/ { n++; name = $1 }
-	END { print n + 0, name }'
+_cau_pacman_rate() {
+	local rate
+	rate="$(cau_state_read download_rate "$CAU_PACMAN_RATE")"
+	[[ $rate =~ ^[0-9]+$ ]] && (( rate > 0 )) || rate=$CAU_PACMAN_RATE
+	printf '%s\n' "$rate"
+}
 
 # What pacman prints once the downloads are done: it checks, then runs the
 # hooks, then installs. From the first of these on, pacman must not be
@@ -57,124 +44,199 @@ CAU_PACMAN_DL_AWK='
 # bar these lines start with a counter or a carriage return.
 CAU_PACMAN_COMMIT_RE='checking keyring|checking keys in keyring|checking package integrity|loading package files|checking for file conflicts|checking available disk space|pre-transaction hooks|Processing package changes|(upgrading|installing|reinstalling|downgrading|removing) [^[:space:]]+'
 
-# _cau_pacman_progress_watch <logfile>
-# Feeds the desktop's progress bar by watching pacman work, through the three
-# phases a pacman run has: first it works out what the upgrade consists of,
-# then everything is fetched, then everything is unpacked. Three steps on the
-# bar rather than one, because they are three stretches to sit through. And
-# each one is silent in its own way.
+# Everything the progress bar needs from pacman's log, in one pass and on one
+# line: package count, download size in bytes, and how far each phase is.
+# Matched against English on purpose: the runner forces LC_ALL=C precisely so
+# pacman's output stays parseable.
 #
-# The first is the one that used to look like a hang. Between "starting full
-# system upgrade" and the transaction it eventually prepares, pacman says
-# nothing whatsoever, and on a large backlog that silence is minutes long. The
-# only honest thing to show there is a label and no counter at all: a tally
-# frozen at "0 of 161" reads as a stuck update, where "Preparing the update"
-# with no number reads as what it actually is.
+# The database sync prints the same " core downloading..." lines as the
+# packages do, so those only count after the "Retrieving packages" header.
 #
-# In the transaction, pacman announces each package twice over, in one of two
-# shapes, and which one depends on a flag this program sets itself:
+# In the transaction pacman announces each package in one of two shapes:
 #
 #   upgrading glibc...              with --noprogressbar, i.e. every timer run
 #   ( 12/218) upgrading glibc [##]  with the bar, i.e. an interactive `run`
 #
-# Only the second carries a counter, and the unattended runs that this bar
-# exists for are exactly the ones that do not get it. So the position is
-# counted here instead (one line per package), and the total taken from the
-# "Package (218)" header pacman prints before it starts. That header is the
-# better number anyway: checkupdates counts packages with an update available
-# and knows nothing about the new dependencies pulled in alongside them.
+# Only the second carries a counter, so the lines are counted as well. Hooks
+# and checks print an (n/m) of their own. Requiring one of the verbs is what
+# keeps those out.
+CAU_PACMAN_WATCH_AWK='
+	BEGIN { unit["B"] = 1; unit["KiB"] = 1024; unit["MiB"] = 1048576; unit["GiB"] = 1073741824 }
+	/^Packages? \([0-9]+\)/ && !total { total = $2; gsub(/[^0-9]/, "", total) }
+	/^Total Download Size:/ { size = $4 * unit[$5] }
+	/^:: Starting full system upgrade/ { upgrade = 1 }
+	/^:: Retrieving packages/ { fetch = 1; next }
+	fetch && / downloading\.\.\.$/ { started++; file = $1 }
+	$0 ~ commit_re { commit = 1 }
+	/^(\([ 0-9]+\/[0-9]+\) )?(upgrading|installing|reinstalling|downgrading|removing) [^ ]+/ {
+		n++
+		if (match($0, /^\([ 0-9]+\/[0-9]+\)/)) {
+			split(substr($0, 2, RLENGTH - 2), c, "/")
+			counted = c[1]; outof = c[2]
+		}
+		match($0, /(upgrading|installing|reinstalling|downgrading|removing) [^ ]+/)
+		name = substr($0, RSTART, RLENGTH)
+		sub(/^[a-z]+ /, "", name); sub(/\.\.\.$/, "", name)
+	}
+	/^:: Running post-transaction hooks/ { hooks = 1 }
+	END {
+		printf "%d %.0f %d %d %d %d %d %d %d %d %s %s\n", total, size, upgrade,
+			fetch, started, commit, n, counted, outof, hooks,
+			(file == "" ? "-" : file), (name == "" ? "-" : name)
+	}'
+
+# _cau_pacman_weigh
+# About how long the repository steps will take, for the bar. Measured on real
+# runs: the checks before the first package take about six seconds, a package
+# installs in 0.4, the hooks after them take half as long again, and
+# rebuilding the boot image adds half a minute. Eight megabytes a package is
+# a stand-in until pacman says how big the download really is.
+_cau_pacman_weigh() {
+	local n="${CAU_PACMAN_COUNT:-0}" boot=0
+
+	cau_progress_active || return 0
+	(( n > 0 )) || return 0
+
+	grep -qE '^(linux|mkinitcpio|systemd|nvidia|[^ ]+-dkms)' <<< "$CAU_PACMAN_PENDING" \
+		&& boot=25
+
+	cau_progress_weigh download $(( n * 8388608 / $(_cau_pacman_rate) + 2 ))
+	cau_progress_weigh repo $(( 6 + n * 2 / 5 ))
+	cau_progress_weigh hooks $(( 5 + n / 5 + boot ))
+}
+
+# _cau_pacman_progress_watch <logfile>
+# Feeds the desktop's progress bar by watching pacman work, through the four
+# stretches a pacman run has. Each one is silent in its own way.
 #
-# What must not be counted is the other (n/m) sequence pacman prints, for
-# hooks and for checking keys, integrity and file conflicts. Each of those runs
-# up to its own total, so following them would drive the bar to the end several
-# times before the first package was unpacked. Requiring one of the verbs above
-# is what excludes them.
+#   resolve   pacman works out what the upgrade consists of and prints
+#             nothing. On a large backlog that is minutes. The bar goes by the
+#             clock, with a label and no counter: a tally frozen at "0 of 161"
+#             reads as a stuck update.
+#   download  pacman names each package as its download starts, several at a
+#             time, and says nothing when one is done. So the bar goes by the
+#             bytes that have arrived instead.
+#   repo      one line per package. The total comes from the "Package (218)"
+#             header: checkupdates knows nothing about new dependencies.
+#   hooks     the boot image, the caches. Often as long as the unpacking, and
+#             by the clock again.
 #
 # Read by polling the log rather than from a pipe: the log is written either by
 # pacman directly or through tee depending on whether a person is watching, and
 # one reader that works for both is worth the second of latency it costs.
 _cau_pacman_progress_watch() {
 	local log="$1"
-	local total="${CAU_PACMAN_COUNT:-0}" announced processed line pkg last=''
-	local phase=resolve fetched shown='' labelled=''
-	local t0=$SECONDS
+	local count="${CAU_PACMAN_COUNT:-0}" phase=resolve labelled='' shown='' t0=$SECONDS
+	local total size upgrade fetch started commit n counted outof hooks file name
+	local cache rate dir='' bytes got=0 pre since=$(( EPOCHSECONDS - 2 ))
+
+	cache="$(pacman-conf CacheDir 2>/dev/null | head -n1)"
+	rate="$(_cau_pacman_rate)"
 
 	while :; do
 		sleep 1
 
-		announced="$(grep -aoE '^Packages? \([0-9]+\)' "$log" 2>/dev/null \
-			| head -n1 | grep -oE '[0-9]+')"
-		[[ $announced =~ ^[0-9]+$ ]] && (( announced > 0 )) && total="$announced"
+		hooks=''
+		read -r total size upgrade fetch started commit n counted outof hooks file name \
+			< <({ tr '\r' '\n' < "$log" \
+				| awk -v commit_re="$CAU_PACMAN_COMMIT_RE" "$CAU_PACMAN_WATCH_AWK"; } 2>/dev/null)
+		[[ $hooks == [01] ]] || continue
 
-		line="$(grep -aoE "$CAU_PACMAN_OP_RE" "$log" 2>/dev/null | tail -n1)"
+		(( total > 0 )) && count=$total
+		# Where pacman does carry a counter, believe it over the tally.
+		if (( outof > 0 )); then
+			count=$outof
+			n=$counted
+		fi
 
-		if [[ -n $line ]]; then
-			# Unpacking has started, so whatever came before it is over. If
-			# nothing was ever retrieved (every package already sitting in the
-			# cache, which is normal after a run that was interrupted once
-			# already), then the download step never happened,
-			# and it is dropped rather than handed its whole share of the bar in
-			# exchange for no work at all.
-			if [[ $phase != install ]]; then
-				[[ $phase == download ]] || cau_progress_drop download
-				phase=install
-				cau_progress_step repo "Updating system packages" "$total"
+		if (( hooks )); then
+			if [[ $phase != hooks ]]; then
+				phase=hooks
+				cau_progress_step hooks "Finishing the installation"
 			fi
-
-			# Nothing new since the last look. Checked before the counting grep
-			# because on a large upgrade this loop spends most of its life here.
-			[[ $line != "$last" ]] || continue
-			last="$line"
-
-			processed="$(grep -acE "$CAU_PACMAN_OP_RE" "$log" 2>/dev/null)"
-			[[ $processed =~ ^[0-9]+$ ]] || continue
-
-			# Where pacman does carry a counter, believe it over the tally: it
-			# is the same number, but it also knows the true total.
-			if [[ $line =~ ^\([[:space:]]*([0-9]+)/([0-9]+)\) ]]; then
-				processed="${BASH_REMATCH[1]}"
-				total="${BASH_REMATCH[2]}"
-			fi
-
-			cau_progress_item "$processed" "$total"
-
-			pkg="${line##* }"
-			cau_progress_detail "Package" "${pkg%...}"
+			cau_progress_pace
 			continue
 		fi
 
-		# Fetching. The header is what tells this apart from the database sync
-		# a few lines earlier, which prints the very same shape.
-		if grep -qa '^:: Retrieving packages' "$log" 2>/dev/null; then
-			if [[ $phase == resolve ]]; then
-				phase=download
-				cau_progress_step download "Downloading updates" "$total"
+		# Checking and unpacking. If nothing was retrieved (every package
+		# already in the cache, which is normal after an interrupted run), the
+		# download step simply never had a turn.
+		if (( commit )); then
+			if [[ $phase != repo ]]; then
+				# How fast this line really is, for the next run's bar.
+				if [[ $phase == download ]] && (( size > 0 && SECONDS - t0 >= 5 )); then
+					cau_state_write download_rate \
+						$(( (rate + size / (SECONDS - t0)) / 2 )) 2>/dev/null
+				fi
+				phase=repo
+				shown=''
+				t0=$SECONDS
+				cau_progress_step repo "Updating system packages" "$count"
 			fi
 
-			read -r fetched pkg < <(awk "$CAU_PACMAN_DL_AWK" "$log" 2>/dev/null)
-			[[ $fetched =~ ^[0-9]+$ ]] || continue
-			[[ $fetched != "$shown" ]] || continue
-			shown="$fetched"
+			# In fifths of a second, like _cau_pacman_weigh: 30 for the checks,
+			# which go by the clock, and 2 for each package.
+			pre=10000
+			if (( n == 0 )); then
+				_cau_progress_pacing $(( SECONDS - t0 )) 6
+				pre=$CAU_PROGRESS_PACED
+			fi
+			cau_progress_at $(( 3 * pre / 1000 + 2 * n )) $(( 30 + 2 * count ))
 
-			cau_progress_item "$fetched" "$total"
-			# Down to the bare name, as the transaction reports it: the file
-			# pacman names here carries version, release and architecture.
-			[[ -n $pkg ]] && cau_progress_detail "Package" "${pkg%-*-*-*}"
+			if [[ "$n $name" != "$shown" ]]; then
+				shown="$n $name"
+				cau_progress_count "$n" "$count"
+				[[ $name == - ]] || cau_progress_detail "Package" "$name"
+			fi
+			continue
+		fi
+
+		if (( fetch )); then
+			if [[ $phase != download ]]; then
+				phase=download
+				shown=''
+				t0=$SECONDS
+				(( size > 0 )) && cau_progress_weigh download $(( size / rate + 2 ))
+				cau_progress_step download "Downloading updates" "$count"
+			fi
+
+			# pacman fetches into a folder of its own inside the cache and moves
+			# the files over at the end. What is in there, against the size it
+			# announced, is how far the download is. Old runs leave such folders
+			# behind, so only one made since this run began counts.
+			if [[ -z $dir && -n $cache ]]; then
+				dir="$(find "$cache" -maxdepth 1 -type d -name 'download-*' \
+					-newermt "@$since" -print -quit 2>/dev/null)"
+			fi
+			bytes=0
+			[[ -n $dir ]] && read -r bytes _ < <(du -sb "$dir" 2>/dev/null)
+			[[ $bytes =~ ^[0-9]+$ ]] && (( bytes > got )) && got=$bytes
+
+			if (( size > 0 && got > 0 )); then
+				cau_progress_at "$got" "$size"
+			else
+				# No such folder (an older pacman): by the clock.
+				cau_progress_pace
+			fi
+
+			if [[ $started != "$shown" ]]; then
+				shown="$started"
+				cau_progress_count "$started" "$count"
+				# Down to the bare name, as the transaction reports it: the file
+				# pacman names here carries version, release and architecture.
+				[[ $file == - ]] || cau_progress_detail "Package" "${file%-*-*-*}"
+			fi
 			continue
 		fi
 
 		# Still resolving. pacman does mark the point where it stops syncing
 		# databases and starts working out the upgrade, and that is the half
 		# worth naming, because it is the half that takes the minutes.
-		if [[ $phase == resolve && $labelled != upgrade ]] \
-			&& grep -qa '^:: Starting full system upgrade' "$log" 2>/dev/null; then
-			labelled=upgrade
+		if (( upgrade )) && [[ -z $labelled ]]; then
+			labelled=1
 			cau_progress_step resolve "Preparing the update"
 		fi
-
-		# Nothing countable happens in here at all, so the bar creeps instead.
-		# This is the stretch that used to look like a hung update.
-		cau_progress_creep $(( SECONDS - t0 ))
+		cau_progress_pace
 	done
 }
 
@@ -215,6 +277,7 @@ _cau_pacman_exec() {
 	if (( watcher )); then
 		kill "$watcher" 2>/dev/null
 		wait "$watcher" 2>/dev/null
+		cau_progress_sync
 	fi
 
 	return "$rc"
@@ -298,15 +361,19 @@ cau_pacman_update() {
 	# over from here and moves on to the download and repo steps as pacman
 	# actually reaches them.
 	cau_progress_step resolve "Checking for updates"
+	cau_progress_tick_start
 
 	if ! cau_pacman_pending; then
+		cau_progress_tick_stop
+		cau_progress_forecast
 		cau_info "No repository updates pending"
-		# Neither of the two steps this would have led to is going to happen,
-		# so the rest of the run gets their share of the bar instead of
-		# watching it jump 70% the moment Flatpaks start.
-		cau_progress_drop download repo
+		# None of the steps this would have led to is going to happen, so the
+		# rest of the run gets their share of the bar.
+		cau_progress_drop download repo hooks
 		return 0
 	fi
+	cau_progress_tick_stop
+	cau_progress_forecast
 
 	if [[ -n $CAU_PACMAN_PENDING ]]; then
 		CAU_PACMAN_COUNT="$(grep -c . <<< "$CAU_PACMAN_PENDING")"
@@ -322,6 +389,7 @@ cau_pacman_update() {
 		CAU_PACMAN_COUNT=0
 		cau_info "Running a full system upgrade (pending list unavailable)"
 	fi
+	_cau_pacman_weigh
 
 	# Clicked while checkupdates ran: no start notice for an update that is
 	# paused or not going to happen.
@@ -355,13 +423,6 @@ cau_pacman_update() {
 
 	while true; do
 		if _cau_pacman_exec "$log" -Syu "${flags[@]}" "${extra[@]}"; then
-			# The watcher decided the same thing in a subshell, so a step it
-			# dropped is still in the plan out here. Same question, same answer,
-			# and the two copies agree on what the rest of the run is scaled
-			# against. Only on the way out: a failed attempt is about to be
-			# retried, and that retry may well download after all.
-			grep -qa '^:: Retrieving packages' "$log" 2>/dev/null \
-				|| cau_progress_drop download
 			cat "$log" >> "$CAU_RUNLOG" 2>/dev/null
 			grep -E '^(removing|replacing) ' "$log" 2>/dev/null \
 				| while read -r line; do cau_info "  $line"; done
@@ -482,6 +543,7 @@ cau_pacman_cleanup() {
 	local -a orphans
 
 	cau_progress_step cleanup "Cleaning up after the update"
+	cau_progress_tick_start
 
 	if [[ $CFG_REMOVE_ORPHANS == yes ]]; then
 		mapfile -t orphans < <(pacman -Qtdq 2>/dev/null)

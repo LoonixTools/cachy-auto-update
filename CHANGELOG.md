@@ -2,6 +2,12 @@
 
 What each release brings, newest first. The [GitHub releases](https://github.com/LoonixTools/cachy-auto-update/releases) add every commit that went into it.
 
+## v1.7.1
+
+_2026-11-10_
+
+A small patch. The progress bar now moves at an even pace instead of jumping, and the tray icon looks for updates again after an update by hand.
+
 ## v1.7.0
 
 _2026-11-08_

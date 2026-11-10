@@ -53,10 +53,16 @@ MENU_PATH = "/MenuBar"
 WATCHER = "org.kde.StatusNotifierWatcher"
 
 # Each look for updates syncs a private copy of the package databases and asks
-# the AUR, so not more often than this. The first one waits until the desktop
-# has settled after login.
-CHECK_EVERY = 3 * 3600
-FIRST_CHECK = 60
+# the AUR, so only this often, like cachy-update: two minutes after login,
+# once the desktop has settled, and then once a day. A look that got no answer
+# (offline, or the network is not up yet after waking) is tried again sooner.
+CHECK_EVERY = 86400
+FIRST_CHECK = 120
+CHECK_RETRY = 300
+
+# pacman's lock. It goes away when somebody is done installing by hand, with
+# pacman, paru or cachy-update, and what is waiting has changed then.
+PACMAN_LOCK = "/var/lib/pacman/db.lck"
 
 # Terminals to open the log and the settings in, best first, with the flag
 # that comes before the command.
@@ -391,6 +397,11 @@ class Tray:
         self.cfg = read_config()
         self.pending = None          # waiting updates; None until known
         self.checking = False
+        self.check_again = False     # something changed during a look
+        self.check_queued = False
+        # When the last look was, by the wall clock. Set so that the first
+        # one is due FIRST_CHECK seconds from now.
+        self.last_check = time.time() - CHECK_EVERY + FIRST_CHECK
         self.starting = False        # clicked, the run has not begun yet
         self.running = update_running()
         self.icon = ""
@@ -432,8 +443,15 @@ class Tray:
                 continue
             monitor.connect("changed", lambda *_: self.queue_refresh())
             self.monitors.append(monitor)
+        try:
+            monitor = Gio.File.new_for_path(PACMAN_LOCK).monitor_file(
+                Gio.FileMonitorFlags.NONE, None)
+        except GLib.Error:
+            pass
+        else:
+            monitor.connect("changed", self.pacman_changed)
+            self.monitors.append(monitor)
         GLib.timeout_add_seconds(30, self.tick)
-        GLib.timeout_add_seconds(FIRST_CHECK, self.scheduled_check)
         return True
 
     def watcher_appeared(self, bus, _name, _owner):
@@ -452,7 +470,22 @@ class Tray:
 
     def tick(self):
         self.refresh()
+        # By the wall clock, which keeps going while the computer sleeps. A
+        # timer does not, so on a laptop "once a day" could take a week. This
+        # way the first tick after waking up looks again if a day has passed.
+        if time.time() - self.last_check >= CHECK_EVERY:
+            self.check()
         return True
+
+    def pacman_changed(self, _monitor, _file, _other, event):
+        if event == Gio.FileMonitorEvent.DELETED:
+            self.check_soon()
+
+    def check_soon(self):
+        """Looks again in a moment, once for however often it is asked."""
+        if not self.check_queued:
+            self.check_queued = True
+            GLib.timeout_add_seconds(10, self.check)
 
     def refresh(self):
         self.refresh_queued = False
@@ -468,20 +501,21 @@ class Tray:
             self.starting = False
         if was_running and not self.running:
             # What is left after the update: most likely nothing.
-            GLib.timeout_add_seconds(10, self.check)
+            self.check_soon()
 
         self.update_look()
         return False
 
-    def scheduled_check(self):
-        self.check()
-        GLib.timeout_add_seconds(CHECK_EVERY, self.scheduled_check)
-        return False
-
     def check(self):
-        if self.checking or self.busy():
+        self.check_queued = False
+        if self.busy():
+            return False     # looks again when the update is done
+        if self.checking:
+            # This look may have started before whatever asked for another.
+            self.check_again = True
             return False
         self.checking = True
+        self.last_check = time.time()
         self.update_look()
         cfg = dict(self.cfg)
 
@@ -496,6 +530,11 @@ class Tray:
         self.checking = False
         if pending is not None:
             self.pending = pending
+        else:
+            self.last_check = time.time() - CHECK_EVERY + CHECK_RETRY
+        if self.check_again:
+            self.check_again = False
+            self.check_soon()
         self.update_look()
         return False
 

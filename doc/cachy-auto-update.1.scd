@@ -179,26 +179,29 @@ during the stretches that have nothing countable to report, above all an AUR
 package being compiled. The job interface carries exactly two description
 fields, so those are the two things shown.
 
-A step that turns out to have no work is dropped from the bar instead of being
-handed its share for nothing. Packages already in the cache are never
-announced, so a run with everything already fetched skips the download step
-outright rather than jumping when unpacking starts; the same applies to AUR
-with nothing pending, or a machine with no Flatpaks installed.
+A step that turns out to have no work is dropped from the bar: a run with
+everything already in the cache has no download step, and the same applies to
+AUR with nothing pending, or a machine with no Flatpaks installed.
 
-Neither counted phase gets a counter from pacman on an unattended run, so both
-are counted here, a line at a time: "foo-1.2-1-x86_64 downloading..." for the
-first, "upgrading foo..." for the second. pacman's output is line-buffered
-through *stdbuf*(1) so those lines arrive as they happen. Writing to a log
-rather than a terminal, libc would otherwise release them in 4KB blocks, around
-a hundred and sixty packages at a time. pacman's other (n/m) sequences
-(checking keys, package integrity, loading package files) each count up to the
-same total and are deliberately ignored.
+The download goes by the bytes that have arrived in pacman's download folder,
+against the size pacman announced. Unpacking is counted a line at a time, from
+"upgrading foo...". pacman's output is line-buffered through *stdbuf*(1) so
+those lines arrive as they happen. Writing to a log rather than a terminal,
+libc would otherwise release them in 4KB blocks, around a hundred and sixty
+packages at a time. AUR packages are counted as pacman installs them. Work
+that cannot be counted (a build, the hooks, a Flatpak) moves the bar by the
+clock: evenly up to 90% of its share when the expected time is up, then slower
+and slower. On the desktop a jump in the numbers shows as a short slide.
 
 # TRAY ICON
 
 With _TrayIcon_ (on by default) every graphical session gets an icon in the
-system tray. It shows whether updates are waiting: it looks for them every
-three hours, with *checkupdates*(8), the AUR's web interface and *flatpak*(1).
+system tray. It shows whether updates are waiting. It looks for them two
+minutes after login and then once a day, with *checkupdates*(8), the AUR's web
+interface and *flatpak*(1). The day is counted by the clock, so it also passes
+while the computer sleeps. The icon looks again whenever pacman has finished
+installing something, so it is right after an update by hand too. Looking only
+counts. Nothing is installed before the next update is due.
 Ignored and held packages are not counted. Its tooltip says when the last
 update was and when the next one is due.
 

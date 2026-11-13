@@ -65,6 +65,11 @@ CLICKS = {
     "resumeRequested": b"resume\n",
 }
 
+# The desktop reads a description field as a link when it looks like one: a
+# scheme such as "Info:" or "warning:", or a path. An invisible word joiner in
+# front keeps it plain text.
+NO_LINK = "⁠"
+
 
 class Job:
     """The progress entry, or a do-nothing stand-in where there is no desk."""
@@ -190,7 +195,7 @@ class Entry:
             self.show()
         elif cmd == "detail" and len(fields) > 2:
             self.job.call("setDescriptionField",
-                          GLib.Variant("(uss)", (0, arg, fields[2])))
+                          GLib.Variant("(uss)", (0, arg, NO_LINK + fields[2])))
         elif cmd == "log" and len(fields) > 2:
             # Field 1, and there is no field 2: the job model behind this
             # interface carries exactly two, and anything further is
@@ -200,7 +205,7 @@ class Entry:
             # itself is one instruction per line. Joined back up with the
             # newlines the job view does render.
             self.job.call("setDescriptionField",
-                          GLib.Variant("(uss)", (1, arg, "\n".join(fields[2:]))))
+                          GLib.Variant("(uss)", (1, arg, NO_LINK + "\n".join(fields[2:]))))
         elif cmd == "total":
             self.progress("setTotalAmount", GLib.Variant("(ts)", (int(arg), unit)))
         elif cmd == "done":

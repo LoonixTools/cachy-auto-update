@@ -16,6 +16,10 @@ pub const SECTION_GAP: f32 = 24.0;
 pub const ROW_PX: f32 = 16.0;
 const ROW_H: f32 = 48.0;
 const SELECT_W: f32 = 200.0;
+/// A character of a menu label, a little more than it takes on average.
+const MENU_CHAR_W: f32 = 8.0;
+/// A menu row around its label: padding, the tick and the gaps.
+const MENU_EXTRA_W: f32 = 56.0;
 
 /// Everything a control needs to paint itself.
 #[derive(Clone, Copy)]
@@ -159,6 +163,14 @@ pub fn select_row(
             }
         })
         .build(p.k, layer);
+    // Rune's menu does not grow for its labels: they shrink and get cut. So
+    // it gets the width of the longest one. The menu is what it put last.
+    if ui.open == Some(key)
+        && let Some(menu) = layer.pop()
+    {
+        let longest = labels.iter().map(|l| l.chars().count()).max().unwrap_or(0) as f32;
+        layer.push(menu.min_w((longest * MENU_CHAR_W + MENU_EXTRA_W).clamp(160.0, 368.0)));
+    }
     setting_row(p, key, title, description, select)
 }
 

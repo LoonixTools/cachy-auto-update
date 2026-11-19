@@ -149,6 +149,8 @@ fn main() {
     let headless = rune_args.iter().any(|a| HEADLESS.contains(&a.as_str()));
 
     let spec = AppSpec::<Ui> {
+        fonts: rune_theme_opencode::FONTS,
+        families: rune_theme_opencode::FAMILIES,
         min_size: Some((760.0, 560.0)),
         scenes: SCENES,
         setup: Some(setup),

@@ -1,15 +1,15 @@
 //! The panes of settings. Every change is written at once.
 
-use crate::controls::{DETAIL, Paint, button, field, section, segmented, select_row, setting, toggle_row};
-use crate::ui::{Pane, Ui};
-use crate::view::page;
-use cachy_auto_update::config::{self, Kind, Reboot};
+use crate::controls::{Paint, page, section, select_row, setting_row, toggle_row};
+use crate::ui::Ui;
+use cachy_auto_update::config::{Kind, Reboot, setting};
 use cachy_auto_update::i18n::{tr, trf, ui_locale};
 use cachy_auto_update::status;
-use rune::{El, text};
+use rune::El;
+use rune_kit::{Button, ButtonVariant, TextInput};
 
 fn choices(key: &str, label: impl Fn(&str) -> String) -> Vec<(String, String)> {
-    match config::setting(key).map(|s| s.kind) {
+    match setting(key).map(|s| s.kind) {
         Some(Kind::Choice(v) | Kind::Interval(v) | Kind::Hours(v)) => v.iter().map(|v| (v.to_string(), label(v))).collect(),
         _ => vec![],
     }
@@ -27,11 +27,11 @@ fn hours_choices(ui: &Ui, loc: &str) -> Vec<(String, String)> {
 
 pub fn schedule(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
     let loc = ui_locale();
-    page(ui, p, Pane::Schedule.title(), vec![])
+    page("schedule")
         .child(section(
             p,
             "when",
-            Some(tr("When")),
+            tr("When"),
             vec![
                 toggle_row(
                     ui,
@@ -63,7 +63,7 @@ pub fn schedule(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
         .child(section(
             p,
             "restart",
-            Some(tr("Restart")),
+            tr("Restart"),
             vec![select_row(
                 ui,
                 p,
@@ -77,7 +77,7 @@ pub fn schedule(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
         .child(section(
             p,
             "wait",
-            Some(tr("Wait while")),
+            tr("Wait while"),
             vec![
                 toggle_row(
                     ui,
@@ -100,41 +100,41 @@ pub fn schedule(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
         ))
 }
 
-/// The packages typed into the field, the way the file keeps them.
-fn typed(s: &Ui) -> String {
-    s.ignore.text.as_str().split_whitespace().collect::<Vec<_>>().join(" ")
-}
-
-fn save_ignore(s: &mut Ui) {
-    let v = typed(s);
-    s.set("IgnorePkg", v);
-}
-
 pub fn updates(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
-    let _ = layer;
-    let changed = typed(ui) != ui.value("IgnorePkg");
-    let save = button(p, "save", tr("Save"), changed, changed).on_press(save_ignore);
-    let field = field(p, "ignore-field", &ui.ignore, tr("For example: linux nvidia"), 220.0, |s| &mut s.ignore, save_ignore);
-    // The AUR helper: a segment each, as few as there are.
-    let helpers: Vec<&str> = match config::setting("AURHelper").map(|s| s.kind) {
-        Some(Kind::Choice(v)) => v.to_vec(),
-        _ => vec![],
-    };
-    let names: Vec<&str> = helpers.iter().map(|v| if *v == "auto" { tr("Automatic") } else { v }).collect();
-    let current = ui.value("AURHelper");
-    let chosen = helpers.iter().position(|v| *v == current).unwrap_or(0);
-    let helper = segmented(p, "aur-helper", tr("AUR helper"), &names, chosen, 260.0, move |s, i| {
-        if let Some(v) = helpers.get(i) {
-            s.set("AURHelper", v.to_string());
-        }
-    });
-    page(ui, p, Pane::Updates.title(), vec![])
+    let helper = |v: &str| if v == "auto" { tr("Automatic").to_string() } else { v.to_string() };
+    let save = Button::new(tr("Save"))
+        .variant(ButtonVariant::Outline)
+        .disabled(ui.ignore.text.as_str().split_whitespace().collect::<Vec<_>>().join(" ") == ui.value("IgnorePkg"))
+        .on_press(|s: &mut Ui| {
+            let v = s.ignore.text.as_str().split_whitespace().collect::<Vec<_>>().join(" ");
+            s.set("IgnorePkg", v);
+        })
+        .build(p.k)
+        .key("save");
+    let field = TextInput::new(&ui.ignore)
+        .placeholder(tr("For example: linux nvidia"))
+        .label(tr("Never update these packages"))
+        .width(Some(260.0))
+        .on_edit(|s: &mut Ui| &mut s.ignore)
+        .on_submit(|s: &mut Ui, _| {
+            let v = s.ignore.text.as_str().split_whitespace().collect::<Vec<_>>().join(" ");
+            s.set("IgnorePkg", v);
+        })
+        .build(p.k)
+        .key("ignore-field");
+    page("updates")
         .child(section(
             p,
             "sources",
-            Some(tr("Sources")),
+            tr("Sources"),
             vec![
-                setting(p, "pacman", tr("System packages"), Some(tr("Always updated, with pacman.")), text(tr("Always")).font(DETAIL).color(p.muted())),
+                setting_row(
+                    p,
+                    "pacman",
+                    tr("System packages"),
+                    Some(tr("Always updated, with pacman.")),
+                    rune::text(tr("Always")).font(p.k.ty.ui).color(p.muted()),
+                ),
                 toggle_row(ui, p, "UpdateAUR", tr("Update AUR packages"), Some(tr("Built with paru or yay. One that does not build is held back."))),
                 toggle_row(ui, p, "UpdateFlatpak", tr("Update Flatpaks"), Some(tr("For the whole system and for each user."))),
                 toggle_row(ui, p, "UpdateAppImages", tr("Update AppImages"), Some(tr("Through Gear Lever, while you are logged in."))),
@@ -143,9 +143,9 @@ pub fn updates(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
         .child(section(
             p,
             "aur",
-            Some(tr("AUR")),
+            tr("AUR"),
             vec![
-                setting(p, "AURHelper", tr("AUR helper"), None, helper),
+                select_row(ui, p, layer, "AURHelper", tr("AUR helper"), None, choices("AURHelper", helper)),
                 toggle_row(
                     ui,
                     p,
@@ -165,8 +165,8 @@ pub fn updates(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
         .child(section(
             p,
             "ignore",
-            Some(tr("Never update")),
-            vec![setting(
+            tr("Never update"),
+            vec![setting_row(
                 p,
                 "IgnorePkg",
                 tr("Never update these packages"),
@@ -177,11 +177,11 @@ pub fn updates(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
 }
 
 pub fn notifications(ui: &Ui, p: Paint) -> El {
-    page(ui, p, Pane::Notifications.title(), vec![])
+    page("notifications")
         .child(section(
             p,
             "messages",
-            Some(tr("Messages")),
+            tr("Messages"),
             vec![
                 toggle_row(ui, p, "Notifications", tr("Show notifications"), Some(tr("Turns off every message below."))),
                 toggle_row(
@@ -205,7 +205,7 @@ pub fn notifications(ui: &Ui, p: Paint) -> El {
         .child(section(
             p,
             "desktop",
-            Some(tr("Desktop")),
+            tr("Desktop"),
             vec![
                 toggle_row(
                     ui,
@@ -238,10 +238,10 @@ pub fn cleanup(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
         "1" => tr("1 version").to_string(),
         n => trf("%s versions", &[&n]),
     };
-    page(ui, p, Pane::Cleanup.title(), vec![]).child(section(
+    page("cleanup").child(section(
         p,
         "housekeeping",
-        Some(tr("After each update")),
+        tr("After each update"),
         vec![
             toggle_row(
                 ui,

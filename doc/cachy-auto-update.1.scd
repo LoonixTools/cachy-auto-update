@@ -28,6 +28,11 @@ whether a tick does anything is decided by _UpdateInterval_ (weekly by default).
 A run that is postponed (low battery, a game running, somebody else using
 pacman) is simply retried at the next tick.
 
+_UpdateHours_ limits when an update may start, in local time: _any_ (the
+default), or from-until in whole hours, such as _3-6_ or _22-6_. A due update
+waits for these hours. So that it still lands in them every time, it may come
+up to half a day early. *Update now* works at any time.
+
 # COMMANDS
 
 *enable*

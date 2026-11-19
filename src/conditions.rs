@@ -140,5 +140,81 @@ pub fn busy() -> Option<String> {
 /// Whether enough time passed since the last successful update.
 pub fn update_due(cfg: &Config) -> bool {
     let last = state::number("last_success");
-    last == 0 || state::now().saturating_sub(last) >= cfg.interval_seconds
+    last == 0 || state::now().saturating_sub(last) >= interval_needed(cfg)
+}
+
+/// How long after an update the next one is due. With UpdateHours, up to
+/// half a day less: the hourly check comes at a different minute each time,
+/// and a daily update made at 04:20 would miss a 04:10 check the next day,
+/// then the rest of the hours, and wait a whole day more.
+pub fn interval_needed(cfg: &Config) -> u64 {
+    let i = cfg.interval_seconds;
+    if cfg.hours.is_some() { i - i.min(86400) / 2 } else { i }
+}
+
+/// Whether an update may start now, by UpdateHours.
+pub fn in_hours(cfg: &Config) -> bool {
+    cfg.hours.is_none_or(|h| h.contains(local(state::now()).tm_hour as u32))
+}
+
+/// The first moment from `ts` on at which an update may start.
+pub fn next_in_hours(cfg: &Config, ts: u64) -> u64 {
+    let Some(h) = cfg.hours else { return ts };
+    let mut tm = local(ts);
+    if h.contains(tm.tm_hour as u32) {
+        return ts;
+    }
+    let start = |tm: &mut libc::tm| {
+        (tm.tm_hour, tm.tm_min, tm.tm_sec, tm.tm_isdst) = (h.from as i32, 0, 0, -1);
+        unsafe { libc::mktime(tm) as u64 }
+    };
+    let today = start(&mut tm);
+    if today > ts {
+        return today;
+    }
+    tm.tm_mday += 1;
+    start(&mut tm)
+}
+
+fn local(ts: u64) -> libc::tm {
+    let t = ts as libc::time_t;
+    let mut tm: libc::tm = unsafe { std::mem::zeroed() };
+    unsafe { libc::localtime_r(&t, &mut tm) };
+    tm
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::config::Hours;
+    use std::collections::HashMap;
+
+    fn cfg(hours: &str, interval: &str) -> Config {
+        Config::from_raw(HashMap::from([("UpdateHours".into(), hours.into()), ("UpdateInterval".into(), interval.into())]))
+    }
+
+    #[test]
+    fn waits_for_the_next_start_of_the_hours() {
+        let now = state::now();
+        let hour = local(now).tm_hour as u32;
+        // Hours that start an hour from now and so do not hold this one.
+        let from = (hour + 1) % 24;
+        let c = cfg(&format!("{from}-{}", (from + 2) % 24), "1d");
+        assert!(!in_hours(&c));
+        let next = next_in_hours(&c, now);
+        let tm = local(next);
+        assert!(next > now && next - now <= 3600 + 60);
+        assert_eq!((tm.tm_hour as u32, tm.tm_min, tm.tm_sec), (from, 0, 0));
+        // Inside the hours, and without any, it is now.
+        assert_eq!(next_in_hours(&c, next + 60), next + 60);
+        assert_eq!(next_in_hours(&cfg("any", "1d"), now), now);
+        assert!(Hours::parse(&format!("{hour}-{}", (hour + 1) % 24)).unwrap().unwrap().contains(hour));
+    }
+
+    #[test]
+    fn hours_let_a_run_come_a_little_early() {
+        assert_eq!(interval_needed(&cfg("any", "1d")), 86400);
+        assert_eq!(interval_needed(&cfg("3-6", "1d")), 43200);
+        assert_eq!(interval_needed(&cfg("3-6", "1w")), 604800 - 43200);
+    }
 }

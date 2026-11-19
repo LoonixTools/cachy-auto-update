@@ -139,6 +139,10 @@ pub fn main(args: &[String]) -> i32 {
             log::debug(format!("Not due yet (interval {})", cfg.interval));
             return 0;
         }
+        if !conditions::in_hours(&cfg) {
+            log::debug(format!("Outside the hours for updates ({})", cfg.get("UpdateHours")));
+            return 0;
+        }
     }
 
     let _ = state::write("last_run", &state::now().to_string());

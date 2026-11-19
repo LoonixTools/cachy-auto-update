@@ -722,3 +722,16 @@ msgstr "Er passiert von selbst, sobald niemand mehr angemeldet ist."
 #, c-format
 msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
 msgstr "Dieser Computer startet in %d Minuten neu, um ein Update abzuschließen. Zum Abbrechen: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Wann aktualisieren"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Updates starten nur in dieser Zeit. „Jetzt aktualisieren“ geht immer."
+
+msgid "Any time"
+msgstr "Jederzeit"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "Zwischen %s und %s"

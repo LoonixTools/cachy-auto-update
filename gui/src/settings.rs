@@ -10,9 +10,19 @@ use rune_kit::{Button, ButtonVariant, TextInput};
 
 fn choices(key: &str, label: impl Fn(&str) -> String) -> Vec<(String, String)> {
     match setting(key).map(|s| s.kind) {
-        Some(Kind::Choice(v) | Kind::Interval(v)) => v.iter().map(|v| (v.to_string(), label(v))).collect(),
+        Some(Kind::Choice(v) | Kind::Interval(v) | Kind::Hours(v)) => v.iter().map(|v| (v.to_string(), label(v))).collect(),
         _ => vec![],
     }
+}
+
+/// The offered hours, and the ones from the file if they are others.
+fn hours_choices(ui: &Ui, loc: &str) -> Vec<(String, String)> {
+    let mut c = choices("UpdateHours", |v| status::hours_text(loc, v));
+    let current = ui.value("UpdateHours");
+    if !c.iter().any(|(v, _)| *v == current) {
+        c.insert(1, (current.clone(), status::hours_text(loc, &current)));
+    }
+    c
 }
 
 pub fn schedule(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
@@ -38,6 +48,15 @@ pub fn schedule(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
                     tr("How often to update"),
                     None,
                     choices("UpdateInterval", |v| crate::controls::capitalize(&status::interval_text(&loc, v))),
+                ),
+                select_row(
+                    ui,
+                    p,
+                    layer,
+                    "UpdateHours",
+                    tr("When to update"),
+                    Some(tr("Updates only start in these hours. Update now works at any time.")),
+                    hours_choices(ui, &loc),
                 ),
             ],
         ))

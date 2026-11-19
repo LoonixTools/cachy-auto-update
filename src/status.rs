@@ -112,13 +112,23 @@ pub fn next_update(cfg: &Config, last_success: u64) -> Next {
         .and_then(|o| o.stdout.trim().parse::<u64>().ok())
         .map(|us| us / 1_000_000)
         .unwrap_or(0);
-    let due = if last_success > 0 { last_success + cfg.interval_seconds } else { 0 };
-    if due > tick {
-        Next::At(due)
+    let due = if last_success > 0 { last_success + crate::conditions::interval_needed(cfg) } else { 0 };
+    let at = if due > tick {
+        due
     } else if tick > 0 {
-        Next::At(tick)
+        tick
     } else {
-        Next::Unknown
+        return Next::Unknown;
+    };
+    Next::At(crate::conditions::next_in_hours(cfg, at))
+}
+
+/// UpdateHours' values, as the window and `status` name them.
+pub fn hours_text(locale: &str, v: &str) -> String {
+    match crate::config::Hours::parse(v) {
+        Ok(None) => tr_in(locale, "Any time").into(),
+        Ok(Some(h)) => fill(tr_in(locale, "Between %s and %s"), &[&format!("{:02}:00", h.from), &format!("{:02}:00", h.until)]),
+        Err(_) => v.into(),
     }
 }
 

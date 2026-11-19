@@ -17,6 +17,8 @@ pub enum Kind {
     Choice(&'static [&'static str]),
     /// A choice of durations, shown as "every week".
     Interval(&'static [&'static str]),
+    /// "any" or hours like "3-6". These are offered, any others are taken.
+    Hours(&'static [&'static str]),
     /// Package names separated by spaces.
     Packages,
 }
@@ -57,11 +59,50 @@ impl Reboot {
     }
 }
 
+/// The hours in which an update may start, in local time: from `from`:00 up
+/// to `until`:00. They may wrap past midnight, as 22-6 does.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Hours {
+    pub from: u32,
+    pub until: u32,
+}
+
+/// A value for UpdateHours that is neither "any" nor hours.
+#[derive(Debug, PartialEq)]
+pub struct BadHours;
+
+impl Hours {
+    /// "any" is Ok(None). "3-6" is 03:00 to 06:00, and 24 is midnight.
+    pub fn parse(v: &str) -> Result<Option<Hours>, BadHours> {
+        let v = v.trim();
+        if v.eq_ignore_ascii_case("any") {
+            return Ok(None);
+        }
+        let (a, b) = v.split_once('-').ok_or(BadHours)?;
+        let hour = |s: &str| s.trim().parse::<u32>().ok().filter(|h| *h <= 24).map(|h| h % 24).ok_or(BadHours);
+        let h = Hours { from: hour(a)?, until: hour(b)? };
+        if h.from == h.until {
+            return Err(BadHours);
+        }
+        Ok(Some(h))
+    }
+
+    pub fn contains(&self, hour: u32) -> bool {
+        if self.from < self.until { (self.from..self.until).contains(&hour) } else { hour >= self.from || hour < self.until }
+    }
+}
+
 /// Every setting there is.
 pub const SETTINGS: &[Setting] = &[
     s("Enabled", Kind::Bool, "no", "Automatic updates"),
     s("Notifications", Kind::Bool, "yes", "Notifications"),
     s("UpdateInterval", Kind::Interval(&["1d", "2d", "3d", "1w", "2w", "4w"]), "1w", "How often to update"),
+    s(
+        "UpdateHours",
+        Kind::Hours(&["any", "0-3", "3-6", "6-9", "9-12", "12-15", "15-18", "18-21", "21-24"]),
+        "any",
+        "When to update",
+    ),
     s("AutoReboot", Kind::Choice(&["no", "needed", "always"]), "no", "Restart automatically"),
     s("TrayIcon", Kind::Bool, "yes", "Show an icon in the system tray"),
     s("CachyUpdate", Kind::Bool, "no", "Also run cachy-update"),
@@ -157,6 +198,11 @@ pub fn normalize(key: &str, value: &str) -> Result<(&'static str, String), Strin
         Kind::Interval(_) => match duration_seconds(value) {
             Some(n) if n > 0 => value.to_string(),
             _ => return Err(bad()),
+        },
+        Kind::Hours(_) => match Hours::parse(value) {
+            Ok(None) => "any".to_string(),
+            Ok(Some(h)) => format!("{}-{}", h.from, if h.until == 0 { 24 } else { h.until }),
+            Err(BadHours) => return Err(bad()),
         },
         Kind::Packages => {
             let names: Vec<&str> = value.split_whitespace().collect();
@@ -283,6 +329,8 @@ pub struct Config {
     pub auto_reboot: Reboot,
     pub interval: String,
     pub interval_seconds: u64,
+    /// None: any time.
+    pub hours: Option<Hours>,
     pub min_battery: i64,
     pub keep_old: i64,
     pub aur_helper: String,
@@ -331,6 +379,8 @@ impl Config {
             auto_reboot: Reboot::parse(&get("AutoReboot", "no")),
             interval_seconds: duration_seconds(&interval).filter(|n| *n > 0).unwrap_or(604800),
             interval,
+            // A value that makes no sense means any time, not never.
+            hours: Hours::parse(&get("UpdateHours", "any")).ok().flatten(),
             min_battery: int("MinBatteryPercent", 30),
             keep_old: int("KeepOldPackages", 3).max(0),
             // Only a helper this program knows: the name is run as a command.
@@ -381,6 +431,24 @@ mod tests {
         assert_eq!(normalize("MinBatteryPercent", "25").unwrap().1, "25");
         assert_eq!(normalize("AutoReboot", "needed").unwrap(), ("AutoReboot", "needed".into()));
         assert!(normalize("AutoReboot", "reboot; rm").is_err());
+    }
+
+    #[test]
+    fn hours() {
+        assert_eq!(Hours::parse("any"), Ok(None));
+        let night = Hours::parse("22-6").unwrap().unwrap();
+        assert!(night.contains(23) && night.contains(0) && night.contains(5));
+        assert!(!night.contains(6) && !night.contains(21));
+        let early = Hours::parse("3-6").unwrap().unwrap();
+        assert!(early.contains(3) && early.contains(5) && !early.contains(6) && !early.contains(2));
+        assert!(Hours::parse("21-24").unwrap().unwrap().contains(23));
+        assert!(Hours::parse("4-4").is_err() && Hours::parse("25-3").is_err() && Hours::parse("4").is_err());
+        assert_eq!(normalize("UpdateHours", " 04-06 ").unwrap().1, "4-6");
+        assert_eq!(normalize("UpdateHours", "21-0").unwrap().1, "21-24");
+        assert_eq!(normalize("UpdateHours", "ANY").unwrap().1, "any");
+        assert!(normalize("UpdateHours", "4-6; rm").is_err());
+        // Nonsense in the file means any time, never no updates at all.
+        assert_eq!(Config::from_raw(HashMap::from([("UpdateHours".into(), "soon".into())])).hours, None);
     }
 
     #[test]

@@ -721,3 +721,16 @@ msgstr ""
 #, c-format
 msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
 msgstr ""
+
+msgid "When to update"
+msgstr ""
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr ""
+
+msgid "Any time"
+msgstr ""
+
+#, c-format
+msgid "Between %s and %s"
+msgstr ""

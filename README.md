@@ -51,15 +51,21 @@ wait right now, for example a game or low battery. The other pages on the left h
 
 Changing a setting asks for your password once, then not again for a few minutes.
 
-Updates run once a week. To change that, use **How often to update**.
+Updates run once a week. To change that, use **How often to update**. To keep them to a quiet time,
+for example the night, pick hours under **When to update** on the **Schedule** page.
+**Update now** works at any time.
+
+From the command line: `sudo cachy-auto-update config set UpdateHours 3-6` (or any other hours, such
+as `22-6`, or `any`).
 
 ### Restart
 
 Nothing restarts on its own, unless you turn on **Restart automatically** under **Schedule**. Pick
-**After a kernel update** or **After every update**. Handy for a home server.
+**After a kernel update** or **After every update**. Handy for a home server: with **Every day**,
+**Between 03:00 and 06:00** and **After every update**, it updates and restarts every night.
 
 <p align="center">
-  <img src="res/screenshots/restart.png" alt="The Schedule page with Restart automatically set to After a kernel update" width="620">
+  <img src="res/screenshots/restart.png" alt="The Schedule page set up for a home server: every day, between 03:00 and 06:00, restart after every update" width="620">
 </p>
 
 It only restarts after an update that went through, and only while nobody is logged in to the desktop.

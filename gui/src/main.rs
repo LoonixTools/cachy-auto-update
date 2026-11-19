@@ -91,7 +91,9 @@ const SCENES: &[Scene] = &[
     ("schedule", |s| s.pane = Pane::Schedule),
     ("restart", |s| {
         s.pane = Pane::Schedule;
-        s.cfg.raw.insert("AutoReboot".into(), "needed".into());
+        s.cfg.raw.insert("UpdateInterval".into(), "1d".into());
+        s.cfg.raw.insert("UpdateHours".into(), "3-6".into());
+        s.cfg.raw.insert("AutoReboot".into(), "always".into());
         s.cfg = Config::from_raw(std::mem::take(&mut s.cfg.raw));
     }),
     ("what", |s| s.pane = Pane::Updates),

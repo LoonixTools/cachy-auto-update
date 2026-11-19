@@ -250,6 +250,7 @@ fn status_cmd() -> i32 {
     let st = Status::read();
     row(tr("Automatic updates"), &onoff(cfg.enabled));
     row(tr("How often"), &status::interval_text(&loc, &cfg.interval));
+    row(tr("When"), &status::hours_text(&loc, &cfg.get("UpdateHours")));
     row(tr("Notifications"), &onoff(cfg.notifications));
     row(tr("Restart automatically"), status::reboot_text(&loc, cfg.auto_reboot));
     println!();

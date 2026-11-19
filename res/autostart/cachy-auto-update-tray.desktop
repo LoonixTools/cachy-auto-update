@@ -2,8 +2,8 @@
 Type=Application
 Name=CachyOS Auto-Update tray icon
 Name[de]=CachyOS Auto-Update Tray-Symbol
-Comment=Shows waiting updates; a click opens the window
-Comment[de]=Zeigt wartende Updates; ein Klick öffnet das Fenster
+Comment=Shows waiting updates; a click installs them
+Comment[de]=Zeigt wartende Updates; ein Klick installiert sie
 Exec=cachy-auto-update-gui --tray
 Icon=cachy-auto-update
 Terminal=false

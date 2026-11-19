@@ -464,7 +464,7 @@ msgstr ""
 msgid "Click to see what it is doing"
 msgstr ""
 
-msgid "Click to open"
+msgid "Click to update now"
 msgstr ""
 
 msgid "Dismiss"

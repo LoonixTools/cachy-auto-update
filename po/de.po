@@ -465,8 +465,8 @@ msgstr "Einstellungen"
 msgid "Click to see what it is doing"
 msgstr "Klicken, um zu sehen, was gerade passiert"
 
-msgid "Click to open"
-msgstr "Klicken zum Öffnen"
+msgid "Click to update now"
+msgstr "Klicken, um jetzt zu aktualisieren"
 
 msgid "Dismiss"
 msgstr "Schließen"

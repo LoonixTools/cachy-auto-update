@@ -76,7 +76,8 @@ From the command line: `sudo cachy-auto-update config set AutoReboot needed` (or
 
 ### Tray icon
 
-An icon in the system tray shows if updates are waiting. Click it to open the window.
+An icon in the system tray shows if updates are waiting. Click it to install them right away.
+While an update runs, a click shows what it is doing.
 Right-click it for **Update now**, **Check for updates**, **Show log** and **Settings**.
 
 Do not want it? Turn off **Show an icon in the system tray** under **Notifications**.

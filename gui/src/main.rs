@@ -1,7 +1,7 @@
 //! cachy-auto-update-gui: the window and the tray icon, drawn with Rune.
 //!
 //! One copy per session. Started by the autostart with `--tray`, it sits in
-//! the tray with no window; a click on the icon opens the window. Started from
+//! the tray with no window; a click on the icon installs the updates. Started from
 //! the menu, it opens the window, and a second start shows the first copy's
 //! window instead of opening another.
 

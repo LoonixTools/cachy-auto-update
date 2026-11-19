@@ -134,10 +134,18 @@ struct Item {
 
 #[zbus::interface(name = "org.kde.StatusNotifierItem")]
 impl Item {
-    /// A click opens the window.
+    /// A click installs the updates. While an update runs, it shows what it
+    /// does instead of starting a second one.
     fn activate(&self, _x: i32, _y: i32) {
-        let token = self.model.lock().unwrap().token.take();
-        show(&self.handle, Pane::Overview, token);
+        let (token, busy) = {
+            let mut m = self.model.lock().unwrap();
+            (m.token.take(), m.look.busy)
+        };
+        if busy {
+            show(&self.handle, Pane::Log, token);
+        } else {
+            with_app(&self.handle, |a| a.update(|s, _| s.update_now()));
+        }
     }
     /// A middle click shows what the update does.
     fn secondary_activate(&self, _x: i32, _y: i32) {
@@ -188,7 +196,7 @@ impl Item {
     #[zbus(property)]
     fn tool_tip(&self) -> (String, Pixmaps, String, String) {
         let m = self.model.lock().unwrap();
-        let body = format!("{}\n\n{}", m.look.body, if m.look.busy { tr("Click to see what it is doing") } else { tr("Click to open") });
+        let body = format!("{}\n\n{}", m.look.body, if m.look.busy { tr("Click to see what it is doing") } else { tr("Click to update now") });
         (m.look.icon.to_string(), Vec::new(), PRETTY.to_string(), body)
     }
     #[zbus(property)]

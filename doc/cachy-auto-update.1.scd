@@ -242,7 +242,8 @@ counts. Nothing is installed before the next update is due.
 Ignored and held packages are not counted. Its tooltip says when the last
 update was and when the next one is due.
 
-A click on the icon opens the window. A middle click opens it on the log.
+A click on the icon installs the updates, like *Update now*. While an update
+runs, it opens the window on the log instead. A middle click opens the log too.
 
 The menu (right click) has *Update now*, *Check for updates*, *Show log* and
 *Settings*. *Update now*, here or in the window, starts

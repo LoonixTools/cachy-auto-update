@@ -483,7 +483,7 @@ checksum = "fc652a48c352aef3ea3aed32080501cf3ef6ed5da78602a020c991775b0aff04"
 
 [[package]]
 name = "cachy-auto-update"
-version = "1.7.1"
+version = "2.0.0"
 dependencies = [
  "futures-util",
  "libc",
@@ -495,7 +495,7 @@ dependencies = [
 
 [[package]]
 name = "cachy-auto-update-gui"
-version = "1.7.1"
+version = "2.0.0"
 dependencies = [
  "cachy-auto-update",
  "futures-util",

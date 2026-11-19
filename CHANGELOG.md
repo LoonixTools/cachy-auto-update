@@ -2,6 +2,28 @@
 
 What each release brings, newest first. The [GitHub releases](https://github.com/LoonixTools/cachy-auto-update/releases) add every commit that went into it.
 
+## v2.0.0
+
+_2026-11-19_
+
+Welcome to cachy-auto-update `v2.0.0`! The terminal menu is now a real window, and the whole tool is rewritten in Rust. Updates can also wait for a quiet time and restart the computer by themselves, handy for a home server.
+
+<p align="center">
+  <img width="480" alt="The CachyOS Auto-Update window: 12 updates available, automatic updates on, and nothing that would make an update wait" src="https://raw.githubusercontent.com/LoonixTools/cachy-auto-update/v2.0.0/res/screenshots/overview.png">
+</p>
+
+### 🚨 Breaking changes
+
+- The terminal menu is gone. `cachy-auto-update` now opens a window with every setting. Without a desktop, change settings with `sudo cachy-auto-update config set`.
+
+### Highlights
+
+- A new window for every setting
+- **Overview** shows if an update would wait right now, and why
+- **Restart automatically** after a kernel update or after every update
+- **When to update** keeps updates to the hours you pick, for example at night
+- No longer needs Python
+
 ## v1.7.1
 
 _2026-11-10_

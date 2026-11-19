@@ -8,18 +8,20 @@ cachy-auto-update - unattended background updates for CachyOS
 
 *cachy-auto-update* [_command_] [_options_]
 
+*cachy-auto-update-gui* [--tray] [--pane _name_]
+
 # DESCRIPTION
 
 *cachy-auto-update* keeps a CachyOS machine current without anybody having to
 think about it: repository packages, AUR packages, Flatpaks and AppImages are
 updated in the background, with no password prompt and no terminal.
 
-Run without a command it opens a small interactive menu with the two switches
-that matter (automatic updates on/off and notifications on/off), plus the
-current status, and a settings screen covering every remaining option so the
-configuration file never has to be edited by hand. In the settings screen the
-arrow keys select, Space or Right changes a value, and _q_ goes back; every
-change is written out immediately.
+Run without a command on a desktop it opens the window (*cachy-auto-update-gui*).
+It shows how things stand, has an *Update now* button, and covers every
+setting, so the configuration file never has to be edited by hand. Every change
+is written at once. Changing a setting needs root: the window asks through
+*pkexec*(1), which wants the administrator password once and then keeps it for a
+few minutes. Without a desktop it prints the status and a short help.
 
 The actual work is done by a systemd system service. The timer ticks hourly;
 whether a tick does anything is decided by _UpdateInterval_ (weekly by default).
@@ -50,6 +52,11 @@ pacman) is simply retried at the next tick.
 *log* [-n _num_] [-f] [-a]
 	Show the log of the last run. *-a* shows the rolling log instead, *-f*
 	follows it.
+
+*config* [list | get _key_ | set _key_ _value_]
+	Show or change a setting. Only known keys and values of the right shape
+	are taken. Settings that change something outside the file (_Enabled_,
+	_TrayIcon_, _CachyUpdate_, _RebootNotification_) take effect at once.
 
 *-h*, *--help*
 	Show a short help text.
@@ -96,7 +103,7 @@ to invoke *pacman* without one. No user password is ever stored anywhere.
 An AUR package that fails to build is held back, and all the others are still
 updated. Some packages can never build on their own, for example one that needs
 a file downloaded by hand. A held package is tried again when the AUR has a new
-version of it, or after three days. Held packages are shown in the menu and in
+version of it, or after three days. Held packages are shown in the window and in
 *cachy-auto-update status*.
 
 After each run, _CleanAURCache_ removes build leftovers from the caches of
@@ -111,12 +118,36 @@ checked with *flatpak repair* and the update is tried once more. AppImages are
 updated through Gear Lever, for users with a graphical session, and AppImages
 whose application is currently running are skipped.
 
-The machine is never restarted automatically. A kernel update that makes a
-restart necessary is reported by *cachy-auto-update status*, not by a
-notification: the running kernel loses its module tree as soon as pacman
-unpacks the new one, so a bubble would fire while the run is still working
-through AUR packages and Flatpaks, and reads as an invitation to restart in the
-middle of it.
+A kernel update that makes a restart necessary is reported by
+*cachy-auto-update status* and the window, not by a notification: the running
+kernel loses its module tree as soon as pacman unpacks the new one, so a bubble
+would fire while the run is still working through AUR packages and Flatpaks,
+and reads as an invitation to restart in the middle of it. The machine is not
+restarted automatically unless _AutoReboot_ asks for it (see *AUTOMATIC
+RESTART*).
+
+# AUTOMATIC RESTART
+
+With _AutoReboot_ the computer restarts by itself after an update. It is _no_
+by default. _needed_ restarts after an update that changed the kernel, _always_
+after every update that installed something. A homelab or a server is the
+typical case.
+
+The restart is careful about the people using the machine:
+
+- It only follows a run that went through. A run that failed, was cancelled or
+  was interrupted drops a planned restart.
+- It waits while anybody is logged in to the desktop, because a restart would
+  end their session and lose what is not saved. Each hourly tick looks again,
+  so it happens once everybody has logged out. The window and
+  *cachy-auto-update status* say that a restart is planned.
+- It waits while pacman or another package manager is running.
+- It is planned with *shutdown*(8), two minutes ahead. Everybody on a terminal
+  or over SSH gets a message, nobody new can log in until then, and
+  *sudo shutdown -c* stops it. A restart stopped that way is not planned again
+  until the next update asks for one.
+
+No update starts while a restart is on its way.
 
 # OTHER UPDATE NOTICES
 
@@ -152,10 +183,11 @@ The option owns that setting: it is set again on every run. The other
 notifications carry no desktop entry and are not affected.
 
 The desktop withdraws a job as soon as the D-Bus connection that requested it
-closes, so a helper process runs inside each graphical session for the duration
-of the update and holds that connection open. It requires _python-gobject_.
-Where that is missing, or on a desktop with no job interface, there is no
-progress entry and nothing else is affected.
+closes, so a helper process (this program again, as that user) runs inside each
+graphical session for the duration of the update and holds that connection
+open. On a desktop with no job interface there is no progress entry and nothing
+else is affected. The window shows the same bar, from
+_/run/cachy-auto-update/progress_.
 
 A repository upgrade is four steps on the bar: working out the upgrade,
 fetching it, unpacking it, and the hooks that run afterwards. Between "Starting
@@ -205,19 +237,18 @@ counts. Nothing is installed before the next update is due.
 Ignored and held packages are not counted. Its tooltip says when the last
 update was and when the next one is due.
 
-A click on the icon installs all updates right away. It starts
+A click on the icon opens the window. A middle click opens it on the log.
+
+The menu (right click) has *Update now*, *Check for updates*, *Show log* and
+*Settings*. *Update now*, here or in the window, starts
 _cachy-auto-update-now.service_, which runs like a forced *run*, and the
 progress bar shows how far it is, even where _NotifyOnStart_ or
 _MinimizeProgress_ would keep it out of the way. A polkit rule lets the
-person at the computer start this one unit without a password. While an update
-runs, a click opens its log in a terminal instead.
+person at the computer start this one unit without a password.
 
-The menu (right click) has *Update now*, *Show log* (the log in a terminal,
-live), *Check for updates* and *Settings* (this program's menu, in a terminal).
-
-The icon speaks the StatusNotifierItem protocol through GLib's Python bindings,
-so it needs _python-gobject_, like the progress bar. Turning _TrayIcon_ off in
-the settings removes it at once.
+The icon and the window are one program, *cachy-auto-update-gui*, started at
+login with *--tray*. Closing the window keeps the icon. Turning _TrayIcon_ off
+removes the icon at once; the program then ends with its window.
 
 # CANCEL AND PAUSE
 
@@ -300,6 +331,9 @@ _/etc/sudoers.d/cachy-auto-update_
 _/usr/share/polkit-1/rules.d/cachy-auto-update.rules_
 	Lets the person at the computer start an update from the tray icon.
 
+_/usr/share/polkit-1/actions/io.github.loonixtools.cachy-auto-update.policy_
+	Lets the window change settings through *pkexec*(1).
+
 _/var/log/cachy-auto-update/last-run.log_
 	Full output of the most recent run.
 
@@ -312,7 +346,7 @@ _/var/lib/cachy-auto-update/_
 # SEE ALSO
 
 *pacman*(8), *checkupdates*(8), *paru*(8), *yay*(8), *flatpak*(1),
-*systemd.timer*(5)
+*systemd.timer*(5), *shutdown*(8)
 
 # AUTHOR
 

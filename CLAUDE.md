@@ -31,7 +31,7 @@ the full changelog link. So commit subjects end up in public: keep them clear.
 2. Bump the version and add the entry at the top of `CHANGELOG.md`, in one commit (`chore: 1.4.0`).
 3. Push, tag and create the release:
    ```bash
-   git tag v1.4.0 && git push origin main v1.4.0
+   git tag v1.4.0 && git push github main v1.4.0 && git push origin main v1.4.0
    gh release create v1.4.0 --title v1.4.0 --notes "$(.github/release-notes.sh v1.4.0)"
    ```
 4. PKGBUILDS picks up the new release for the AUR on its own.

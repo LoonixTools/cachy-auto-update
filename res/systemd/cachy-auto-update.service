@@ -8,7 +8,7 @@ ConditionPathExists=/etc/cachy-auto-update/cachy-auto-update.conf
 
 [Service]
 Type=oneshot
-ExecStart=/usr/lib/cachy-auto-update/cachy-auto-update-run
+ExecStart=/usr/bin/cachy-auto-update run
 
 # Tool output has to stay parseable; everything shown to a human is rendered
 # back into their own locale explicitly.

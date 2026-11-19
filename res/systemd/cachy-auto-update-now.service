@@ -13,7 +13,7 @@ ConditionPathExists=/etc/cachy-auto-update/cachy-auto-update.conf
 
 [Service]
 Type=oneshot
-ExecStart=/usr/lib/cachy-auto-update/cachy-auto-update-run --now
+ExecStart=/usr/bin/cachy-auto-update run --now
 Environment=LC_ALL=C
 
 # Somebody is waiting for this one, so it does not run at idle priority. Still

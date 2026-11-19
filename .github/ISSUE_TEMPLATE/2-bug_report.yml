@@ -48,7 +48,7 @@ body:
     - AppImages
     - When it runs or waits
     - Notifications
-    - The menu
+    - The window or the tray icon
     - Other
   validations:
     required: true

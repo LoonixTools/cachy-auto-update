@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!--
+  The window changes settings with `pkexec cachy-auto-update config set`.
+  That asks for the administrator password once and keeps it for a few
+  minutes, so changing several settings asks only once.
+-->
+<policyconfig>
+  <vendor>CachyOS Auto-Update</vendor>
+  <vendor_url>https://github.com/LoonixTools/cachy-auto-update</vendor_url>
+  <icon_name>cachy-auto-update</icon_name>
+  <action id="io.github.loonixtools.cachy-auto-update.settings">
+    <description>Change the update settings</description>
+    <description xml:lang="de">Update-Einstellungen ändern</description>
+    <message>Changing the settings of CachyOS Auto-Update needs your password.</message>
+    <message xml:lang="de">Zum Ändern der Einstellungen von CachyOS Auto-Update wird Ihr Passwort benötigt.</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/cachy-auto-update</annotate>
+  </action>
+</policyconfig>

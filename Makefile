@@ -1,22 +1,18 @@
 # cachy-auto-update: build and install
 #
-# Everything here is plain shell; "building" only means compiling the gettext
-# catalogs and rendering the man page. Both are optional in the sense that the
-# targets degrade to a no-op when msgfmt/scdoc are missing, so the tree stays
-# usable for development without the build dependencies installed.
+# Two programs, built with cargo: cachy-auto-update (the command line and the
+# update run) and cachy-auto-update-gui (the window and the tray icon). The
+# translations in po/ are compiled into both. The man page needs scdoc and is
+# skipped without it.
 
-# Overridable so a packager can pass the version it is actually building
-# (`make VERSION=$pkgver`). The literal below is the fallback for builds
-# straight from a checkout, and is what a release tag has to carry.
-VERSION      ?= 1.7.1
+# The version comes from Cargo.toml. VERSION is still taken, so an older
+# PKGBUILD that passes it keeps working.
+VERSION      ?=
 
 PREFIX       ?= /usr
 DESTDIR      ?=
 BINDIR       ?= $(PREFIX)/bin
-LIBEXECDIR   ?= $(PREFIX)/lib/cachy-auto-update
 DATADIR      ?= $(PREFIX)/share
-LIBDIR       ?= $(DATADIR)/cachy-auto-update/lib
-LOCALEDIR    ?= $(DATADIR)/locale
 MANDIR       ?= $(DATADIR)/man
 SYSCONFDIR   ?= /etc
 SYSTEMDDIR   ?= $(PREFIX)/lib/systemd/system
@@ -24,28 +20,21 @@ SYSUSERSDIR  ?= $(PREFIX)/lib/sysusers.d
 TMPFILESDIR  ?= $(PREFIX)/lib/tmpfiles.d
 XDGAUTOSTART ?= $(SYSCONFDIR)/xdg/autostart
 POLKITRULES  ?= $(DATADIR)/polkit-1/rules.d
+POLKITACTIONS ?= $(DATADIR)/polkit-1/actions
 
-LINGUAS      := de
-MOFILES      := $(patsubst %,po/%.mo,$(LINGUAS))
+CARGO        ?= cargo
+CARGOFLAGS   ?= --release --locked
+TARGET       := target/release
+
 MANPAGE      := doc/cachy-auto-update.1
-
-LIBS         := $(wildcard src/lib/*.sh)
-
-MSGFMT       := $(shell command -v msgfmt 2>/dev/null)
 SCDOC        := $(shell command -v scdoc 2>/dev/null)
 
 .PHONY: all build install uninstall check clean
 
 all: build
 
-build: $(MOFILES) $(MANPAGE)
-
-po/%.mo: po/%.po
-ifdef MSGFMT
-	$(MSGFMT) --check --output-file=$@ $<
-else
-	@echo "msgfmt not found, skipping $@"
-endif
+build: $(MANPAGE)
+	$(CARGO) build $(CARGOFLAGS) --workspace
 
 $(MANPAGE): doc/cachy-auto-update.1.scd
 ifdef SCDOC
@@ -54,57 +43,16 @@ else
 	@echo "scdoc not found, skipping $@"
 endif
 
-# Syntax-check every shell file, and run shellcheck when it is available.
 check:
-	@set -e; for f in src/cachy-auto-update src/cachy-auto-update-run $(LIBS); do \
-		bash -n "$$f" && echo "ok  $$f"; \
-	done
-	@if command -v shellcheck >/dev/null 2>&1; then \
-		shellcheck -x -e SC1090,SC1091 src/cachy-auto-update src/cachy-auto-update-run $(LIBS); \
-		echo "ok  shellcheck"; \
-	else \
-		echo "shellcheck not found, skipped"; \
-	fi
-	@if command -v python3 >/dev/null 2>&1; then \
-		python3 -m py_compile src/cachy-auto-update-progress \
-			&& echo "ok  src/cachy-auto-update-progress"; \
-		python3 -m py_compile src/cachy-auto-update-tray \
-			&& echo "ok  src/cachy-auto-update-tray"; \
-		rm -rf src/__pycache__; \
-	else \
-		echo "python3 not found, skipped"; \
-	fi
+	$(CARGO) test --workspace
+	$(CARGO) clippy --workspace -- -D warnings
 	@if command -v visudo >/dev/null 2>&1; then \
 		visudo -cf res/sudoers/cachy-auto-update >/dev/null && echo "ok  sudoers"; \
 	fi
 
-install: build
-	# executables
-	install -Dm755 src/cachy-auto-update     "$(DESTDIR)$(BINDIR)/cachy-auto-update"
-	install -Dm755 src/cachy-auto-update-run "$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-run"
-	# holds a session bus connection open so the update can drive a progress bar
-	install -Dm755 src/cachy-auto-update-progress \
-		"$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-progress"
-	# the icon in the system tray, started in every session by autostart
-	install -Dm755 src/cachy-auto-update-tray \
-		"$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-tray"
-	# the version and the resolved lib path are baked in at install time
-	sed -i -e 's|@VERSION@|$(VERSION)|g' \
-	       -e 's|@LIBDIR@|$(LIBDIR)|g' \
-	       -e 's|@LIBEXECDIR@|$(LIBEXECDIR)|g' \
-	       -e 's|@LOCALEDIR@|$(LOCALEDIR)|g' \
-	       "$(DESTDIR)$(BINDIR)/cachy-auto-update" \
-	       "$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-run" \
-	       "$(DESTDIR)$(LIBEXECDIR)/cachy-auto-update-tray"
-
-	# shell libraries
-	install -d "$(DESTDIR)$(LIBDIR)"
-	install -Dm644 -t "$(DESTDIR)$(LIBDIR)" $(LIBS)
-	sed -i -e 's|@VERSION@|$(VERSION)|g' \
-	       -e 's|@LIBDIR@|$(LIBDIR)|g' \
-	       -e 's|@LIBEXECDIR@|$(LIBEXECDIR)|g' \
-	       -e 's|@LOCALEDIR@|$(LOCALEDIR)|g' \
-	       "$(DESTDIR)$(LIBDIR)"/*.sh
+install:
+	install -Dm755 $(TARGET)/cachy-auto-update     "$(DESTDIR)$(BINDIR)/cachy-auto-update"
+	install -Dm755 $(TARGET)/cachy-auto-update-gui "$(DESTDIR)$(BINDIR)/cachy-auto-update-gui"
 
 	# configuration (marked as backup= in the PKGBUILD)
 	install -Dm644 res/config/cachy-auto-update.conf \
@@ -113,7 +61,9 @@ install: build
 		"$(DESTDIR)$(SYSCONFDIR)/logrotate.d/cachy-auto-update"
 
 	# privilege bridge for the AUR helper: a locked system account plus a
-	# NOPASSWD rule scoped to pacman only
+	# NOPASSWD rule scoped to pacman only. The folder keeps sudo's own 750,
+	# else pacman warns that it differs from the one on disk.
+	install -dm750 "$(DESTDIR)$(SYSCONFDIR)/sudoers.d"
 	install -Dm440 res/sudoers/cachy-auto-update \
 		"$(DESTDIR)$(SYSCONFDIR)/sudoers.d/cachy-auto-update"
 	install -Dm644 res/sysusers/cachy-auto-update.conf \
@@ -126,30 +76,29 @@ install: build
 		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.service"
 	install -Dm644 res/systemd/cachy-auto-update.timer \
 		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.timer"
-	# the update the tray icon starts, and the rule that lets it without a
+	# the update Update now starts, and the rule that lets it without a
 	# password
 	install -Dm644 res/systemd/cachy-auto-update-now.service \
 		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update-now.service"
 	install -Dm644 res/polkit/cachy-auto-update.rules \
 		"$(DESTDIR)$(POLKITRULES)/cachy-auto-update.rules"
+	# lets the window change settings through pkexec
+	install -Dm644 res/polkit/io.github.loonixtools.cachy-auto-update.policy \
+		"$(DESTDIR)$(POLKITACTIONS)/io.github.loonixtools.cachy-auto-update.policy"
 
-	# delivers notifications that were queued while nobody was logged in
+	# delivers notifications that were queued while nobody was logged in,
+	# and starts the tray icon
 	install -Dm644 res/autostart/cachy-auto-update-notify.desktop \
 		"$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-notify.desktop"
 	install -Dm644 res/autostart/cachy-auto-update-tray.desktop \
 		"$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-tray.desktop"
 
-	# names and illustrates the progress bar; hidden from the application menu
+	# the window in the application menu; it also names the progress bar
 	install -Dm644 res/applications/cachy-auto-update.desktop \
 		"$(DESTDIR)$(DATADIR)/applications/cachy-auto-update.desktop"
-
-	# translations
-	@for l in $(LINGUAS); do \
-		if [ -f "po/$$l.mo" ]; then \
-			install -Dm644 "po/$$l.mo" \
-				"$(DESTDIR)$(LOCALEDIR)/$$l/LC_MESSAGES/cachy-auto-update.mo"; \
-		fi; \
-	done
+	# the app's icon, for the menu, the window, notifications and polkit
+	install -Dm644 res/cachy-auto-update.svg \
+		"$(DESTDIR)$(DATADIR)/icons/hicolor/scalable/apps/cachy-auto-update.svg"
 
 	# documentation
 	@if [ -f $(MANPAGE) ]; then \
@@ -159,8 +108,7 @@ install: build
 
 uninstall:
 	rm -f  "$(DESTDIR)$(BINDIR)/cachy-auto-update"
-	rm -rf "$(DESTDIR)$(LIBEXECDIR)"
-	rm -rf "$(DESTDIR)$(DATADIR)/cachy-auto-update"
+	rm -f  "$(DESTDIR)$(BINDIR)/cachy-auto-update-gui"
 	rm -f  "$(DESTDIR)$(SYSCONFDIR)/sudoers.d/cachy-auto-update"
 	rm -f  "$(DESTDIR)$(SYSUSERSDIR)/cachy-auto-update.conf"
 	rm -f  "$(DESTDIR)$(TMPFILESDIR)/cachy-auto-update.conf"
@@ -168,10 +116,16 @@ uninstall:
 	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.timer"
 	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update-now.service"
 	rm -f  "$(DESTDIR)$(POLKITRULES)/cachy-auto-update.rules"
+	rm -f  "$(DESTDIR)$(POLKITACTIONS)/io.github.loonixtools.cachy-auto-update.policy"
 	rm -f  "$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-notify.desktop"
 	rm -f  "$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-tray.desktop"
 	rm -f  "$(DESTDIR)$(DATADIR)/applications/cachy-auto-update.desktop"
+	rm -f  "$(DESTDIR)$(DATADIR)/icons/hicolor/scalable/apps/cachy-auto-update.svg"
 	rm -f  "$(DESTDIR)$(MANDIR)/man1/cachy-auto-update.1"
+	# left by versions before 2.0
+	rm -rf "$(DESTDIR)$(PREFIX)/lib/cachy-auto-update"
+	rm -rf "$(DESTDIR)$(DATADIR)/cachy-auto-update"
 
 clean:
-	rm -f po/*.mo $(MANPAGE)
+	$(CARGO) clean
+	rm -f $(MANPAGE)

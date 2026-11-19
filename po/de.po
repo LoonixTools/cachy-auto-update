@@ -17,12 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Status labels
 msgid "ON"
 msgstr "AN"
 
-msgid "OFF"
-msgstr "AUS"
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Unbekannte Einstellung: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Kein gültiger Wert für %s: %s"
 
 msgid "Automatic updates"
 msgstr "Automatische Updates"
@@ -30,27 +34,101 @@ msgstr "Automatische Updates"
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-msgid "Last check"
-msgstr "Letzte Prüfung"
+msgid "Show an icon in the system tray"
+msgstr "Symbol im Systemabschnitt anzeigen"
 
-msgid "Last successful update"
-msgstr "Letztes Update"
+msgid "Also run cachy-update"
+msgstr "cachy-update auch laufen lassen"
 
-msgid "Next scheduled run"
-msgstr "Nächster Lauf"
+msgid "Show the CachyOS restart notice"
+msgstr "Neustart-Hinweis von CachyOS zeigen"
+
+msgid "Notify when an update starts"
+msgstr "Melden, wenn ein Update beginnt"
+
+msgid "Start the progress bar minimized"
+msgstr "Fortschrittsbalken minimiert starten"
+
+msgid "Notify after a successful update"
+msgstr "Melden nach erfolgreichem Update"
+
+msgid "Notify when something goes wrong"
+msgstr "Melden, wenn etwas schiefgeht"
+
+msgid "Postpone while a game is running"
+msgstr "Verschieben, solange ein Spiel läuft"
+
+msgid "Only update on mains power"
+msgstr "Nur am Stromnetz aktualisieren"
+
+msgid "Update AUR packages"
+msgstr "AUR-Pakete aktualisieren"
+
+msgid "Update Flatpaks"
+msgstr "Flatpaks aktualisieren"
+
+msgid "Update AppImages"
+msgstr "AppImages aktualisieren"
+
+msgid "Also rebuild -git packages"
+msgstr "Auch -git-Pakete neu bauen"
+
+msgid "AUR helper"
+msgstr "AUR-Helfer"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Paketkonflikte automatisch auflösen"
+
+msgid "Trim the package cache"
+msgstr "Paket-Cache beschneiden"
+
+msgid "Clean the AUR build caches"
+msgstr "AUR-Build-Caches aufräumen"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Nicht mehr benötigte Pakete entfernen"
+
+msgid "Never update these packages"
+msgstr "Diese Pakete nie aktualisieren"
+
+msgid "running on battery"
+msgstr "läuft im Akkubetrieb"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "Akku bei %d%%, unter der Grenze von %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "ein Spiel läuft (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "ein Spiel läuft (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "eine Anwendung verhindert den Leerlauf (Vollbild-Spiel oder Video)"
+
+msgid "pacman's database is locked by another process"
+msgstr "pacmans Datenbank ist gerade von einem anderen Prozess gesperrt"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s läuft gerade"
+
+msgid "Pausing once the current step is done"
+msgstr "Wird nach dem laufenden Schritt pausiert"
+
+msgid "Stopping the update"
+msgstr "Update wird abgebrochen"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Der laufende Schritt wird noch zu Ende gebracht. Bitte den Rechner bis dahin eingeschaltet lassen."
+
+msgid "Log"
+msgstr "Protokoll"
 
 msgid "never"
 msgstr "noch nie"
-
-msgid "unknown"
-msgstr "unbekannt"
-
-msgid "not scheduled"
-msgstr "nicht eingeplant"
-
-#, c-format
-msgid "%d packages"
-msgstr "%d Pakete"
 
 msgid "just now"
 msgstr "gerade eben"
@@ -75,366 +153,6 @@ msgstr "vor 1 Tag"
 #, c-format
 msgid "%d days ago"
 msgstr "vor %d Tagen"
-
-msgid "The last run reported a problem. See 'cachy-auto-update log'."
-msgstr "Beim letzten Lauf gab es ein Problem. Siehe „cachy-auto-update log“."
-
-msgid "A restart is recommended to finish a kernel update."
-msgstr "Ein Neustart wird empfohlen, um ein Kernel-Update abzuschließen."
-
-#. Conditions
-msgid "Current conditions:"
-msgstr "Aktuelle Bedingungen:"
-
-msgid "on AC power"
-msgstr "am Stromnetz"
-
-msgid "on battery"
-msgstr "im Akkubetrieb"
-
-#, c-format
-msgid "on battery (%d%%, threshold %d%%)"
-msgstr "im Akkubetrieb (%d%%, Grenze %d%%)"
-
-msgid "running on battery"
-msgstr "läuft im Akkubetrieb"
-
-#, c-format
-msgid "battery at %d%%, below the %d%% threshold"
-msgstr "Akku bei %d%%, unter der Grenze von %d%%"
-
-msgid "no game detected"
-msgstr "kein Spiel erkannt"
-
-msgid "a game is running (GameMode)"
-msgstr "ein Spiel läuft (GameMode)"
-
-#, c-format
-msgid "a game is running (%s)"
-msgstr "ein Spiel läuft (%s)"
-
-msgid "an application is blocking idle (fullscreen game or video)"
-msgstr "eine Anwendung verhindert den Leerlauf (Vollbild-Spiel oder Video)"
-
-msgid "package system is free"
-msgstr "Paketsystem ist frei"
-
-msgid "pacman's database is locked by another process"
-msgstr "pacmans Datenbank ist gerade von einem anderen Prozess gesperrt"
-
-#, c-format
-msgid "%s is currently running"
-msgstr "%s läuft gerade"
-
-#. Menu
-msgid "Toggle automatic updates"
-msgstr "Automatische Updates umschalten"
-
-msgid "Toggle notifications"
-msgstr "Benachrichtigungen umschalten"
-
-msgid "Update now"
-msgstr "Jetzt aktualisieren"
-
-msgid "Show log"
-msgstr "Protokoll anzeigen"
-
-msgid "Show current conditions"
-msgstr "Aktuelle Bedingungen anzeigen"
-
-msgid "Quit"
-msgstr "Beenden"
-
-msgid "Press any key to continue..."
-msgstr "Zum Fortfahren eine Taste drücken …"
-
-#. Commands
-msgid "Automatic updates are on."
-msgstr "Automatische Updates sind eingeschaltet."
-
-msgid "Automatic updates are off."
-msgstr "Automatische Updates sind ausgeschaltet."
-
-msgid "Notifications are on."
-msgstr "Benachrichtigungen sind eingeschaltet."
-
-msgid "Notifications are off."
-msgstr "Benachrichtigungen sind ausgeschaltet."
-
-msgid "This command has to run as root."
-msgstr "Dieser Befehl muss als root ausgeführt werden."
-
-msgid "Could not write the configuration file."
-msgstr "Die Konfigurationsdatei konnte nicht geschrieben werden."
-
-msgid "Could not enable the systemd timer."
-msgstr "Der systemd-Timer konnte nicht aktiviert werden."
-
-msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
-msgstr ""
-"/etc/sudoers.d/cachy-auto-update ist fehlerhaft und wird nicht aktiviert."
-
-msgid "No AUR helper found. Install paru or yay for AUR updates."
-msgstr "Kein AUR-Helper gefunden. Für AUR-Updates paru oder yay installieren."
-
-msgid "base-devel is missing, so AUR packages cannot be built."
-msgstr "base-devel fehlt, daher lassen sich keine AUR-Pakete bauen."
-
-msgid "No log yet."
-msgstr "Noch kein Protokoll vorhanden."
-
-#, c-format
-msgid "Unknown command: %s"
-msgstr "Unbekannter Befehl: %s"
-
-#. Help
-msgid "Usage: cachy-auto-update [command]"
-msgstr "Aufruf: cachy-auto-update [Befehl]"
-
-msgid "Usage: cachy-auto-update notifications on|off"
-msgstr "Aufruf: cachy-auto-update notifications on|off"
-
-msgid "Commands:"
-msgstr "Befehle:"
-
-msgid "Turn automatic updates on"
-msgstr "Automatische Updates einschalten"
-
-msgid "Turn automatic updates off"
-msgstr "Automatische Updates ausschalten"
-
-msgid "Turn desktop notifications on or off"
-msgstr "Benachrichtigungen ein- oder ausschalten"
-
-msgid "Show the current state and conditions"
-msgstr "Aktuellen Zustand und Bedingungen anzeigen"
-
-msgid "Run an update now"
-msgstr "Jetzt ein Update durchführen"
-
-msgid "Show the log of the last run"
-msgstr "Protokoll des letzten Laufs anzeigen"
-
-msgid "Show this help"
-msgstr "Diese Hilfe anzeigen"
-
-msgid "Show the version"
-msgstr "Version anzeigen"
-
-msgid "Without a command an interactive menu is shown."
-msgstr "Ohne Befehl wird ein interaktives Menü angezeigt."
-
-#. Progress bar
-#. The headline of the desktop's progress entry. Whoever reads it has not gone
-#. looking for it - it appears next to whatever they were doing - so each one
-#. says outright that this is an update running, rather than naming the kind of
-#. package on its own.
-msgid "Checking for updates"
-msgstr "Nach Updates wird gesucht"
-
-msgid "Preparing the update"
-msgstr "Update wird vorbereitet"
-
-msgid "Downloading updates"
-msgstr "Updates werden heruntergeladen"
-
-msgid "Updating system packages"
-msgstr "Systempakete werden aktualisiert"
-
-msgid "Finishing the installation"
-msgstr "Installation wird abgeschlossen"
-
-msgid "Updating AUR packages"
-msgstr "AUR-Pakete werden aktualisiert"
-
-msgid "Updating Flatpak apps"
-msgstr "Flatpak-Programme werden aktualisiert"
-
-msgid "Updating AppImages"
-msgstr "AppImages werden aktualisiert"
-
-msgid "Cleaning up after the update"
-msgstr "Aufräumen nach dem Update"
-
-msgid "Log"
-msgstr "Protokoll"
-
-msgid "Package"
-msgstr "Paket"
-
-msgid "The update was stopped before it finished."
-msgstr "Das Update wurde vor dem Ende abgebrochen."
-
-#. Notifications
-msgid "System updated"
-msgstr "System aktualisiert"
-
-#, c-format
-msgid "%d updates were installed."
-msgstr "%d Updates wurden installiert."
-
-msgid "Update failed"
-msgstr "Update fehlgeschlagen"
-
-msgid ""
-"Something went wrong while updating. Run 'cachy-auto-update log' for details."
-msgstr ""
-"Beim Update ist etwas schiefgelaufen. Details mit „cachy-auto-update log“."
-
-msgid "Package database locked"
-msgstr "Paketdatenbank gesperrt"
-
-msgid ""
-"pacman's lock file looks left over from an interrupted update. Updates are "
-"paused until it is cleared."
-msgstr ""
-"Die Sperrdatei von pacman scheint von einem abgebrochenen Update übrig zu "
-"sein. Bis sie entfernt ist, pausieren die Updates."
-
-msgid "Some packages were held back"
-msgstr "Einige Pakete wurden zurückgehalten"
-
-#, c-format
-msgid "%s could not be updated and was skipped. Everything else is up to date."
-msgstr ""
-"%s konnte nicht aktualisiert werden und wurde übersprungen. Alles andere ist "
-"aktuell."
-
-#, c-format
-msgid "Held back: %s"
-msgstr "Zurückgehalten: %s"
-
-msgid "The last run was stopped before it finished."
-msgstr "Der letzte Lauf wurde abgebrochen, bevor er fertig war."
-
-msgid "Finishing an interrupted update"
-msgstr "Abgebrochenes Update wird beendet"
-
-msgid ""
-"The last update was cut short, most likely because the machine was switched "
-"off. It is being finished now."
-msgstr ""
-"Das letzte Update wurde unterbrochen, vermutlich weil der Rechner "
-"ausgeschaltet wurde. Es wird jetzt zu Ende geführt."
-
-msgid "Installing updates"
-msgstr "Updates werden installiert"
-
-#, c-format
-msgid ""
-"%d packages are being updated. Please leave the computer switched on until "
-"this is done."
-msgstr ""
-"%d Pakete werden gerade aktualisiert. Bitte den Rechner so lange "
-"eingeschaltet lassen."
-
-msgid "Settings"
-msgstr "Einstellungen"
-
-msgid "(none)"
-msgstr "(keine)"
-
-msgid "Up/Down: select, Space or Right: change, q: back"
-msgstr "Hoch/Runter: wählen, Leertaste oder Rechts: ändern, q: zurück"
-
-msgid "Package names separated by spaces, empty to clear:"
-msgstr "Paketnamen mit Leerzeichen getrennt, leer zum Löschen:"
-
-msgid "Notify when an update starts"
-msgstr "Melden, wenn ein Update beginnt"
-
-msgid "Start the progress bar minimized"
-msgstr "Fortschrittsbalken minimiert starten"
-
-msgid "Notify after a successful update"
-msgstr "Melden nach erfolgreichem Update"
-
-msgid "Notify when something goes wrong"
-msgstr "Melden, wenn etwas schiefgeht"
-
-msgid "How often to update"
-msgstr "Wie oft aktualisieren"
-
-msgid "Show an icon in the system tray"
-msgstr "Symbol im Systemabschnitt anzeigen"
-
-msgid "Also run cachy-update"
-msgstr "cachy-update auch laufen lassen"
-
-msgid "Show the CachyOS restart notice"
-msgstr "Neustart-Hinweis von CachyOS zeigen"
-
-msgid "Postpone while a game is running"
-msgstr "Verschieben, solange ein Spiel läuft"
-
-msgid "Only update on mains power"
-msgstr "Nur am Stromnetz aktualisieren"
-
-msgid "Minimum battery level (%)"
-msgstr "Mindest-Akkustand (%)"
-
-msgid "Update AUR packages"
-msgstr "AUR-Pakete aktualisieren"
-
-msgid "Update Flatpaks"
-msgstr "Flatpaks aktualisieren"
-
-msgid "Update AppImages"
-msgstr "AppImages aktualisieren"
-
-msgid "Also rebuild -git packages"
-msgstr "Auch -git-Pakete neu bauen"
-
-msgid "AUR helper"
-msgstr "AUR-Helfer"
-
-msgid "Resolve package conflicts automatically"
-msgstr "Paketkonflikte automatisch auflösen"
-
-msgid "Trim the package cache"
-msgstr "Paket-Cache beschneiden"
-
-msgid "Cached versions to keep"
-msgstr "Behaltene Versionen im Cache"
-
-msgid "Remove packages nothing needs any more"
-msgstr "Nicht mehr benötigte Pakete entfernen"
-
-msgid "Never update these packages"
-msgstr "Diese Pakete nie aktualisieren"
-
-#. Settings labels
-msgid "Clean the AUR build caches"
-msgstr "AUR-Build-Caches aufräumen"
-
-msgid "The last run was cancelled. It will run again later."
-msgstr "Der letzte Lauf wurde abgebrochen. Er läuft später erneut."
-
-#. Cancel and pause
-msgid "Stopping the update"
-msgstr "Update wird abgebrochen"
-
-msgid ""
-"The current step is finished first. Please leave the computer switched on "
-"until then."
-msgstr ""
-"Der laufende Schritt wird noch zu Ende gebracht. Bitte den Rechner bis "
-"dahin eingeschaltet lassen."
-
-msgid "Pausing once the current step is done"
-msgstr "Wird nach dem laufenden Schritt pausiert"
-
-msgid "Update stopped"
-msgstr "Update abgebrochen"
-
-msgid "You can switch off the computer now. The update will run again later."
-msgstr ""
-"Der Rechner kann jetzt ausgeschaltet werden. Das Update läuft später "
-"erneut."
-
-#. Interval
-msgid "How often"
-msgstr "Wie oft"
 
 msgid "every minute"
 msgstr "jede Minute"
@@ -464,22 +182,237 @@ msgstr "jede Woche"
 msgid "every %d weeks"
 msgstr "alle %d Wochen"
 
-#. Tray icon
-msgid "Looking for updates..."
-msgstr "Suche nach Updates …"
+msgid "The update was stopped before it finished."
+msgstr "Das Update wurde vor dem Ende abgebrochen."
 
-msgid "Not checked for updates yet"
-msgstr "Noch nicht nach Updates gesucht"
+msgid "Finishing an interrupted update"
+msgstr "Abgebrochenes Update wird beendet"
 
-msgid "1 update available"
-msgstr "1 Update verfügbar"
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Das letzte Update wurde unterbrochen, vermutlich weil der Rechner ausgeschaltet wurde. Es wird jetzt zu Ende geführt."
+
+msgid "Package database locked"
+msgstr "Paketdatenbank gesperrt"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "Die Sperrdatei von pacman scheint von einem abgebrochenen Update übrig zu sein. Bis sie entfernt ist, pausieren die Updates."
+
+msgid "Update failed"
+msgstr "Update fehlgeschlagen"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Beim Update ist etwas schiefgelaufen. Details mit „cachy-auto-update log“."
+
+msgid "Update stopped"
+msgstr "Update abgebrochen"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Der Rechner kann jetzt ausgeschaltet werden. Das Update läuft später erneut."
+
+msgid "System updated"
+msgstr "System aktualisiert"
 
 #, c-format
-msgid "%d updates available"
-msgstr "%d Updates verfügbar"
+msgid "%d updates were installed."
+msgstr "%d Updates wurden installiert."
 
-msgid "Everything is up to date"
-msgstr "Alles ist aktuell"
+msgid "Some packages were held back"
+msgstr "Einige Pakete wurden zurückgehalten"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s konnte nicht aktualisiert werden und wurde übersprungen. Alles andere ist aktuell."
+
+msgid "This command has to run as root."
+msgstr "Dieser Befehl muss als root ausgeführt werden."
+
+msgid "Could not write the configuration file."
+msgstr "Die Konfigurationsdatei konnte nicht geschrieben werden."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update ist fehlerhaft und wird nicht aktiviert."
+
+msgid "Could not enable the systemd timer."
+msgstr "Der systemd-Timer konnte nicht aktiviert werden."
+
+msgid "Automatic updates are on."
+msgstr "Automatische Updates sind eingeschaltet."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Kein AUR-Helper gefunden. Für AUR-Updates paru oder yay installieren."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "base-devel fehlt, daher lassen sich keine AUR-Pakete bauen."
+
+msgid "Automatic updates are off."
+msgstr "Automatische Updates sind ausgeschaltet."
+
+msgid "Notifications are on."
+msgstr "Benachrichtigungen sind eingeschaltet."
+
+msgid "Notifications are off."
+msgstr "Benachrichtigungen sind ausgeschaltet."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Aufruf: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Aufruf: cachy-auto-update config [list | get SCHLÜSSEL | set SCHLÜSSEL WERT]"
+
+msgid "OFF"
+msgstr "AUS"
+
+msgid "How often"
+msgstr "Wie oft"
+
+msgid "Last check"
+msgstr "Letzte Prüfung"
+
+msgid "Last successful update"
+msgstr "Letztes Update"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d Pakete"
+
+msgid "not scheduled"
+msgstr "nicht eingeplant"
+
+msgid "unknown"
+msgstr "unbekannt"
+
+msgid "Next scheduled run"
+msgstr "Nächster Lauf"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Beim letzten Lauf gab es ein Problem. Siehe „cachy-auto-update log“."
+
+msgid "The last run was stopped before it finished."
+msgstr "Der letzte Lauf wurde abgebrochen, bevor er fertig war."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Der letzte Lauf wurde abgebrochen. Er läuft später erneut."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Ein Neustart wird empfohlen, um ein Kernel-Update abzuschließen."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Zurückgehalten: %s"
+
+msgid "Current conditions:"
+msgstr "Aktuelle Bedingungen:"
+
+msgid "on AC power"
+msgstr "am Stromnetz"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "im Akkubetrieb (%d%%, Grenze %d%%)"
+
+msgid "on battery"
+msgstr "im Akkubetrieb"
+
+msgid "no game detected"
+msgstr "kein Spiel erkannt"
+
+msgid "package system is free"
+msgstr "Paketsystem ist frei"
+
+msgid "No log yet."
+msgstr "Noch kein Protokoll vorhanden."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Aufruf: cachy-auto-update [Befehl]"
+
+msgid "Commands:"
+msgstr "Befehle:"
+
+msgid "Without a command the window opens."
+msgstr "Ohne Befehl öffnet sich das Fenster."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Unbekannter Befehl: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Automatische Updates einschalten"
+
+msgid "Turn automatic updates off"
+msgstr "Automatische Updates ausschalten"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Benachrichtigungen ein- oder ausschalten"
+
+msgid "Show the current state and conditions"
+msgstr "Aktuellen Zustand und Bedingungen anzeigen"
+
+msgid "Run an update now"
+msgstr "Jetzt ein Update durchführen"
+
+msgid "Show the log of the last run"
+msgstr "Protokoll des letzten Laufs anzeigen"
+
+msgid "Show or change a setting"
+msgstr "Eine Einstellung anzeigen oder ändern"
+
+msgid "Show this help"
+msgstr "Diese Hilfe anzeigen"
+
+msgid "Show the version"
+msgstr "Version anzeigen"
+
+msgid "Finishing the installation"
+msgstr "Installation wird abgeschlossen"
+
+msgid "Updating system packages"
+msgstr "Systempakete werden aktualisiert"
+
+msgid "Downloading updates"
+msgstr "Updates werden heruntergeladen"
+
+msgid "Preparing the update"
+msgstr "Update wird vorbereitet"
+
+msgid "Checking for updates"
+msgstr "Nach Updates wird gesucht"
+
+msgid "Cleaning up after the update"
+msgstr "Aufräumen nach dem Update"
+
+msgid "Package"
+msgstr "Paket"
+
+msgid "Installing updates"
+msgstr "Updates werden installiert"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "%d Pakete werden gerade aktualisiert. Bitte den Rechner so lange eingeschaltet lassen."
+
+msgid "Updating AUR packages"
+msgstr "AUR-Pakete werden aktualisiert"
+
+msgid "Updating Flatpak apps"
+msgstr "Flatpak-Programme werden aktualisiert"
+
+msgid "Updating AppImages"
+msgstr "AppImages werden aktualisiert"
+
+msgid "Overview"
+msgstr "Übersicht"
+
+msgid "Schedule"
+msgstr "Zeitplan"
+
+msgid "What to update"
+msgstr "Was aktualisiert wird"
+
+msgid "Cleanup"
+msgstr "Aufräumen"
+
+msgid "The update could not be started."
+msgstr "Das Update konnte nicht gestartet werden."
 
 #, c-format
 msgid "Last update: %s"
@@ -492,11 +425,300 @@ msgstr "Nächstes Update: %s"
 msgid "The last update had a problem."
 msgstr "Beim letzten Update gab es ein Problem."
 
-msgid "Click to update now"
-msgstr "Klicken, um jetzt zu aktualisieren"
+msgid "The update is paused"
+msgstr "Das Update ist pausiert"
+
+msgid "Looking for updates..."
+msgstr "Suche nach Updates …"
+
+msgid "Not checked for updates yet"
+msgstr "Noch nicht nach Updates gesucht"
+
+msgid "Everything is up to date"
+msgstr "Alles ist aktuell"
+
+msgid "1 update available"
+msgstr "1 Update verfügbar"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d Updates verfügbar"
+
+msgid "Could not save the setting."
+msgstr "Die Einstellung konnte nicht gespeichert werden."
+
+msgid "The setting was not changed: no permission."
+msgstr "Die Einstellung wurde nicht geändert: keine Berechtigung."
+
+msgid "Update now"
+msgstr "Jetzt aktualisieren"
+
+msgid "Check for updates"
+msgstr "Nach Updates suchen"
+
+msgid "Show log"
+msgstr "Protokoll anzeigen"
+
+msgid "Settings"
+msgstr "Einstellungen"
 
 msgid "Click to see what it is doing"
 msgstr "Klicken, um zu sehen, was gerade passiert"
 
-msgid "Check for updates"
-msgstr "Nach Updates suchen"
+msgid "Click to open"
+msgstr "Klicken zum Öffnen"
+
+msgid "Dismiss"
+msgstr "Schließen"
+
+#, c-format
+msgid "Version %s"
+msgstr "Version %s"
+
+msgid "Starting the update..."
+msgstr "Das Update startet …"
+
+msgid "Paused"
+msgstr "Pausiert"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d von %d"
+
+msgid "Update progress"
+msgstr "Fortschritt des Updates"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Bitte den Rechner eingeschaltet lassen, bis es fertig ist."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Alles andere läuft weiter. Im Protokoll steht, was schiefging."
+
+msgid "It is finished on the next run."
+msgstr "Beim nächsten Lauf wird es zu Ende gebracht."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Neu starten, wann es passt. Von selbst startet nichts neu."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Diese konnten nicht aktualisiert werden und wurden übersprungen. Später wird es erneut versucht."
+
+msgid "Needs a look"
+msgstr "Bitte ansehen"
+
+msgid "Update automatically"
+msgstr "Automatisch aktualisieren"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Updates werden im Hintergrund installiert, ohne Passwort und ohne Rückfragen."
+
+msgid "How often to update"
+msgstr "Wie oft aktualisieren"
+
+msgid "Looking..."
+msgstr "Wird geprüft …"
+
+msgid "On AC power"
+msgstr "Am Netzstrom"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "Im Akkubetrieb (%d%%)"
+
+msgid "On battery"
+msgstr "Im Akkubetrieb"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Updates warten, bis der Rechner am Strom hängt."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Unter %d%% Akku warten Updates."
+
+msgid "Updates wait until it is closed."
+msgstr "Updates warten, bis es beendet ist."
+
+msgid "No game running"
+msgstr "Kein Spiel läuft"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Updates warten, um nicht in die Quere zu kommen."
+
+msgid "Package system is free"
+msgstr "Paketsystem ist frei"
+
+msgid "Right now"
+msgstr "Gerade jetzt"
+
+msgid "An update waits while any of these is orange"
+msgstr "Ein Update wartet, solange einer davon orange ist"
+
+msgid "System packages"
+msgstr "Systempakete"
+
+msgid "AUR packages"
+msgstr "AUR-Pakete"
+
+msgid "Flatpaks"
+msgstr "Flatpaks"
+
+msgid "AppImages"
+msgstr "AppImages"
+
+msgid "Last update"
+msgstr "Letztes Update"
+
+msgid "When"
+msgstr "Wann"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Jede Stunde wird geprüft. Aktualisiert wird, sobald die Zeit darunter vorbei ist."
+
+msgid "Wait while"
+msgstr "Warten, solange"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Auch während ein Video im Vollbild läuft. Eine Stunde später wird es erneut versucht."
+
+msgid "Minimum battery level"
+msgstr "Mindest-Akkustand"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Darunter wartet ein Laptop im Akkubetrieb."
+
+msgid "No minimum"
+msgstr "Kein Minimum"
+
+msgid "Automatic"
+msgstr "Automatisch"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "For example: linux nvidia"
+msgstr "Zum Beispiel: linux nvidia"
+
+msgid "Sources"
+msgstr "Quellen"
+
+msgid "Always updated, with pacman."
+msgstr "Werden immer aktualisiert, mit pacman."
+
+msgid "Always"
+msgstr "Immer"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Gebaut mit paru oder yay. Ein Paket, das sich nicht bauen lässt, wird zurückgehalten."
+
+msgid "For the whole system and for each user."
+msgstr "Für das ganze System und für jeden Benutzer."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Über Gear Lever, solange jemand angemeldet ist."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Sie werden oft neu gebaut und gehen öfter kaputt als fertige Versionen."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Wenn ein neues Paket ein altes ersetzt: zustimmen statt anzuhalten."
+
+msgid "Never update"
+msgstr "Nie aktualisieren"
+
+msgid "Package names, separated by spaces."
+msgstr "Paketnamen, durch Leerzeichen getrennt."
+
+msgid "Messages"
+msgstr "Meldungen"
+
+msgid "Show notifications"
+msgstr "Benachrichtigungen anzeigen"
+
+msgid "Turns off every message below."
+msgstr "Schaltet alle Meldungen darunter aus."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Mit einem Fortschrittsbalken mit Pause und Abbrechen."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Er wartet im Benachrichtigungsbereich, statt aufzuspringen."
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Es zeigt, wenn Updates warten. Ein Klick öffnet dieses Fenster."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Sein eigenes Tray-Symbol und seine tägliche Prüfung. Nicht nötig, solange sich Updates selbst installieren."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Er erscheint mitten im Update, deshalb ist er aus."
+
+msgid "None"
+msgstr "Keine"
+
+msgid "1 version"
+msgstr "1 Version"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s Versionen"
+
+msgid "After each update"
+msgstr "Nach jedem Update"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Entfernt alte Paketdateien. Installierte Software bleibt unberührt."
+
+msgid "Cached versions to keep"
+msgstr "Behaltene Versionen im Cache"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Mehr Versionen erlauben den Weg zurück zu einer älteren."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Entfernt Bau-Reste von paru, yay und Shelly. Die Bauanleitungen bleiben."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Das entfernt installierte Software, deshalb ist es standardmäßig aus."
+
+msgid "Last run"
+msgstr "Letzter Lauf"
+
+msgid "All runs"
+msgstr "Alle Läufe"
+
+msgid "Which log"
+msgstr "Welches Protokoll"
+
+msgid "Restart"
+msgstr "Neustart"
+
+msgid "Restart automatically"
+msgstr "Automatisch neu starten"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Nur wenn niemand angemeldet ist und nie nach einem fehlgeschlagenen Update."
+
+msgid "Never"
+msgstr "Nie"
+
+msgid "After a kernel update"
+msgstr "Nach einem Kernel-Update"
+
+msgid "After every update"
+msgstr "Nach jedem Update"
+
+msgid "A restart is planned to finish the update."
+msgstr "Ein Neustart ist geplant, um das Update abzuschließen."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Er passiert von selbst, sobald niemand mehr angemeldet ist."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Dieser Computer startet in %d Minuten neu, um ein Update abzuschließen. Zum Abbrechen: sudo shutdown -c"

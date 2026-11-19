@@ -30,7 +30,9 @@ if (( title )); then
 	exit 0
 fi
 
-repo="${GITHUB_REPOSITORY:-$(git remote get-url origin | sed -E 's#^.*github\.com[:/]##; s#\.git$##')}"
+# GitHub is the home. A clone that has origin on a mirror keeps GitHub as
+# the remote "github".
+repo="${GITHUB_REPOSITORY:-$( (git remote get-url github 2> /dev/null || git remote get-url origin) | sed -E 's#^.*github\.com[:/]##; s#\.git$##')}"
 name="${repo#*/}"
 
 # The entry: up to the next one, without the date line (GitHub shows the

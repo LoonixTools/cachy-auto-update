@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-48.2 -1.2 553.3 553.3" width="512" height="512">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" viewBox="-48.2 -1.2 553.3 553.3" width="512" height="512">
   <!-- The C is the CachyOS logo, taken unchanged from cachyos-settings (/usr/share/icons/cachyos.svg), without its bubbles. -->
   <defs>
     <linearGradient id="bo-badge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fd0ff"/><stop offset="1" stop-color="#0c62a0"/></linearGradient>
@@ -7,19 +7,8 @@
   </defs>
   <g filter="url(#bo-soft)">
     <g mask="url(#bo-gap)">
-      <svg x="0" y="0" width="512" height="512"
-  
-  
-   version="1.1"
-   viewBox="0 0 64 64"
-   id="svg13595"
-   sodipodi:docname="finalTemplate2.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+      <!-- A group, not a nested <svg>: KDE draws icons with Qt, which skips nested ones. -->
+      <g transform="scale(8)">
   <defs
      id="defs13599">
     <linearGradient
@@ -241,7 +230,7 @@
     
     
   </g>
-</svg>
+      </g>
     </g>
   </g>
   <g filter="url(#bo-soft)">

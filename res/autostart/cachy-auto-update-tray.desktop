@@ -2,10 +2,10 @@
 Type=Application
 Name=CachyOS Auto-Update tray icon
 Name[de]=CachyOS Auto-Update Tray-Symbol
-Comment=Shows waiting updates and installs them with one click
-Comment[de]=Zeigt wartende Updates und installiert sie mit einem Klick
-Exec=/usr/lib/cachy-auto-update/cachy-auto-update-tray
-Icon=system-software-update
+Comment=Shows waiting updates; a click opens the window
+Comment[de]=Zeigt wartende Updates; ein Klick öffnet das Fenster
+Exec=cachy-auto-update-gui --tray
+Icon=cachy-auto-update
 Terminal=false
 NoDisplay=true
 X-GNOME-Autostart-enabled=true

@@ -54,9 +54,15 @@ install:
 	install -Dm755 $(TARGET)/cachy-auto-update     "$(DESTDIR)$(BINDIR)/cachy-auto-update"
 	install -Dm755 $(TARGET)/cachy-auto-update-gui "$(DESTDIR)$(BINDIR)/cachy-auto-update-gui"
 
-	# configuration (marked as backup= in the PKGBUILD)
-	install -Dm644 res/config/cachy-auto-update.conf \
-		"$(DESTDIR)$(SYSCONFDIR)/cachy-auto-update/cachy-auto-update.conf"
+	# configuration (marked as backup= in the PKGBUILD). An existing one is
+	# kept: the new defaults go next to it as .new.
+	@conf="$(DESTDIR)$(SYSCONFDIR)/cachy-auto-update/cachy-auto-update.conf"; \
+	if [ -e "$$conf" ] && ! cmp -s res/config/cachy-auto-update.conf "$$conf"; then \
+		install -Dm644 res/config/cachy-auto-update.conf "$$conf.new"; \
+		echo "kept $$conf, the new defaults are in $$conf.new"; \
+	else \
+		install -Dm644 res/config/cachy-auto-update.conf "$$conf"; \
+	fi
 	install -Dm644 res/logrotate/cachy-auto-update \
 		"$(DESTDIR)$(SYSCONFDIR)/logrotate.d/cachy-auto-update"
 

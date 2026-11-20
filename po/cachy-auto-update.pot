@@ -452,6 +452,15 @@ msgstr ""
 msgid "Update now"
 msgstr ""
 
+msgid "Update and shut down"
+msgstr ""
+
+msgid "Update and restart"
+msgstr ""
+
+msgid "More update options"
+msgstr ""
+
 msgid "Check for updates"
 msgstr ""
 
@@ -488,6 +497,12 @@ msgid "Update progress"
 msgstr ""
 
 msgid "Please leave the computer switched on until this is done."
+msgstr ""
+
+msgid "The computer shuts down when the update is done."
+msgstr ""
+
+msgid "The computer restarts when the update is done."
 msgstr ""
 
 msgid "Everything else keeps working. The log says what went wrong."

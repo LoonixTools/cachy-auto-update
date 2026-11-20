@@ -4,6 +4,7 @@ use crate::desktop::{Cmd, Look};
 use cachy_auto_update::config::{self, Config};
 use cachy_auto_update::i18n::{tr, trf};
 use cachy_auto_update::paths::NOW_UNIT;
+use cachy_auto_update::reboot::Then;
 use cachy_auto_update::status::{LastResult, Next, RunProgress, Status};
 use cachy_auto_update::{check, state, status};
 use rune::{AppHandle, TextEdit};
@@ -97,6 +98,8 @@ pub struct Snapshot {
     pub status: Status,
     pub running: bool,
     pub progress: Option<RunProgress>,
+    /// The running update shuts down or restarts the computer when done.
+    pub then: Option<Then>,
 }
 
 impl Snapshot {
@@ -107,6 +110,7 @@ impl Snapshot {
             status: Status::read(),
             running,
             progress: if running { status::run_progress() } else { None },
+            then: if running { cachy_auto_update::reboot::announced() } else { None },
         }
     }
 }
@@ -139,6 +143,8 @@ pub struct Ui {
     pub progress: Option<RunProgress>,
     /// Update now was clicked and the run has not begun yet.
     pub starting: bool,
+    /// What follows the update that runs or starts.
+    pub then: Option<Then>,
     pub pending: Option<u64>,
     pub checking: bool,
     /// When the next look for updates is due (Unix time).
@@ -172,6 +178,7 @@ impl Ui {
             running: snap.running,
             progress: snap.progress,
             starting: false,
+            then: snap.then,
             pending: None,
             checking: false,
             check_at: state::now() + first,
@@ -215,6 +222,9 @@ impl Ui {
         self.progress = snap.progress;
         if self.running {
             self.starting = false;
+        }
+        if self.running || !self.starting {
+            self.then = snap.then;
         }
         // What is left after an update: most likely nothing.
         if was_running && !self.running {
@@ -261,19 +271,27 @@ impl Ui {
         self.set(key, v.into());
     }
 
-    /// Asks systemd to start the update. polkit lets the person at the
-    /// computer do that without a password.
     pub fn update_now(&mut self) {
+        self.update(None);
+    }
+
+    /// Asks systemd to start the update, and with `then` to shut down or
+    /// restart after it. polkit lets the person at the computer do that
+    /// without a password.
+    pub fn update(&mut self, then: Option<Then>) {
+        self.open = None;
         if self.busy() {
             return;
         }
         self.starting = true;
+        self.then = then;
         self.error = None;
         self.sync_tray();
         let Some(host) = self.host.clone() else { return };
+        let unit = then.map_or(NOW_UNIT.to_string(), Then::unit);
         std::thread::spawn(move || {
             let ok = cachy_auto_update::proc::output(
-                std::process::Command::new("systemctl").args(["start", "--no-block", NOW_UNIT]),
+                std::process::Command::new("systemctl").args(["start", "--no-block", &unit]),
                 Duration::from_secs(120),
             )
             .is_some_and(|o| o.ok());
@@ -382,6 +400,11 @@ impl Ui {
             "update-none"
         };
         let mut lines = vec![self.headline()];
+        if self.busy()
+            && let Some(t) = self.then
+        {
+            lines.push(then_text(t).into());
+        }
         lines.push(trf("Last update: %s", &[&status::time_ago(&cachy_auto_update::i18n::ui_locale(), self.status.last_success)]));
         match self.next {
             Next::At(ts) => lines.push(trf("Next update: %s", &[&status::strftime(ts, "%a %x %H:%M")])),
@@ -419,5 +442,13 @@ impl Ui {
             Some(1) => tr("1 update available").into(),
             Some(n) => trf("%d updates available", &[&n]),
         }
+    }
+}
+
+/// What happens once the update is done.
+pub fn then_text(t: Then) -> &'static str {
+    match t {
+        Then::PowerOff => tr("The computer shuts down when the update is done."),
+        Then::Reboot => tr("The computer restarts when the update is done."),
     }
 }

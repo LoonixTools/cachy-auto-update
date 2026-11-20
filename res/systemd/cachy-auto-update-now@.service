@@ -1,0 +1,23 @@
+[Unit]
+Description=CachyOS update, started by hand, then %i
+Documentation=man:cachy-auto-update(1)
+Documentation=https://github.com/LoonixTools/cachy-auto-update
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/etc/cachy-auto-update/cachy-auto-update.conf
+
+# Update and shut down (@poweroff), or Update and restart (@reboot). Like
+# cachy-auto-update-now.service, and when the update is done, the computer
+# shuts down or restarts. Not after Cancel.
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cachy-auto-update run --now --then=%i
+Environment=LC_ALL=C
+
+Nice=10
+OOMScoreAdjust=500
+TimeoutStartSec=4h
+
+NoNewPrivileges=no
+ProtectHostname=yes

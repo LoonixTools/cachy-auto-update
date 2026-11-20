@@ -169,9 +169,14 @@ pub fn select_row(
         && let Some(menu) = layer.pop()
     {
         let longest = labels.iter().map(|l| l.chars().count()).max().unwrap_or(0) as f32;
-        layer.push(menu.min_w((longest * MENU_CHAR_W + MENU_EXTRA_W).clamp(160.0, 368.0)));
+        layer.push(menu.min_w(menu_width(longest)));
     }
     setting_row(p, key, title, description, select)
+}
+
+/// A menu wide enough for a label of `chars` characters.
+pub fn menu_width(chars: f32) -> f32 {
+    (chars * MENU_CHAR_W + MENU_EXTRA_W).clamp(160.0, 368.0)
 }
 
 /// A small coloured dot, for how a condition stands.

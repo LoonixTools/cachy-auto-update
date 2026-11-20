@@ -453,6 +453,15 @@ msgstr "Die Einstellung wurde nicht geändert: keine Berechtigung."
 msgid "Update now"
 msgstr "Jetzt aktualisieren"
 
+msgid "Update and shut down"
+msgstr "Aktualisieren und herunterfahren"
+
+msgid "Update and restart"
+msgstr "Aktualisieren und neu starten"
+
+msgid "More update options"
+msgstr "Weitere Update-Optionen"
+
 msgid "Check for updates"
 msgstr "Nach Updates suchen"
 
@@ -490,6 +499,12 @@ msgstr "Fortschritt des Updates"
 
 msgid "Please leave the computer switched on until this is done."
 msgstr "Bitte den Rechner eingeschaltet lassen, bis es fertig ist."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Der Rechner fährt herunter, wenn das Update fertig ist."
+
+msgid "The computer restarts when the update is done."
+msgstr "Der Rechner startet neu, wenn das Update fertig ist."
 
 msgid "Everything else keeps working. The log says what went wrong."
 msgstr "Alles andere läuft weiter. Im Protokoll steht, was schiefging."

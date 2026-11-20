@@ -49,10 +49,12 @@ up to half a day early. *Update now* works at any time.
 	postpone a run. This is the first thing to look at when the updater
 	appears to be doing nothing.
 
-*run* [--force] [--dry-run]
+*run* [--force] [--dry-run] [--then poweroff|reboot]
 	Update now. *--force* skips the interval, battery and gaming checks;
 	*--dry-run* lists what would be updated and changes nothing. The check
-	for another running package manager is never skipped.
+	for another running package manager is never skipped. *--then* shuts
+	down or restarts the computer once the update is done, even after a
+	problem, but not after *Cancel*. It implies *--force*.
 
 *log* [-n _num_] [-f] [-a]
 	Show the log of the last run. *-a* shows the rolling log instead, *-f*
@@ -245,12 +247,15 @@ update was and when the next one is due.
 A click on the icon installs the updates, like *Update now*. While an update
 runs, it opens the window on the log instead. A middle click opens the log too.
 
-The menu (right click) has *Update now*, *Check for updates*, *Show log* and
-*Settings*. *Update now*, here or in the window, starts
-_cachy-auto-update-now.service_, which runs like a forced *run*, and the
-progress bar shows how far it is, even where _NotifyOnStart_ or
-_MinimizeProgress_ would keep it out of the way. A polkit rule lets the
-person at the computer start this one unit without a password.
+The menu (right click) has *Update now*, *Update and shut down*, *Update and
+restart*, *Check for updates*, *Show log* and *Settings*. *Update now*, here or
+in the window, starts _cachy-auto-update-now.service_, which runs like a
+forced *run*, and the progress bar shows how far it is, even where
+_NotifyOnStart_ or _MinimizeProgress_ would keep it out of the way. *Update
+and shut down* and *Update and restart* (in the window, behind the arrow next
+to *Update now*) start _cachy-auto-update-now@poweroff.service_ and
+_cachy-auto-update-now@reboot.service_, which run *run --now --then*. A polkit
+rule lets the person at the computer start these units without a password.
 
 The icon and the window are one program, *cachy-auto-update-gui*, started at
 login with *--tray*. Closing the window keeps the icon. Turning _TrayIcon_ off

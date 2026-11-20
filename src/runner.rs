@@ -10,6 +10,7 @@ use crate::notify::{self, Note, Urgency};
 use crate::paths::{PRETTY, paths, self_exe};
 use crate::pkg::{aur, flatpak, pacman};
 use crate::progress::{Outcome, Progress};
+use crate::reboot::Then;
 use crate::{conditions, locks, log, proc, quiet, state};
 use std::os::unix::fs::PermissionsExt;
 use std::os::unix::process::CommandExt;
@@ -56,6 +57,7 @@ fn watch_signals(progress: Progress) {
         // First: an entry whose owner just vanishes is reported as a crash.
         progress.end(Outcome::Failed, "The update was stopped before it finished.");
         let _ = state::write("last_result", "interrupted");
+        crate::reboot::announce(None);
         let _ = std::fs::remove_file(paths().running());
         std::process::exit(130);
     });
@@ -67,7 +69,9 @@ fn note<'a>(urgency: Urgency, linger: bool, title: &'a str, body: &'a str, args:
 
 pub fn main(args: &[String]) -> i32 {
     let (mut force, mut dry_run, mut by_hand) = (false, false, false);
-    for a in args {
+    let mut then = None;
+    let mut it = args.iter();
+    while let Some(a) = it.next() {
         match a.as_str() {
             "--force" => force = true,
             // Somebody clicked Update now and waits for it: like --force, and
@@ -78,7 +82,18 @@ pub fn main(args: &[String]) -> i32 {
             }
             "--dry-run" => dry_run = true,
             "--debug" => log::set_debug(true),
+            // Update and shut down, or Update and restart. Somebody asked for
+            // it, so like --force.
+            "--then" => then = it.next().and_then(|t| Then::parse(t)),
+            s if s.starts_with("--then=") => then = Then::parse(&s[7..]),
             _ => {}
+        }
+        if a.starts_with("--then") {
+            if then.is_none() {
+                eprintln!("cachy-auto-update run: --then takes poweroff or reboot");
+                return 2;
+            }
+            force = true;
         }
     }
     if !proc::is_root() {
@@ -199,7 +214,9 @@ pub fn main(args: &[String]) -> i32 {
     log::reset_runlog();
     log::info("Starting update run");
 
-    // Tells the tray icon and the window that an update runs.
+    // Tells the tray icon and the window that an update runs, and what
+    // follows it. That first, so they see both at once.
+    crate::reboot::announce(then);
     let _ = std::fs::write(paths().running(), format!("{}\n", std::process::id()));
     let _ = std::fs::set_permissions(paths().running(), std::fs::Permissions::from_mode(0o644));
 
@@ -300,7 +317,8 @@ pub fn main(args: &[String]) -> i32 {
         let _ = state::write("last_result", "ok");
         let _ = state::write("last_success", &state::now().to_string());
         log::info(format!("Update run finished successfully ({total} item(s) updated)"));
-        if total > 0 && cfg.notify_success {
+        // Not when the computer goes off right after.
+        if total > 0 && cfg.notify_success && then.is_none() {
             notify::notify_tagged(
                 &cfg,
                 Some("run"),
@@ -360,8 +378,16 @@ pub fn main(args: &[String]) -> i32 {
     }
     let _ = std::fs::remove_file(paths().running());
 
-    // Last, with everything written down: AutoReboot.
-    crate::reboot::after_run(&cfg, !failed && !cancelled, total, kernel);
+    // Last, with everything written down: shut down or restart as asked, even
+    // after a problem, since nobody may be there. Not after Cancel. Else
+    // AutoReboot.
+    match then {
+        Some(t) if !cancelled => crate::reboot::then(t),
+        _ => {
+            crate::reboot::announce(None);
+            crate::reboot::after_run(&cfg, !failed && !cancelled, total, kernel);
+        }
+    }
     i32::from(failed)
 }
 

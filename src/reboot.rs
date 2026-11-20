@@ -4,11 +4,84 @@
 //! is logged in to the desktop: a restart would end their session and lose
 //! what is not saved. Until then the restart waits, and each hourly tick
 //! looks again. People on a terminal or over SSH get a message first.
+//!
+//! Update and shut down, and Update and restart, are different: somebody
+//! asked for them, so they happen right after the run (`run --then`).
 
 use crate::config::{Config, Reboot};
 use crate::i18n::{system_locale, trf_in};
+use crate::paths::paths;
 use crate::{locks, log, proc, state, users};
 use std::process::Command;
+
+/// What `run --then` does once the update is done.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub enum Then {
+    PowerOff,
+    Reboot,
+}
+
+impl Then {
+    pub fn parse(s: &str) -> Option<Then> {
+        match s {
+            "poweroff" | "shutdown" => Some(Then::PowerOff),
+            "reboot" | "restart" => Some(Then::Reboot),
+            _ => None,
+        }
+    }
+
+    /// systemctl's verb, and the instance of the unit.
+    pub fn name(self) -> &'static str {
+        match self {
+            Then::PowerOff => "poweroff",
+            Then::Reboot => "reboot",
+        }
+    }
+
+    /// The unit the window and the tray icon start for it.
+    pub fn unit(self) -> String {
+        format!("cachy-auto-update-now@{}.service", self.name())
+    }
+}
+
+/// Tells the window and the tray icon what follows the running update. None
+/// takes it back.
+pub fn announce(then: Option<Then>) {
+    let file = paths().then();
+    match then {
+        Some(t) => {
+            let _ = std::fs::write(&file, format!("{}\n", t.name()));
+        }
+        None => {
+            let _ = std::fs::remove_file(&file);
+        }
+    }
+}
+
+/// What follows the running update.
+pub fn announced() -> Option<Then> {
+    Then::parse(std::fs::read_to_string(paths().then()).ok()?.trim())
+}
+
+/// Shuts down or restarts right away, as asked. The run ignores the signal
+/// that the shutdown sends it, so it is not taken for a run that was cut off.
+pub fn then(t: Then) {
+    state::clear("reboot_pending");
+    announce(None);
+    for sig in [libc::SIGINT, libc::SIGTERM, libc::SIGHUP] {
+        unsafe {
+            libc::signal(sig, libc::SIG_IGN);
+        }
+    }
+    log::info(match t {
+        Then::PowerOff => "Shutting down, as asked",
+        Then::Reboot => "Restarting, as asked",
+    });
+    // Our own inhibitor would stop it otherwise.
+    if !proc::quiet(Command::new("systemctl").args(["--no-block", "--check-inhibitors=no", t.name()])) {
+        log::warn(format!("systemctl {} failed", t.name()));
+    }
+}
 
 /// Minutes between the message and the restart.
 const DELAY_MINUTES: u32 = 2;
@@ -95,6 +168,14 @@ fn try_now() -> Result<(), String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn then_names() {
+        assert_eq!(Then::parse("poweroff"), Some(Then::PowerOff));
+        assert_eq!(Then::parse("restart"), Some(Then::Reboot));
+        assert_eq!(Then::parse("halt"), None);
+        assert_eq!(Then::Reboot.unit(), "cachy-auto-update-now@reboot.service");
+    }
 
     #[test]
     fn only_what_the_setting_asks_for() {

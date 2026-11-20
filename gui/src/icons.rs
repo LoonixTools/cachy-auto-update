@@ -108,6 +108,11 @@ line_icon!(RESTART, "cau-restart", [
     "M3 3v5h5",
 ]);
 
+line_icon!(POWER, "cau-power", [
+    "M12 2v10",
+    "M18.4 6.6a9 9 0 1 1-12.77.04",
+]);
+
 line_icon!(PAUSE, "cau-pause", [
     "M8 5v14",
     "M16 5v14",

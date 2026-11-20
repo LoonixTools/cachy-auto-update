@@ -67,6 +67,10 @@ impl Paths {
     pub fn progress(&self) -> PathBuf {
         self.run.join("progress")
     }
+    /// What follows a running update: poweroff or reboot.
+    pub fn then(&self) -> PathBuf {
+        self.run.join("then")
+    }
     pub fn notify_queue(&self) -> PathBuf {
         self.state.join("notify-queue")
     }

@@ -82,10 +82,12 @@ install:
 		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.service"
 	install -Dm644 res/systemd/cachy-auto-update.timer \
 		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.timer"
-	# the update Update now starts, and the rule that lets it without a
-	# password
+	# the update Update now starts, the one for Update and shut down or
+	# restart, and the rule that lets them without a password
 	install -Dm644 res/systemd/cachy-auto-update-now.service \
 		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update-now.service"
+	install -Dm644 "res/systemd/cachy-auto-update-now@.service" \
+		"$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update-now@.service"
 	install -Dm644 res/polkit/cachy-auto-update.rules \
 		"$(DESTDIR)$(POLKITRULES)/cachy-auto-update.rules"
 	# lets the window change settings through pkexec
@@ -121,6 +123,7 @@ uninstall:
 	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.service"
 	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update.timer"
 	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update-now.service"
+	rm -f  "$(DESTDIR)$(SYSTEMDDIR)/cachy-auto-update-now@.service"
 	rm -f  "$(DESTDIR)$(POLKITRULES)/cachy-auto-update.rules"
 	rm -f  "$(DESTDIR)$(POLKITACTIONS)/io.github.loonixtools.cachy-auto-update.policy"
 	rm -f  "$(DESTDIR)$(XDGAUTOSTART)/cachy-auto-update-notify.desktop"

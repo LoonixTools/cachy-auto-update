@@ -1,14 +1,18 @@
 //! The first pane: how things stand, the big button, and why an update would
 //! wait right now.
 
-use crate::controls::{Paint, ROW_PX, card, dot, icon_row, page, section, section_note, select_row, toggle_row};
+use crate::controls::{Paint, ROW_PX, card, dot, icon_row, menu_width, page, section, section_note, select_row, toggle_row};
 use crate::icons;
 use crate::ui::{Pane, Ui};
 use cachy_auto_update::config::{Kind, setting};
 use cachy_auto_update::i18n::{tr, trf, ui_locale};
+use cachy_auto_update::reboot::Then;
 use cachy_auto_update::status::{self, LastResult, Next};
 use rune::{El, col, el, icon, row, text};
-use rune_kit::{Button, ButtonVariant, Progress, Spinner};
+use rune_kit::{Button, ButtonVariant, Menu, MenuItem, Placement, Progress, Spinner};
+
+/// The menu next to Update now.
+const UPDATE_MENU: &str = "update-menu";
 
 pub fn actions(ui: &Ui, p: Paint) -> Vec<El> {
     vec![
@@ -22,7 +26,7 @@ pub fn actions(ui: &Ui, p: Paint) -> Vec<El> {
 }
 
 pub fn pane(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
-    let mut pg = page("overview").child(hero(ui, p));
+    let mut pg = page("overview").child(hero(ui, p, layer));
     if let Some(n) = notices(ui, p) {
         pg = pg.child(n);
     }
@@ -30,7 +34,7 @@ pub fn pane(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
 }
 
 /// The status card: what is happening, and the button that updates now.
-fn hero(ui: &Ui, p: Paint) -> El {
+fn hero(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
     let c = &p.k.c;
     let (glyph, tint) = if ui.busy() {
         (None, c.icon_accent)
@@ -67,17 +71,49 @@ fn hero(ui: &Ui, p: Paint) -> El {
         copy = copy.child(running(ui, p));
     }
 
-    let button = Button::new(tr("Update now"))
+    card(
+        p,
+        "hero",
+        vec![row().key("hero-row").px(ROW_PX + 4.0).py(20.0).gap(16.0).center_y().child(badge).child(copy).child(update_button(ui, p, layer))],
+    )
+}
+
+/// Update now, and an arrow at its side for Update and shut down or restart.
+fn update_button(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
+    let r = p.k.radius.md;
+    let open = ui.open == Some(UPDATE_MENU);
+    let now = Button::new(tr("Update now"))
         .variant(ButtonVariant::Contrast)
         .disabled(ui.busy())
         .on_press(|s: &mut Ui| s.update_now())
         .build(p.k)
-        .key("update-now");
-    card(
-        p,
-        "hero",
-        vec![row().key("hero-row").px(ROW_PX + 4.0).py(20.0).gap(16.0).center_y().child(badge).child(copy).child(button)],
-    )
+        .key("update-now")
+        .corners([r, 0.0, 0.0, r]);
+    let chevron = p.k.glyph.chevron_down;
+    let more = Button::new(tr("More update options"))
+        .variant(ButtonVariant::Contrast)
+        .disabled(ui.busy())
+        .expanded(open)
+        .label_with(move |_, ink| icon(chevron, 16.0).color(ink))
+        .on_press(|s: &mut Ui| s.open = if s.open == Some(UPDATE_MENU) { None } else { Some(UPDATE_MENU) })
+        .build(p.k)
+        .key("update-more")
+        .px(6.0)
+        .corners([0.0, r, r, 0.0]);
+    let (off, restart) = (tr("Update and shut down"), tr("Update and restart"));
+    // Rune's menu does not grow for its labels, so it gets the longest one's
+    // width, and the icon's.
+    let longest = off.chars().count().max(restart.chars().count()) as f32;
+    let menu = Menu::new(UPDATE_MENU)
+        .trigger(more)
+        .placement(Placement::BottomEnd)
+        .min_width(menu_width(longest) + 22.0)
+        .item(MenuItem::new(off).icon(&icons::POWER).on_select(|s: &mut Ui| s.update(Some(Then::PowerOff))))
+        .item(MenuItem::new(restart).icon(&icons::RESTART).on_select(|s: &mut Ui| s.update(Some(Then::Reboot))))
+        .open(open && !ui.busy())
+        .on_close(|s: &mut Ui| s.open = None)
+        .build(p.k, layer);
+    row().key("update").gap(1.0).child(now).child(menu)
 }
 
 /// The bar of a running update, as the run reports it.
@@ -114,7 +150,7 @@ fn running(ui: &Ui, p: Paint) -> El {
         .child(Progress::new(Some(prog.percent as f32 / 100.0)).build(p.k).key("bar").label(tr("Update progress")))
         .children(detail)
         .child(
-            text(tr("Please leave the computer switched on until this is done."))
+            text(ui.then.map_or(tr("Please leave the computer switched on until this is done."), crate::ui::then_text))
                 .key("hint")
                 .font(crate::controls::DESCRIPTION)
                 .color(p.muted())

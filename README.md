@@ -58,6 +58,18 @@ for example the night, pick hours under **When to update** on the **Schedule** p
 From the command line: `sudo cachy-auto-update config set UpdateHours 3-6` (or any other hours, such
 as `22-6`, or `any`).
 
+### Update and shut down
+
+Done for the day? Click the arrow next to **Update now** and pick **Update and shut down** or
+**Update and restart**. The computer installs the updates, then shuts down or restarts. **Cancel**
+on the progress bar stops both.
+
+<p align="center">
+  <img src="res/screenshots/update-menu.png" alt="The arrow next to Update now opens a menu with Update and shut down, and Update and restart" width="620">
+</p>
+
+From the command line: `sudo cachy-auto-update run --then poweroff` (or `reboot`).
+
 ### Restart
 
 Nothing restarts on its own, unless you turn on **Restart automatically** under **Schedule**. Pick
@@ -78,7 +90,8 @@ From the command line: `sudo cachy-auto-update config set AutoReboot needed` (or
 
 An icon in the system tray shows if updates are waiting. Click it to install them right away.
 While an update runs, a click shows what it is doing.
-Right-click it for **Update now**, **Check for updates**, **Show log** and **Settings**.
+Right-click it for **Update now**, **Update and shut down**, **Update and restart**, **Check for updates**,
+**Show log** and **Settings**.
 
 Do not want it? Turn off **Show an icon in the system tray** under **Notifications**.
 

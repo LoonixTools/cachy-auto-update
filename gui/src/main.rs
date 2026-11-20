@@ -46,6 +46,7 @@ fn scene_base() -> Ui {
         },
         running: false,
         progress: None,
+        then: None,
     };
     let mut ui = Ui::new(None, snap);
     ui.pending = Some(0);
@@ -62,6 +63,22 @@ const SCENES: &[Scene] = &[
     ("updates", |s| s.pending = Some(12)),
     ("running", |s| {
         s.running = true;
+        s.progress = Some(RunProgress {
+            percent: 42,
+            label: "Updating system packages".into(),
+            done: 87,
+            total: 214,
+            paused: false,
+            detail: "linux-cachyos".into(),
+        });
+    }),
+    ("update-menu", |s| {
+        s.pending = Some(12);
+        s.open = Some("update-menu");
+    }),
+    ("shutdown", |s| {
+        s.running = true;
+        s.then = Some(cachy_auto_update::reboot::Then::PowerOff);
         s.progress = Some(RunProgress {
             percent: 42,
             label: "Updating system packages".into(),

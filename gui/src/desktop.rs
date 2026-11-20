@@ -11,6 +11,7 @@
 use crate::ui::{Pane, Ui};
 use cachy_auto_update::i18n::tr;
 use cachy_auto_update::paths::PRETTY;
+use cachy_auto_update::reboot::Then;
 use futures_util::StreamExt;
 use rune::AppHandle;
 use std::collections::HashMap;
@@ -80,6 +81,8 @@ const CHECK: i32 = 2;
 const SEPARATOR: i32 = 3;
 const SHOW_LOG: i32 = 4;
 const SETTINGS: i32 = 5;
+const UPDATE_POWEROFF: i32 = 6;
+const UPDATE_REBOOT: i32 = 7;
 
 struct Model {
     look: Look,
@@ -105,6 +108,8 @@ fn items(look: &Look) -> Vec<(i32, Vec<(&'static str, OwnedVariant)>)> {
     };
     vec![
         (UPDATE_NOW, action(tr("Update now"), "update-low", !look.busy)),
+        (UPDATE_POWEROFF, action(tr("Update and shut down"), "system-shutdown", !look.busy)),
+        (UPDATE_REBOOT, action(tr("Update and restart"), "system-reboot", !look.busy)),
         (CHECK, action(tr("Check for updates"), "view-refresh", !(look.busy || look.checking))),
         (SEPARATOR, vec![("type", s("separator"))]),
         (SHOW_LOG, action(tr("Show log"), "utilities-terminal", true)),
@@ -225,6 +230,8 @@ impl Menu {
         }
         match id {
             UPDATE_NOW => with_app(&self.handle, |a| a.update(|s, _| s.update_now())),
+            UPDATE_POWEROFF => with_app(&self.handle, |a| a.update(|s, _| s.update(Some(Then::PowerOff)))),
+            UPDATE_REBOOT => with_app(&self.handle, |a| a.update(|s, _| s.update(Some(Then::Reboot)))),
             CHECK => with_app(&self.handle, |a| a.update(|s, _| s.check())),
             SHOW_LOG => show(&self.handle, Pane::Log, None),
             SETTINGS => show(&self.handle, Pane::Overview, None),

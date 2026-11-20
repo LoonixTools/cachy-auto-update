@@ -2,6 +2,12 @@
 
 What each release brings, newest first. The [GitHub releases](https://github.com/LoonixTools/cachy-auto-update/releases) add every commit that went into it.
 
+## v2.0.1
+
+_2026-11-20_
+
+A small update. Click the arrow next to **Update now**, or right-click the tray icon, to pick **Update and shut down** or **Update and restart**. A click on the tray icon installs the updates right away again, and the restart notice goes away after a restart.
+
 ## v2.0.0
 
 _2026-11-19_

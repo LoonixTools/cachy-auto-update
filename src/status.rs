@@ -46,7 +46,8 @@ impl Status {
                 _ => LastResult::None,
             },
             counts: [c(0), c(1), c(2), c(3)],
-            reboot: state::read_or("reboot_needed", "0") == "1",
+            // Until the restart: the run cannot see it happen.
+            reboot: state::read_or("reboot_needed", "0") == "1" && crate::pkg::pacman::reboot_needed(),
             restart_planned: crate::reboot::pending(),
             held: state::read_or("held_back", "").split_whitespace().map(String::from).collect(),
         }

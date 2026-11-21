@@ -750,3 +750,21 @@ msgstr "Jederzeit"
 #, c-format
 msgid "Between %s and %s"
 msgstr "Zwischen %s und %s"
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Language of this window"
+msgstr "Sprache dieses Fensters"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Nur für dich. Benachrichtigungen folgen dem Desktop."
+
+msgid "System default"
+msgstr "Systemstandard"
+
+msgid "Could not save the language."
+msgstr "Die Sprache konnte nicht gespeichert werden."
+
+msgid "Window"
+msgstr "Fenster"

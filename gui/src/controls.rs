@@ -143,7 +143,23 @@ pub fn select_row(
     description: Option<&str>,
     choices: Vec<(String, String)>,
 ) -> El {
-    let current = ui.value(key);
+    select_row_with(ui, p, layer, key, title, description, ui.value(key), choices, |s, k, v| s.set(k, v))
+}
+
+/// A select row for a value that is not a setting of the file: `set` takes
+/// the chosen one.
+#[allow(clippy::too_many_arguments)]
+pub fn select_row_with(
+    ui: &Ui,
+    p: Paint,
+    layer: &mut Vec<El>,
+    key: &'static str,
+    title: &str,
+    description: Option<&str>,
+    current: String,
+    choices: Vec<(String, String)>,
+    set: fn(&mut Ui, &'static str, String),
+) -> El {
     let labels: Vec<String> = choices.iter().map(|(_, l)| l.clone()).collect();
     let shown = choices.iter().find(|(v, _)| *v == current).map(|(_, l)| l.clone()).unwrap_or_else(|| current.clone());
     // A value from the file that is not among the choices still shows.
@@ -157,7 +173,7 @@ pub fn select_row(
         .on_close(|s: &mut Ui| s.open = None)
         .on_choose(move |s: &mut Ui, label: &str, _| {
             if let Some((v, _)) = choices.iter().find(|(_, l)| l == label) {
-                s.set(key, v.clone());
+                set(s, key, v.clone());
             } else {
                 s.open = None;
             }

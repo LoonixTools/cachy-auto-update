@@ -14,7 +14,18 @@ include!(concat!(env!("OUT_DIR"), "/catalogs.rs"));
 static CHOSEN: RwLock<Option<String>> = RwLock::new(None);
 
 /// Native names of the languages, for the language menu.
-const NAMES: &[(&str, &str)] = &[("de", "Deutsch"), ("en", "English"), ("es", "Español")];
+const NAMES: &[(&str, &str)] = &[
+    ("de", "Deutsch"),
+    ("en", "English"),
+    ("es", "Español"),
+    ("fr", "Français"),
+    ("it", "Italiano"),
+    ("ja", "日本語"),
+    ("ko", "한국어"),
+    ("pt_BR", "Português (Brasil)"),
+    ("ru", "Русский"),
+    ("zh_CN", "简体中文"),
+];
 
 /// Shows the UI in `lang` ("es", "de_DE.UTF-8", ...) from now on, or in the
 /// language of the environment again with `None`.
@@ -68,10 +79,12 @@ pub fn system_locale() -> Option<String> {
         .filter(|v| !v.is_empty())
 }
 
-/// The catalog for a locale such as "de_DE.UTF-8", if there is one.
+/// The catalog for a locale such as "de_DE.UTF-8", if there is one: one
+/// for the language and region ("pt_BR") first, then one for the language.
 fn catalog(locale: &str) -> Option<&'static [(&'static str, &'static str)]> {
-    let lang = locale.split(['_', '.', '@']).next().unwrap_or("");
-    CATALOGS.iter().find(|(l, _)| *l == lang).map(|(_, c)| *c)
+    let full = locale.split(['.', '@']).next().unwrap_or("");
+    let lang = full.split('_').next().unwrap_or("");
+    [full, lang].into_iter().find_map(|l| CATALOGS.iter().find(|(c, _)| *c == l).map(|(_, c)| *c))
 }
 
 /// `msgid` in `locale`, or `msgid` itself when it has no translation.
@@ -164,8 +177,32 @@ mod tests {
     fn languages_list_english_first() {
         let l = languages();
         assert_eq!(l[0], ("en", "English"));
-        assert!(l.contains(&("es", "Español")));
-        assert!(l.contains(&("de", "Deutsch")));
+        for code in ["de", "es", "fr", "it", "ja", "ko", "pt_BR", "ru", "zh_CN"] {
+            let (_, name) = l.iter().find(|(c, _)| *c == code).unwrap_or_else(|| panic!("{code} missing"));
+            assert_ne!(*name, code, "{code} has no native name");
+        }
+    }
+
+    #[test]
+    fn regions_find_their_catalog() {
+        assert_eq!(tr_in("pt_BR.UTF-8", "Settings"), "Configurações");
+        assert_eq!(tr_in("zh_CN.UTF-8", "Settings"), "设置");
+        // No catalog for Portugal or Taiwan: English, not a near miss.
+        assert_eq!(tr_in("pt_PT.UTF-8", "Settings"), "Settings");
+        assert_eq!(tr_in("zh_TW.UTF-8", "Settings"), "Settings");
+        assert_eq!(tr_in("fr_CA.UTF-8", "Settings"), "Paramètres");
+        assert_eq!(tr_in("ja_JP.UTF-8", "Settings"), "設定");
+        assert_eq!(tr_in("ko_KR.UTF-8", "Settings"), "설정");
+        assert_eq!(tr_in("it_IT.UTF-8", "Settings"), "Impostazioni");
+        assert_eq!(tr_in("ru_RU.UTF-8", "Settings"), "Настройки");
+    }
+
+    #[test]
+    fn every_catalog_is_complete() {
+        let (_, de) = CATALOGS.iter().find(|(c, _)| *c == "de").unwrap();
+        for (lang, catalog) in CATALOGS {
+            assert_eq!(catalog.len(), de.len(), "{lang}");
+        }
     }
 
     #[test]

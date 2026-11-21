@@ -2,6 +2,12 @@
 
 What each release brings, newest first. The [GitHub releases](https://github.com/LoonixTools/cachy-auto-update/releases) add every commit that went into it.
 
+## v2.0.2
+
+_2026-11-21_
+
+A small patch. Pick the language of the window with **Language of this window** on the **Notifications** page. Spanish, French, Italian, Brazilian Portuguese, Russian, Japanese, Chinese and Korean are new. After the update from 1.x, the tray no longer shows two icons, and **Settings** no longer opens a terminal.
+
 ## v2.0.1
 
 _2026-11-20_

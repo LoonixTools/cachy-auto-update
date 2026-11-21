@@ -67,6 +67,11 @@ if command -v gh > /dev/null; then
 	while IFS=$'\t' read -r sha who; do
 		[[ -n $who ]] && login[$sha]="$who"
 	done < <(gh "${api[@]}" 2>/dev/null || true)
+	# GitHub gives commits from the anonymous noreply address to a stranger
+	# named "noreply". Their pull request names the real author.
+	while read -r sha; do
+		login[$sha]="$(gh api "repos/$repo/commits/$sha/pulls" --jq '.[0].user.login // ""' 2>/dev/null || true)"
+	done < <(git log --no-merges --format='%H %ae' "${prev:+$prev..}$target" | awk '$2 == "noreply@users.noreply.github.com" { print $1 }')
 fi
 
 declare -A list=()

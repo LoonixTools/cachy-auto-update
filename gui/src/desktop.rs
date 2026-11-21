@@ -11,6 +11,7 @@
 use crate::ui::{Pane, Ui};
 use cachy_auto_update::i18n::tr;
 use cachy_auto_update::paths::PRETTY;
+use cachy_auto_update::proc;
 use cachy_auto_update::reboot::Then;
 use futures_util::StreamExt;
 use rune::AppHandle;
@@ -28,6 +29,9 @@ const MENU_PATH: &str = "/MenuBar";
 const WATCHER: &str = "org.kde.StatusNotifierWatcher";
 const WATCHER_PATH: &str = "/StatusNotifierWatcher";
 const TIMEOUT: Duration = Duration::from_secs(5);
+/// The tray icon of versions before 2.0, a Python script. An update to 2.0
+/// leaves it running until the next login, and its Settings opens a terminal.
+const OLD_TRAY: &str = "io.github.loonixtools.CachyAutoUpdate.Tray";
 
 /// What the tray icon shows.
 #[derive(Clone, Debug, PartialEq)]
@@ -303,6 +307,20 @@ async fn register(conn: &Connection) {
     let _ = tokio::time::timeout(TIMEOUT, call).await;
 }
 
+/// Ends the icon from before 2.0, so the tray shows one icon and not two.
+async fn stop_old_tray(conn: &Connection) {
+    let call = async {
+        let bus = zbus::fdo::DBusProxy::new(conn).await?;
+        bus.get_connection_unix_process_id(zbus::names::BusName::from_static_str(OLD_TRAY)?).await
+    };
+    let Ok(Ok(pid)) = tokio::time::timeout(TIMEOUT, call).await else { return };
+    let Ok(pid) = i32::try_from(pid) else { return };
+    // Only that script, whoever else might hold the name.
+    if proc::args(pid).iter().any(|a| a.ends_with("/cachy-auto-update-tray")) {
+        proc::signal(pid, libc::SIGTERM);
+    }
+}
+
 async fn start_tray(model: &Shared, handle: &Handle) -> Option<(Connection, zbus::proxy::SignalStream<'static>)> {
     let setup = async {
         let conn = zbus::connection::Builder::session()
@@ -316,6 +334,7 @@ async fn start_tray(model: &Shared, handle: &Handle) -> Option<(Connection, zbus
     };
     let (conn, owners) = tokio::time::timeout(TIMEOUT, setup).await.ok()?.ok()?;
     register(&conn).await;
+    stop_old_tray(&conn).await;
     Some((conn, owners))
 }
 

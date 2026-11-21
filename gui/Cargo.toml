@@ -15,3 +15,4 @@ rune-theme-opencode = { git = "https://github.com/anomalyco/rune.git", rev = "95
 tokio = { version = "1", features = ["rt", "net", "time", "sync", "macros"] }
 zbus = { version = "6", default-features = false, features = ["tokio", "proxy", "service"] }
 futures-util = "0.3"
+libc = "0.2"

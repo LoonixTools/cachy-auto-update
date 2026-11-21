@@ -14,8 +14,24 @@
   <action id="io.github.loonixtools.cachy-auto-update.settings">
     <description>Change the update settings</description>
     <description xml:lang="de">Update-Einstellungen ändern</description>
+    <description xml:lang="es">Cambiar los ajustes de actualización</description>
+    <description xml:lang="fr">Modifier les paramètres de mise à jour</description>
+    <description xml:lang="it">Modificare le impostazioni di aggiornamento</description>
+    <description xml:lang="pt_BR">Alterar as configurações de atualização</description>
+    <description xml:lang="ru">Изменить настройки обновлений</description>
+    <description xml:lang="ja">アップデートの設定を変更</description>
+    <description xml:lang="zh_CN">更改更新设置</description>
+    <description xml:lang="ko">업데이트 설정 변경</description>
     <message>Changing the settings of CachyOS Auto-Update needs your password.</message>
     <message xml:lang="de">Zum Ändern der Einstellungen von CachyOS Auto-Update wird Ihr Passwort benötigt.</message>
+    <message xml:lang="es">Para cambiar los ajustes de CachyOS Auto-Update se necesita tu contraseña.</message>
+    <message xml:lang="fr">La modification des paramètres de CachyOS Auto-Update nécessite votre mot de passe.</message>
+    <message xml:lang="it">Per modificare le impostazioni di CachyOS Auto-Update serve la tua password.</message>
+    <message xml:lang="pt_BR">Alterar as configurações do CachyOS Auto-Update requer sua senha.</message>
+    <message xml:lang="ru">Для изменения настроек CachyOS Auto-Update нужен ваш пароль.</message>
+    <message xml:lang="ja">CachyOS Auto-Update の設定を変更するにはパスワードが必要です。</message>
+    <message xml:lang="zh_CN">更改 CachyOS Auto-Update 的设置需要你的密码。</message>
+    <message xml:lang="ko">CachyOS Auto-Update 설정을 변경하려면 비밀번호가 필요합니다.</message>
     <defaults>
       <allow_any>auth_admin</allow_any>
       <allow_inactive>auth_admin</allow_inactive>

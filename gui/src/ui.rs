@@ -29,13 +29,11 @@ pub enum Pane {
     Updates,
     Notifications,
     Cleanup,
-    Language,
     Log,
 }
 
 impl Pane {
-    pub const ALL: [Pane; 7] =
-        [Pane::Overview, Pane::Schedule, Pane::Updates, Pane::Notifications, Pane::Cleanup, Pane::Language, Pane::Log];
+    pub const ALL: [Pane; 6] = [Pane::Overview, Pane::Schedule, Pane::Updates, Pane::Notifications, Pane::Cleanup, Pane::Log];
 
     pub fn title(self) -> &'static str {
         match self {
@@ -44,7 +42,6 @@ impl Pane {
             Pane::Updates => tr("What to update"),
             Pane::Notifications => tr("Notifications"),
             Pane::Cleanup => tr("Cleanup"),
-            Pane::Language => tr("Language"),
             Pane::Log => tr("Log"),
         }
     }
@@ -56,7 +53,6 @@ impl Pane {
             Pane::Updates => "nav-updates",
             Pane::Notifications => "nav-notifications",
             Pane::Cleanup => "nav-cleanup",
-            Pane::Language => "nav-language",
             Pane::Log => "nav-log",
         }
     }
@@ -69,7 +65,6 @@ impl Pane {
             Pane::Updates => &PACKAGE,
             Pane::Notifications => &BELL,
             Pane::Cleanup => &BROOM,
-            Pane::Language => &GLOBE,
             Pane::Log => &LOG,
         }
     }
@@ -81,7 +76,6 @@ impl Pane {
             "updates" => Pane::Updates,
             "notifications" => Pane::Notifications,
             "cleanup" => Pane::Cleanup,
-            "language" => Pane::Language,
             "log" => Pane::Log,
             _ => Pane::Overview,
         }
@@ -432,7 +426,7 @@ impl Ui {
         }
         lines.push(trf("Last update: %s", &[&status::time_ago(&cachy_auto_update::i18n::ui_locale(), self.status.last_success)]));
         match self.next {
-            Next::At(ts) => lines.push(trf("Next update: %s", &[&status::strftime(ts, "%a %x %H:%M")])),
+            Next::At(ts) => lines.push(trf("Next update: %s", &[&status::date_time(ts)])),
             _ if !self.cfg.enabled => lines.push(tr("Automatic updates are off.").into()),
             _ => {}
         }

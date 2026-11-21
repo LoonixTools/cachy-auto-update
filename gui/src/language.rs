@@ -2,7 +2,7 @@
 //! in ~/.config/cachy-auto-update/language; an empty or missing file means
 //! the language of the desktop.
 
-use crate::controls::{Paint, page, section, select_row_with};
+use crate::controls::{Paint, select_row_with};
 use crate::ui::Ui;
 use cachy_auto_update::i18n::{languages, tr};
 use rune::El;
@@ -32,25 +32,21 @@ pub fn save(lang: &str) -> std::io::Result<()> {
     std::fs::write(f, format!("{lang}\n"))
 }
 
-pub fn pane(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
+/// The row that picks it, on the Notifications page.
+pub fn row(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
     let mut choices = vec![(String::new(), tr("System default").to_string())];
     choices.extend(languages().into_iter().map(|(code, name)| (code.to_string(), name.to_string())));
-    page("language").child(section(
+    select_row_with(
+        ui,
         p,
-        "window",
-        tr("Window"),
-        vec![select_row_with(
-            ui,
-            p,
-            layer,
-            "Language",
-            tr("Language of this window"),
-            Some(tr("Just for you. Notifications follow the desktop.")),
-            ui.language.clone(),
-            choices,
-            |s, _, v| s.set_language(v),
-        )],
-    ))
+        layer,
+        "Language",
+        tr("Language of this window"),
+        Some(tr("Just for you. Notifications follow the desktop.")),
+        ui.language.clone(),
+        choices,
+        |s, _, v| s.set_language(v),
+    )
 }
 
 #[cfg(test)]

@@ -750,9 +750,6 @@ msgstr ""
 msgid "Between %s and %s"
 msgstr ""
 
-msgid "Language"
-msgstr ""
-
 msgid "Language of this window"
 msgstr ""
 
@@ -763,7 +760,4 @@ msgid "System default"
 msgstr ""
 
 msgid "Could not save the language."
-msgstr ""
-
-msgid "Window"
 msgstr ""

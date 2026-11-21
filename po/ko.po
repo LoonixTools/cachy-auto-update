@@ -751,9 +751,6 @@ msgstr "언제든지"
 msgid "Between %s and %s"
 msgstr "%s부터 %s까지"
 
-msgid "Language"
-msgstr "언어"
-
 msgid "Language of this window"
 msgstr "이 창의 언어"
 
@@ -765,6 +762,3 @@ msgstr "시스템 기본값"
 
 msgid "Could not save the language."
 msgstr "언어를 저장할 수 없습니다."
-
-msgid "Window"
-msgstr "창"

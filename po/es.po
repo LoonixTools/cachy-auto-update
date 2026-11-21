@@ -751,9 +751,6 @@ msgstr "A cualquier hora"
 msgid "Between %s and %s"
 msgstr "Entre las %s y las %s"
 
-msgid "Language"
-msgstr "Idioma"
-
 msgid "Language of this window"
 msgstr "Idioma de esta ventana"
 
@@ -765,6 +762,3 @@ msgstr "Predeterminado del sistema"
 
 msgid "Could not save the language."
 msgstr "No se pudo guardar el idioma."
-
-msgid "Window"
-msgstr "Ventana"

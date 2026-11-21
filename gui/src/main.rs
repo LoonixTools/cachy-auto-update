@@ -118,9 +118,8 @@ const SCENES: &[Scene] = &[
     ("notifications", |s| s.pane = Pane::Notifications),
     ("cleanup", |s| s.pane = Pane::Cleanup),
     ("log", |s| s.pane = Pane::Log),
-    ("language", |s| s.pane = Pane::Language),
-    ("language-menu", |s| {
-        s.pane = Pane::Language;
+    ("language", |s| {
+        s.pane = Pane::Notifications;
         s.open = Some("Language");
     }),
 ];

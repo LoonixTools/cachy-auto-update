@@ -55,7 +55,7 @@ fn hero(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
     let loc = ui_locale();
     let mut sub = vec![trf("Last update: %s", &[&status::time_ago(&loc, ui.status.last_success)])];
     match ui.next {
-        Next::At(ts) if ui.cfg.enabled => sub.push(trf("Next update: %s", &[&status::strftime(ts, "%a %x %H:%M")])),
+        Next::At(ts) if ui.cfg.enabled => sub.push(trf("Next update: %s", &[&status::date_time(ts)])),
         _ if !ui.cfg.enabled => sub.push(tr("Automatic updates are off.").into()),
         _ => {}
     }
@@ -306,7 +306,7 @@ fn conditions(ui: &Ui, p: Paint) -> El {
 fn last_update(ui: &Ui, p: Paint) -> El {
     let st = &ui.status;
     let when = if st.last_success > 0 {
-        status::strftime(st.last_success, "%a %x %H:%M")
+        status::date_time(st.last_success)
     } else {
         tr("never").to_string()
     };

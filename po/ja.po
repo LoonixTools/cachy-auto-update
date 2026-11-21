@@ -751,9 +751,6 @@ msgstr "いつでも"
 msgid "Between %s and %s"
 msgstr "%s から %s まで"
 
-msgid "Language"
-msgstr "言語"
-
 msgid "Language of this window"
 msgstr "このウィンドウの言語"
 
@@ -765,6 +762,3 @@ msgstr "システムの既定"
 
 msgid "Could not save the language."
 msgstr "言語を保存できませんでした。"
-
-msgid "Window"
-msgstr "ウィンドウ"

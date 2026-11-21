@@ -187,13 +187,92 @@ pub fn interval_text(locale: &str, v: &str) -> String {
 /// A local date and time through strftime, in the locale LC_TIME names.
 /// Call `init_time_locale` once first.
 pub fn strftime(ts: u64, format: &str) -> String {
+    format_time(ts, format, None)
+}
+
+/// strftime in `locale`, or in the one LC_TIME names.
+fn format_time(ts: u64, format: &str, locale: Option<libc::locale_t>) -> String {
     let t = ts as libc::time_t;
     let mut tm: libc::tm = unsafe { std::mem::zeroed() };
     unsafe { libc::localtime_r(&t, &mut tm) };
     let Ok(fmt) = std::ffi::CString::new(format) else { return String::new() };
     let mut buf = [0u8; 128];
-    let n = unsafe { libc::strftime(buf.as_mut_ptr().cast(), buf.len(), fmt.as_ptr(), &tm) };
+    let (out, len, f) = (buf.as_mut_ptr().cast(), buf.len(), fmt.as_ptr());
+    let n = match locale {
+        Some(l) => unsafe { libc::strftime_l(out, len, f, &tm, l) },
+        None => unsafe { libc::strftime(out, len, f, &tm) },
+    };
     String::from_utf8_lossy(&buf[..n]).into_owned()
+}
+
+/// How the window shows dates.
+enum Dates {
+    /// In the locale of the environment.
+    Env,
+    /// In a locale of the language picked in the window.
+    Picked(libc::locale_t),
+    /// No locale of that language is installed: in numbers only, so the
+    /// weekday is not in another language.
+    Numbers,
+}
+
+// The locale is only used and freed with the lock held.
+unsafe impl Send for Dates {}
+
+static DATES: std::sync::Mutex<Dates> = std::sync::Mutex::new(Dates::Env);
+
+/// Shows dates in `lang` ("es", "pt_BR", ...) from now on, or in the locale
+/// of the environment again with `None`.
+pub fn set_date_language(lang: Option<&str>) {
+    let base = |l: &str| l.split(['_', '.', '@']).next().unwrap_or("").to_string();
+    let env = ["LC_ALL", "LC_TIME", "LANG"].iter().find_map(|v| std::env::var(v).ok().filter(|v| !v.is_empty()));
+    let env = env.map(|e| if e == "C" || e.starts_with("C.") || e == "POSIX" { "en".into() } else { base(&e) });
+    let dates = match lang {
+        None => Dates::Env,
+        // Keeps the region of the environment, es_MX for "es".
+        Some(l) if env.as_deref() == Some(base(l).as_str()) => Dates::Env,
+        Some(l) => date_locales(l)
+            .into_iter()
+            .find_map(|name| {
+                let name = std::ffi::CString::new(name).ok()?;
+                let loc = unsafe { libc::newlocale(libc::LC_TIME_MASK, name.as_ptr(), std::ptr::null_mut()) };
+                (!loc.is_null()).then_some(loc)
+            })
+            .map_or(Dates::Numbers, Dates::Picked),
+    };
+    let mut d = DATES.lock().unwrap_or_else(|e| e.into_inner());
+    if let Dates::Picked(old) = std::mem::replace(&mut *d, dates) {
+        unsafe { libc::freelocale(old) };
+    }
+}
+
+/// Locales to try for `lang`, most likely first.
+fn date_locales(lang: &str) -> Vec<String> {
+    let full = match lang {
+        "de" => "de_DE",
+        "en" => "en_US",
+        "es" => "es_ES",
+        "fr" => "fr_FR",
+        "it" => "it_IT",
+        "ja" => "ja_JP",
+        "ko" => "ko_KR",
+        "ru" => "ru_RU",
+        l => l,
+    };
+    let mut out = vec![format!("{full}.UTF-8")];
+    if lang == "en" {
+        out.push("C.UTF-8".into());
+    }
+    out
+}
+
+/// The weekday, date and time, for the window.
+pub fn date_time(ts: u64) -> String {
+    match *DATES.lock().unwrap_or_else(|e| e.into_inner()) {
+        Dates::Env => strftime(ts, "%a %x %H:%M"),
+        Dates::Picked(l) => format_time(ts, "%a %x %H:%M", Some(l)),
+        Dates::Numbers => strftime(ts, "%Y-%m-%d %H:%M"),
+    }
 }
 
 /// Dates follow the locale the program was started in.

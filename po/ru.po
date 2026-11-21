@@ -751,9 +751,6 @@ msgstr "В любое время"
 msgid "Between %s and %s"
 msgstr "С %s до %s"
 
-msgid "Language"
-msgstr "Язык"
-
 msgid "Language of this window"
 msgstr "Язык этого окна"
 
@@ -765,6 +762,3 @@ msgstr "Как в системе"
 
 msgid "Could not save the language."
 msgstr "Не удалось сохранить язык."
-
-msgid "Window"
-msgstr "Окно"

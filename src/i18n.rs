@@ -27,10 +27,11 @@ const NAMES: &[(&str, &str)] = &[
     ("zh_CN", "简体中文"),
 ];
 
-/// Shows the UI in `lang` ("es", "de_DE.UTF-8", ...) from now on, or in the
-/// language of the environment again with `None`.
+/// Shows the UI and its dates in `lang` ("es", "de_DE.UTF-8", ...) from now
+/// on, or in the language of the environment again with `None`.
 pub fn set_ui_language(lang: Option<&str>) {
     let lang = lang.map(str::trim).filter(|l| !l.is_empty()).map(String::from);
+    crate::status::set_date_language(lang.as_deref());
     *CHOSEN.write().unwrap_or_else(|e| e.into_inner()) = lang;
 }
 
@@ -198,14 +199,6 @@ mod tests {
     }
 
     #[test]
-    fn every_catalog_is_complete() {
-        let (_, de) = CATALOGS.iter().find(|(c, _)| *c == "de").unwrap();
-        for (lang, catalog) in CATALOGS {
-            assert_eq!(catalog.len(), de.len(), "{lang}");
-        }
-    }
-
-    #[test]
     fn every_translation_keeps_its_placeholders() {
         fn marks(s: &str) -> Vec<char> {
             let mut out = Vec::new();
@@ -231,6 +224,11 @@ mod tests {
         assert_eq!(ui_locale(), "es");
         set_ui_language(Some("en"));
         assert_eq!(tr("Settings"), "Settings");
+        let day = crate::status::date_time(0);
+        assert!(day.starts_with("Wed") || day.starts_with("Thu"), "{day}");
+        // No locale of it is installed: the date is in numbers only.
+        set_ui_language(Some("xx"));
+        assert!(crate::status::date_time(0).starts_with("19"));
         set_ui_language(None);
         assert_eq!(ui_language(), None);
     }

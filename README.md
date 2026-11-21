@@ -114,6 +114,16 @@ stays in the notification area and does not pop up. Click the notification icon 
   <img src="res/screenshots/notifications.png" alt="The Notifications page with Start the progress bar minimized and the other message settings" width="620">
 </p>
 
+### Language
+
+The window speaks English, Spanish and German. It follows the language of your desktop. To pick
+another one, open **Language** and choose it under **Language of this window**. It changes at once,
+also in the tray icon, and only for you.
+
+<p align="center">
+  <img src="res/screenshots/language.png" alt="The Language page with its menu open: System default, English, Deutsch and Español" width="620">
+</p>
+
 ### Command line
 
 ```bash

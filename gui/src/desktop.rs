@@ -36,6 +36,8 @@ pub struct Look {
     pub body: String,
     pub busy: bool,
     pub checking: bool,
+    /// The menu is in this language.
+    pub language: String,
 }
 
 pub enum Cmd {
@@ -377,7 +379,7 @@ async fn serve(rx: std::sync::mpsc::Receiver<Cmd>, handle: Handle) {
         }
     });
     let model: Shared = Arc::new(Mutex::new(Model {
-        look: Look { icon: "update-none", body: String::new(), busy: false, checking: false },
+        look: Look { icon: "update-none", body: String::new(), busy: false, checking: false, language: String::new() },
         revision: 1,
         token: None,
     }));
@@ -409,7 +411,7 @@ async fn serve(rx: std::sync::mpsc::Receiver<Cmd>, handle: Handle) {
                         let (icon, menu) = {
                             let mut m = model.lock().unwrap();
                             let icon = m.look.icon != look.icon;
-                            let menu = (m.look.busy, m.look.checking) != (look.busy, look.checking);
+                            let menu = (m.look.busy, m.look.checking, &m.look.language) != (look.busy, look.checking, &look.language);
                             m.look = look;
                             if menu {
                                 m.revision += 1;

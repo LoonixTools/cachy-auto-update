@@ -18,6 +18,7 @@ pub fn view(ui: &Ui, cx: &mut Cx<Ui>) -> El {
         Pane::Updates => (vec![], crate::settings::updates(ui, p, &mut layer)),
         Pane::Notifications => (vec![], crate::settings::notifications(ui, p)),
         Pane::Cleanup => (vec![], crate::settings::cleanup(ui, p, &mut layer)),
+        Pane::Language => (vec![], crate::language::pane(ui, p, &mut layer)),
         Pane::Log => (crate::log_pane::actions(ui, p), crate::log_pane::pane(ui, p)),
     };
     let body = if ui.pane == Pane::Log { body } else { scroll_body(p, body) };

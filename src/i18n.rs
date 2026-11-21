@@ -6,12 +6,49 @@
 //! UI locale here, or the locale of the user a notification goes to.
 
 use std::fmt::Display;
+use std::sync::RwLock;
 
 include!(concat!(env!("OUT_DIR"), "/catalogs.rs"));
 
-/// The locale user-facing text is shown in. Standard POSIX order: LC_ALL wins,
-/// and LC_ALL=C really means English.
+/// The language picked in the window, over the one of the environment.
+static CHOSEN: RwLock<Option<String>> = RwLock::new(None);
+
+/// Native names of the languages, for the language menu.
+const NAMES: &[(&str, &str)] = &[("de", "Deutsch"), ("en", "English"), ("es", "Español")];
+
+/// Shows the UI in `lang` ("es", "de_DE.UTF-8", ...) from now on, or in the
+/// language of the environment again with `None`.
+pub fn set_ui_language(lang: Option<&str>) {
+    let lang = lang.map(str::trim).filter(|l| !l.is_empty()).map(String::from);
+    *CHOSEN.write().unwrap_or_else(|e| e.into_inner()) = lang;
+}
+
+/// The language picked with `set_ui_language`, if any.
+pub fn ui_language() -> Option<String> {
+    CHOSEN.read().unwrap_or_else(|e| e.into_inner()).clone()
+}
+
+/// The languages there is a catalog for, and English: (code, native name),
+/// English first.
+pub fn languages() -> Vec<(&'static str, &'static str)> {
+    let name = |code: &'static str| NAMES.iter().find(|(c, _)| *c == code).map_or(code, |(_, n)| *n);
+    let mut out: Vec<_> = CATALOGS.iter().map(|(code, _)| (*code, name(code))).collect();
+    out.sort_by_key(|(_, n)| n.to_lowercase());
+    out.insert(0, ("en", name("en")));
+    out
+}
+
+/// The locale user-facing text is shown in: the language picked in the
+/// window, else the standard POSIX order: LC_ALL wins, and LC_ALL=C really
+/// means English.
 pub fn ui_locale() -> String {
+    if let Some(l) = ui_language() {
+        return l;
+    }
+    env_locale()
+}
+
+fn env_locale() -> String {
     for var in ["CAU_UI_LOCALE", "LC_ALL", "LC_MESSAGES", "LANG"] {
         if let Ok(v) = std::env::var(var)
             && !v.is_empty()
@@ -48,10 +85,14 @@ pub fn tr_in<'a>(locale: &str, msgid: &'a str) -> &'a str {
     }
 }
 
-/// `msgid` in the UI locale. The locale is read once per process.
+/// `msgid` in the UI locale. The environment is read once per process; the
+/// language picked in the window counts from the next call on.
 pub fn tr(msgid: &str) -> &str {
-    static LOCALE: std::sync::OnceLock<String> = std::sync::OnceLock::new();
-    tr_in(LOCALE.get_or_init(ui_locale), msgid)
+    static ENV: std::sync::OnceLock<String> = std::sync::OnceLock::new();
+    match CHOSEN.read().unwrap_or_else(|e| e.into_inner()).as_deref() {
+        Some(l) => tr_in(l, msgid),
+        None => tr_in(ENV.get_or_init(env_locale), msgid),
+    }
 }
 
 /// Fills a printf-style message: each `%d`, `%s` or `%i` takes the next
@@ -110,5 +151,50 @@ mod tests {
         assert_eq!(tr_in("de_DE.UTF-8", "ON"), "AN");
         assert_eq!(tr_in("C", "ON"), "ON");
         assert_eq!(tr_in("de_DE.UTF-8", "no such message"), "no such message");
+    }
+
+    #[test]
+    fn spanish_is_found() {
+        assert_eq!(tr_in("es_ES.UTF-8", "ON"), "ACTIVADO");
+        assert_eq!(tr_in("es", "Overview"), "Resumen");
+        assert_eq!(fill(tr_in("es_MX.UTF-8", "%d updates available"), &[&3]), "3 actualizaciones disponibles");
+    }
+
+    #[test]
+    fn languages_list_english_first() {
+        let l = languages();
+        assert_eq!(l[0], ("en", "English"));
+        assert!(l.contains(&("es", "Español")));
+        assert!(l.contains(&("de", "Deutsch")));
+    }
+
+    #[test]
+    fn every_translation_keeps_its_placeholders() {
+        fn marks(s: &str) -> Vec<char> {
+            let mut out = Vec::new();
+            let mut chars = s.chars();
+            while let Some(c) = chars.next() {
+                if c == '%' && let Some(n @ ('d' | 's' | 'i')) = chars.next() {
+                    out.push(n);
+                }
+            }
+            out
+        }
+        for (lang, catalog) in CATALOGS {
+            for (id, text) in *catalog {
+                assert_eq!(marks(id), marks(text), "{lang}: {id:?}");
+            }
+        }
+    }
+
+    #[test]
+    fn the_picked_language_wins_and_goes_back() {
+        set_ui_language(Some("es"));
+        assert_eq!(tr("Settings"), "Ajustes");
+        assert_eq!(ui_locale(), "es");
+        set_ui_language(Some("en"));
+        assert_eq!(tr("Settings"), "Settings");
+        set_ui_language(None);
+        assert_eq!(ui_language(), None);
     }
 }

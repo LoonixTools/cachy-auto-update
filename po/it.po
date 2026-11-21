@@ -1,0 +1,764 @@
+# Italian translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-21 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "ON"
+msgstr "ATTIVO"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Impostazione sconosciuta: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Valore non valido per %s: %s"
+
+msgid "Automatic updates"
+msgstr "Aggiornamenti automatici"
+
+msgid "Notifications"
+msgstr "Notifiche"
+
+msgid "Show an icon in the system tray"
+msgstr "Mostra un'icona nell'area di notifica"
+
+msgid "Also run cachy-update"
+msgstr "Esegui anche cachy-update"
+
+msgid "Show the CachyOS restart notice"
+msgstr "Mostra l'avviso di riavvio di CachyOS"
+
+msgid "Notify when an update starts"
+msgstr "Avvisa quando inizia un aggiornamento"
+
+msgid "Start the progress bar minimized"
+msgstr "Avvia la barra di avanzamento ridotta a icona"
+
+msgid "Notify after a successful update"
+msgstr "Avvisa dopo un aggiornamento riuscito"
+
+msgid "Notify when something goes wrong"
+msgstr "Avvisa quando qualcosa va storto"
+
+msgid "Postpone while a game is running"
+msgstr "Rimanda mentre è in esecuzione un gioco"
+
+msgid "Only update on mains power"
+msgstr "Aggiorna solo con l'alimentatore collegato"
+
+msgid "Update AUR packages"
+msgstr "Aggiorna i pacchetti AUR"
+
+msgid "Update Flatpaks"
+msgstr "Aggiorna i Flatpak"
+
+msgid "Update AppImages"
+msgstr "Aggiorna le AppImage"
+
+msgid "Also rebuild -git packages"
+msgstr "Ricompila anche i pacchetti -git"
+
+msgid "AUR helper"
+msgstr "Helper AUR"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Risolvi automaticamente i conflitti tra pacchetti"
+
+msgid "Trim the package cache"
+msgstr "Riduci la cache dei pacchetti"
+
+msgid "Clean the AUR build caches"
+msgstr "Pulisci le cache di compilazione AUR"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Rimuovi i pacchetti che non servono più"
+
+msgid "Never update these packages"
+msgstr "Non aggiornare mai questi pacchetti"
+
+msgid "running on battery"
+msgstr "alimentazione a batteria"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "batteria al %d%%, sotto la soglia del %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "è in esecuzione un gioco (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "è in esecuzione un gioco (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "un'applicazione blocca la sospensione (gioco o video a schermo intero)"
+
+msgid "pacman's database is locked by another process"
+msgstr "il database di pacman è bloccato da un altro processo"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s è in esecuzione"
+
+msgid "Pausing once the current step is done"
+msgstr "Pausa al termine del passaggio corrente"
+
+msgid "Stopping the update"
+msgstr "Interruzione dell'aggiornamento"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Prima viene completato il passaggio corrente. Lascia il computer acceso fino ad allora."
+
+msgid "Log"
+msgstr "Registro"
+
+msgid "never"
+msgstr "mai"
+
+msgid "just now"
+msgstr "proprio ora"
+
+msgid "1 minute ago"
+msgstr "1 minuto fa"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d minuti fa"
+
+msgid "1 hour ago"
+msgstr "1 ora fa"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d ore fa"
+
+msgid "1 day ago"
+msgstr "1 giorno fa"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d giorni fa"
+
+msgid "every minute"
+msgstr "ogni minuto"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "ogni %d minuti"
+
+msgid "every hour"
+msgstr "ogni ora"
+
+#, c-format
+msgid "every %d hours"
+msgstr "ogni %d ore"
+
+msgid "every day"
+msgstr "ogni giorno"
+
+#, c-format
+msgid "every %d days"
+msgstr "ogni %d giorni"
+
+msgid "every week"
+msgstr "ogni settimana"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "ogni %d settimane"
+
+msgid "The update was stopped before it finished."
+msgstr "L'aggiornamento è stato interrotto prima della fine."
+
+msgid "Finishing an interrupted update"
+msgstr "Completamento di un aggiornamento interrotto"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "L'ultimo aggiornamento è stato interrotto, probabilmente perché il computer è stato spento. Ora viene completato."
+
+msgid "Package database locked"
+msgstr "Database dei pacchetti bloccato"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "Il file di blocco di pacman sembra rimasto da un aggiornamento interrotto. Gli aggiornamenti sono in pausa finché non viene rimosso."
+
+msgid "Update failed"
+msgstr "Aggiornamento non riuscito"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Qualcosa è andato storto durante l'aggiornamento. Esegui 'cachy-auto-update log' per i dettagli."
+
+msgid "Update stopped"
+msgstr "Aggiornamento interrotto"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Ora puoi spegnere il computer. L'aggiornamento verrà eseguito di nuovo più tardi."
+
+msgid "System updated"
+msgstr "Sistema aggiornato"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "Sono stati installati %d aggiornamenti."
+
+msgid "Some packages were held back"
+msgstr "Alcuni pacchetti sono stati trattenuti"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s non è stato aggiornato ed è stato saltato. Tutto il resto è aggiornato."
+
+msgid "This command has to run as root."
+msgstr "Questo comando deve essere eseguito come root."
+
+msgid "Could not write the configuration file."
+msgstr "Impossibile scrivere il file di configurazione."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update non è valido; attivazione rifiutata."
+
+msgid "Could not enable the systemd timer."
+msgstr "Impossibile attivare il timer di systemd."
+
+msgid "Automatic updates are on."
+msgstr "Gli aggiornamenti automatici sono attivi."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Nessun helper AUR trovato. Installa paru o yay per gli aggiornamenti AUR."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "Manca base-devel, quindi i pacchetti AUR non possono essere compilati."
+
+msgid "Automatic updates are off."
+msgstr "Gli aggiornamenti automatici sono disattivati."
+
+msgid "Notifications are on."
+msgstr "Le notifiche sono attive."
+
+msgid "Notifications are off."
+msgstr "Le notifiche sono disattivate."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Uso: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Uso: cachy-auto-update config [list | get CHIAVE | set CHIAVE VALORE]"
+
+msgid "OFF"
+msgstr "DISATTIVO"
+
+msgid "How often"
+msgstr "Frequenza"
+
+msgid "Last check"
+msgstr "Ultimo controllo"
+
+msgid "Last successful update"
+msgstr "Ultimo aggiornamento riuscito"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d pacchetti"
+
+msgid "not scheduled"
+msgstr "non pianificato"
+
+msgid "unknown"
+msgstr "sconosciuto"
+
+msgid "Next scheduled run"
+msgstr "Prossima esecuzione pianificata"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "L'ultima esecuzione ha segnalato un problema. Vedi 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "L'ultima esecuzione è stata interrotta prima della fine."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "L'ultima esecuzione è stata annullata. Verrà eseguita di nuovo più tardi."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Si consiglia un riavvio per completare un aggiornamento del kernel."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Trattenuti: %s"
+
+msgid "Current conditions:"
+msgstr "Condizioni attuali:"
+
+msgid "on AC power"
+msgstr "con alimentatore collegato"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "a batteria (%d%%, soglia %d%%)"
+
+msgid "on battery"
+msgstr "a batteria"
+
+msgid "no game detected"
+msgstr "nessun gioco rilevato"
+
+msgid "package system is free"
+msgstr "il sistema dei pacchetti è libero"
+
+msgid "No log yet."
+msgstr "Ancora nessun registro."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Uso: cachy-auto-update [comando]"
+
+msgid "Commands:"
+msgstr "Comandi:"
+
+msgid "Without a command the window opens."
+msgstr "Senza comando si apre la finestra."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Comando sconosciuto: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Attiva gli aggiornamenti automatici"
+
+msgid "Turn automatic updates off"
+msgstr "Disattiva gli aggiornamenti automatici"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Attiva o disattiva le notifiche del desktop"
+
+msgid "Show the current state and conditions"
+msgstr "Mostra lo stato e le condizioni attuali"
+
+msgid "Run an update now"
+msgstr "Esegui subito un aggiornamento"
+
+msgid "Show the log of the last run"
+msgstr "Mostra il registro dell'ultima esecuzione"
+
+msgid "Show or change a setting"
+msgstr "Mostra o cambia un'impostazione"
+
+msgid "Show this help"
+msgstr "Mostra questo aiuto"
+
+msgid "Show the version"
+msgstr "Mostra la versione"
+
+msgid "Finishing the installation"
+msgstr "Completamento dell'installazione"
+
+msgid "Updating system packages"
+msgstr "Aggiornamento dei pacchetti di sistema"
+
+msgid "Downloading updates"
+msgstr "Download degli aggiornamenti"
+
+msgid "Preparing the update"
+msgstr "Preparazione dell'aggiornamento"
+
+msgid "Checking for updates"
+msgstr "Ricerca di aggiornamenti"
+
+msgid "Cleaning up after the update"
+msgstr "Pulizia dopo l'aggiornamento"
+
+msgid "Package"
+msgstr "Pacchetto"
+
+msgid "Installing updates"
+msgstr "Installazione degli aggiornamenti"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "Aggiornamento di %d pacchetti in corso. Lascia il computer acceso fino alla fine."
+
+msgid "Updating AUR packages"
+msgstr "Aggiornamento dei pacchetti AUR"
+
+msgid "Updating Flatpak apps"
+msgstr "Aggiornamento delle app Flatpak"
+
+msgid "Updating AppImages"
+msgstr "Aggiornamento delle AppImage"
+
+msgid "Overview"
+msgstr "Panoramica"
+
+msgid "Schedule"
+msgstr "Pianificazione"
+
+msgid "What to update"
+msgstr "Cosa aggiornare"
+
+msgid "Cleanup"
+msgstr "Pulizia"
+
+msgid "The update could not be started."
+msgstr "Impossibile avviare l'aggiornamento."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Ultimo aggiornamento: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Prossimo aggiornamento: %s"
+
+msgid "The last update had a problem."
+msgstr "L'ultimo aggiornamento ha avuto un problema."
+
+msgid "The update is paused"
+msgstr "L'aggiornamento è in pausa"
+
+msgid "Looking for updates..."
+msgstr "Ricerca di aggiornamenti..."
+
+msgid "Not checked for updates yet"
+msgstr "Aggiornamenti non ancora cercati"
+
+msgid "Everything is up to date"
+msgstr "Tutto è aggiornato"
+
+msgid "1 update available"
+msgstr "1 aggiornamento disponibile"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d aggiornamenti disponibili"
+
+msgid "Could not save the setting."
+msgstr "Impossibile salvare l'impostazione."
+
+msgid "The setting was not changed: no permission."
+msgstr "L'impostazione non è stata cambiata: permesso negato."
+
+msgid "Update now"
+msgstr "Aggiorna ora"
+
+msgid "Update and shut down"
+msgstr "Aggiorna e spegni"
+
+msgid "Update and restart"
+msgstr "Aggiorna e riavvia"
+
+msgid "More update options"
+msgstr "Altre opzioni di aggiornamento"
+
+msgid "Check for updates"
+msgstr "Cerca aggiornamenti"
+
+msgid "Show log"
+msgstr "Mostra registro"
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "Click to see what it is doing"
+msgstr "Fai clic per vedere cosa sta facendo"
+
+msgid "Click to update now"
+msgstr "Fai clic per aggiornare ora"
+
+msgid "Dismiss"
+msgstr "Chiudi"
+
+#, c-format
+msgid "Version %s"
+msgstr "Versione %s"
+
+msgid "Starting the update..."
+msgstr "Avvio dell'aggiornamento..."
+
+msgid "Paused"
+msgstr "In pausa"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d di %d"
+
+msgid "Update progress"
+msgstr "Avanzamento dell'aggiornamento"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Lascia il computer acceso fino alla fine."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Il computer si spegne al termine dell'aggiornamento."
+
+msgid "The computer restarts when the update is done."
+msgstr "Il computer si riavvia al termine dell'aggiornamento."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Tutto il resto continua a funzionare. Il registro indica cosa è andato storto."
+
+msgid "It is finished on the next run."
+msgstr "Verrà completato alla prossima esecuzione."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Riavvia quando ti è comodo. Niente si riavvia da solo."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Questi non sono stati aggiornati e sono stati saltati. Verranno riprovati più tardi."
+
+msgid "Needs a look"
+msgstr "Da controllare"
+
+msgid "Update automatically"
+msgstr "Aggiorna automaticamente"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Gli aggiornamenti si installano in background, senza password e senza domande."
+
+msgid "How often to update"
+msgstr "Frequenza degli aggiornamenti"
+
+msgid "Looking..."
+msgstr "Ricerca..."
+
+msgid "On AC power"
+msgstr "Con alimentatore collegato"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "A batteria (%d%%)"
+
+msgid "On battery"
+msgstr "A batteria"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Gli aggiornamenti attendono che il computer sia collegato alla corrente."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Gli aggiornamenti attendono sotto il %d%% di batteria."
+
+msgid "Updates wait until it is closed."
+msgstr "Gli aggiornamenti attendono che venga chiuso."
+
+msgid "No game running"
+msgstr "Nessun gioco in esecuzione"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Gli aggiornamenti attendono per non essere d'intralcio."
+
+msgid "Package system is free"
+msgstr "Il sistema dei pacchetti è libero"
+
+msgid "Right now"
+msgstr "In questo momento"
+
+msgid "An update waits while any of these is orange"
+msgstr "Un aggiornamento attende finché uno di questi è arancione"
+
+msgid "System packages"
+msgstr "Pacchetti di sistema"
+
+msgid "AUR packages"
+msgstr "Pacchetti AUR"
+
+msgid "Flatpaks"
+msgstr "Flatpak"
+
+msgid "AppImages"
+msgstr "AppImage"
+
+msgid "Last update"
+msgstr "Ultimo aggiornamento"
+
+msgid "When"
+msgstr "Quando"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Ogni ora c'è un controllo, e si aggiorna una volta trascorso il tempo indicato sotto."
+
+msgid "Wait while"
+msgstr "Attendi mentre"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Anche mentre un video è a schermo intero. Riprova un'ora dopo."
+
+msgid "Minimum battery level"
+msgstr "Livello minimo della batteria"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Sotto questo livello, un portatile a batteria attende."
+
+msgid "No minimum"
+msgstr "Nessun minimo"
+
+msgid "Automatic"
+msgstr "Automatico"
+
+msgid "Save"
+msgstr "Salva"
+
+msgid "For example: linux nvidia"
+msgstr "Ad esempio: linux nvidia"
+
+msgid "Sources"
+msgstr "Origini"
+
+msgid "Always updated, with pacman."
+msgstr "Sempre aggiornati, con pacman."
+
+msgid "Always"
+msgstr "Sempre"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Compilati con paru o yay. Quelli che non si compilano vengono trattenuti."
+
+msgid "For the whole system and for each user."
+msgstr "Per tutto il sistema e per ogni utente."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Tramite Gear Lever, mentre hai effettuato l'accesso."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Si ricompilano spesso e si rompono più spesso delle versioni rilasciate."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Quando un nuovo pacchetto ne sostituisce uno vecchio, rispondi sì invece di fermarti."
+
+msgid "Never update"
+msgstr "Non aggiornare mai"
+
+msgid "Package names, separated by spaces."
+msgstr "Nomi dei pacchetti, separati da spazi."
+
+msgid "Messages"
+msgstr "Messaggi"
+
+msgid "Show notifications"
+msgstr "Mostra notifiche"
+
+msgid "Turns off every message below."
+msgstr "Disattiva tutti i messaggi qui sotto."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Con una barra di avanzamento con Pausa e Annulla."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Attende nell'area di notifica invece di comparire."
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Indica quando ci sono aggiornamenti in attesa. Un clic apre questa finestra."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "La sua icona e il suo controllo giornaliero. Non serve finché gli aggiornamenti si installano da soli."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Compare nel mezzo di un aggiornamento, quindi è disattivato."
+
+msgid "None"
+msgstr "Nessuna"
+
+msgid "1 version"
+msgstr "1 versione"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s versioni"
+
+msgid "After each update"
+msgstr "Dopo ogni aggiornamento"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Rimuove i vecchi file dei pacchetti. Il software installato non viene mai toccato."
+
+msgid "Cached versions to keep"
+msgstr "Versioni in cache da conservare"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Più versioni permettono di tornare a una precedente."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Rimuove i residui di compilazione di paru, yay e Shelly. Le ricette restano."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Rimuove software installato, quindi è disattivato per impostazione predefinita."
+
+msgid "Last run"
+msgstr "Ultima esecuzione"
+
+msgid "All runs"
+msgstr "Tutte le esecuzioni"
+
+msgid "Which log"
+msgstr "Quale registro"
+
+msgid "Restart"
+msgstr "Riavvio"
+
+msgid "Restart automatically"
+msgstr "Riavvia automaticamente"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Solo quando nessuno ha effettuato l'accesso, e mai dopo un aggiornamento non riuscito."
+
+msgid "Never"
+msgstr "Mai"
+
+msgid "After a kernel update"
+msgstr "Dopo un aggiornamento del kernel"
+
+msgid "After every update"
+msgstr "Dopo ogni aggiornamento"
+
+msgid "A restart is planned to finish the update."
+msgstr "È previsto un riavvio per completare l'aggiornamento."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Avviene da solo quando nessuno ha effettuato l'accesso."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Questo computer si riavvia tra %d minuti per completare un aggiornamento. Per impedirlo, esegui: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Quando aggiornare"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Gli aggiornamenti iniziano solo in queste ore. Aggiorna ora funziona in qualsiasi momento."
+
+msgid "Any time"
+msgstr "In qualsiasi momento"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "Tra le %s e le %s"
+
+msgid "Language of this window"
+msgstr "Lingua di questa finestra"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Solo per te. Le notifiche seguono il desktop."
+
+msgid "System default"
+msgstr "Predefinita di sistema"
+
+msgid "Could not save the language."
+msgstr "Impossibile salvare la lingua."

@@ -1,0 +1,764 @@
+# Russian translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-21 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "ON"
+msgstr "ВКЛ"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Неизвестный параметр: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Недопустимое значение для %s: %s"
+
+msgid "Automatic updates"
+msgstr "Автоматические обновления"
+
+msgid "Notifications"
+msgstr "Уведомления"
+
+msgid "Show an icon in the system tray"
+msgstr "Показывать значок в системном трее"
+
+msgid "Also run cachy-update"
+msgstr "Также запускать cachy-update"
+
+msgid "Show the CachyOS restart notice"
+msgstr "Показывать уведомление CachyOS о перезагрузке"
+
+msgid "Notify when an update starts"
+msgstr "Сообщать о начале обновления"
+
+msgid "Start the progress bar minimized"
+msgstr "Запускать индикатор прогресса свёрнутым"
+
+msgid "Notify after a successful update"
+msgstr "Сообщать об успешном обновлении"
+
+msgid "Notify when something goes wrong"
+msgstr "Сообщать о проблемах"
+
+msgid "Postpone while a game is running"
+msgstr "Откладывать, пока запущена игра"
+
+msgid "Only update on mains power"
+msgstr "Обновлять только от сети"
+
+msgid "Update AUR packages"
+msgstr "Обновлять пакеты AUR"
+
+msgid "Update Flatpaks"
+msgstr "Обновлять Flatpak"
+
+msgid "Update AppImages"
+msgstr "Обновлять AppImage"
+
+msgid "Also rebuild -git packages"
+msgstr "Также пересобирать пакеты -git"
+
+msgid "AUR helper"
+msgstr "Помощник AUR"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Автоматически разрешать конфликты пакетов"
+
+msgid "Trim the package cache"
+msgstr "Сокращать кэш пакетов"
+
+msgid "Clean the AUR build caches"
+msgstr "Очищать кэши сборки AUR"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Удалять пакеты, которые больше не нужны"
+
+msgid "Never update these packages"
+msgstr "Никогда не обновлять эти пакеты"
+
+msgid "running on battery"
+msgstr "работа от батареи"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "заряд батареи %d%%, ниже порога %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "запущена игра (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "запущена игра (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "приложение блокирует простой (игра или видео на весь экран)"
+
+msgid "pacman's database is locked by another process"
+msgstr "база данных pacman заблокирована другим процессом"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "сейчас работает %s"
+
+msgid "Pausing once the current step is done"
+msgstr "Пауза после завершения текущего шага"
+
+msgid "Stopping the update"
+msgstr "Остановка обновления"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Сначала завершится текущий шаг. Не выключайте компьютер до этого момента."
+
+msgid "Log"
+msgstr "Журнал"
+
+msgid "never"
+msgstr "никогда"
+
+msgid "just now"
+msgstr "только что"
+
+msgid "1 minute ago"
+msgstr "1 мин. назад"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d мин. назад"
+
+msgid "1 hour ago"
+msgstr "1 ч. назад"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d ч. назад"
+
+msgid "1 day ago"
+msgstr "1 дн. назад"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d дн. назад"
+
+msgid "every minute"
+msgstr "каждую минуту"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "каждые %d мин."
+
+msgid "every hour"
+msgstr "каждый час"
+
+#, c-format
+msgid "every %d hours"
+msgstr "каждые %d ч."
+
+msgid "every day"
+msgstr "каждый день"
+
+#, c-format
+msgid "every %d days"
+msgstr "каждые %d дн."
+
+msgid "every week"
+msgstr "каждую неделю"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "каждые %d нед."
+
+msgid "The update was stopped before it finished."
+msgstr "Обновление было остановлено до завершения."
+
+msgid "Finishing an interrupted update"
+msgstr "Завершение прерванного обновления"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Последнее обновление было прервано, скорее всего, из-за выключения компьютера. Сейчас оно завершается."
+
+msgid "Package database locked"
+msgstr "База данных пакетов заблокирована"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "Файл блокировки pacman, похоже, остался от прерванного обновления. Обновления приостановлены, пока он не будет удалён."
+
+msgid "Update failed"
+msgstr "Ошибка обновления"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Во время обновления что-то пошло не так. Подробности: 'cachy-auto-update log'."
+
+msgid "Update stopped"
+msgstr "Обновление остановлено"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Теперь можно выключить компьютер. Обновление запустится позже снова."
+
+msgid "System updated"
+msgstr "Система обновлена"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "Установлено обновлений: %d."
+
+msgid "Some packages were held back"
+msgstr "Некоторые пакеты задержаны"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "Не удалось обновить %s, он пропущен. Всё остальное обновлено."
+
+msgid "This command has to run as root."
+msgstr "Эту команду нужно запускать от root."
+
+msgid "Could not write the configuration file."
+msgstr "Не удалось записать файл конфигурации."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update недействителен; включение отменено."
+
+msgid "Could not enable the systemd timer."
+msgstr "Не удалось включить таймер systemd."
+
+msgid "Automatic updates are on."
+msgstr "Автоматические обновления включены."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Помощник AUR не найден. Установите paru или yay для обновлений AUR."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "Нет base-devel, поэтому пакеты AUR нельзя собрать."
+
+msgid "Automatic updates are off."
+msgstr "Автоматические обновления выключены."
+
+msgid "Notifications are on."
+msgstr "Уведомления включены."
+
+msgid "Notifications are off."
+msgstr "Уведомления выключены."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Использование: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Использование: cachy-auto-update config [list | get КЛЮЧ | set КЛЮЧ ЗНАЧЕНИЕ]"
+
+msgid "OFF"
+msgstr "ВЫКЛ"
+
+msgid "How often"
+msgstr "Как часто"
+
+msgid "Last check"
+msgstr "Последняя проверка"
+
+msgid "Last successful update"
+msgstr "Последнее успешное обновление"
+
+#, c-format
+msgid "%d packages"
+msgstr "Пакетов: %d"
+
+msgid "not scheduled"
+msgstr "не запланировано"
+
+msgid "unknown"
+msgstr "неизвестно"
+
+msgid "Next scheduled run"
+msgstr "Следующий запуск по расписанию"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Последний запуск сообщил о проблеме. См. 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "Последний запуск был остановлен до завершения."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Последний запуск был отменён. Он повторится позже."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Рекомендуется перезагрузка для завершения обновления ядра."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Задержаны: %s"
+
+msgid "Current conditions:"
+msgstr "Текущие условия:"
+
+msgid "on AC power"
+msgstr "питание от сети"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "от батареи (%d%%, порог %d%%)"
+
+msgid "on battery"
+msgstr "от батареи"
+
+msgid "no game detected"
+msgstr "игры не обнаружены"
+
+msgid "package system is free"
+msgstr "система пакетов свободна"
+
+msgid "No log yet."
+msgstr "Журнала пока нет."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Использование: cachy-auto-update [команда]"
+
+msgid "Commands:"
+msgstr "Команды:"
+
+msgid "Without a command the window opens."
+msgstr "Без команды открывается окно."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Неизвестная команда: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Включить автоматические обновления"
+
+msgid "Turn automatic updates off"
+msgstr "Выключить автоматические обновления"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Включить или выключить уведомления на рабочем столе"
+
+msgid "Show the current state and conditions"
+msgstr "Показать текущее состояние и условия"
+
+msgid "Run an update now"
+msgstr "Обновить сейчас"
+
+msgid "Show the log of the last run"
+msgstr "Показать журнал последнего запуска"
+
+msgid "Show or change a setting"
+msgstr "Показать или изменить параметр"
+
+msgid "Show this help"
+msgstr "Показать эту справку"
+
+msgid "Show the version"
+msgstr "Показать версию"
+
+msgid "Finishing the installation"
+msgstr "Завершение установки"
+
+msgid "Updating system packages"
+msgstr "Обновление системных пакетов"
+
+msgid "Downloading updates"
+msgstr "Загрузка обновлений"
+
+msgid "Preparing the update"
+msgstr "Подготовка обновления"
+
+msgid "Checking for updates"
+msgstr "Поиск обновлений"
+
+msgid "Cleaning up after the update"
+msgstr "Очистка после обновления"
+
+msgid "Package"
+msgstr "Пакет"
+
+msgid "Installing updates"
+msgstr "Установка обновлений"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "Обновляется пакетов: %d. Не выключайте компьютер до завершения."
+
+msgid "Updating AUR packages"
+msgstr "Обновление пакетов AUR"
+
+msgid "Updating Flatpak apps"
+msgstr "Обновление приложений Flatpak"
+
+msgid "Updating AppImages"
+msgstr "Обновление AppImage"
+
+msgid "Overview"
+msgstr "Обзор"
+
+msgid "Schedule"
+msgstr "Расписание"
+
+msgid "What to update"
+msgstr "Что обновлять"
+
+msgid "Cleanup"
+msgstr "Очистка"
+
+msgid "The update could not be started."
+msgstr "Не удалось запустить обновление."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Последнее обновление: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Следующее обновление: %s"
+
+msgid "The last update had a problem."
+msgstr "При последнем обновлении возникла проблема."
+
+msgid "The update is paused"
+msgstr "Обновление приостановлено"
+
+msgid "Looking for updates..."
+msgstr "Поиск обновлений..."
+
+msgid "Not checked for updates yet"
+msgstr "Обновления ещё не проверялись"
+
+msgid "Everything is up to date"
+msgstr "Всё обновлено"
+
+msgid "1 update available"
+msgstr "Доступно 1 обновление"
+
+#, c-format
+msgid "%d updates available"
+msgstr "Доступно обновлений: %d"
+
+msgid "Could not save the setting."
+msgstr "Не удалось сохранить параметр."
+
+msgid "The setting was not changed: no permission."
+msgstr "Параметр не изменён: нет прав."
+
+msgid "Update now"
+msgstr "Обновить сейчас"
+
+msgid "Update and shut down"
+msgstr "Обновить и выключить"
+
+msgid "Update and restart"
+msgstr "Обновить и перезагрузить"
+
+msgid "More update options"
+msgstr "Другие варианты обновления"
+
+msgid "Check for updates"
+msgstr "Проверить обновления"
+
+msgid "Show log"
+msgstr "Показать журнал"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Click to see what it is doing"
+msgstr "Нажмите, чтобы увидеть, что происходит"
+
+msgid "Click to update now"
+msgstr "Нажмите, чтобы обновить сейчас"
+
+msgid "Dismiss"
+msgstr "Закрыть"
+
+#, c-format
+msgid "Version %s"
+msgstr "Версия %s"
+
+msgid "Starting the update..."
+msgstr "Запуск обновления..."
+
+msgid "Paused"
+msgstr "Пауза"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d из %d"
+
+msgid "Update progress"
+msgstr "Ход обновления"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Не выключайте компьютер до завершения."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Компьютер выключится после обновления."
+
+msgid "The computer restarts when the update is done."
+msgstr "Компьютер перезагрузится после обновления."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Всё остальное работает. В журнале видно, что пошло не так."
+
+msgid "It is finished on the next run."
+msgstr "Оно завершится при следующем запуске."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Перезагрузите, когда будет удобно. Само ничего не перезагрузится."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Эти пакеты не удалось обновить, они пропущены. Попытка повторится позже."
+
+msgid "Needs a look"
+msgstr "Требует внимания"
+
+msgid "Update automatically"
+msgstr "Обновлять автоматически"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Обновления устанавливаются в фоне, без пароля и вопросов."
+
+msgid "How often to update"
+msgstr "Как часто обновлять"
+
+msgid "Looking..."
+msgstr "Поиск..."
+
+msgid "On AC power"
+msgstr "Питание от сети"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "От батареи (%d%%)"
+
+msgid "On battery"
+msgstr "От батареи"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Обновления ждут подключения к сети."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Обновления ждут, пока заряд ниже %d%%."
+
+msgid "Updates wait until it is closed."
+msgstr "Обновления ждут, пока оно не закроется."
+
+msgid "No game running"
+msgstr "Игры не запущены"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Обновления ждут, чтобы не мешать."
+
+msgid "Package system is free"
+msgstr "Система пакетов свободна"
+
+msgid "Right now"
+msgstr "Сейчас"
+
+msgid "An update waits while any of these is orange"
+msgstr "Обновление ждёт, пока что-то из этого оранжевое"
+
+msgid "System packages"
+msgstr "Системные пакеты"
+
+msgid "AUR packages"
+msgstr "Пакеты AUR"
+
+msgid "Flatpaks"
+msgstr "Flatpak"
+
+msgid "AppImages"
+msgstr "AppImage"
+
+msgid "Last update"
+msgstr "Последнее обновление"
+
+msgid "When"
+msgstr "Когда"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Проверка идёт каждый час, обновление начинается, когда пройдёт указанное ниже время."
+
+msgid "Wait while"
+msgstr "Ждать, пока"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Также пока видео идёт на весь экран. Повторная попытка через час."
+
+msgid "Minimum battery level"
+msgstr "Минимальный заряд батареи"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Ниже этого ноутбук на батарее ждёт."
+
+msgid "No minimum"
+msgstr "Без минимума"
+
+msgid "Automatic"
+msgstr "Автоматически"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "For example: linux nvidia"
+msgstr "Например: linux nvidia"
+
+msgid "Sources"
+msgstr "Источники"
+
+msgid "Always updated, with pacman."
+msgstr "Обновляются всегда, через pacman."
+
+msgid "Always"
+msgstr "Всегда"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Собираются через paru или yay. Пакет, который не собирается, задерживается."
+
+msgid "For the whole system and for each user."
+msgstr "Для всей системы и для каждого пользователя."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Через Gear Lever, пока вы в системе."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Они часто пересобираются и ломаются чаще, чем выпущенные версии."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Когда новый пакет заменяет старый, отвечать «да», а не останавливаться."
+
+msgid "Never update"
+msgstr "Никогда не обновлять"
+
+msgid "Package names, separated by spaces."
+msgstr "Имена пакетов через пробел."
+
+msgid "Messages"
+msgstr "Сообщения"
+
+msgid "Show notifications"
+msgstr "Показывать уведомления"
+
+msgid "Turns off every message below."
+msgstr "Выключает все сообщения ниже."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "С индикатором прогресса с кнопками «Пауза» и «Отмена»."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Он ждёт в области уведомлений, а не всплывает."
+
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Показывает, когда есть обновления. Нажатие открывает это окно."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Свой значок в трее и ежедневная проверка. Не нужен, пока обновления ставятся сами."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Оно всплывает посреди обновления, поэтому выключено."
+
+msgid "None"
+msgstr "Нет"
+
+msgid "1 version"
+msgstr "1 версия"
+
+#, c-format
+msgid "%s versions"
+msgstr "Версий: %s"
+
+msgid "After each update"
+msgstr "После каждого обновления"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Удаляет старые файлы пакетов. Установленные программы не затрагиваются."
+
+msgid "Cached versions to keep"
+msgstr "Сколько версий хранить в кэше"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Больше версий позволяет вернуться к старой."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Удаляет остатки сборки paru, yay и Shelly. Рецепты остаются."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Удаляет установленные программы, поэтому по умолчанию выключено."
+
+msgid "Last run"
+msgstr "Последний запуск"
+
+msgid "All runs"
+msgstr "Все запуски"
+
+msgid "Which log"
+msgstr "Какой журнал"
+
+msgid "Restart"
+msgstr "Перезагрузка"
+
+msgid "Restart automatically"
+msgstr "Перезагружать автоматически"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Только когда никто не вошёл в систему, и никогда после неудачного обновления."
+
+msgid "Never"
+msgstr "Никогда"
+
+msgid "After a kernel update"
+msgstr "После обновления ядра"
+
+msgid "After every update"
+msgstr "После каждого обновления"
+
+msgid "A restart is planned to finish the update."
+msgstr "Для завершения обновления запланирована перезагрузка."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Она произойдёт сама, когда никто не будет в системе."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Компьютер перезагрузится через %d мин., чтобы завершить обновление. Чтобы отменить, выполните: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Когда обновлять"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Обновления начинаются только в эти часы. «Обновить сейчас» работает в любое время."
+
+msgid "Any time"
+msgstr "В любое время"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "С %s до %s"
+
+msgid "Language of this window"
+msgstr "Язык этого окна"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Только для вас. Уведомления следуют языку рабочего стола."
+
+msgid "System default"
+msgstr "Как в системе"
+
+msgid "Could not save the language."
+msgstr "Не удалось сохранить язык."

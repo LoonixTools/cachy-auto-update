@@ -749,3 +749,15 @@ msgstr ""
 #, c-format
 msgid "Between %s and %s"
 msgstr ""
+
+msgid "Language of this window"
+msgstr ""
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr ""
+
+msgid "System default"
+msgstr ""
+
+msgid "Could not save the language."
+msgstr ""

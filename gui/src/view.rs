@@ -16,7 +16,7 @@ pub fn view(ui: &Ui, cx: &mut Cx<Ui>) -> El {
         Pane::Overview => (crate::overview::actions(ui, p), crate::overview::pane(ui, p, &mut layer)),
         Pane::Schedule => (vec![], crate::settings::schedule(ui, p, &mut layer)),
         Pane::Updates => (vec![], crate::settings::updates(ui, p, &mut layer)),
-        Pane::Notifications => (vec![], crate::settings::notifications(ui, p)),
+        Pane::Notifications => (vec![], crate::settings::notifications(ui, p, &mut layer)),
         Pane::Cleanup => (vec![], crate::settings::cleanup(ui, p, &mut layer)),
         Pane::Log => (crate::log_pane::actions(ui, p), crate::log_pane::pane(ui, p)),
     };

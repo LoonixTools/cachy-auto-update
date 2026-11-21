@@ -160,6 +160,8 @@ pub struct Ui {
     pub host: Option<Host>,
     /// The tray icon is shown.
     pub tray: bool,
+    /// The language picked for the window, "" for the desktop's.
+    pub language: String,
     /// The app's logo, for the sidebar. The cache stays as long as it.
     pub images: Option<rune::ImageCache>,
     pub logo: Option<rune::Image>,
@@ -191,6 +193,7 @@ impl Ui {
             error: None,
             host,
             tray: false,
+            language: cachy_auto_update::i18n::ui_language().unwrap_or_default(),
             images: None,
             logo: None,
             sent: None,
@@ -264,6 +267,22 @@ impl Ui {
                 s.apply(snap);
             });
         });
+    }
+
+    /// Shows the window and the tray icon in `lang` ("" for the desktop's)
+    /// at once, and keeps it for the next start.
+    pub fn set_language(&mut self, lang: String) {
+        self.open = None;
+        if lang == self.language {
+            return;
+        }
+        cachy_auto_update::i18n::set_ui_language(Some(&lang).filter(|l| !l.is_empty()).map(String::as_str));
+        // Headless: there is no file to write.
+        if self.host.is_some() && crate::language::save(&lang).is_err() {
+            self.error = Some(tr("Could not save the language.").into());
+        }
+        self.language = lang;
+        self.sync_tray();
     }
 
     pub fn toggle(&mut self, key: &'static str) {
@@ -407,7 +426,7 @@ impl Ui {
         }
         lines.push(trf("Last update: %s", &[&status::time_ago(&cachy_auto_update::i18n::ui_locale(), self.status.last_success)]));
         match self.next {
-            Next::At(ts) => lines.push(trf("Next update: %s", &[&status::strftime(ts, "%a %x %H:%M")])),
+            Next::At(ts) => lines.push(trf("Next update: %s", &[&status::date_time(ts)])),
             _ if !self.cfg.enabled => lines.push(tr("Automatic updates are off.").into()),
             _ => {}
         }
@@ -424,7 +443,7 @@ impl Ui {
                 lines.push(tr("A restart is planned to finish the update.").into());
             }
         }
-        Look { icon, body: lines.join("\n"), busy: self.busy(), checking: self.checking }
+        Look { icon, body: lines.join("\n"), busy: self.busy(), checking: self.checking, language: self.language.clone() }
     }
 
     /// One line on how things stand.

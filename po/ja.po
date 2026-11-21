@@ -1,0 +1,764 @@
+# Japanese translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-21 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "ON"
+msgstr "オン"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "不明な設定: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "%s に無効な値です: %s"
+
+msgid "Automatic updates"
+msgstr "自動アップデート"
+
+msgid "Notifications"
+msgstr "通知"
+
+msgid "Show an icon in the system tray"
+msgstr "システムトレイにアイコンを表示"
+
+msgid "Also run cachy-update"
+msgstr "cachy-update も実行する"
+
+msgid "Show the CachyOS restart notice"
+msgstr "CachyOS の再起動通知を表示"
+
+msgid "Notify when an update starts"
+msgstr "アップデート開始時に通知"
+
+msgid "Start the progress bar minimized"
+msgstr "進捗バーを最小化して開始"
+
+msgid "Notify after a successful update"
+msgstr "アップデート成功後に通知"
+
+msgid "Notify when something goes wrong"
+msgstr "問題が起きたときに通知"
+
+msgid "Postpone while a game is running"
+msgstr "ゲーム実行中は延期"
+
+msgid "Only update on mains power"
+msgstr "電源接続時のみアップデート"
+
+msgid "Update AUR packages"
+msgstr "AUR パッケージをアップデート"
+
+msgid "Update Flatpaks"
+msgstr "Flatpak をアップデート"
+
+msgid "Update AppImages"
+msgstr "AppImage をアップデート"
+
+msgid "Also rebuild -git packages"
+msgstr "-git パッケージも再ビルド"
+
+msgid "AUR helper"
+msgstr "AUR ヘルパー"
+
+msgid "Resolve package conflicts automatically"
+msgstr "パッケージの競合を自動で解決"
+
+msgid "Trim the package cache"
+msgstr "パッケージキャッシュを削減"
+
+msgid "Clean the AUR build caches"
+msgstr "AUR のビルドキャッシュを削除"
+
+msgid "Remove packages nothing needs any more"
+msgstr "不要になったパッケージを削除"
+
+msgid "Never update these packages"
+msgstr "これらのパッケージは更新しない"
+
+msgid "running on battery"
+msgstr "バッテリー駆動中"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "バッテリー %d%%、しきい値 %d%% 未満"
+
+msgid "a game is running (GameMode)"
+msgstr "ゲーム実行中 (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "ゲーム実行中 (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "アプリがアイドルを阻止しています (全画面のゲームまたは動画)"
+
+msgid "pacman's database is locked by another process"
+msgstr "pacman のデータベースが別のプロセスにロックされています"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s が実行中です"
+
+msgid "Pausing once the current step is done"
+msgstr "現在のステップ完了後に一時停止します"
+
+msgid "Stopping the update"
+msgstr "アップデートを停止しています"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "まず現在のステップを完了します。それまでコンピューターの電源を切らないでください。"
+
+msgid "Log"
+msgstr "ログ"
+
+msgid "never"
+msgstr "なし"
+
+msgid "just now"
+msgstr "たった今"
+
+msgid "1 minute ago"
+msgstr "1 分前"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d 分前"
+
+msgid "1 hour ago"
+msgstr "1 時間前"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d 時間前"
+
+msgid "1 day ago"
+msgstr "1 日前"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d 日前"
+
+msgid "every minute"
+msgstr "毎分"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "%d 分ごと"
+
+msgid "every hour"
+msgstr "毎時"
+
+#, c-format
+msgid "every %d hours"
+msgstr "%d 時間ごと"
+
+msgid "every day"
+msgstr "毎日"
+
+#, c-format
+msgid "every %d days"
+msgstr "%d 日ごと"
+
+msgid "every week"
+msgstr "毎週"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "%d 週間ごと"
+
+msgid "The update was stopped before it finished."
+msgstr "アップデートは完了前に停止されました。"
+
+msgid "Finishing an interrupted update"
+msgstr "中断されたアップデートを完了しています"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "前回のアップデートは途中で終わりました。おそらく電源が切られたためです。今から完了させます。"
+
+msgid "Package database locked"
+msgstr "パッケージデータベースがロックされています"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "pacman のロックファイルが中断されたアップデートの残りのようです。削除されるまでアップデートは一時停止します。"
+
+msgid "Update failed"
+msgstr "アップデートに失敗しました"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "アップデート中に問題が発生しました。詳細は 'cachy-auto-update log' を実行してください。"
+
+msgid "Update stopped"
+msgstr "アップデートを停止しました"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "コンピューターの電源を切っても大丈夫です。アップデートは後で再実行されます。"
+
+msgid "System updated"
+msgstr "システムを更新しました"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "%d 件のアップデートをインストールしました。"
+
+msgid "Some packages were held back"
+msgstr "一部のパッケージを保留しました"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s は更新できなかったためスキップしました。それ以外はすべて最新です。"
+
+msgid "This command has to run as root."
+msgstr "このコマンドは root で実行する必要があります。"
+
+msgid "Could not write the configuration file."
+msgstr "設定ファイルを書き込めませんでした。"
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update が無効なため、有効にできません。"
+
+msgid "Could not enable the systemd timer."
+msgstr "systemd タイマーを有効にできませんでした。"
+
+msgid "Automatic updates are on."
+msgstr "自動アップデートはオンです。"
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "AUR ヘルパーが見つかりません。AUR を更新するには paru または yay をインストールしてください。"
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "base-devel がないため、AUR パッケージをビルドできません。"
+
+msgid "Automatic updates are off."
+msgstr "自動アップデートはオフです。"
+
+msgid "Notifications are on."
+msgstr "通知はオンです。"
+
+msgid "Notifications are off."
+msgstr "通知はオフです。"
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "使い方: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "使い方: cachy-auto-update config [list | get キー | set キー 値]"
+
+msgid "OFF"
+msgstr "オフ"
+
+msgid "How often"
+msgstr "頻度"
+
+msgid "Last check"
+msgstr "最終チェック"
+
+msgid "Last successful update"
+msgstr "最後に成功したアップデート"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d 個のパッケージ"
+
+msgid "not scheduled"
+msgstr "予定なし"
+
+msgid "unknown"
+msgstr "不明"
+
+msgid "Next scheduled run"
+msgstr "次回の予定実行"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "前回の実行で問題が報告されました。'cachy-auto-update log' を確認してください。"
+
+msgid "The last run was stopped before it finished."
+msgstr "前回の実行は完了前に停止されました。"
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "前回の実行はキャンセルされました。後で再実行されます。"
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "カーネルのアップデートを完了するには再起動をおすすめします。"
+
+#, c-format
+msgid "Held back: %s"
+msgstr "保留中: %s"
+
+msgid "Current conditions:"
+msgstr "現在の状態:"
+
+msgid "on AC power"
+msgstr "電源に接続中"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "バッテリー駆動 (%d%%、しきい値 %d%%)"
+
+msgid "on battery"
+msgstr "バッテリー駆動"
+
+msgid "no game detected"
+msgstr "ゲームは検出されません"
+
+msgid "package system is free"
+msgstr "パッケージシステムは空いています"
+
+msgid "No log yet."
+msgstr "まだログはありません。"
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "使い方: cachy-auto-update [コマンド]"
+
+msgid "Commands:"
+msgstr "コマンド:"
+
+msgid "Without a command the window opens."
+msgstr "コマンドなしではウィンドウが開きます。"
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "不明なコマンド: %s"
+
+msgid "Turn automatic updates on"
+msgstr "自動アップデートをオンにする"
+
+msgid "Turn automatic updates off"
+msgstr "自動アップデートをオフにする"
+
+msgid "Turn desktop notifications on or off"
+msgstr "デスクトップ通知をオン/オフにする"
+
+msgid "Show the current state and conditions"
+msgstr "現在の状態と条件を表示"
+
+msgid "Run an update now"
+msgstr "今すぐアップデートを実行"
+
+msgid "Show the log of the last run"
+msgstr "前回の実行のログを表示"
+
+msgid "Show or change a setting"
+msgstr "設定を表示または変更"
+
+msgid "Show this help"
+msgstr "このヘルプを表示"
+
+msgid "Show the version"
+msgstr "バージョンを表示"
+
+msgid "Finishing the installation"
+msgstr "インストールを完了しています"
+
+msgid "Updating system packages"
+msgstr "システムパッケージを更新中"
+
+msgid "Downloading updates"
+msgstr "アップデートをダウンロード中"
+
+msgid "Preparing the update"
+msgstr "アップデートを準備中"
+
+msgid "Checking for updates"
+msgstr "アップデートを確認中"
+
+msgid "Cleaning up after the update"
+msgstr "アップデート後の後片付け中"
+
+msgid "Package"
+msgstr "パッケージ"
+
+msgid "Installing updates"
+msgstr "アップデートをインストール中"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "%d 個のパッケージを更新中です。完了するまでコンピューターの電源を切らないでください。"
+
+msgid "Updating AUR packages"
+msgstr "AUR パッケージを更新中"
+
+msgid "Updating Flatpak apps"
+msgstr "Flatpak アプリを更新中"
+
+msgid "Updating AppImages"
+msgstr "AppImage を更新中"
+
+msgid "Overview"
+msgstr "概要"
+
+msgid "Schedule"
+msgstr "スケジュール"
+
+msgid "What to update"
+msgstr "更新する対象"
+
+msgid "Cleanup"
+msgstr "クリーンアップ"
+
+msgid "The update could not be started."
+msgstr "アップデートを開始できませんでした。"
+
+#, c-format
+msgid "Last update: %s"
+msgstr "前回のアップデート: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "次回のアップデート: %s"
+
+msgid "The last update had a problem."
+msgstr "前回のアップデートで問題がありました。"
+
+msgid "The update is paused"
+msgstr "アップデートは一時停止中です"
+
+msgid "Looking for updates..."
+msgstr "アップデートを確認中..."
+
+msgid "Not checked for updates yet"
+msgstr "まだアップデートを確認していません"
+
+msgid "Everything is up to date"
+msgstr "すべて最新です"
+
+msgid "1 update available"
+msgstr "1 件のアップデートがあります"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d 件のアップデートがあります"
+
+msgid "Could not save the setting."
+msgstr "設定を保存できませんでした。"
+
+msgid "The setting was not changed: no permission."
+msgstr "設定は変更されませんでした: 権限がありません。"
+
+msgid "Update now"
+msgstr "今すぐ更新"
+
+msgid "Update and shut down"
+msgstr "更新してシャットダウン"
+
+msgid "Update and restart"
+msgstr "更新して再起動"
+
+msgid "More update options"
+msgstr "その他の更新オプション"
+
+msgid "Check for updates"
+msgstr "アップデートを確認"
+
+msgid "Show log"
+msgstr "ログを表示"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Click to see what it is doing"
+msgstr "クリックして処理内容を表示"
+
+msgid "Click to update now"
+msgstr "クリックして今すぐ更新"
+
+msgid "Dismiss"
+msgstr "閉じる"
+
+#, c-format
+msgid "Version %s"
+msgstr "バージョン %s"
+
+msgid "Starting the update..."
+msgstr "アップデートを開始しています..."
+
+msgid "Paused"
+msgstr "一時停止中"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d / %d"
+
+msgid "Update progress"
+msgstr "アップデートの進捗"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "完了するまでコンピューターの電源を切らないでください。"
+
+msgid "The computer shuts down when the update is done."
+msgstr "アップデート完了後にコンピューターをシャットダウンします。"
+
+msgid "The computer restarts when the update is done."
+msgstr "アップデート完了後にコンピューターを再起動します。"
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "他はすべて動作しています。何が起きたかはログで確認できます。"
+
+msgid "It is finished on the next run."
+msgstr "次回の実行で完了します。"
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "都合のよいときに再起動してください。自動では再起動しません。"
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "これらは更新できなかったためスキップしました。後で再試行します。"
+
+msgid "Needs a look"
+msgstr "確認が必要"
+
+msgid "Update automatically"
+msgstr "自動でアップデート"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "アップデートはパスワードも確認もなしにバックグラウンドでインストールされます。"
+
+msgid "How often to update"
+msgstr "アップデートの頻度"
+
+msgid "Looking..."
+msgstr "確認中..."
+
+msgid "On AC power"
+msgstr "電源に接続中"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "バッテリー駆動 (%d%%)"
+
+msgid "On battery"
+msgstr "バッテリー駆動"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "電源に接続されるまでアップデートは待機します。"
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "バッテリーが %d%% 未満の間はアップデートは待機します。"
+
+msgid "Updates wait until it is closed."
+msgstr "閉じられるまでアップデートは待機します。"
+
+msgid "No game running"
+msgstr "ゲームは実行されていません"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "邪魔にならないようアップデートは待機します。"
+
+msgid "Package system is free"
+msgstr "パッケージシステムは空いています"
+
+msgid "Right now"
+msgstr "現在"
+
+msgid "An update waits while any of these is orange"
+msgstr "どれかがオレンジの間、アップデートは待機します"
+
+msgid "System packages"
+msgstr "システムパッケージ"
+
+msgid "AUR packages"
+msgstr "AUR パッケージ"
+
+msgid "Flatpaks"
+msgstr "Flatpak"
+
+msgid "AppImages"
+msgstr "AppImage"
+
+msgid "Last update"
+msgstr "前回のアップデート"
+
+msgid "When"
+msgstr "タイミング"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "1 時間ごとにチェックし、下の間隔が過ぎたらアップデートします。"
+
+msgid "Wait while"
+msgstr "待機する条件"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "動画を全画面で再生中も含みます。1 時間後に再試行します。"
+
+msgid "Minimum battery level"
+msgstr "バッテリー残量の下限"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "これを下回ると、バッテリー駆動のノート PC は待機します。"
+
+msgid "No minimum"
+msgstr "下限なし"
+
+msgid "Automatic"
+msgstr "自動"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "For example: linux nvidia"
+msgstr "例: linux nvidia"
+
+msgid "Sources"
+msgstr "ソース"
+
+msgid "Always updated, with pacman."
+msgstr "常に pacman で更新されます。"
+
+msgid "Always"
+msgstr "常時"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "paru または yay でビルドします。ビルドできないものは保留されます。"
+
+msgid "For the whole system and for each user."
+msgstr "システム全体と各ユーザー向け。"
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "ログイン中に Gear Lever 経由で。"
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "頻繁に再ビルドされ、リリース版より壊れやすいです。"
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "新しいパッケージが古いものを置き換えるとき、停止せずに「はい」と答えます。"
+
+msgid "Never update"
+msgstr "更新しない"
+
+msgid "Package names, separated by spaces."
+msgstr "パッケージ名をスペース区切りで。"
+
+msgid "Messages"
+msgstr "メッセージ"
+
+msgid "Show notifications"
+msgstr "通知を表示"
+
+msgid "Turns off every message below."
+msgstr "以下のすべてのメッセージをオフにします。"
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "一時停止とキャンセルのある進捗バー付き。"
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "ポップアップせず通知エリアで待機します。"
+
+msgid "Desktop"
+msgstr "デスクトップ"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "アップデートがあるときに表示します。クリックでこのウィンドウを開きます。"
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "独自のトレイアイコンと毎日のチェック。アップデートが自動でインストールされる間は不要です。"
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "アップデートの途中で表示されるため、オフにしています。"
+
+msgid "None"
+msgstr "なし"
+
+msgid "1 version"
+msgstr "1 バージョン"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s バージョン"
+
+msgid "After each update"
+msgstr "各アップデートの後"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "古いパッケージファイルを削除します。インストール済みのソフトウェアには触れません。"
+
+msgid "Cached versions to keep"
+msgstr "キャッシュに残すバージョン数"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "多く残すと古いバージョンに戻せます。"
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "paru、yay、Shelly のビルドの残りを削除します。レシピは残ります。"
+
+msgid "This removes installed software, so it is off by default."
+msgstr "インストール済みのソフトウェアを削除するため、既定ではオフです。"
+
+msgid "Last run"
+msgstr "前回の実行"
+
+msgid "All runs"
+msgstr "すべての実行"
+
+msgid "Which log"
+msgstr "表示するログ"
+
+msgid "Restart"
+msgstr "再起動"
+
+msgid "Restart automatically"
+msgstr "自動で再起動"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "誰もログインしていないときだけ。アップデート失敗後は再起動しません。"
+
+msgid "Never"
+msgstr "しない"
+
+msgid "After a kernel update"
+msgstr "カーネルのアップデート後"
+
+msgid "After every update"
+msgstr "毎回のアップデート後"
+
+msgid "A restart is planned to finish the update."
+msgstr "アップデートを完了するため再起動が予定されています。"
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "誰もログインしていないときに自動で行われます。"
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "アップデートを完了するため、このコンピューターは %d 分後に再起動します。止めるには次を実行: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "アップデートする時間帯"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "アップデートはこの時間帯にのみ開始します。今すぐ更新はいつでも使えます。"
+
+msgid "Any time"
+msgstr "いつでも"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "%s から %s まで"
+
+msgid "Language of this window"
+msgstr "このウィンドウの言語"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "あなた専用です。通知はデスクトップの言語に従います。"
+
+msgid "System default"
+msgstr "システムの既定"
+
+msgid "Could not save the language."
+msgstr "言語を保存できませんでした。"

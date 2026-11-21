@@ -9,6 +9,7 @@ mod actions;
 mod controls;
 mod desktop;
 mod icons;
+mod language;
 mod log_pane;
 mod overview;
 mod settings;
@@ -117,6 +118,10 @@ const SCENES: &[Scene] = &[
     ("notifications", |s| s.pane = Pane::Notifications),
     ("cleanup", |s| s.pane = Pane::Cleanup),
     ("log", |s| s.pane = Pane::Log),
+    ("language", |s| {
+        s.pane = Pane::Notifications;
+        s.open = Some("Language");
+    }),
 ];
 
 /// The logo, the same file the menu entry shows.
@@ -179,6 +184,11 @@ fn main() {
         return;
     }
 
+    // Before anything is shown, so the first frame is in it.
+    let lang = language::load();
+    if !lang.is_empty() {
+        cachy_auto_update::i18n::set_ui_language(Some(&lang));
+    }
     let cfg = Config::load();
     // The autostart, with the icon switched off: nothing to do.
     if tray_start && !cfg.tray {

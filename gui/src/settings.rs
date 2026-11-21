@@ -176,7 +176,7 @@ pub fn updates(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
         ))
 }
 
-pub fn notifications(ui: &Ui, p: Paint) -> El {
+pub fn notifications(ui: &Ui, p: Paint, layer: &mut Vec<El>) -> El {
     page("notifications")
         .child(section(
             p,
@@ -228,6 +228,7 @@ pub fn notifications(ui: &Ui, p: Paint) -> El {
                     tr("Show the CachyOS restart notice"),
                     Some(tr("It pops up in the middle of an update, so it is off.")),
                 ),
+                crate::language::row(ui, p, layer),
             ],
         ))
 }

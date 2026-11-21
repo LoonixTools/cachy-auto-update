@@ -1,0 +1,764 @@
+# Korean translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-21 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Korean\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "ON"
+msgstr "켜짐"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "알 수 없는 설정: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "%s에 유효하지 않은 값: %s"
+
+msgid "Automatic updates"
+msgstr "자동 업데이트"
+
+msgid "Notifications"
+msgstr "알림"
+
+msgid "Show an icon in the system tray"
+msgstr "시스템 트레이에 아이콘 표시"
+
+msgid "Also run cachy-update"
+msgstr "cachy-update도 실행"
+
+msgid "Show the CachyOS restart notice"
+msgstr "CachyOS 재시작 알림 표시"
+
+msgid "Notify when an update starts"
+msgstr "업데이트가 시작되면 알림"
+
+msgid "Start the progress bar minimized"
+msgstr "진행 표시줄을 최소화한 채로 시작"
+
+msgid "Notify after a successful update"
+msgstr "업데이트 성공 후 알림"
+
+msgid "Notify when something goes wrong"
+msgstr "문제가 생기면 알림"
+
+msgid "Postpone while a game is running"
+msgstr "게임 실행 중에는 미루기"
+
+msgid "Only update on mains power"
+msgstr "전원 연결 시에만 업데이트"
+
+msgid "Update AUR packages"
+msgstr "AUR 패키지 업데이트"
+
+msgid "Update Flatpaks"
+msgstr "Flatpak 업데이트"
+
+msgid "Update AppImages"
+msgstr "AppImage 업데이트"
+
+msgid "Also rebuild -git packages"
+msgstr "-git 패키지도 다시 빌드"
+
+msgid "AUR helper"
+msgstr "AUR 도우미"
+
+msgid "Resolve package conflicts automatically"
+msgstr "패키지 충돌 자동 해결"
+
+msgid "Trim the package cache"
+msgstr "패키지 캐시 줄이기"
+
+msgid "Clean the AUR build caches"
+msgstr "AUR 빌드 캐시 정리"
+
+msgid "Remove packages nothing needs any more"
+msgstr "더 이상 필요 없는 패키지 제거"
+
+msgid "Never update these packages"
+msgstr "이 패키지는 업데이트하지 않음"
+
+msgid "running on battery"
+msgstr "배터리 사용 중"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "배터리 %d%%, 기준 %d%% 미만"
+
+msgid "a game is running (GameMode)"
+msgstr "게임 실행 중 (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "게임 실행 중 (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "앱이 유휴 상태를 막고 있음 (전체 화면 게임 또는 동영상)"
+
+msgid "pacman's database is locked by another process"
+msgstr "다른 프로세스가 pacman 데이터베이스를 잠갔습니다"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s 실행 중"
+
+msgid "Pausing once the current step is done"
+msgstr "현재 단계가 끝나면 일시 중지합니다"
+
+msgid "Stopping the update"
+msgstr "업데이트 중지 중"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "현재 단계를 먼저 마칩니다. 그때까지 컴퓨터를 켜 두세요."
+
+msgid "Log"
+msgstr "로그"
+
+msgid "never"
+msgstr "없음"
+
+msgid "just now"
+msgstr "방금"
+
+msgid "1 minute ago"
+msgstr "1분 전"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d분 전"
+
+msgid "1 hour ago"
+msgstr "1시간 전"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d시간 전"
+
+msgid "1 day ago"
+msgstr "1일 전"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d일 전"
+
+msgid "every minute"
+msgstr "매분"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "%d분마다"
+
+msgid "every hour"
+msgstr "매시간"
+
+#, c-format
+msgid "every %d hours"
+msgstr "%d시간마다"
+
+msgid "every day"
+msgstr "매일"
+
+#, c-format
+msgid "every %d days"
+msgstr "%d일마다"
+
+msgid "every week"
+msgstr "매주"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "%d주마다"
+
+msgid "The update was stopped before it finished."
+msgstr "업데이트가 끝나기 전에 중지되었습니다."
+
+msgid "Finishing an interrupted update"
+msgstr "중단된 업데이트 마무리 중"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "지난 업데이트가 중간에 끊겼습니다. 아마 컴퓨터가 꺼졌기 때문입니다. 지금 마무리하고 있습니다."
+
+msgid "Package database locked"
+msgstr "패키지 데이터베이스 잠김"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "pacman 잠금 파일이 중단된 업데이트에서 남은 것 같습니다. 정리될 때까지 업데이트가 일시 중지됩니다."
+
+msgid "Update failed"
+msgstr "업데이트 실패"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "업데이트 중 문제가 생겼습니다. 자세한 내용은 'cachy-auto-update log'를 실행하세요."
+
+msgid "Update stopped"
+msgstr "업데이트 중지됨"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "이제 컴퓨터를 꺼도 됩니다. 업데이트는 나중에 다시 실행됩니다."
+
+msgid "System updated"
+msgstr "시스템 업데이트됨"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "업데이트 %d개를 설치했습니다."
+
+msgid "Some packages were held back"
+msgstr "일부 패키지가 보류되었습니다"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s을(를) 업데이트할 수 없어 건너뛰었습니다. 나머지는 모두 최신입니다."
+
+msgid "This command has to run as root."
+msgstr "이 명령은 root로 실행해야 합니다."
+
+msgid "Could not write the configuration file."
+msgstr "설정 파일을 쓸 수 없습니다."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update가 유효하지 않아 켜지 않습니다."
+
+msgid "Could not enable the systemd timer."
+msgstr "systemd 타이머를 켤 수 없습니다."
+
+msgid "Automatic updates are on."
+msgstr "자동 업데이트가 켜졌습니다."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "AUR 도우미가 없습니다. AUR 업데이트를 하려면 paru 또는 yay를 설치하세요."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "base-devel이 없어 AUR 패키지를 빌드할 수 없습니다."
+
+msgid "Automatic updates are off."
+msgstr "자동 업데이트가 꺼졌습니다."
+
+msgid "Notifications are on."
+msgstr "알림이 켜졌습니다."
+
+msgid "Notifications are off."
+msgstr "알림이 꺼졌습니다."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "사용법: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "사용법: cachy-auto-update config [list | get 키 | set 키 값]"
+
+msgid "OFF"
+msgstr "꺼짐"
+
+msgid "How often"
+msgstr "빈도"
+
+msgid "Last check"
+msgstr "마지막 확인"
+
+msgid "Last successful update"
+msgstr "마지막 성공한 업데이트"
+
+#, c-format
+msgid "%d packages"
+msgstr "패키지 %d개"
+
+msgid "not scheduled"
+msgstr "예약 없음"
+
+msgid "unknown"
+msgstr "알 수 없음"
+
+msgid "Next scheduled run"
+msgstr "다음 예약 실행"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "지난 실행에서 문제가 보고되었습니다. 'cachy-auto-update log'를 확인하세요."
+
+msgid "The last run was stopped before it finished."
+msgstr "지난 실행이 끝나기 전에 중지되었습니다."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "지난 실행이 취소되었습니다. 나중에 다시 실행됩니다."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "커널 업데이트를 마치려면 재시작을 권장합니다."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "보류됨: %s"
+
+msgid "Current conditions:"
+msgstr "현재 조건:"
+
+msgid "on AC power"
+msgstr "전원 연결됨"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "배터리 사용 중 (%d%%, 기준 %d%%)"
+
+msgid "on battery"
+msgstr "배터리 사용 중"
+
+msgid "no game detected"
+msgstr "감지된 게임 없음"
+
+msgid "package system is free"
+msgstr "패키지 시스템 사용 가능"
+
+msgid "No log yet."
+msgstr "아직 로그가 없습니다."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "사용법: cachy-auto-update [명령]"
+
+msgid "Commands:"
+msgstr "명령:"
+
+msgid "Without a command the window opens."
+msgstr "명령 없이 실행하면 창이 열립니다."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "알 수 없는 명령: %s"
+
+msgid "Turn automatic updates on"
+msgstr "자동 업데이트 켜기"
+
+msgid "Turn automatic updates off"
+msgstr "자동 업데이트 끄기"
+
+msgid "Turn desktop notifications on or off"
+msgstr "데스크톱 알림 켜기 또는 끄기"
+
+msgid "Show the current state and conditions"
+msgstr "현재 상태와 조건 표시"
+
+msgid "Run an update now"
+msgstr "지금 업데이트 실행"
+
+msgid "Show the log of the last run"
+msgstr "지난 실행의 로그 표시"
+
+msgid "Show or change a setting"
+msgstr "설정 표시 또는 변경"
+
+msgid "Show this help"
+msgstr "이 도움말 표시"
+
+msgid "Show the version"
+msgstr "버전 표시"
+
+msgid "Finishing the installation"
+msgstr "설치 마무리 중"
+
+msgid "Updating system packages"
+msgstr "시스템 패키지 업데이트 중"
+
+msgid "Downloading updates"
+msgstr "업데이트 다운로드 중"
+
+msgid "Preparing the update"
+msgstr "업데이트 준비 중"
+
+msgid "Checking for updates"
+msgstr "업데이트 확인 중"
+
+msgid "Cleaning up after the update"
+msgstr "업데이트 후 정리 중"
+
+msgid "Package"
+msgstr "패키지"
+
+msgid "Installing updates"
+msgstr "업데이트 설치 중"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "패키지 %d개를 업데이트하고 있습니다. 끝날 때까지 컴퓨터를 켜 두세요."
+
+msgid "Updating AUR packages"
+msgstr "AUR 패키지 업데이트 중"
+
+msgid "Updating Flatpak apps"
+msgstr "Flatpak 앱 업데이트 중"
+
+msgid "Updating AppImages"
+msgstr "AppImage 업데이트 중"
+
+msgid "Overview"
+msgstr "개요"
+
+msgid "Schedule"
+msgstr "일정"
+
+msgid "What to update"
+msgstr "업데이트 대상"
+
+msgid "Cleanup"
+msgstr "정리"
+
+msgid "The update could not be started."
+msgstr "업데이트를 시작할 수 없습니다."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "마지막 업데이트: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "다음 업데이트: %s"
+
+msgid "The last update had a problem."
+msgstr "지난 업데이트에 문제가 있었습니다."
+
+msgid "The update is paused"
+msgstr "업데이트가 일시 중지되었습니다"
+
+msgid "Looking for updates..."
+msgstr "업데이트 찾는 중..."
+
+msgid "Not checked for updates yet"
+msgstr "아직 업데이트를 확인하지 않았습니다"
+
+msgid "Everything is up to date"
+msgstr "모두 최신입니다"
+
+msgid "1 update available"
+msgstr "업데이트 1개 있음"
+
+#, c-format
+msgid "%d updates available"
+msgstr "업데이트 %d개 있음"
+
+msgid "Could not save the setting."
+msgstr "설정을 저장할 수 없습니다."
+
+msgid "The setting was not changed: no permission."
+msgstr "설정이 바뀌지 않았습니다: 권한이 없습니다."
+
+msgid "Update now"
+msgstr "지금 업데이트"
+
+msgid "Update and shut down"
+msgstr "업데이트 후 종료"
+
+msgid "Update and restart"
+msgstr "업데이트 후 재시작"
+
+msgid "More update options"
+msgstr "업데이트 옵션 더 보기"
+
+msgid "Check for updates"
+msgstr "업데이트 확인"
+
+msgid "Show log"
+msgstr "로그 보기"
+
+msgid "Settings"
+msgstr "설정"
+
+msgid "Click to see what it is doing"
+msgstr "클릭하면 진행 상황을 봅니다"
+
+msgid "Click to update now"
+msgstr "클릭하면 지금 업데이트합니다"
+
+msgid "Dismiss"
+msgstr "닫기"
+
+#, c-format
+msgid "Version %s"
+msgstr "버전 %s"
+
+msgid "Starting the update..."
+msgstr "업데이트 시작 중..."
+
+msgid "Paused"
+msgstr "일시 중지됨"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d / %d"
+
+msgid "Update progress"
+msgstr "업데이트 진행률"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "끝날 때까지 컴퓨터를 켜 두세요."
+
+msgid "The computer shuts down when the update is done."
+msgstr "업데이트가 끝나면 컴퓨터가 종료됩니다."
+
+msgid "The computer restarts when the update is done."
+msgstr "업데이트가 끝나면 컴퓨터가 재시작됩니다."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "나머지는 모두 정상 작동합니다. 무엇이 잘못됐는지는 로그에 있습니다."
+
+msgid "It is finished on the next run."
+msgstr "다음 실행 때 마무리됩니다."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "편할 때 재시작하세요. 저절로 재시작되지 않습니다."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "이 패키지들은 업데이트할 수 없어 건너뛰었습니다. 나중에 다시 시도합니다."
+
+msgid "Needs a look"
+msgstr "확인 필요"
+
+msgid "Update automatically"
+msgstr "자동으로 업데이트"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "업데이트가 암호나 질문 없이 백그라운드에서 설치됩니다."
+
+msgid "How often to update"
+msgstr "업데이트 빈도"
+
+msgid "Looking..."
+msgstr "찾는 중..."
+
+msgid "On AC power"
+msgstr "전원 연결됨"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "배터리 사용 중 (%d%%)"
+
+msgid "On battery"
+msgstr "배터리 사용 중"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "컴퓨터가 전원에 연결될 때까지 업데이트가 기다립니다."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "배터리가 %d%% 미만이면 업데이트가 기다립니다."
+
+msgid "Updates wait until it is closed."
+msgstr "그것이 닫힐 때까지 업데이트가 기다립니다."
+
+msgid "No game running"
+msgstr "실행 중인 게임 없음"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "방해가 되지 않도록 업데이트가 기다립니다."
+
+msgid "Package system is free"
+msgstr "패키지 시스템 사용 가능"
+
+msgid "Right now"
+msgstr "지금"
+
+msgid "An update waits while any of these is orange"
+msgstr "이 중 하나라도 주황색이면 업데이트가 기다립니다"
+
+msgid "System packages"
+msgstr "시스템 패키지"
+
+msgid "AUR packages"
+msgstr "AUR 패키지"
+
+msgid "Flatpaks"
+msgstr "Flatpak"
+
+msgid "AppImages"
+msgstr "AppImage"
+
+msgid "Last update"
+msgstr "마지막 업데이트"
+
+msgid "When"
+msgstr "시기"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "매시간 확인하고, 아래 간격이 지나면 업데이트합니다."
+
+msgid "Wait while"
+msgstr "기다리는 조건"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "동영상을 전체 화면으로 재생할 때도 기다립니다. 한 시간 뒤 다시 시도합니다."
+
+msgid "Minimum battery level"
+msgstr "최소 배터리 잔량"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "이보다 낮으면 배터리로 작동하는 노트북은 기다립니다."
+
+msgid "No minimum"
+msgstr "최소값 없음"
+
+msgid "Automatic"
+msgstr "자동"
+
+msgid "Save"
+msgstr "저장"
+
+msgid "For example: linux nvidia"
+msgstr "예: linux nvidia"
+
+msgid "Sources"
+msgstr "소스"
+
+msgid "Always updated, with pacman."
+msgstr "항상 pacman으로 업데이트합니다."
+
+msgid "Always"
+msgstr "항상"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "paru 또는 yay로 빌드합니다. 빌드되지 않는 패키지는 보류됩니다."
+
+msgid "For the whole system and for each user."
+msgstr "시스템 전체와 각 사용자용."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "로그인한 동안 Gear Lever를 통해."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "자주 다시 빌드되며 정식 버전보다 더 자주 깨집니다."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "새 패키지가 기존 패키지를 대체할 때 멈추지 않고 '예'라고 답합니다."
+
+msgid "Never update"
+msgstr "업데이트하지 않음"
+
+msgid "Package names, separated by spaces."
+msgstr "패키지 이름, 공백으로 구분."
+
+msgid "Messages"
+msgstr "메시지"
+
+msgid "Show notifications"
+msgstr "알림 표시"
+
+msgid "Turns off every message below."
+msgstr "아래의 모든 메시지를 끕니다."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "일시 중지와 취소 버튼이 있는 진행 표시줄과 함께."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "팝업 대신 알림 영역에서 기다립니다."
+
+msgid "Desktop"
+msgstr "데스크톱"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "업데이트가 기다리고 있을 때 표시됩니다. 클릭하면 이 창이 열립니다."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "자체 트레이 아이콘과 매일 확인. 업데이트가 저절로 설치되는 동안에는 필요 없습니다."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "업데이트 도중에 뜨기 때문에 꺼 두었습니다."
+
+msgid "None"
+msgstr "없음"
+
+msgid "1 version"
+msgstr "1개 버전"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s개 버전"
+
+msgid "After each update"
+msgstr "업데이트할 때마다"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "오래된 패키지 파일을 지웁니다. 설치된 소프트웨어는 건드리지 않습니다."
+
+msgid "Cached versions to keep"
+msgstr "캐시에 남길 버전 수"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "버전을 더 남기면 이전 버전으로 돌아갈 수 있습니다."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "paru, yay, Shelly의 빌드 잔여물을 지웁니다. 레시피는 남깁니다."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "설치된 소프트웨어를 지우므로 기본값은 꺼짐입니다."
+
+msgid "Last run"
+msgstr "마지막 실행"
+
+msgid "All runs"
+msgstr "모든 실행"
+
+msgid "Which log"
+msgstr "표시할 로그"
+
+msgid "Restart"
+msgstr "재시작"
+
+msgid "Restart automatically"
+msgstr "자동으로 재시작"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "아무도 로그인하지 않았을 때만, 그리고 업데이트가 실패한 뒤에는 하지 않습니다."
+
+msgid "Never"
+msgstr "안 함"
+
+msgid "After a kernel update"
+msgstr "커널 업데이트 후"
+
+msgid "After every update"
+msgstr "업데이트할 때마다"
+
+msgid "A restart is planned to finish the update."
+msgstr "업데이트를 마치기 위해 재시작이 예정되어 있습니다."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "아무도 로그인하지 않으면 저절로 진행됩니다."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "업데이트를 마치기 위해 이 컴퓨터가 %d분 뒤 재시작됩니다. 막으려면 실행하세요: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "업데이트 시간"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "업데이트는 이 시간에만 시작됩니다. 지금 업데이트는 언제든 쓸 수 있습니다."
+
+msgid "Any time"
+msgstr "언제든지"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "%s부터 %s까지"
+
+msgid "Language of this window"
+msgstr "이 창의 언어"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "나에게만 적용됩니다. 알림은 데스크톱 언어를 따릅니다."
+
+msgid "System default"
+msgstr "시스템 기본값"
+
+msgid "Could not save the language."
+msgstr "언어를 저장할 수 없습니다."

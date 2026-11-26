@@ -1,0 +1,764 @@
+# Czech translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-26 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+msgid "ON"
+msgstr "ZAP."
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Neznámé nastavení: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Neplatná hodnota pro %s: %s"
+
+msgid "Automatic updates"
+msgstr "Automatické aktualizace"
+
+msgid "Notifications"
+msgstr "Oznámení"
+
+msgid "Show an icon in the system tray"
+msgstr "Zobrazit ikonu v systémové liště"
+
+msgid "Also run cachy-update"
+msgstr "Spouštět také cachy-update"
+
+msgid "Show the CachyOS restart notice"
+msgstr "Zobrazit upozornění CachyOS na restart"
+
+msgid "Notify when an update starts"
+msgstr "Oznámit začátek aktualizace"
+
+msgid "Start the progress bar minimized"
+msgstr "Spouštět ukazatel průběhu minimalizovaný"
+
+msgid "Notify after a successful update"
+msgstr "Oznámit úspěšnou aktualizaci"
+
+msgid "Notify when something goes wrong"
+msgstr "Oznámit, když se něco pokazí"
+
+msgid "Postpone while a game is running"
+msgstr "Odložit, když běží hra"
+
+msgid "Only update on mains power"
+msgstr "Aktualizovat jen při napájení ze sítě"
+
+msgid "Update AUR packages"
+msgstr "Aktualizovat balíčky AUR"
+
+msgid "Update Flatpaks"
+msgstr "Aktualizovat Flatpaky"
+
+msgid "Update AppImages"
+msgstr "Aktualizovat AppImage"
+
+msgid "Also rebuild -git packages"
+msgstr "Znovu sestavovat i balíčky -git"
+
+msgid "AUR helper"
+msgstr "Pomocník AUR"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Automaticky řešit konflikty balíčků"
+
+msgid "Trim the package cache"
+msgstr "Zmenšovat mezipaměť balíčků"
+
+msgid "Clean the AUR build caches"
+msgstr "Čistit mezipaměti sestavení AUR"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Odebírat balíčky, které už nic nepotřebuje"
+
+msgid "Never update these packages"
+msgstr "Tyto balíčky nikdy neaktualizovat"
+
+msgid "running on battery"
+msgstr "běží na baterii"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "baterie na %d%%, pod hranicí %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "běží hra (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "běží hra (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "aplikace brání nečinnosti (hra nebo video na celou obrazovku)"
+
+msgid "pacman's database is locked by another process"
+msgstr "databázi pacmanu zamkl jiný proces"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s právě běží"
+
+msgid "Pausing once the current step is done"
+msgstr "Pozastaví se po dokončení aktuálního kroku"
+
+msgid "Stopping the update"
+msgstr "Zastavování aktualizace"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Nejdřív se dokončí aktuální krok. Do té doby nechte počítač zapnutý."
+
+msgid "Log"
+msgstr "Záznam"
+
+msgid "never"
+msgstr "nikdy"
+
+msgid "just now"
+msgstr "právě teď"
+
+msgid "1 minute ago"
+msgstr "před 1 minutou"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "před %d min"
+
+msgid "1 hour ago"
+msgstr "před 1 hodinou"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "před %d h"
+
+msgid "1 day ago"
+msgstr "před 1 dnem"
+
+#, c-format
+msgid "%d days ago"
+msgstr "před %d dny"
+
+msgid "every minute"
+msgstr "každou minutu"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "každých %d min"
+
+msgid "every hour"
+msgstr "každou hodinu"
+
+#, c-format
+msgid "every %d hours"
+msgstr "každých %d h"
+
+msgid "every day"
+msgstr "každý den"
+
+#, c-format
+msgid "every %d days"
+msgstr "každé %d dny"
+
+msgid "every week"
+msgstr "každý týden"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "každé %d týdny"
+
+msgid "The update was stopped before it finished."
+msgstr "Aktualizace byla zastavena před dokončením."
+
+msgid "Finishing an interrupted update"
+msgstr "Dokončování přerušené aktualizace"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Poslední aktualizace byla přerušena, nejspíš proto, že se počítač vypnul. Teď se dokončuje."
+
+msgid "Package database locked"
+msgstr "Databáze balíčků je zamčená"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "Zámek pacmanu vypadá jako pozůstatek přerušené aktualizace. Aktualizace jsou pozastavené, dokud nebude odstraněn."
+
+msgid "Update failed"
+msgstr "Aktualizace selhala"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Během aktualizace se něco pokazilo. Podrobnosti ukáže 'cachy-auto-update log'."
+
+msgid "Update stopped"
+msgstr "Aktualizace zastavena"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Teď můžete počítač vypnout. Aktualizace se později spustí znovu."
+
+msgid "System updated"
+msgstr "Systém aktualizován"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "Nainstalované aktualizace: %d."
+
+msgid "Some packages were held back"
+msgstr "Některé balíčky byly podrženy"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s nešel aktualizovat a byl přeskočen. Vše ostatní je aktuální."
+
+msgid "This command has to run as root."
+msgstr "Tento příkaz musí běžet jako root."
+
+msgid "Could not write the configuration file."
+msgstr "Nepodařilo se zapsat soubor s nastavením."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update je neplatný; zapnutí odmítnuto."
+
+msgid "Could not enable the systemd timer."
+msgstr "Nepodařilo se zapnout časovač systemd."
+
+msgid "Automatic updates are on."
+msgstr "Automatické aktualizace jsou zapnuté."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Nenalezen žádný pomocník AUR. Pro aktualizace AUR nainstalujte paru nebo yay."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "Chybí base-devel, takže balíčky AUR nejde sestavit."
+
+msgid "Automatic updates are off."
+msgstr "Automatické aktualizace jsou vypnuté."
+
+msgid "Notifications are on."
+msgstr "Oznámení jsou zapnutá."
+
+msgid "Notifications are off."
+msgstr "Oznámení jsou vypnutá."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Použití: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Použití: cachy-auto-update config [list | get KLÍČ | set KLÍČ HODNOTA]"
+
+msgid "OFF"
+msgstr "VYP."
+
+msgid "How often"
+msgstr "Jak často"
+
+msgid "Last check"
+msgstr "Poslední kontrola"
+
+msgid "Last successful update"
+msgstr "Poslední úspěšná aktualizace"
+
+#, c-format
+msgid "%d packages"
+msgstr "Balíčky: %d"
+
+msgid "not scheduled"
+msgstr "nenaplánováno"
+
+msgid "unknown"
+msgstr "neznámé"
+
+msgid "Next scheduled run"
+msgstr "Další plánované spuštění"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Poslední spuštění nahlásilo problém. Viz 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "Poslední spuštění bylo zastaveno před dokončením."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Poslední spuštění bylo zrušeno. Později se spustí znovu."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Pro dokončení aktualizace jádra se doporučuje restart."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Podrženo: %s"
+
+msgid "Current conditions:"
+msgstr "Aktuální podmínky:"
+
+msgid "on AC power"
+msgstr "napájení ze sítě"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "na baterii (%d%%, hranice %d%%)"
+
+msgid "on battery"
+msgstr "na baterii"
+
+msgid "no game detected"
+msgstr "nezjištěna žádná hra"
+
+msgid "package system is free"
+msgstr "systém balíčků je volný"
+
+msgid "No log yet."
+msgstr "Zatím žádný záznam."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Použití: cachy-auto-update [příkaz]"
+
+msgid "Commands:"
+msgstr "Příkazy:"
+
+msgid "Without a command the window opens."
+msgstr "Bez příkazu se otevře okno."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Neznámý příkaz: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Zapnout automatické aktualizace"
+
+msgid "Turn automatic updates off"
+msgstr "Vypnout automatické aktualizace"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Zapnout nebo vypnout oznámení na ploše"
+
+msgid "Show the current state and conditions"
+msgstr "Zobrazit aktuální stav a podmínky"
+
+msgid "Run an update now"
+msgstr "Spustit aktualizaci hned"
+
+msgid "Show the log of the last run"
+msgstr "Zobrazit záznam posledního spuštění"
+
+msgid "Show or change a setting"
+msgstr "Zobrazit nebo změnit nastavení"
+
+msgid "Show this help"
+msgstr "Zobrazit tuto nápovědu"
+
+msgid "Show the version"
+msgstr "Zobrazit verzi"
+
+msgid "Finishing the installation"
+msgstr "Dokončování instalace"
+
+msgid "Updating system packages"
+msgstr "Aktualizace systémových balíčků"
+
+msgid "Downloading updates"
+msgstr "Stahování aktualizací"
+
+msgid "Preparing the update"
+msgstr "Příprava aktualizace"
+
+msgid "Checking for updates"
+msgstr "Hledání aktualizací"
+
+msgid "Cleaning up after the update"
+msgstr "Úklid po aktualizaci"
+
+msgid "Package"
+msgstr "Balíček"
+
+msgid "Installing updates"
+msgstr "Instalace aktualizací"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "Aktualizované balíčky: %d. Nechte počítač zapnutý, dokud to neskončí."
+
+msgid "Updating AUR packages"
+msgstr "Aktualizace balíčků AUR"
+
+msgid "Updating Flatpak apps"
+msgstr "Aktualizace aplikací Flatpak"
+
+msgid "Updating AppImages"
+msgstr "Aktualizace AppImage"
+
+msgid "Overview"
+msgstr "Přehled"
+
+msgid "Schedule"
+msgstr "Plán"
+
+msgid "What to update"
+msgstr "Co aktualizovat"
+
+msgid "Cleanup"
+msgstr "Úklid"
+
+msgid "The update could not be started."
+msgstr "Aktualizaci se nepodařilo spustit."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Poslední aktualizace: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Další aktualizace: %s"
+
+msgid "The last update had a problem."
+msgstr "Poslední aktualizace měla problém."
+
+msgid "The update is paused"
+msgstr "Aktualizace je pozastavená"
+
+msgid "Looking for updates..."
+msgstr "Hledání aktualizací..."
+
+msgid "Not checked for updates yet"
+msgstr "Aktualizace zatím nebyly zkontrolovány"
+
+msgid "Everything is up to date"
+msgstr "Vše je aktuální"
+
+msgid "1 update available"
+msgstr "Je dostupná 1 aktualizace"
+
+#, c-format
+msgid "%d updates available"
+msgstr "Dostupné aktualizace: %d"
+
+msgid "Could not save the setting."
+msgstr "Nastavení se nepodařilo uložit."
+
+msgid "The setting was not changed: no permission."
+msgstr "Nastavení se nezměnilo: chybí oprávnění."
+
+msgid "Update now"
+msgstr "Aktualizovat"
+
+msgid "Update and shut down"
+msgstr "Aktualizovat a vypnout"
+
+msgid "Update and restart"
+msgstr "Aktualizovat a restartovat"
+
+msgid "More update options"
+msgstr "Další možnosti aktualizace"
+
+msgid "Check for updates"
+msgstr "Zkontrolovat aktualizace"
+
+msgid "Show log"
+msgstr "Zobrazit záznam"
+
+msgid "Settings"
+msgstr "Nastavení"
+
+msgid "Click to see what it is doing"
+msgstr "Klepněte a uvidíte, co se děje"
+
+msgid "Click to update now"
+msgstr "Klepněte a aktualizujte hned"
+
+msgid "Dismiss"
+msgstr "Zavřít"
+
+#, c-format
+msgid "Version %s"
+msgstr "Verze %s"
+
+msgid "Starting the update..."
+msgstr "Spouštění aktualizace..."
+
+msgid "Paused"
+msgstr "Pozastaveno"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d z %d"
+
+msgid "Update progress"
+msgstr "Průběh aktualizace"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Nechte počítač zapnutý, dokud to neskončí."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Po dokončení aktualizace se počítač vypne."
+
+msgid "The computer restarts when the update is done."
+msgstr "Po dokončení aktualizace se počítač restartuje."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Vše ostatní funguje dál. Záznam ukáže, co se pokazilo."
+
+msgid "It is finished on the next run."
+msgstr "Dokončí se při příštím spuštění."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Restartujte, až se vám to hodí. Nic se nerestartuje samo."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Tyto nešly aktualizovat a byly přeskočeny. Později se to zkusí znovu."
+
+msgid "Needs a look"
+msgstr "Vyžaduje pozornost"
+
+msgid "Update automatically"
+msgstr "Aktualizovat automaticky"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Aktualizace se instalují na pozadí, bez hesla a bez otázek."
+
+msgid "How often to update"
+msgstr "Jak často aktualizovat"
+
+msgid "Looking..."
+msgstr "Hledání..."
+
+msgid "On AC power"
+msgstr "Napájení ze sítě"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "Na baterii (%d%%)"
+
+msgid "On battery"
+msgstr "Na baterii"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Aktualizace počkají, až bude počítač připojen do zásuvky."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Aktualizace čekají pod %d%% baterie."
+
+msgid "Updates wait until it is closed."
+msgstr "Aktualizace počkají, až se zavře."
+
+msgid "No game running"
+msgstr "Neběží žádná hra"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Aktualizace čekají, aby nepřekážely."
+
+msgid "Package system is free"
+msgstr "Systém balíčků je volný"
+
+msgid "Right now"
+msgstr "Právě teď"
+
+msgid "An update waits while any of these is orange"
+msgstr "Aktualizace čeká, dokud je kterákoli z těchto oranžová"
+
+msgid "System packages"
+msgstr "Systémové balíčky"
+
+msgid "AUR packages"
+msgstr "Balíčky AUR"
+
+msgid "Flatpaks"
+msgstr "Flatpaky"
+
+msgid "AppImages"
+msgstr "AppImage"
+
+msgid "Last update"
+msgstr "Poslední aktualizace"
+
+msgid "When"
+msgstr "Kdy"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Každou hodinu proběhne kontrola, a jakmile uplyne doba níže, proběhne aktualizace."
+
+msgid "Wait while"
+msgstr "Čekat, když"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Také když hraje video na celou obrazovku. Další pokus o hodinu později."
+
+msgid "Minimum battery level"
+msgstr "Minimální úroveň baterie"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Pod touto hranicí notebook na baterii čeká."
+
+msgid "No minimum"
+msgstr "Bez minima"
+
+msgid "Automatic"
+msgstr "Automaticky"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "For example: linux nvidia"
+msgstr "Například: linux nvidia"
+
+msgid "Sources"
+msgstr "Zdroje"
+
+msgid "Always updated, with pacman."
+msgstr "Vždy aktualizováno, přes pacman."
+
+msgid "Always"
+msgstr "Vždy"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Sestavuje se přes paru nebo yay. Balíček, který nejde sestavit, je podržen."
+
+msgid "For the whole system and for each user."
+msgstr "Pro celý systém a pro každého uživatele."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Přes Gear Lever, když jste přihlášeni."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Sestavují se často a rozbíjejí se častěji než vydané verze."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Když nový balíček nahrazuje starý, odpovědět ano místo zastavení."
+
+msgid "Never update"
+msgstr "Nikdy neaktualizovat"
+
+msgid "Package names, separated by spaces."
+msgstr "Názvy balíčků oddělené mezerami."
+
+msgid "Messages"
+msgstr "Zprávy"
+
+msgid "Show notifications"
+msgstr "Zobrazovat oznámení"
+
+msgid "Turns off every message below."
+msgstr "Vypne všechny zprávy níže."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "S ukazatelem průběhu s tlačítky Pozastavit a Zrušit."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Čeká v oznamovací oblasti, místo aby vyskočil."
+
+msgid "Desktop"
+msgstr "Plocha"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Ukazuje, když čekají aktualizace. Klepnutí otevře toto okno."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Vlastní ikona v liště a denní kontrola. Není potřeba, dokud se aktualizace instalují samy."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Vyskakuje uprostřed aktualizace, proto je vypnuté."
+
+msgid "None"
+msgstr "Žádné"
+
+msgid "1 version"
+msgstr "1 verze"
+
+#, c-format
+msgid "%s versions"
+msgstr "Verze: %s"
+
+msgid "After each update"
+msgstr "Po každé aktualizaci"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Odstraní staré soubory balíčků. Nainstalovaného softwaru se nikdy nedotkne."
+
+msgid "Cached versions to keep"
+msgstr "Počet verzí v mezipaměti"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Víc verzí dovolí vrátit se ke starší."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Odstraní zbytky sestavení paru, yay a Shelly. Recepty zůstanou."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Toto odebírá nainstalovaný software, proto je ve výchozím stavu vypnuté."
+
+msgid "Last run"
+msgstr "Poslední spuštění"
+
+msgid "All runs"
+msgstr "Všechna spuštění"
+
+msgid "Which log"
+msgstr "Který záznam"
+
+msgid "Restart"
+msgstr "Restart"
+
+msgid "Restart automatically"
+msgstr "Restartovat automaticky"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Jen když nikdo není přihlášen, a nikdy po neúspěšné aktualizaci."
+
+msgid "Never"
+msgstr "Nikdy"
+
+msgid "After a kernel update"
+msgstr "Po aktualizaci jádra"
+
+msgid "After every update"
+msgstr "Po každé aktualizaci"
+
+msgid "A restart is planned to finish the update."
+msgstr "Pro dokončení aktualizace je naplánován restart."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Proběhne sám, jakmile nikdo nebude přihlášen."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Tento počítač se za %d min restartuje, aby dokončil aktualizaci. Pro zastavení spusťte: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Kdy aktualizovat"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Aktualizace začínají jen v těchto hodinách. Aktualizovat funguje kdykoli."
+
+msgid "Any time"
+msgstr "Kdykoli"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "Od %s do %s"
+
+msgid "Language of this window"
+msgstr "Jazyk tohoto okna"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Jen pro vás. Oznámení se řídí plochou."
+
+msgid "System default"
+msgstr "Výchozí systému"
+
+msgid "Could not save the language."
+msgstr "Jazyk se nepodařilo uložit."

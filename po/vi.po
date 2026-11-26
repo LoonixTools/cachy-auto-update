@@ -1,0 +1,764 @@
+# Vietnamese translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-26 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Vietnamese\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "ON"
+msgstr "BẬT"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Cài đặt không rõ: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Giá trị không hợp lệ cho %s: %s"
+
+msgid "Automatic updates"
+msgstr "Cập nhật tự động"
+
+msgid "Notifications"
+msgstr "Thông báo"
+
+msgid "Show an icon in the system tray"
+msgstr "Hiện biểu tượng ở khay hệ thống"
+
+msgid "Also run cachy-update"
+msgstr "Chạy cả cachy-update"
+
+msgid "Show the CachyOS restart notice"
+msgstr "Hiện thông báo khởi động lại của CachyOS"
+
+msgid "Notify when an update starts"
+msgstr "Báo khi bắt đầu cập nhật"
+
+msgid "Start the progress bar minimized"
+msgstr "Khởi động thanh tiến trình ở dạng thu nhỏ"
+
+msgid "Notify after a successful update"
+msgstr "Báo sau khi cập nhật thành công"
+
+msgid "Notify when something goes wrong"
+msgstr "Báo khi có lỗi"
+
+msgid "Postpone while a game is running"
+msgstr "Hoãn khi đang chơi game"
+
+msgid "Only update on mains power"
+msgstr "Chỉ cập nhật khi cắm sạc"
+
+msgid "Update AUR packages"
+msgstr "Cập nhật gói AUR"
+
+msgid "Update Flatpaks"
+msgstr "Cập nhật Flatpak"
+
+msgid "Update AppImages"
+msgstr "Cập nhật AppImage"
+
+msgid "Also rebuild -git packages"
+msgstr "Biên dịch lại cả gói -git"
+
+msgid "AUR helper"
+msgstr "Trình hỗ trợ AUR"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Tự động giải quyết xung đột gói"
+
+msgid "Trim the package cache"
+msgstr "Thu gọn bộ nhớ đệm gói"
+
+msgid "Clean the AUR build caches"
+msgstr "Dọn bộ nhớ đệm biên dịch AUR"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Gỡ các gói không còn cần đến"
+
+msgid "Never update these packages"
+msgstr "Không bao giờ cập nhật các gói này"
+
+msgid "running on battery"
+msgstr "đang dùng pin"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "pin còn %d%%, dưới ngưỡng %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "đang chạy game (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "đang chạy game (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "một ứng dụng đang chặn chế độ nghỉ (game hoặc video toàn màn hình)"
+
+msgid "pacman's database is locked by another process"
+msgstr "cơ sở dữ liệu của pacman bị một tiến trình khác khóa"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s đang chạy"
+
+msgid "Pausing once the current step is done"
+msgstr "Sẽ tạm dừng khi bước hiện tại xong"
+
+msgid "Stopping the update"
+msgstr "Đang dừng cập nhật"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Bước hiện tại sẽ được hoàn tất trước. Vui lòng để máy bật cho đến lúc đó."
+
+msgid "Log"
+msgstr "Nhật ký"
+
+msgid "never"
+msgstr "chưa bao giờ"
+
+msgid "just now"
+msgstr "vừa xong"
+
+msgid "1 minute ago"
+msgstr "1 phút trước"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d phút trước"
+
+msgid "1 hour ago"
+msgstr "1 giờ trước"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d giờ trước"
+
+msgid "1 day ago"
+msgstr "1 ngày trước"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d ngày trước"
+
+msgid "every minute"
+msgstr "mỗi phút"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "mỗi %d phút"
+
+msgid "every hour"
+msgstr "mỗi giờ"
+
+#, c-format
+msgid "every %d hours"
+msgstr "mỗi %d giờ"
+
+msgid "every day"
+msgstr "mỗi ngày"
+
+#, c-format
+msgid "every %d days"
+msgstr "mỗi %d ngày"
+
+msgid "every week"
+msgstr "mỗi tuần"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "mỗi %d tuần"
+
+msgid "The update was stopped before it finished."
+msgstr "Bản cập nhật đã bị dừng trước khi xong."
+
+msgid "Finishing an interrupted update"
+msgstr "Đang hoàn tất bản cập nhật bị gián đoạn"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Lần cập nhật trước bị ngắt giữa chừng, có lẽ do máy bị tắt. Giờ đang hoàn tất nó."
+
+msgid "Package database locked"
+msgstr "Cơ sở dữ liệu gói bị khóa"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "Tệp khóa của pacman có vẻ còn sót lại từ một lần cập nhật bị gián đoạn. Việc cập nhật tạm dừng cho đến khi tệp được xóa."
+
+msgid "Update failed"
+msgstr "Cập nhật thất bại"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Đã có lỗi khi cập nhật. Chạy 'cachy-auto-update log' để xem chi tiết."
+
+msgid "Update stopped"
+msgstr "Đã dừng cập nhật"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Bạn có thể tắt máy ngay bây giờ. Việc cập nhật sẽ chạy lại sau."
+
+msgid "System updated"
+msgstr "Hệ thống đã được cập nhật"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "Đã cài %d bản cập nhật."
+
+msgid "Some packages were held back"
+msgstr "Một số gói đã bị giữ lại"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "Không thể cập nhật %s nên đã bỏ qua. Mọi thứ khác đều đã mới nhất."
+
+msgid "This command has to run as root."
+msgstr "Lệnh này phải chạy với quyền root."
+
+msgid "Could not write the configuration file."
+msgstr "Không thể ghi tệp cấu hình."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update không hợp lệ; từ chối bật."
+
+msgid "Could not enable the systemd timer."
+msgstr "Không thể bật bộ hẹn giờ systemd."
+
+msgid "Automatic updates are on."
+msgstr "Cập nhật tự động đang bật."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Không tìm thấy trình hỗ trợ AUR. Hãy cài paru hoặc yay để cập nhật AUR."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "Thiếu base-devel nên không thể biên dịch gói AUR."
+
+msgid "Automatic updates are off."
+msgstr "Cập nhật tự động đang tắt."
+
+msgid "Notifications are on."
+msgstr "Thông báo đang bật."
+
+msgid "Notifications are off."
+msgstr "Thông báo đang tắt."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Cách dùng: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Cách dùng: cachy-auto-update config [list | get KHÓA | set KHÓA GIÁ_TRỊ]"
+
+msgid "OFF"
+msgstr "TẮT"
+
+msgid "How often"
+msgstr "Tần suất"
+
+msgid "Last check"
+msgstr "Lần kiểm tra cuối"
+
+msgid "Last successful update"
+msgstr "Lần cập nhật thành công cuối"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d gói"
+
+msgid "not scheduled"
+msgstr "chưa lên lịch"
+
+msgid "unknown"
+msgstr "không rõ"
+
+msgid "Next scheduled run"
+msgstr "Lần chạy theo lịch tiếp theo"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Lần chạy trước báo có vấn đề. Xem 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "Lần chạy trước bị dừng trước khi xong."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Lần chạy trước đã bị hủy. Nó sẽ chạy lại sau."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Nên khởi động lại để hoàn tất cập nhật kernel."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Bị giữ lại: %s"
+
+msgid "Current conditions:"
+msgstr "Điều kiện hiện tại:"
+
+msgid "on AC power"
+msgstr "đang cắm sạc"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "đang dùng pin (%d%%, ngưỡng %d%%)"
+
+msgid "on battery"
+msgstr "đang dùng pin"
+
+msgid "no game detected"
+msgstr "không phát hiện game"
+
+msgid "package system is free"
+msgstr "hệ thống gói đang rảnh"
+
+msgid "No log yet."
+msgstr "Chưa có nhật ký."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Cách dùng: cachy-auto-update [lệnh]"
+
+msgid "Commands:"
+msgstr "Các lệnh:"
+
+msgid "Without a command the window opens."
+msgstr "Không có lệnh thì cửa sổ sẽ mở."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Lệnh không rõ: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Bật cập nhật tự động"
+
+msgid "Turn automatic updates off"
+msgstr "Tắt cập nhật tự động"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Bật hoặc tắt thông báo trên màn hình"
+
+msgid "Show the current state and conditions"
+msgstr "Hiện trạng thái và điều kiện hiện tại"
+
+msgid "Run an update now"
+msgstr "Chạy cập nhật ngay"
+
+msgid "Show the log of the last run"
+msgstr "Hiện nhật ký của lần chạy cuối"
+
+msgid "Show or change a setting"
+msgstr "Hiện hoặc thay đổi một cài đặt"
+
+msgid "Show this help"
+msgstr "Hiện trợ giúp này"
+
+msgid "Show the version"
+msgstr "Hiện phiên bản"
+
+msgid "Finishing the installation"
+msgstr "Đang hoàn tất cài đặt"
+
+msgid "Updating system packages"
+msgstr "Đang cập nhật gói hệ thống"
+
+msgid "Downloading updates"
+msgstr "Đang tải bản cập nhật"
+
+msgid "Preparing the update"
+msgstr "Đang chuẩn bị cập nhật"
+
+msgid "Checking for updates"
+msgstr "Đang kiểm tra cập nhật"
+
+msgid "Cleaning up after the update"
+msgstr "Đang dọn dẹp sau cập nhật"
+
+msgid "Package"
+msgstr "Gói"
+
+msgid "Installing updates"
+msgstr "Đang cài bản cập nhật"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "Đang cập nhật %d gói. Vui lòng để máy bật cho đến khi xong."
+
+msgid "Updating AUR packages"
+msgstr "Đang cập nhật gói AUR"
+
+msgid "Updating Flatpak apps"
+msgstr "Đang cập nhật ứng dụng Flatpak"
+
+msgid "Updating AppImages"
+msgstr "Đang cập nhật AppImage"
+
+msgid "Overview"
+msgstr "Tổng quan"
+
+msgid "Schedule"
+msgstr "Lịch"
+
+msgid "What to update"
+msgstr "Cập nhật những gì"
+
+msgid "Cleanup"
+msgstr "Dọn dẹp"
+
+msgid "The update could not be started."
+msgstr "Không thể bắt đầu cập nhật."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Lần cập nhật cuối: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Lần cập nhật tới: %s"
+
+msgid "The last update had a problem."
+msgstr "Lần cập nhật trước gặp sự cố."
+
+msgid "The update is paused"
+msgstr "Cập nhật đang tạm dừng"
+
+msgid "Looking for updates..."
+msgstr "Đang tìm bản cập nhật..."
+
+msgid "Not checked for updates yet"
+msgstr "Chưa kiểm tra cập nhật"
+
+msgid "Everything is up to date"
+msgstr "Mọi thứ đều đã mới nhất"
+
+msgid "1 update available"
+msgstr "Có 1 bản cập nhật"
+
+#, c-format
+msgid "%d updates available"
+msgstr "Có %d bản cập nhật"
+
+msgid "Could not save the setting."
+msgstr "Không thể lưu cài đặt."
+
+msgid "The setting was not changed: no permission."
+msgstr "Cài đặt không được thay đổi: không có quyền."
+
+msgid "Update now"
+msgstr "Cập nhật ngay"
+
+msgid "Update and shut down"
+msgstr "Cập nhật rồi tắt máy"
+
+msgid "Update and restart"
+msgstr "Cập nhật rồi khởi động lại"
+
+msgid "More update options"
+msgstr "Thêm tùy chọn cập nhật"
+
+msgid "Check for updates"
+msgstr "Kiểm tra cập nhật"
+
+msgid "Show log"
+msgstr "Xem nhật ký"
+
+msgid "Settings"
+msgstr "Cài đặt"
+
+msgid "Click to see what it is doing"
+msgstr "Bấm để xem nó đang làm gì"
+
+msgid "Click to update now"
+msgstr "Bấm để cập nhật ngay"
+
+msgid "Dismiss"
+msgstr "Đóng"
+
+#, c-format
+msgid "Version %s"
+msgstr "Phiên bản %s"
+
+msgid "Starting the update..."
+msgstr "Đang bắt đầu cập nhật..."
+
+msgid "Paused"
+msgstr "Đã tạm dừng"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d / %d"
+
+msgid "Update progress"
+msgstr "Tiến trình cập nhật"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Vui lòng để máy bật cho đến khi xong."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Máy sẽ tắt khi cập nhật xong."
+
+msgid "The computer restarts when the update is done."
+msgstr "Máy sẽ khởi động lại khi cập nhật xong."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Mọi thứ khác vẫn chạy bình thường. Nhật ký cho biết lỗi gì."
+
+msgid "It is finished on the next run."
+msgstr "Nó sẽ được hoàn tất ở lần chạy tới."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Khởi động lại khi bạn thấy tiện. Không có gì tự khởi động lại."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Các gói này không thể cập nhật nên đã bỏ qua. Sẽ thử lại sau."
+
+msgid "Needs a look"
+msgstr "Cần xem qua"
+
+msgid "Update automatically"
+msgstr "Tự động cập nhật"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Bản cập nhật được cài ở chế độ nền, không cần mật khẩu và không hỏi gì."
+
+msgid "How often to update"
+msgstr "Tần suất cập nhật"
+
+msgid "Looking..."
+msgstr "Đang tìm..."
+
+msgid "On AC power"
+msgstr "Đang cắm sạc"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "Đang dùng pin (%d%%)"
+
+msgid "On battery"
+msgstr "Đang dùng pin"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Việc cập nhật sẽ chờ đến khi máy được cắm sạc."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Việc cập nhật sẽ chờ khi pin dưới %d%%."
+
+msgid "Updates wait until it is closed."
+msgstr "Việc cập nhật sẽ chờ đến khi nó được đóng."
+
+msgid "No game running"
+msgstr "Không có game nào đang chạy"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Việc cập nhật sẽ chờ để không làm phiền bạn."
+
+msgid "Package system is free"
+msgstr "Hệ thống gói đang rảnh"
+
+msgid "Right now"
+msgstr "Hiện tại"
+
+msgid "An update waits while any of these is orange"
+msgstr "Việc cập nhật sẽ chờ khi bất kỳ mục nào có màu cam"
+
+msgid "System packages"
+msgstr "Gói hệ thống"
+
+msgid "AUR packages"
+msgstr "Gói AUR"
+
+msgid "Flatpaks"
+msgstr "Flatpak"
+
+msgid "AppImages"
+msgstr "AppImage"
+
+msgid "Last update"
+msgstr "Lần cập nhật cuối"
+
+msgid "When"
+msgstr "Khi nào"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Mỗi giờ có một lần kiểm tra, và sẽ cập nhật khi đã qua khoảng thời gian bên dưới."
+
+msgid "Wait while"
+msgstr "Chờ khi"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Cả khi đang phát video toàn màn hình. Thử lại sau một giờ."
+
+msgid "Minimum battery level"
+msgstr "Mức pin tối thiểu"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Dưới mức này, máy tính xách tay dùng pin sẽ chờ."
+
+msgid "No minimum"
+msgstr "Không giới hạn"
+
+msgid "Automatic"
+msgstr "Tự động"
+
+msgid "Save"
+msgstr "Lưu"
+
+msgid "For example: linux nvidia"
+msgstr "Ví dụ: linux nvidia"
+
+msgid "Sources"
+msgstr "Nguồn"
+
+msgid "Always updated, with pacman."
+msgstr "Luôn được cập nhật, bằng pacman."
+
+msgid "Always"
+msgstr "Luôn luôn"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Được biên dịch bằng paru hoặc yay. Gói nào không biên dịch được sẽ bị giữ lại."
+
+msgid "For the whole system and for each user."
+msgstr "Cho toàn hệ thống và cho từng người dùng."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Qua Gear Lever, khi bạn đang đăng nhập."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Chúng được biên dịch lại thường xuyên và hay hỏng hơn các bản phát hành."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Khi một gói mới thay thế gói cũ, trả lời có thay vì dừng lại."
+
+msgid "Never update"
+msgstr "Không bao giờ cập nhật"
+
+msgid "Package names, separated by spaces."
+msgstr "Tên gói, cách nhau bằng dấu cách."
+
+msgid "Messages"
+msgstr "Tin nhắn"
+
+msgid "Show notifications"
+msgstr "Hiện thông báo"
+
+msgid "Turns off every message below."
+msgstr "Tắt mọi tin nhắn bên dưới."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Kèm thanh tiến trình có nút Tạm dừng và Hủy."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Nó chờ ở vùng thông báo thay vì bật lên."
+
+msgid "Desktop"
+msgstr "Màn hình nền"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Nó hiện khi có bản cập nhật đang chờ. Bấm vào để mở cửa sổ này."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Biểu tượng khay và lần kiểm tra hằng ngày riêng. Không cần khi bản cập nhật tự cài."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Nó bật lên giữa lúc cập nhật, nên đang tắt."
+
+msgid "None"
+msgstr "Không"
+
+msgid "1 version"
+msgstr "1 phiên bản"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s phiên bản"
+
+msgid "After each update"
+msgstr "Sau mỗi lần cập nhật"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Xóa các tệp gói cũ. Phần mềm đã cài không bao giờ bị động đến."
+
+msgid "Cached versions to keep"
+msgstr "Số phiên bản giữ trong bộ nhớ đệm"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Giữ nhiều phiên bản hơn để có thể quay về bản cũ."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Xóa phần thừa sau biên dịch của paru, yay và Shelly. Công thức vẫn giữ lại."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Việc này gỡ phần mềm đã cài, nên mặc định tắt."
+
+msgid "Last run"
+msgstr "Lần chạy cuối"
+
+msgid "All runs"
+msgstr "Mọi lần chạy"
+
+msgid "Which log"
+msgstr "Nhật ký nào"
+
+msgid "Restart"
+msgstr "Khởi động lại"
+
+msgid "Restart automatically"
+msgstr "Tự động khởi động lại"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Chỉ khi không ai đăng nhập, và không bao giờ sau một lần cập nhật thất bại."
+
+msgid "Never"
+msgstr "Không bao giờ"
+
+msgid "After a kernel update"
+msgstr "Sau khi cập nhật kernel"
+
+msgid "After every update"
+msgstr "Sau mỗi lần cập nhật"
+
+msgid "A restart is planned to finish the update."
+msgstr "Đã lên lịch khởi động lại để hoàn tất cập nhật."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Nó sẽ tự diễn ra khi không ai đăng nhập."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Máy này sẽ khởi động lại sau %d phút để hoàn tất cập nhật. Để dừng, chạy: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Khi nào cập nhật"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Việc cập nhật chỉ bắt đầu trong các giờ này. Cập nhật ngay dùng được mọi lúc."
+
+msgid "Any time"
+msgstr "Bất cứ lúc nào"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "Từ %s đến %s"
+
+msgid "Language of this window"
+msgstr "Ngôn ngữ của cửa sổ này"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Chỉ cho bạn. Thông báo theo ngôn ngữ màn hình nền."
+
+msgid "System default"
+msgstr "Mặc định hệ thống"
+
+msgid "Could not save the language."
+msgstr "Không thể lưu ngôn ngữ."

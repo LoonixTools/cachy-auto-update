@@ -257,6 +257,16 @@ fn date_locales(lang: &str) -> Vec<String> {
         "ja" => "ja_JP",
         "ko" => "ko_KR",
         "ru" => "ru_RU",
+        "pl" => "pl_PL",
+        "tr" => "tr_TR",
+        "nl" => "nl_NL",
+        "uk" => "uk_UA",
+        "cs" => "cs_CZ",
+        "sv" => "sv_SE",
+        "id" => "id_ID",
+        "vi" => "vi_VN",
+        "hu" => "hu_HU",
+        "ro" => "ro_RO",
         l => l,
     };
     let mut out = vec![format!("{full}.UTF-8")];

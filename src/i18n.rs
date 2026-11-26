@@ -13,18 +13,30 @@ include!(concat!(env!("OUT_DIR"), "/catalogs.rs"));
 /// The language picked in the window, over the one of the environment.
 static CHOSEN: RwLock<Option<String>> = RwLock::new(None);
 
-/// Native names of the languages, for the language menu.
+/// Native names of the languages, for the language menu, in its order:
+/// Latin script by name, then Cyrillic, then the others. Sorting by name
+/// alone puts "Čeština" after "Türkçe".
 const NAMES: &[(&str, &str)] = &[
-    ("de", "Deutsch"),
     ("en", "English"),
+    ("id", "Bahasa Indonesia"),
+    ("cs", "Čeština"),
+    ("de", "Deutsch"),
     ("es", "Español"),
     ("fr", "Français"),
     ("it", "Italiano"),
-    ("ja", "日本語"),
-    ("ko", "한국어"),
+    ("hu", "Magyar"),
+    ("nl", "Nederlands"),
+    ("pl", "Polski"),
     ("pt_BR", "Português (Brasil)"),
+    ("ro", "Română"),
+    ("sv", "Svenska"),
+    ("vi", "Tiếng Việt"),
+    ("tr", "Türkçe"),
     ("ru", "Русский"),
+    ("uk", "Українська"),
+    ("ja", "日本語"),
     ("zh_CN", "简体中文"),
+    ("ko", "한국어"),
 ];
 
 /// Shows the UI and its dates in `lang` ("es", "de_DE.UTF-8", ...) from now
@@ -44,9 +56,10 @@ pub fn ui_language() -> Option<String> {
 /// English first.
 pub fn languages() -> Vec<(&'static str, &'static str)> {
     let name = |code: &'static str| NAMES.iter().find(|(c, _)| *c == code).map_or(code, |(_, n)| *n);
+    let rank = |code: &str| NAMES.iter().position(|(c, _)| *c == code).unwrap_or(NAMES.len());
     let mut out: Vec<_> = CATALOGS.iter().map(|(code, _)| (*code, name(code))).collect();
-    out.sort_by_key(|(_, n)| n.to_lowercase());
-    out.insert(0, ("en", name("en")));
+    out.push(("en", name("en")));
+    out.sort_by_key(|(code, _)| rank(code));
     out
 }
 
@@ -178,9 +191,15 @@ mod tests {
     fn languages_list_english_first() {
         let l = languages();
         assert_eq!(l[0], ("en", "English"));
-        for code in ["de", "es", "fr", "it", "ja", "ko", "pt_BR", "ru", "zh_CN"] {
-            let (_, name) = l.iter().find(|(c, _)| *c == code).unwrap_or_else(|| panic!("{code} missing"));
-            assert_ne!(*name, code, "{code} has no native name");
+        let codes: Vec<_> = l.iter().map(|(c, _)| *c).collect();
+        let names: Vec<_> = NAMES.iter().map(|(c, _)| *c).collect();
+        assert_eq!(codes, names, "the menu follows NAMES");
+        for (code, _) in NAMES {
+            let (_, name) = l.iter().find(|(c, _)| c == code).unwrap_or_else(|| panic!("{code} missing"));
+            assert_ne!(name, code, "{code} has no native name");
+        }
+        for (code, _) in CATALOGS {
+            assert!(NAMES.iter().any(|(c, _)| c == code), "{code} has no native name");
         }
     }
 
@@ -196,6 +215,16 @@ mod tests {
         assert_eq!(tr_in("ko_KR.UTF-8", "Settings"), "설정");
         assert_eq!(tr_in("it_IT.UTF-8", "Settings"), "Impostazioni");
         assert_eq!(tr_in("ru_RU.UTF-8", "Settings"), "Настройки");
+        assert_eq!(tr_in("pl_PL.UTF-8", "Settings"), "Ustawienia");
+        assert_eq!(tr_in("tr_TR.UTF-8", "Settings"), "Ayarlar");
+        assert_eq!(tr_in("nl_BE.UTF-8", "Settings"), "Instellingen");
+        assert_eq!(tr_in("uk_UA.UTF-8", "Settings"), "Налаштування");
+        assert_eq!(tr_in("cs_CZ.UTF-8", "Settings"), "Nastavení");
+        assert_eq!(tr_in("sv_FI.UTF-8", "Settings"), "Inställningar");
+        assert_eq!(tr_in("id_ID.UTF-8", "Settings"), "Pengaturan");
+        assert_eq!(tr_in("vi_VN.UTF-8", "Settings"), "Cài đặt");
+        assert_eq!(tr_in("hu_HU.UTF-8", "Settings"), "Beállítások");
+        assert_eq!(tr_in("ro_RO.UTF-8", "Settings"), "Setări");
     }
 
     #[test]

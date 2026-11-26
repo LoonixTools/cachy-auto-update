@@ -1,0 +1,764 @@
+# Hungarian translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-26 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Hungarian\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "ON"
+msgstr "BE"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Ismeretlen beállítás: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Érvénytelen érték ehhez: %s: %s"
+
+msgid "Automatic updates"
+msgstr "Automatikus frissítések"
+
+msgid "Notifications"
+msgstr "Értesítések"
+
+msgid "Show an icon in the system tray"
+msgstr "Ikon megjelenítése a tálcán"
+
+msgid "Also run cachy-update"
+msgstr "A cachy-update futtatása is"
+
+msgid "Show the CachyOS restart notice"
+msgstr "A CachyOS újraindítási figyelmeztetés megjelenítése"
+
+msgid "Notify when an update starts"
+msgstr "Értesítés frissítés indulásakor"
+
+msgid "Start the progress bar minimized"
+msgstr "A folyamatjelző indítása kis méretben"
+
+msgid "Notify after a successful update"
+msgstr "Értesítés sikeres frissítés után"
+
+msgid "Notify when something goes wrong"
+msgstr "Értesítés, ha valami hiba történik"
+
+msgid "Postpone while a game is running"
+msgstr "Elhalasztás, amíg játék fut"
+
+msgid "Only update on mains power"
+msgstr "Frissítés csak hálózati áramról"
+
+msgid "Update AUR packages"
+msgstr "AUR-csomagok frissítése"
+
+msgid "Update Flatpaks"
+msgstr "Flatpakok frissítése"
+
+msgid "Update AppImages"
+msgstr "AppImage-ek frissítése"
+
+msgid "Also rebuild -git packages"
+msgstr "A -git csomagok újraépítése is"
+
+msgid "AUR helper"
+msgstr "AUR-segéd"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Csomagütközések automatikus feloldása"
+
+msgid "Trim the package cache"
+msgstr "A csomaggyorsítótár csökkentése"
+
+msgid "Clean the AUR build caches"
+msgstr "Az AUR építési gyorsítótárak törlése"
+
+msgid "Remove packages nothing needs any more"
+msgstr "A már semmihez sem kellő csomagok eltávolítása"
+
+msgid "Never update these packages"
+msgstr "Ezeket a csomagokat soha ne frissítse"
+
+msgid "running on battery"
+msgstr "akkumulátorról működik"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "akkumulátor %d%%, a %d%% küszöb alatt"
+
+msgid "a game is running (GameMode)"
+msgstr "játék fut (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "játék fut (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "egy alkalmazás akadályozza a tétlenséget (teljes képernyős játék vagy videó)"
+
+msgid "pacman's database is locked by another process"
+msgstr "a pacman adatbázisát egy másik folyamat zárolta"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s éppen fut"
+
+msgid "Pausing once the current step is done"
+msgstr "Szünet az aktuális lépés végén"
+
+msgid "Stopping the update"
+msgstr "A frissítés leállítása"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Előbb befejeződik az aktuális lépés. Addig hagyja bekapcsolva a számítógépet."
+
+msgid "Log"
+msgstr "Napló"
+
+msgid "never"
+msgstr "soha"
+
+msgid "just now"
+msgstr "az imént"
+
+msgid "1 minute ago"
+msgstr "1 perce"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d perce"
+
+msgid "1 hour ago"
+msgstr "1 órája"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d órája"
+
+msgid "1 day ago"
+msgstr "1 napja"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d napja"
+
+msgid "every minute"
+msgstr "percenként"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "%d percenként"
+
+msgid "every hour"
+msgstr "óránként"
+
+#, c-format
+msgid "every %d hours"
+msgstr "%d óránként"
+
+msgid "every day"
+msgstr "naponta"
+
+#, c-format
+msgid "every %d days"
+msgstr "%d naponta"
+
+msgid "every week"
+msgstr "hetente"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "%d hetente"
+
+msgid "The update was stopped before it finished."
+msgstr "A frissítés leállt, mielőtt befejeződött."
+
+msgid "Finishing an interrupted update"
+msgstr "Megszakadt frissítés befejezése"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Az utolsó frissítés megszakadt, valószínűleg mert a gépet kikapcsolták. Most fejeződik be."
+
+msgid "Package database locked"
+msgstr "A csomagadatbázis zárolva"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "A pacman zárolási fájlja egy megszakadt frissítés maradványának tűnik. A frissítések szünetelnek, amíg el nem távolítják."
+
+msgid "Update failed"
+msgstr "Sikertelen frissítés"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Hiba történt a frissítés közben. A részletekért futtassa: 'cachy-auto-update log'."
+
+msgid "Update stopped"
+msgstr "A frissítés leállt"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Most már kikapcsolhatja a számítógépet. A frissítés később újra lefut."
+
+msgid "System updated"
+msgstr "A rendszer frissítve"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "%d frissítés települt."
+
+msgid "Some packages were held back"
+msgstr "Néhány csomag visszatartva"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "A(z) %s nem frissíthető, ezért kimaradt. Minden más naprakész."
+
+msgid "This command has to run as root."
+msgstr "Ezt a parancsot rootként kell futtatni."
+
+msgid "Could not write the configuration file."
+msgstr "Nem sikerült írni a beállítófájlt."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "Az /etc/sudoers.d/cachy-auto-update érvénytelen; a bekapcsolás elutasítva."
+
+msgid "Could not enable the systemd timer."
+msgstr "Nem sikerült bekapcsolni a systemd időzítőt."
+
+msgid "Automatic updates are on."
+msgstr "Az automatikus frissítések be vannak kapcsolva."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Nem található AUR-segéd. Az AUR-frissítésekhez telepítse a paru vagy a yay programot."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "Hiányzik a base-devel, így az AUR-csomagok nem építhetők."
+
+msgid "Automatic updates are off."
+msgstr "Az automatikus frissítések ki vannak kapcsolva."
+
+msgid "Notifications are on."
+msgstr "Az értesítések be vannak kapcsolva."
+
+msgid "Notifications are off."
+msgstr "Az értesítések ki vannak kapcsolva."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Használat: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Használat: cachy-auto-update config [list | get KULCS | set KULCS ÉRTÉK]"
+
+msgid "OFF"
+msgstr "KI"
+
+msgid "How often"
+msgstr "Milyen gyakran"
+
+msgid "Last check"
+msgstr "Utolsó ellenőrzés"
+
+msgid "Last successful update"
+msgstr "Utolsó sikeres frissítés"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d csomag"
+
+msgid "not scheduled"
+msgstr "nincs ütemezve"
+
+msgid "unknown"
+msgstr "ismeretlen"
+
+msgid "Next scheduled run"
+msgstr "Következő ütemezett futás"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Az utolsó futás hibát jelzett. Lásd: 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "Az utolsó futás leállt, mielőtt befejeződött."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Az utolsó futást megszakították. Később újra lefut."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Egy kernelfrissítés befejezéséhez újraindítás ajánlott."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Visszatartva: %s"
+
+msgid "Current conditions:"
+msgstr "Jelenlegi feltételek:"
+
+msgid "on AC power"
+msgstr "hálózati áramról"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "akkumulátorról (%d%%, küszöb %d%%)"
+
+msgid "on battery"
+msgstr "akkumulátorról"
+
+msgid "no game detected"
+msgstr "nem észlelhető játék"
+
+msgid "package system is free"
+msgstr "a csomagrendszer szabad"
+
+msgid "No log yet."
+msgstr "Még nincs napló."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Használat: cachy-auto-update [parancs]"
+
+msgid "Commands:"
+msgstr "Parancsok:"
+
+msgid "Without a command the window opens."
+msgstr "Parancs nélkül az ablak nyílik meg."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Ismeretlen parancs: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Automatikus frissítések bekapcsolása"
+
+msgid "Turn automatic updates off"
+msgstr "Automatikus frissítések kikapcsolása"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Asztali értesítések be- vagy kikapcsolása"
+
+msgid "Show the current state and conditions"
+msgstr "A jelenlegi állapot és feltételek megjelenítése"
+
+msgid "Run an update now"
+msgstr "Frissítés futtatása most"
+
+msgid "Show the log of the last run"
+msgstr "Az utolsó futás naplójának megjelenítése"
+
+msgid "Show or change a setting"
+msgstr "Egy beállítás megjelenítése vagy módosítása"
+
+msgid "Show this help"
+msgstr "Ennek a súgónak a megjelenítése"
+
+msgid "Show the version"
+msgstr "A verzió megjelenítése"
+
+msgid "Finishing the installation"
+msgstr "A telepítés befejezése"
+
+msgid "Updating system packages"
+msgstr "Rendszercsomagok frissítése"
+
+msgid "Downloading updates"
+msgstr "Frissítések letöltése"
+
+msgid "Preparing the update"
+msgstr "A frissítés előkészítése"
+
+msgid "Checking for updates"
+msgstr "Frissítések keresése"
+
+msgid "Cleaning up after the update"
+msgstr "Takarítás a frissítés után"
+
+msgid "Package"
+msgstr "Csomag"
+
+msgid "Installing updates"
+msgstr "Frissítések telepítése"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "%d csomag frissítése folyik. Hagyja bekapcsolva a számítógépet, amíg be nem fejeződik."
+
+msgid "Updating AUR packages"
+msgstr "AUR-csomagok frissítése"
+
+msgid "Updating Flatpak apps"
+msgstr "Flatpak-alkalmazások frissítése"
+
+msgid "Updating AppImages"
+msgstr "AppImage-ek frissítése"
+
+msgid "Overview"
+msgstr "Áttekintés"
+
+msgid "Schedule"
+msgstr "Ütemezés"
+
+msgid "What to update"
+msgstr "Mit frissítsen"
+
+msgid "Cleanup"
+msgstr "Takarítás"
+
+msgid "The update could not be started."
+msgstr "A frissítést nem sikerült elindítani."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Utolsó frissítés: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Következő frissítés: %s"
+
+msgid "The last update had a problem."
+msgstr "Az utolsó frissítésnél hiba történt."
+
+msgid "The update is paused"
+msgstr "A frissítés szünetel"
+
+msgid "Looking for updates..."
+msgstr "Frissítések keresése..."
+
+msgid "Not checked for updates yet"
+msgstr "Még nem történt frissítéskeresés"
+
+msgid "Everything is up to date"
+msgstr "Minden naprakész"
+
+msgid "1 update available"
+msgstr "1 frissítés érhető el"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d frissítés érhető el"
+
+msgid "Could not save the setting."
+msgstr "Nem sikerült menteni a beállítást."
+
+msgid "The setting was not changed: no permission."
+msgstr "A beállítás nem változott: nincs jogosultság."
+
+msgid "Update now"
+msgstr "Frissítés most"
+
+msgid "Update and shut down"
+msgstr "Frissítés és leállítás"
+
+msgid "Update and restart"
+msgstr "Frissítés és újraindítás"
+
+msgid "More update options"
+msgstr "További frissítési lehetőségek"
+
+msgid "Check for updates"
+msgstr "Frissítések keresése"
+
+msgid "Show log"
+msgstr "Napló megjelenítése"
+
+msgid "Settings"
+msgstr "Beállítások"
+
+msgid "Click to see what it is doing"
+msgstr "Kattintson, és megnézheti, mit csinál"
+
+msgid "Click to update now"
+msgstr "Kattintson a frissítéshez most"
+
+msgid "Dismiss"
+msgstr "Bezárás"
+
+#, c-format
+msgid "Version %s"
+msgstr "Verzió: %s"
+
+msgid "Starting the update..."
+msgstr "A frissítés indítása..."
+
+msgid "Paused"
+msgstr "Szünetel"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d / %d"
+
+msgid "Update progress"
+msgstr "Frissítés állapota"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Hagyja bekapcsolva a számítógépet, amíg be nem fejeződik."
+
+msgid "The computer shuts down when the update is done."
+msgstr "A frissítés végén a számítógép leáll."
+
+msgid "The computer restarts when the update is done."
+msgstr "A frissítés végén a számítógép újraindul."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Minden más tovább működik. A napló megmutatja, mi romlott el."
+
+msgid "It is finished on the next run."
+msgstr "A következő futáskor fejeződik be."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Indítsa újra, amikor alkalmas. Semmi sem indul újra magától."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Ezek nem frissíthetők, ezért kimaradtak. Később újra próbálkozik."
+
+msgid "Needs a look"
+msgstr "Figyelmet igényel"
+
+msgid "Update automatically"
+msgstr "Automatikus frissítés"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "A frissítések a háttérben települnek, jelszó és kérdések nélkül."
+
+msgid "How often to update"
+msgstr "Milyen gyakran frissítsen"
+
+msgid "Looking..."
+msgstr "Keresés..."
+
+msgid "On AC power"
+msgstr "Hálózati áramról"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "Akkumulátorról (%d%%)"
+
+msgid "On battery"
+msgstr "Akkumulátorról"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "A frissítések várnak, amíg a gépet áramra nem kötik."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "A frissítések várnak %d%% akkumulátor alatt."
+
+msgid "Updates wait until it is closed."
+msgstr "A frissítések várnak, amíg be nem zárják."
+
+msgid "No game running"
+msgstr "Nem fut játék"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "A frissítések várnak, hogy ne zavarjanak."
+
+msgid "Package system is free"
+msgstr "A csomagrendszer szabad"
+
+msgid "Right now"
+msgstr "Most"
+
+msgid "An update waits while any of these is orange"
+msgstr "A frissítés vár, amíg ezek közül bármelyik narancssárga"
+
+msgid "System packages"
+msgstr "Rendszercsomagok"
+
+msgid "AUR packages"
+msgstr "AUR-csomagok"
+
+msgid "Flatpaks"
+msgstr "Flatpakok"
+
+msgid "AppImages"
+msgstr "AppImage-ek"
+
+msgid "Last update"
+msgstr "Utolsó frissítés"
+
+msgid "When"
+msgstr "Mikor"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Óránként van ellenőrzés, és frissít, ha eltelt az alábbi idő."
+
+msgid "Wait while"
+msgstr "Várakozás, amíg"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Akkor is, ha videó megy teljes képernyőn. Egy óra múlva újra próbálja."
+
+msgid "Minimum battery level"
+msgstr "Minimális akkumulátorszint"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Ez alatt az akkumulátoros laptop vár."
+
+msgid "No minimum"
+msgstr "Nincs minimum"
+
+msgid "Automatic"
+msgstr "Automatikus"
+
+msgid "Save"
+msgstr "Mentés"
+
+msgid "For example: linux nvidia"
+msgstr "Például: linux nvidia"
+
+msgid "Sources"
+msgstr "Források"
+
+msgid "Always updated, with pacman."
+msgstr "Mindig frissül, a pacman segítségével."
+
+msgid "Always"
+msgstr "Mindig"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "A paru vagy a yay építi. Ami nem épül meg, azt visszatartja."
+
+msgid "For the whole system and for each user."
+msgstr "Az egész rendszernek és minden felhasználónak."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "A Gear Leveren keresztül, amíg be van jelentkezve."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Gyakran újraépülnek, és gyakrabban romlanak el, mint a kiadott verziók."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Ha egy új csomag lecserél egy régit, igennel válaszol leállás helyett."
+
+msgid "Never update"
+msgstr "Soha ne frissítse"
+
+msgid "Package names, separated by spaces."
+msgstr "Csomagnevek, szóközzel elválasztva."
+
+msgid "Messages"
+msgstr "Üzenetek"
+
+msgid "Show notifications"
+msgstr "Értesítések megjelenítése"
+
+msgid "Turns off every message below."
+msgstr "Kikapcsolja az összes alábbi üzenetet."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Szünet és Mégse gombos folyamatjelzővel."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Az értesítési területen vár ahelyett, hogy felugrana."
+
+msgid "Desktop"
+msgstr "Asztal"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Jelzi, ha frissítések várnak. Kattintásra megnyílik ez az ablak."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Saját tálcaikon és napi ellenőrzés. Nem kell, amíg a frissítések maguktól települnek."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Frissítés közben ugrik fel, ezért ki van kapcsolva."
+
+msgid "None"
+msgstr "Egy sem"
+
+msgid "1 version"
+msgstr "1 verzió"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s verzió"
+
+msgid "After each update"
+msgstr "Minden frissítés után"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Törli a régi csomagfájlokat. A telepített szoftverekhez sosem nyúl."
+
+msgid "Cached versions to keep"
+msgstr "Megtartandó verziók a gyorsítótárban"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Több verzióval vissza lehet térni egy régebbire."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Törli a paru, a yay és a Shelly építési maradékait. A receptek maradnak."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Ez telepített szoftvert távolít el, ezért alapból ki van kapcsolva."
+
+msgid "Last run"
+msgstr "Utolsó futás"
+
+msgid "All runs"
+msgstr "Összes futás"
+
+msgid "Which log"
+msgstr "Melyik napló"
+
+msgid "Restart"
+msgstr "Újraindítás"
+
+msgid "Restart automatically"
+msgstr "Automatikus újraindítás"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Csak ha senki sincs bejelentkezve, és sosem sikertelen frissítés után."
+
+msgid "Never"
+msgstr "Soha"
+
+msgid "After a kernel update"
+msgstr "Kernelfrissítés után"
+
+msgid "After every update"
+msgstr "Minden frissítés után"
+
+msgid "A restart is planned to finish the update."
+msgstr "A frissítés befejezéséhez újraindítás van tervezve."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Magától megtörténik, ha senki sincs bejelentkezve."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "A számítógép %d perc múlva újraindul egy frissítés befejezéséhez. Leállításhoz futtassa: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Mikor frissítsen"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "A frissítések csak ezekben az órákban indulnak. A Frissítés most bármikor működik."
+
+msgid "Any time"
+msgstr "Bármikor"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "%s és %s között"
+
+msgid "Language of this window"
+msgstr "Az ablak nyelve"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Csak Önnek. Az értesítések az asztal nyelvét követik."
+
+msgid "System default"
+msgstr "Rendszer alapértelmezése"
+
+msgid "Could not save the language."
+msgstr "Nem sikerült menteni a nyelvet."

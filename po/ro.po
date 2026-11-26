@@ -1,0 +1,764 @@
+# Romanian translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-26 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2);\n"
+
+msgid "ON"
+msgstr "PORNIT"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Setare necunoscută: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Valoare nevalidă pentru %s: %s"
+
+msgid "Automatic updates"
+msgstr "Actualizări automate"
+
+msgid "Notifications"
+msgstr "Notificări"
+
+msgid "Show an icon in the system tray"
+msgstr "Arată o pictogramă în bara de sistem"
+
+msgid "Also run cachy-update"
+msgstr "Rulează și cachy-update"
+
+msgid "Show the CachyOS restart notice"
+msgstr "Arată avizul de repornire CachyOS"
+
+msgid "Notify when an update starts"
+msgstr "Anunță când începe o actualizare"
+
+msgid "Start the progress bar minimized"
+msgstr "Pornește bara de progres minimizată"
+
+msgid "Notify after a successful update"
+msgstr "Anunță după o actualizare reușită"
+
+msgid "Notify when something goes wrong"
+msgstr "Anunță când ceva nu merge"
+
+msgid "Postpone while a game is running"
+msgstr "Amână cât timp rulează un joc"
+
+msgid "Only update on mains power"
+msgstr "Actualizează doar la priză"
+
+msgid "Update AUR packages"
+msgstr "Actualizează pachetele AUR"
+
+msgid "Update Flatpaks"
+msgstr "Actualizează Flatpak-urile"
+
+msgid "Update AppImages"
+msgstr "Actualizează AppImage-urile"
+
+msgid "Also rebuild -git packages"
+msgstr "Recompilează și pachetele -git"
+
+msgid "AUR helper"
+msgstr "Asistent AUR"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Rezolvă automat conflictele de pachete"
+
+msgid "Trim the package cache"
+msgstr "Micșorează cache-ul de pachete"
+
+msgid "Clean the AUR build caches"
+msgstr "Curăță cache-urile de compilare AUR"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Elimină pachetele de care nu mai are nevoie nimic"
+
+msgid "Never update these packages"
+msgstr "Nu actualiza niciodată aceste pachete"
+
+msgid "running on battery"
+msgstr "pe baterie"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "baterie la %d%%, sub pragul de %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "rulează un joc (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "rulează un joc (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "o aplicație împiedică starea de repaus (joc sau video pe tot ecranul)"
+
+msgid "pacman's database is locked by another process"
+msgstr "baza de date pacman este blocată de alt proces"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s rulează acum"
+
+msgid "Pausing once the current step is done"
+msgstr "Se pune pe pauză după pasul curent"
+
+msgid "Stopping the update"
+msgstr "Se oprește actualizarea"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Mai întâi se termină pasul curent. Lasă calculatorul pornit până atunci."
+
+msgid "Log"
+msgstr "Jurnal"
+
+msgid "never"
+msgstr "niciodată"
+
+msgid "just now"
+msgstr "chiar acum"
+
+msgid "1 minute ago"
+msgstr "acum 1 min."
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "acum %d min."
+
+msgid "1 hour ago"
+msgstr "acum 1 oră"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "acum %d ore"
+
+msgid "1 day ago"
+msgstr "acum 1 zi"
+
+#, c-format
+msgid "%d days ago"
+msgstr "acum %d zile"
+
+msgid "every minute"
+msgstr "în fiecare minut"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "la fiecare %d min."
+
+msgid "every hour"
+msgstr "în fiecare oră"
+
+#, c-format
+msgid "every %d hours"
+msgstr "la fiecare %d ore"
+
+msgid "every day"
+msgstr "în fiecare zi"
+
+#, c-format
+msgid "every %d days"
+msgstr "la fiecare %d zile"
+
+msgid "every week"
+msgstr "în fiecare săptămână"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "la fiecare %d săptămâni"
+
+msgid "The update was stopped before it finished."
+msgstr "Actualizarea a fost oprită înainte să se termine."
+
+msgid "Finishing an interrupted update"
+msgstr "Se termină o actualizare întreruptă"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Ultima actualizare a fost întreruptă, probabil pentru că s-a oprit calculatorul. Acum este terminată."
+
+msgid "Package database locked"
+msgstr "Baza de date a pachetelor este blocată"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "Fișierul de blocare pacman pare rămas de la o actualizare întreruptă. Actualizările sunt în pauză până când este șters."
+
+msgid "Update failed"
+msgstr "Actualizare eșuată"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Ceva n-a mers în timpul actualizării. Rulează 'cachy-auto-update log' pentru detalii."
+
+msgid "Update stopped"
+msgstr "Actualizare oprită"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Poți opri calculatorul acum. Actualizarea va rula din nou mai târziu."
+
+msgid "System updated"
+msgstr "Sistem actualizat"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "Actualizări instalate: %d."
+
+msgid "Some packages were held back"
+msgstr "Unele pachete au fost reținute"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s nu a putut fi actualizat și a fost sărit. Restul este la zi."
+
+msgid "This command has to run as root."
+msgstr "Această comandă trebuie rulată ca root."
+
+msgid "Could not write the configuration file."
+msgstr "Nu s-a putut scrie fișierul de configurare."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update nu este valid; activarea este refuzată."
+
+msgid "Could not enable the systemd timer."
+msgstr "Nu s-a putut activa temporizatorul systemd."
+
+msgid "Automatic updates are on."
+msgstr "Actualizările automate sunt pornite."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Nu s-a găsit niciun asistent AUR. Instalează paru sau yay pentru actualizări AUR."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "Lipsește base-devel, deci pachetele AUR nu pot fi compilate."
+
+msgid "Automatic updates are off."
+msgstr "Actualizările automate sunt oprite."
+
+msgid "Notifications are on."
+msgstr "Notificările sunt pornite."
+
+msgid "Notifications are off."
+msgstr "Notificările sunt oprite."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Utilizare: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Utilizare: cachy-auto-update config [list | get CHEIE | set CHEIE VALOARE]"
+
+msgid "OFF"
+msgstr "OPRIT"
+
+msgid "How often"
+msgstr "Cât de des"
+
+msgid "Last check"
+msgstr "Ultima verificare"
+
+msgid "Last successful update"
+msgstr "Ultima actualizare reușită"
+
+#, c-format
+msgid "%d packages"
+msgstr "Pachete: %d"
+
+msgid "not scheduled"
+msgstr "neprogramată"
+
+msgid "unknown"
+msgstr "necunoscut"
+
+msgid "Next scheduled run"
+msgstr "Următoarea rulare programată"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Ultima rulare a raportat o problemă. Vezi 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "Ultima rulare a fost oprită înainte să se termine."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Ultima rulare a fost anulată. Va rula din nou mai târziu."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Se recomandă o repornire pentru a termina o actualizare de kernel."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Reținute: %s"
+
+msgid "Current conditions:"
+msgstr "Condiții actuale:"
+
+msgid "on AC power"
+msgstr "la priză"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "pe baterie (%d%%, prag %d%%)"
+
+msgid "on battery"
+msgstr "pe baterie"
+
+msgid "no game detected"
+msgstr "niciun joc detectat"
+
+msgid "package system is free"
+msgstr "sistemul de pachete este liber"
+
+msgid "No log yet."
+msgstr "Încă nu există jurnal."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Utilizare: cachy-auto-update [comandă]"
+
+msgid "Commands:"
+msgstr "Comenzi:"
+
+msgid "Without a command the window opens."
+msgstr "Fără comandă se deschide fereastra."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Comandă necunoscută: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Pornește actualizările automate"
+
+msgid "Turn automatic updates off"
+msgstr "Oprește actualizările automate"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Pornește sau oprește notificările desktop"
+
+msgid "Show the current state and conditions"
+msgstr "Arată starea și condițiile actuale"
+
+msgid "Run an update now"
+msgstr "Rulează acum o actualizare"
+
+msgid "Show the log of the last run"
+msgstr "Arată jurnalul ultimei rulări"
+
+msgid "Show or change a setting"
+msgstr "Arată sau schimbă o setare"
+
+msgid "Show this help"
+msgstr "Arată acest ajutor"
+
+msgid "Show the version"
+msgstr "Arată versiunea"
+
+msgid "Finishing the installation"
+msgstr "Se termină instalarea"
+
+msgid "Updating system packages"
+msgstr "Se actualizează pachetele de sistem"
+
+msgid "Downloading updates"
+msgstr "Se descarcă actualizările"
+
+msgid "Preparing the update"
+msgstr "Se pregătește actualizarea"
+
+msgid "Checking for updates"
+msgstr "Se caută actualizări"
+
+msgid "Cleaning up after the update"
+msgstr "Curățenie după actualizare"
+
+msgid "Package"
+msgstr "Pachet"
+
+msgid "Installing updates"
+msgstr "Se instalează actualizările"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "Pachete în curs de actualizare: %d. Lasă calculatorul pornit până se termină."
+
+msgid "Updating AUR packages"
+msgstr "Se actualizează pachetele AUR"
+
+msgid "Updating Flatpak apps"
+msgstr "Se actualizează aplicațiile Flatpak"
+
+msgid "Updating AppImages"
+msgstr "Se actualizează AppImage-urile"
+
+msgid "Overview"
+msgstr "Prezentare"
+
+msgid "Schedule"
+msgstr "Program"
+
+msgid "What to update"
+msgstr "Ce se actualizează"
+
+msgid "Cleanup"
+msgstr "Curățenie"
+
+msgid "The update could not be started."
+msgstr "Actualizarea nu a putut porni."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Ultima actualizare: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Următoarea actualizare: %s"
+
+msgid "The last update had a problem."
+msgstr "Ultima actualizare a avut o problemă."
+
+msgid "The update is paused"
+msgstr "Actualizarea este în pauză"
+
+msgid "Looking for updates..."
+msgstr "Se caută actualizări..."
+
+msgid "Not checked for updates yet"
+msgstr "Încă nu s-au căutat actualizări"
+
+msgid "Everything is up to date"
+msgstr "Totul este la zi"
+
+msgid "1 update available"
+msgstr "1 actualizare disponibilă"
+
+#, c-format
+msgid "%d updates available"
+msgstr "Actualizări disponibile: %d"
+
+msgid "Could not save the setting."
+msgstr "Setarea nu a putut fi salvată."
+
+msgid "The setting was not changed: no permission."
+msgstr "Setarea nu a fost schimbată: lipsă permisiune."
+
+msgid "Update now"
+msgstr "Actualizează acum"
+
+msgid "Update and shut down"
+msgstr "Actualizează și oprește"
+
+msgid "Update and restart"
+msgstr "Actualizează și repornește"
+
+msgid "More update options"
+msgstr "Mai multe opțiuni de actualizare"
+
+msgid "Check for updates"
+msgstr "Caută actualizări"
+
+msgid "Show log"
+msgstr "Arată jurnalul"
+
+msgid "Settings"
+msgstr "Setări"
+
+msgid "Click to see what it is doing"
+msgstr "Clic pentru a vedea ce face"
+
+msgid "Click to update now"
+msgstr "Clic pentru a actualiza acum"
+
+msgid "Dismiss"
+msgstr "Închide"
+
+#, c-format
+msgid "Version %s"
+msgstr "Versiunea %s"
+
+msgid "Starting the update..."
+msgstr "Se pornește actualizarea..."
+
+msgid "Paused"
+msgstr "În pauză"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d din %d"
+
+msgid "Update progress"
+msgstr "Progresul actualizării"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Lasă calculatorul pornit până se termină."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Calculatorul se oprește când se termină actualizarea."
+
+msgid "The computer restarts when the update is done."
+msgstr "Calculatorul repornește când se termină actualizarea."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Restul funcționează în continuare. Jurnalul arată ce n-a mers."
+
+msgid "It is finished on the next run."
+msgstr "Se termină la următoarea rulare."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Repornește când îți convine. Nimic nu repornește singur."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Acestea nu au putut fi actualizate și au fost sărite. Se va încerca din nou mai târziu."
+
+msgid "Needs a look"
+msgstr "Necesită atenție"
+
+msgid "Update automatically"
+msgstr "Actualizează automat"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Actualizările se instalează în fundal, fără parolă și fără întrebări."
+
+msgid "How often to update"
+msgstr "Cât de des să actualizeze"
+
+msgid "Looking..."
+msgstr "Se caută..."
+
+msgid "On AC power"
+msgstr "La priză"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "Pe baterie (%d%%)"
+
+msgid "On battery"
+msgstr "Pe baterie"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Actualizările așteaptă până când calculatorul e la priză."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Actualizările așteaptă sub %d%% baterie."
+
+msgid "Updates wait until it is closed."
+msgstr "Actualizările așteaptă până se închide."
+
+msgid "No game running"
+msgstr "Niciun joc nu rulează"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Actualizările așteaptă ca să nu deranjeze."
+
+msgid "Package system is free"
+msgstr "Sistemul de pachete este liber"
+
+msgid "Right now"
+msgstr "Acum"
+
+msgid "An update waits while any of these is orange"
+msgstr "O actualizare așteaptă cât timp oricare dintre acestea e portocalie"
+
+msgid "System packages"
+msgstr "Pachete de sistem"
+
+msgid "AUR packages"
+msgstr "Pachete AUR"
+
+msgid "Flatpaks"
+msgstr "Flatpak-uri"
+
+msgid "AppImages"
+msgstr "AppImage-uri"
+
+msgid "Last update"
+msgstr "Ultima actualizare"
+
+msgid "When"
+msgstr "Când"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "O verificare rulează în fiecare oră și actualizează după ce trece timpul de mai jos."
+
+msgid "Wait while"
+msgstr "Așteaptă cât timp"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Și cât timp rulează un video pe tot ecranul. Încearcă din nou după o oră."
+
+msgid "Minimum battery level"
+msgstr "Nivel minim al bateriei"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Sub acesta, un laptop pe baterie așteaptă."
+
+msgid "No minimum"
+msgstr "Fără minim"
+
+msgid "Automatic"
+msgstr "Automat"
+
+msgid "Save"
+msgstr "Salvează"
+
+msgid "For example: linux nvidia"
+msgstr "De exemplu: linux nvidia"
+
+msgid "Sources"
+msgstr "Surse"
+
+msgid "Always updated, with pacman."
+msgstr "Mereu actualizate, cu pacman."
+
+msgid "Always"
+msgstr "Mereu"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Compilate cu paru sau yay. Un pachet care nu se compilează este reținut."
+
+msgid "For the whole system and for each user."
+msgstr "Pentru tot sistemul și pentru fiecare utilizator."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Prin Gear Lever, cât timp ești autentificat."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Se recompilează des și se strică mai des decât versiunile lansate."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Când un pachet nou înlocuiește unul vechi, răspunde da în loc să se oprească."
+
+msgid "Never update"
+msgstr "Nu actualiza niciodată"
+
+msgid "Package names, separated by spaces."
+msgstr "Nume de pachete, separate prin spații."
+
+msgid "Messages"
+msgstr "Mesaje"
+
+msgid "Show notifications"
+msgstr "Arată notificările"
+
+msgid "Turns off every message below."
+msgstr "Oprește toate mesajele de mai jos."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Cu o bară de progres cu Pauză și Anulează."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Așteaptă în zona de notificări în loc să apară."
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Arată când așteaptă actualizări. Un clic deschide această fereastră."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Propria pictogramă în bară și verificarea zilnică. Nu e nevoie cât timp actualizările se instalează singure."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Apare în mijlocul unei actualizări, de aceea este oprit."
+
+msgid "None"
+msgstr "Niciuna"
+
+msgid "1 version"
+msgstr "1 versiune"
+
+#, c-format
+msgid "%s versions"
+msgstr "Versiuni: %s"
+
+msgid "After each update"
+msgstr "După fiecare actualizare"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Șterge fișierele vechi ale pachetelor. Programele instalate nu sunt atinse niciodată."
+
+msgid "Cached versions to keep"
+msgstr "Versiuni păstrate în cache"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Mai multe versiuni permit revenirea la una mai veche."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Șterge resturile de compilare de la paru, yay și Shelly. Rețetele rămân."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Aceasta elimină programe instalate, de aceea este oprită implicit."
+
+msgid "Last run"
+msgstr "Ultima rulare"
+
+msgid "All runs"
+msgstr "Toate rulările"
+
+msgid "Which log"
+msgstr "Ce jurnal"
+
+msgid "Restart"
+msgstr "Repornire"
+
+msgid "Restart automatically"
+msgstr "Repornește automat"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Doar când nu e nimeni autentificat, și niciodată după o actualizare eșuată."
+
+msgid "Never"
+msgstr "Niciodată"
+
+msgid "After a kernel update"
+msgstr "După o actualizare de kernel"
+
+msgid "After every update"
+msgstr "După fiecare actualizare"
+
+msgid "A restart is planned to finish the update."
+msgstr "Este planificată o repornire pentru a termina actualizarea."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Se întâmplă singură când nu e nimeni autentificat."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Calculatorul repornește în %d min. pentru a termina o actualizare. Ca s-o oprești, rulează: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Când să actualizeze"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Actualizările pornesc doar în aceste ore. Actualizează acum merge oricând."
+
+msgid "Any time"
+msgstr "Oricând"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "Între %s și %s"
+
+msgid "Language of this window"
+msgstr "Limba acestei ferestre"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Doar pentru tine. Notificările urmează desktopul."
+
+msgid "System default"
+msgstr "Implicită sistemului"
+
+msgid "Could not save the language."
+msgstr "Limba nu a putut fi salvată."

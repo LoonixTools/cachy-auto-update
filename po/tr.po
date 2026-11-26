@@ -1,0 +1,764 @@
+# Turkish translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-26 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "ON"
+msgstr "AÇIK"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Bilinmeyen ayar: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "%s için geçersiz değer: %s"
+
+msgid "Automatic updates"
+msgstr "Otomatik güncellemeler"
+
+msgid "Notifications"
+msgstr "Bildirimler"
+
+msgid "Show an icon in the system tray"
+msgstr "Sistem tepsisinde simge göster"
+
+msgid "Also run cachy-update"
+msgstr "cachy-update'i de çalıştır"
+
+msgid "Show the CachyOS restart notice"
+msgstr "CachyOS yeniden başlatma uyarısını göster"
+
+msgid "Notify when an update starts"
+msgstr "Güncelleme başladığında bildir"
+
+msgid "Start the progress bar minimized"
+msgstr "İlerleme çubuğunu küçültülmüş başlat"
+
+msgid "Notify after a successful update"
+msgstr "Başarılı güncellemeden sonra bildir"
+
+msgid "Notify when something goes wrong"
+msgstr "Bir sorun olduğunda bildir"
+
+msgid "Postpone while a game is running"
+msgstr "Oyun çalışırken ertele"
+
+msgid "Only update on mains power"
+msgstr "Yalnızca şebeke gücündeyken güncelle"
+
+msgid "Update AUR packages"
+msgstr "AUR paketlerini güncelle"
+
+msgid "Update Flatpaks"
+msgstr "Flatpak'leri güncelle"
+
+msgid "Update AppImages"
+msgstr "AppImage'leri güncelle"
+
+msgid "Also rebuild -git packages"
+msgstr "-git paketlerini de yeniden derle"
+
+msgid "AUR helper"
+msgstr "AUR yardımcısı"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Paket çakışmalarını otomatik çöz"
+
+msgid "Trim the package cache"
+msgstr "Paket önbelleğini küçült"
+
+msgid "Clean the AUR build caches"
+msgstr "AUR derleme önbelleklerini temizle"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Artık hiçbir şeyin ihtiyaç duymadığı paketleri kaldır"
+
+msgid "Never update these packages"
+msgstr "Bu paketleri asla güncelleme"
+
+msgid "running on battery"
+msgstr "pille çalışıyor"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "pil %%%d, %%%d eşiğinin altında"
+
+msgid "a game is running (GameMode)"
+msgstr "bir oyun çalışıyor (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "bir oyun çalışıyor (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "bir uygulama boşta kalmayı engelliyor (tam ekran oyun veya video)"
+
+msgid "pacman's database is locked by another process"
+msgstr "pacman veritabanı başka bir işlem tarafından kilitlendi"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s şu anda çalışıyor"
+
+msgid "Pausing once the current step is done"
+msgstr "Geçerli adım bitince duraklatılacak"
+
+msgid "Stopping the update"
+msgstr "Güncelleme durduruluyor"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Önce geçerli adım tamamlanır. O zamana kadar lütfen bilgisayarı kapatmayın."
+
+msgid "Log"
+msgstr "Günlük"
+
+msgid "never"
+msgstr "hiç"
+
+msgid "just now"
+msgstr "az önce"
+
+msgid "1 minute ago"
+msgstr "1 dakika önce"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d dakika önce"
+
+msgid "1 hour ago"
+msgstr "1 saat önce"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d saat önce"
+
+msgid "1 day ago"
+msgstr "1 gün önce"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d gün önce"
+
+msgid "every minute"
+msgstr "her dakika"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "her %d dakikada"
+
+msgid "every hour"
+msgstr "her saat"
+
+#, c-format
+msgid "every %d hours"
+msgstr "her %d saatte"
+
+msgid "every day"
+msgstr "her gün"
+
+#, c-format
+msgid "every %d days"
+msgstr "her %d günde"
+
+msgid "every week"
+msgstr "her hafta"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "her %d haftada"
+
+msgid "The update was stopped before it finished."
+msgstr "Güncelleme bitmeden durduruldu."
+
+msgid "Finishing an interrupted update"
+msgstr "Yarım kalan güncelleme tamamlanıyor"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Son güncelleme yarıda kesildi, büyük olasılıkla bilgisayar kapatıldığı için. Şimdi tamamlanıyor."
+
+msgid "Package database locked"
+msgstr "Paket veritabanı kilitli"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "pacman kilit dosyası yarım kalan bir güncellemeden artmış görünüyor. Silinene kadar güncellemeler duraklatıldı."
+
+msgid "Update failed"
+msgstr "Güncelleme başarısız"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Güncelleme sırasında bir sorun oluştu. Ayrıntılar için 'cachy-auto-update log' çalıştırın."
+
+msgid "Update stopped"
+msgstr "Güncelleme durduruldu"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Bilgisayarı şimdi kapatabilirsiniz. Güncelleme daha sonra yeniden çalışacak."
+
+msgid "System updated"
+msgstr "Sistem güncellendi"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "%d güncelleme yüklendi."
+
+msgid "Some packages were held back"
+msgstr "Bazı paketler bekletildi"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s güncellenemedi ve atlandı. Geri kalan her şey güncel."
+
+msgid "This command has to run as root."
+msgstr "Bu komut root olarak çalıştırılmalı."
+
+msgid "Could not write the configuration file."
+msgstr "Yapılandırma dosyası yazılamadı."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update geçersiz; etkinleştirme reddedildi."
+
+msgid "Could not enable the systemd timer."
+msgstr "systemd zamanlayıcısı etkinleştirilemedi."
+
+msgid "Automatic updates are on."
+msgstr "Otomatik güncellemeler açık."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "AUR yardımcısı bulunamadı. AUR güncellemeleri için paru veya yay yükleyin."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "base-devel eksik, bu yüzden AUR paketleri derlenemiyor."
+
+msgid "Automatic updates are off."
+msgstr "Otomatik güncellemeler kapalı."
+
+msgid "Notifications are on."
+msgstr "Bildirimler açık."
+
+msgid "Notifications are off."
+msgstr "Bildirimler kapalı."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Kullanım: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Kullanım: cachy-auto-update config [list | get ANAHTAR | set ANAHTAR DEĞER]"
+
+msgid "OFF"
+msgstr "KAPALI"
+
+msgid "How often"
+msgstr "Sıklık"
+
+msgid "Last check"
+msgstr "Son denetim"
+
+msgid "Last successful update"
+msgstr "Son başarılı güncelleme"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d paket"
+
+msgid "not scheduled"
+msgstr "planlanmadı"
+
+msgid "unknown"
+msgstr "bilinmiyor"
+
+msgid "Next scheduled run"
+msgstr "Sonraki planlı çalışma"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Son çalışma bir sorun bildirdi. 'cachy-auto-update log' bölümüne bakın."
+
+msgid "The last run was stopped before it finished."
+msgstr "Son çalışma bitmeden durduruldu."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Son çalışma iptal edildi. Daha sonra yeniden çalışacak."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Bir çekirdek güncellemesini tamamlamak için yeniden başlatma önerilir."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Bekletilen: %s"
+
+msgid "Current conditions:"
+msgstr "Mevcut koşullar:"
+
+msgid "on AC power"
+msgstr "şebeke gücünde"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "pille (%%%d, eşik %%%d)"
+
+msgid "on battery"
+msgstr "pille"
+
+msgid "no game detected"
+msgstr "oyun algılanmadı"
+
+msgid "package system is free"
+msgstr "paket sistemi boşta"
+
+msgid "No log yet."
+msgstr "Henüz günlük yok."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Kullanım: cachy-auto-update [komut]"
+
+msgid "Commands:"
+msgstr "Komutlar:"
+
+msgid "Without a command the window opens."
+msgstr "Komut olmadan pencere açılır."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Bilinmeyen komut: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Otomatik güncellemeleri aç"
+
+msgid "Turn automatic updates off"
+msgstr "Otomatik güncellemeleri kapat"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Masaüstü bildirimlerini aç veya kapat"
+
+msgid "Show the current state and conditions"
+msgstr "Mevcut durumu ve koşulları göster"
+
+msgid "Run an update now"
+msgstr "Şimdi bir güncelleme çalıştır"
+
+msgid "Show the log of the last run"
+msgstr "Son çalışmanın günlüğünü göster"
+
+msgid "Show or change a setting"
+msgstr "Bir ayarı göster veya değiştir"
+
+msgid "Show this help"
+msgstr "Bu yardımı göster"
+
+msgid "Show the version"
+msgstr "Sürümü göster"
+
+msgid "Finishing the installation"
+msgstr "Kurulum tamamlanıyor"
+
+msgid "Updating system packages"
+msgstr "Sistem paketleri güncelleniyor"
+
+msgid "Downloading updates"
+msgstr "Güncellemeler indiriliyor"
+
+msgid "Preparing the update"
+msgstr "Güncelleme hazırlanıyor"
+
+msgid "Checking for updates"
+msgstr "Güncellemeler denetleniyor"
+
+msgid "Cleaning up after the update"
+msgstr "Güncellemeden sonra temizleniyor"
+
+msgid "Package"
+msgstr "Paket"
+
+msgid "Installing updates"
+msgstr "Güncellemeler yükleniyor"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "%d paket güncelleniyor. Bu bitene kadar lütfen bilgisayarı kapatmayın."
+
+msgid "Updating AUR packages"
+msgstr "AUR paketleri güncelleniyor"
+
+msgid "Updating Flatpak apps"
+msgstr "Flatpak uygulamaları güncelleniyor"
+
+msgid "Updating AppImages"
+msgstr "AppImage'ler güncelleniyor"
+
+msgid "Overview"
+msgstr "Genel bakış"
+
+msgid "Schedule"
+msgstr "Zamanlama"
+
+msgid "What to update"
+msgstr "Neler güncellensin"
+
+msgid "Cleanup"
+msgstr "Temizlik"
+
+msgid "The update could not be started."
+msgstr "Güncelleme başlatılamadı."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Son güncelleme: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Sonraki güncelleme: %s"
+
+msgid "The last update had a problem."
+msgstr "Son güncellemede bir sorun oldu."
+
+msgid "The update is paused"
+msgstr "Güncelleme duraklatıldı"
+
+msgid "Looking for updates..."
+msgstr "Güncellemeler aranıyor..."
+
+msgid "Not checked for updates yet"
+msgstr "Henüz güncelleme denetlenmedi"
+
+msgid "Everything is up to date"
+msgstr "Her şey güncel"
+
+msgid "1 update available"
+msgstr "1 güncelleme var"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d güncelleme var"
+
+msgid "Could not save the setting."
+msgstr "Ayar kaydedilemedi."
+
+msgid "The setting was not changed: no permission."
+msgstr "Ayar değiştirilmedi: izin yok."
+
+msgid "Update now"
+msgstr "Şimdi güncelle"
+
+msgid "Update and shut down"
+msgstr "Güncelle ve kapat"
+
+msgid "Update and restart"
+msgstr "Güncelle ve yeniden başlat"
+
+msgid "More update options"
+msgstr "Diğer güncelleme seçenekleri"
+
+msgid "Check for updates"
+msgstr "Güncellemeleri denetle"
+
+msgid "Show log"
+msgstr "Günlüğü göster"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid "Click to see what it is doing"
+msgstr "Ne yaptığını görmek için tıklayın"
+
+msgid "Click to update now"
+msgstr "Şimdi güncellemek için tıklayın"
+
+msgid "Dismiss"
+msgstr "Kapat"
+
+#, c-format
+msgid "Version %s"
+msgstr "Sürüm %s"
+
+msgid "Starting the update..."
+msgstr "Güncelleme başlatılıyor..."
+
+msgid "Paused"
+msgstr "Duraklatıldı"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d / %d"
+
+msgid "Update progress"
+msgstr "Güncelleme ilerlemesi"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Bu bitene kadar lütfen bilgisayarı kapatmayın."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Güncelleme bitince bilgisayar kapanır."
+
+msgid "The computer restarts when the update is done."
+msgstr "Güncelleme bitince bilgisayar yeniden başlar."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Geri kalan her şey çalışmaya devam ediyor. Neyin yanlış gittiğini günlük gösterir."
+
+msgid "It is finished on the next run."
+msgstr "Bir sonraki çalışmada tamamlanır."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Size uygun olduğunda yeniden başlatın. Hiçbir şey kendiliğinden yeniden başlamaz."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Bunlar güncellenemedi ve atlandı. Daha sonra yeniden denenecek."
+
+msgid "Needs a look"
+msgstr "Bakılması gerekiyor"
+
+msgid "Update automatically"
+msgstr "Otomatik güncelle"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Güncellemeler arka planda, parola ve soru olmadan yüklenir."
+
+msgid "How often to update"
+msgstr "Ne sıklıkla güncellensin"
+
+msgid "Looking..."
+msgstr "Aranıyor..."
+
+msgid "On AC power"
+msgstr "Şebeke gücünde"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "Pille (%%%d)"
+
+msgid "On battery"
+msgstr "Pille"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Güncellemeler bilgisayar prize takılana kadar bekler."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Güncellemeler pil %%%d altındayken bekler."
+
+msgid "Updates wait until it is closed."
+msgstr "Güncellemeler o kapanana kadar bekler."
+
+msgid "No game running"
+msgstr "Çalışan oyun yok"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Güncellemeler engel olmamak için bekler."
+
+msgid "Package system is free"
+msgstr "Paket sistemi boşta"
+
+msgid "Right now"
+msgstr "Şu anda"
+
+msgid "An update waits while any of these is orange"
+msgstr "Bunlardan biri turuncu olduğu sürece güncelleme bekler"
+
+msgid "System packages"
+msgstr "Sistem paketleri"
+
+msgid "AUR packages"
+msgstr "AUR paketleri"
+
+msgid "Flatpaks"
+msgstr "Flatpak'ler"
+
+msgid "AppImages"
+msgstr "AppImage'ler"
+
+msgid "Last update"
+msgstr "Son güncelleme"
+
+msgid "When"
+msgstr "Ne zaman"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Her saat bir denetim yapılır ve aşağıdaki süre geçince güncellenir."
+
+msgid "Wait while"
+msgstr "Şu durumlarda bekle"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Tam ekran video oynarken de. Bir saat sonra yeniden dener."
+
+msgid "Minimum battery level"
+msgstr "En düşük pil seviyesi"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Bunun altında, pille çalışan dizüstü bilgisayar bekler."
+
+msgid "No minimum"
+msgstr "En düşük yok"
+
+msgid "Automatic"
+msgstr "Otomatik"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "For example: linux nvidia"
+msgstr "Örneğin: linux nvidia"
+
+msgid "Sources"
+msgstr "Kaynaklar"
+
+msgid "Always updated, with pacman."
+msgstr "Her zaman pacman ile güncellenir."
+
+msgid "Always"
+msgstr "Her zaman"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "paru veya yay ile derlenir. Derlenemeyen bekletilir."
+
+msgid "For the whole system and for each user."
+msgstr "Tüm sistem ve her kullanıcı için."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Gear Lever ile, oturum açıkken."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Sık yeniden derlenirler ve yayımlanmış sürümlerden daha sık bozulurlar."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Yeni bir paket eskisinin yerine geçtiğinde durmak yerine evet de."
+
+msgid "Never update"
+msgstr "Asla güncelleme"
+
+msgid "Package names, separated by spaces."
+msgstr "Boşlukla ayrılmış paket adları."
+
+msgid "Messages"
+msgstr "İletiler"
+
+msgid "Show notifications"
+msgstr "Bildirimleri göster"
+
+msgid "Turns off every message below."
+msgstr "Aşağıdaki tüm iletileri kapatır."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Duraklat ve İptal düğmeli bir ilerleme çubuğuyla."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Açılmak yerine bildirim alanında bekler."
+
+msgid "Desktop"
+msgstr "Masaüstü"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Bekleyen güncelleme olduğunu gösterir. Tıklamak bu pencereyi açar."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Kendi tepsi simgesi ve günlük denetimi. Güncellemeler kendiliğinden yüklenirken gerekmez."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Bir güncellemenin ortasında açılır, bu yüzden kapalı."
+
+msgid "None"
+msgstr "Hiçbiri"
+
+msgid "1 version"
+msgstr "1 sürüm"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s sürüm"
+
+msgid "After each update"
+msgstr "Her güncellemeden sonra"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Eski paket dosyalarını siler. Yüklü yazılıma asla dokunulmaz."
+
+msgid "Cached versions to keep"
+msgstr "Önbellekte tutulacak sürümler"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Daha fazla sürüm, eskisine geri dönme imkânı verir."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "paru, yay ve Shelly'nin derleme artıklarını siler. Tarifler kalır."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Bu, yüklü yazılımı siler, bu yüzden varsayılan olarak kapalı."
+
+msgid "Last run"
+msgstr "Son çalışma"
+
+msgid "All runs"
+msgstr "Tüm çalışmalar"
+
+msgid "Which log"
+msgstr "Hangi günlük"
+
+msgid "Restart"
+msgstr "Yeniden başlatma"
+
+msgid "Restart automatically"
+msgstr "Otomatik yeniden başlat"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Yalnızca kimse oturum açmamışken ve başarısız bir güncellemeden sonra asla."
+
+msgid "Never"
+msgstr "Asla"
+
+msgid "After a kernel update"
+msgstr "Çekirdek güncellemesinden sonra"
+
+msgid "After every update"
+msgstr "Her güncellemeden sonra"
+
+msgid "A restart is planned to finish the update."
+msgstr "Güncellemeyi tamamlamak için yeniden başlatma planlandı."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Kimse oturum açmamışken kendiliğinden olur."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Bu bilgisayar bir güncellemeyi tamamlamak için %d dakika sonra yeniden başlayacak. Durdurmak için çalıştırın: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Ne zaman güncellensin"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Güncellemeler yalnızca bu saatlerde başlar. Şimdi güncelle her zaman çalışır."
+
+msgid "Any time"
+msgstr "Her saatte"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "%s ile %s arası"
+
+msgid "Language of this window"
+msgstr "Bu pencerenin dili"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Yalnızca sizin için. Bildirimler masaüstünü izler."
+
+msgid "System default"
+msgstr "Sistem varsayılanı"
+
+msgid "Could not save the language."
+msgstr "Dil kaydedilemedi."

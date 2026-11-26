@@ -1,0 +1,764 @@
+# Swedish translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-26 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Swedish\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "ON"
+msgstr "PÅ"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Okänd inställning: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Ogiltigt värde för %s: %s"
+
+msgid "Automatic updates"
+msgstr "Automatiska uppdateringar"
+
+msgid "Notifications"
+msgstr "Aviseringar"
+
+msgid "Show an icon in the system tray"
+msgstr "Visa en ikon i systemfältet"
+
+msgid "Also run cachy-update"
+msgstr "Kör även cachy-update"
+
+msgid "Show the CachyOS restart notice"
+msgstr "Visa CachyOS meddelande om omstart"
+
+msgid "Notify when an update starts"
+msgstr "Meddela när en uppdatering börjar"
+
+msgid "Start the progress bar minimized"
+msgstr "Starta förloppsindikatorn minimerad"
+
+msgid "Notify after a successful update"
+msgstr "Meddela efter en lyckad uppdatering"
+
+msgid "Notify when something goes wrong"
+msgstr "Meddela när något går fel"
+
+msgid "Postpone while a game is running"
+msgstr "Skjut upp medan ett spel körs"
+
+msgid "Only update on mains power"
+msgstr "Uppdatera bara på nätström"
+
+msgid "Update AUR packages"
+msgstr "Uppdatera AUR-paket"
+
+msgid "Update Flatpaks"
+msgstr "Uppdatera Flatpaks"
+
+msgid "Update AppImages"
+msgstr "Uppdatera AppImages"
+
+msgid "Also rebuild -git packages"
+msgstr "Bygg även om -git-paket"
+
+msgid "AUR helper"
+msgstr "AUR-hjälpare"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Lös paketkonflikter automatiskt"
+
+msgid "Trim the package cache"
+msgstr "Trimma paketcachen"
+
+msgid "Clean the AUR build caches"
+msgstr "Rensa AUR-byggcacharna"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Ta bort paket som inget längre behöver"
+
+msgid "Never update these packages"
+msgstr "Uppdatera aldrig dessa paket"
+
+msgid "running on battery"
+msgstr "går på batteri"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "batteri på %d%%, under gränsen på %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "ett spel körs (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "ett spel körs (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "ett program blockerar viloläge (spel eller video i helskärm)"
+
+msgid "pacman's database is locked by another process"
+msgstr "pacmans databas är låst av en annan process"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s körs just nu"
+
+msgid "Pausing once the current step is done"
+msgstr "Pausar när det aktuella steget är klart"
+
+msgid "Stopping the update"
+msgstr "Stoppar uppdateringen"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Det aktuella steget avslutas först. Låt datorn vara på tills dess."
+
+msgid "Log"
+msgstr "Logg"
+
+msgid "never"
+msgstr "aldrig"
+
+msgid "just now"
+msgstr "nyss"
+
+msgid "1 minute ago"
+msgstr "för 1 minut sedan"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "för %d minuter sedan"
+
+msgid "1 hour ago"
+msgstr "för 1 timme sedan"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "för %d timmar sedan"
+
+msgid "1 day ago"
+msgstr "för 1 dag sedan"
+
+#, c-format
+msgid "%d days ago"
+msgstr "för %d dagar sedan"
+
+msgid "every minute"
+msgstr "varje minut"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "var %d:e minut"
+
+msgid "every hour"
+msgstr "varje timme"
+
+#, c-format
+msgid "every %d hours"
+msgstr "var %d:e timme"
+
+msgid "every day"
+msgstr "varje dag"
+
+#, c-format
+msgid "every %d days"
+msgstr "var %d:e dag"
+
+msgid "every week"
+msgstr "varje vecka"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "var %d:e vecka"
+
+msgid "The update was stopped before it finished."
+msgstr "Uppdateringen stoppades innan den var klar."
+
+msgid "Finishing an interrupted update"
+msgstr "Avslutar en avbruten uppdatering"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Den senaste uppdateringen avbröts, troligen för att datorn stängdes av. Den avslutas nu."
+
+msgid "Package database locked"
+msgstr "Paketdatabasen är låst"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "pacmans låsfil verkar vara kvar från en avbruten uppdatering. Uppdateringar är pausade tills den tas bort."
+
+msgid "Update failed"
+msgstr "Uppdateringen misslyckades"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Något gick fel under uppdateringen. Kör 'cachy-auto-update log' för detaljer."
+
+msgid "Update stopped"
+msgstr "Uppdateringen stoppad"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Du kan stänga av datorn nu. Uppdateringen körs igen senare."
+
+msgid "System updated"
+msgstr "Systemet uppdaterat"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "%d uppdateringar installerades."
+
+msgid "Some packages were held back"
+msgstr "Vissa paket hölls tillbaka"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s kunde inte uppdateras och hoppades över. Allt annat är uppdaterat."
+
+msgid "This command has to run as root."
+msgstr "Det här kommandot måste köras som root."
+
+msgid "Could not write the configuration file."
+msgstr "Kunde inte skriva konfigurationsfilen."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update är ogiltig; vägrar aktivera."
+
+msgid "Could not enable the systemd timer."
+msgstr "Kunde inte aktivera systemd-timern."
+
+msgid "Automatic updates are on."
+msgstr "Automatiska uppdateringar är på."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Ingen AUR-hjälpare hittades. Installera paru eller yay för AUR-uppdateringar."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "base-devel saknas, så AUR-paket kan inte byggas."
+
+msgid "Automatic updates are off."
+msgstr "Automatiska uppdateringar är av."
+
+msgid "Notifications are on."
+msgstr "Aviseringar är på."
+
+msgid "Notifications are off."
+msgstr "Aviseringar är av."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Användning: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Användning: cachy-auto-update config [list | get NYCKEL | set NYCKEL VÄRDE]"
+
+msgid "OFF"
+msgstr "AV"
+
+msgid "How often"
+msgstr "Hur ofta"
+
+msgid "Last check"
+msgstr "Senaste kontroll"
+
+msgid "Last successful update"
+msgstr "Senaste lyckade uppdatering"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d paket"
+
+msgid "not scheduled"
+msgstr "inte schemalagd"
+
+msgid "unknown"
+msgstr "okänd"
+
+msgid "Next scheduled run"
+msgstr "Nästa schemalagda körning"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Den senaste körningen rapporterade ett problem. Se 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "Den senaste körningen stoppades innan den var klar."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Den senaste körningen avbröts. Den körs igen senare."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "En omstart rekommenderas för att slutföra en kärnuppdatering."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Tillbakahållna: %s"
+
+msgid "Current conditions:"
+msgstr "Aktuella förhållanden:"
+
+msgid "on AC power"
+msgstr "på nätström"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "på batteri (%d%%, gräns %d%%)"
+
+msgid "on battery"
+msgstr "på batteri"
+
+msgid "no game detected"
+msgstr "inget spel upptäckt"
+
+msgid "package system is free"
+msgstr "paketsystemet är ledigt"
+
+msgid "No log yet."
+msgstr "Ingen logg ännu."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Användning: cachy-auto-update [kommando]"
+
+msgid "Commands:"
+msgstr "Kommandon:"
+
+msgid "Without a command the window opens."
+msgstr "Utan kommando öppnas fönstret."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Okänt kommando: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Slå på automatiska uppdateringar"
+
+msgid "Turn automatic updates off"
+msgstr "Stäng av automatiska uppdateringar"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Slå på eller av skrivbordsaviseringar"
+
+msgid "Show the current state and conditions"
+msgstr "Visa aktuell status och förhållanden"
+
+msgid "Run an update now"
+msgstr "Kör en uppdatering nu"
+
+msgid "Show the log of the last run"
+msgstr "Visa loggen för den senaste körningen"
+
+msgid "Show or change a setting"
+msgstr "Visa eller ändra en inställning"
+
+msgid "Show this help"
+msgstr "Visa den här hjälpen"
+
+msgid "Show the version"
+msgstr "Visa versionen"
+
+msgid "Finishing the installation"
+msgstr "Slutför installationen"
+
+msgid "Updating system packages"
+msgstr "Uppdaterar systempaket"
+
+msgid "Downloading updates"
+msgstr "Hämtar uppdateringar"
+
+msgid "Preparing the update"
+msgstr "Förbereder uppdateringen"
+
+msgid "Checking for updates"
+msgstr "Söker efter uppdateringar"
+
+msgid "Cleaning up after the update"
+msgstr "Städar efter uppdateringen"
+
+msgid "Package"
+msgstr "Paket"
+
+msgid "Installing updates"
+msgstr "Installerar uppdateringar"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "%d paket uppdateras. Låt datorn vara på tills det är klart."
+
+msgid "Updating AUR packages"
+msgstr "Uppdaterar AUR-paket"
+
+msgid "Updating Flatpak apps"
+msgstr "Uppdaterar Flatpak-appar"
+
+msgid "Updating AppImages"
+msgstr "Uppdaterar AppImages"
+
+msgid "Overview"
+msgstr "Översikt"
+
+msgid "Schedule"
+msgstr "Schema"
+
+msgid "What to update"
+msgstr "Vad som uppdateras"
+
+msgid "Cleanup"
+msgstr "Städning"
+
+msgid "The update could not be started."
+msgstr "Uppdateringen kunde inte startas."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Senaste uppdatering: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Nästa uppdatering: %s"
+
+msgid "The last update had a problem."
+msgstr "Den senaste uppdateringen hade ett problem."
+
+msgid "The update is paused"
+msgstr "Uppdateringen är pausad"
+
+msgid "Looking for updates..."
+msgstr "Söker efter uppdateringar..."
+
+msgid "Not checked for updates yet"
+msgstr "Har inte sökt efter uppdateringar än"
+
+msgid "Everything is up to date"
+msgstr "Allt är uppdaterat"
+
+msgid "1 update available"
+msgstr "1 uppdatering tillgänglig"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d uppdateringar tillgängliga"
+
+msgid "Could not save the setting."
+msgstr "Kunde inte spara inställningen."
+
+msgid "The setting was not changed: no permission."
+msgstr "Inställningen ändrades inte: ingen behörighet."
+
+msgid "Update now"
+msgstr "Uppdatera nu"
+
+msgid "Update and shut down"
+msgstr "Uppdatera och stäng av"
+
+msgid "Update and restart"
+msgstr "Uppdatera och starta om"
+
+msgid "More update options"
+msgstr "Fler uppdateringsalternativ"
+
+msgid "Check for updates"
+msgstr "Sök efter uppdateringar"
+
+msgid "Show log"
+msgstr "Visa logg"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Click to see what it is doing"
+msgstr "Klicka för att se vad den gör"
+
+msgid "Click to update now"
+msgstr "Klicka för att uppdatera nu"
+
+msgid "Dismiss"
+msgstr "Stäng"
+
+#, c-format
+msgid "Version %s"
+msgstr "Version %s"
+
+msgid "Starting the update..."
+msgstr "Startar uppdateringen..."
+
+msgid "Paused"
+msgstr "Pausad"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d av %d"
+
+msgid "Update progress"
+msgstr "Uppdateringsförlopp"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Låt datorn vara på tills det är klart."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Datorn stängs av när uppdateringen är klar."
+
+msgid "The computer restarts when the update is done."
+msgstr "Datorn startas om när uppdateringen är klar."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Allt annat fungerar som vanligt. Loggen visar vad som gick fel."
+
+msgid "It is finished on the next run."
+msgstr "Den slutförs vid nästa körning."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Starta om när det passar dig. Inget startas om av sig självt."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Dessa kunde inte uppdateras och hoppades över. De provas igen senare."
+
+msgid "Needs a look"
+msgstr "Behöver ses över"
+
+msgid "Update automatically"
+msgstr "Uppdatera automatiskt"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Uppdateringar installeras i bakgrunden, utan lösenord och utan frågor."
+
+msgid "How often to update"
+msgstr "Hur ofta uppdatera"
+
+msgid "Looking..."
+msgstr "Söker..."
+
+msgid "On AC power"
+msgstr "På nätström"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "På batteri (%d%%)"
+
+msgid "On battery"
+msgstr "På batteri"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Uppdateringar väntar tills datorn är ansluten till ström."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Uppdateringar väntar under %d%% batteri."
+
+msgid "Updates wait until it is closed."
+msgstr "Uppdateringar väntar tills det stängs."
+
+msgid "No game running"
+msgstr "Inget spel körs"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Uppdateringar väntar för att inte vara i vägen."
+
+msgid "Package system is free"
+msgstr "Paketsystemet är ledigt"
+
+msgid "Right now"
+msgstr "Just nu"
+
+msgid "An update waits while any of these is orange"
+msgstr "En uppdatering väntar så länge någon av dessa är orange"
+
+msgid "System packages"
+msgstr "Systempaket"
+
+msgid "AUR packages"
+msgstr "AUR-paket"
+
+msgid "Flatpaks"
+msgstr "Flatpaks"
+
+msgid "AppImages"
+msgstr "AppImages"
+
+msgid "Last update"
+msgstr "Senaste uppdatering"
+
+msgid "When"
+msgstr "När"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "En kontroll körs varje timme och uppdaterar när tiden nedan har gått."
+
+msgid "Wait while"
+msgstr "Vänta medan"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Även medan en video spelas i helskärm. Försöker igen en timme senare."
+
+msgid "Minimum battery level"
+msgstr "Lägsta batterinivå"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Under denna väntar en bärbar dator på batteri."
+
+msgid "No minimum"
+msgstr "Inget minimum"
+
+msgid "Automatic"
+msgstr "Automatisk"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "For example: linux nvidia"
+msgstr "Till exempel: linux nvidia"
+
+msgid "Sources"
+msgstr "Källor"
+
+msgid "Always updated, with pacman."
+msgstr "Uppdateras alltid, med pacman."
+
+msgid "Always"
+msgstr "Alltid"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Byggs med paru eller yay. Ett paket som inte går att bygga hålls tillbaka."
+
+msgid "For the whole system and for each user."
+msgstr "För hela systemet och för varje användare."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Via Gear Lever, medan du är inloggad."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "De byggs om ofta och går sönder oftare än släppta versioner."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "När ett nytt paket ersätter ett gammalt, svara ja i stället för att stoppa."
+
+msgid "Never update"
+msgstr "Uppdatera aldrig"
+
+msgid "Package names, separated by spaces."
+msgstr "Paketnamn, åtskilda med mellanslag."
+
+msgid "Messages"
+msgstr "Meddelanden"
+
+msgid "Show notifications"
+msgstr "Visa aviseringar"
+
+msgid "Turns off every message below."
+msgstr "Stänger av alla meddelanden nedan."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Med en förloppsindikator med Pausa och Avbryt."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Den väntar i meddelandefältet i stället för att dyka upp."
+
+msgid "Desktop"
+msgstr "Skrivbord"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Den visar när uppdateringar väntar. Ett klick öppnar det här fönstret."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Egen ikon i systemfältet och en daglig kontroll. Behövs inte medan uppdateringar installeras av sig själva."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Den dyker upp mitt i en uppdatering, så den är av."
+
+msgid "None"
+msgstr "Inga"
+
+msgid "1 version"
+msgstr "1 version"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s versioner"
+
+msgid "After each update"
+msgstr "Efter varje uppdatering"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Tar bort gamla paketfiler. Installerad programvara rörs aldrig."
+
+msgid "Cached versions to keep"
+msgstr "Cachade versioner att behålla"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Fler versioner ger utrymme att gå tillbaka till en äldre."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Tar bort byggrester från paru, yay och Shelly. Recepten finns kvar."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Detta tar bort installerad programvara, så det är av som standard."
+
+msgid "Last run"
+msgstr "Senaste körning"
+
+msgid "All runs"
+msgstr "Alla körningar"
+
+msgid "Which log"
+msgstr "Vilken logg"
+
+msgid "Restart"
+msgstr "Omstart"
+
+msgid "Restart automatically"
+msgstr "Starta om automatiskt"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Bara när ingen är inloggad, och aldrig efter en misslyckad uppdatering."
+
+msgid "Never"
+msgstr "Aldrig"
+
+msgid "After a kernel update"
+msgstr "Efter en kärnuppdatering"
+
+msgid "After every update"
+msgstr "Efter varje uppdatering"
+
+msgid "A restart is planned to finish the update."
+msgstr "En omstart är planerad för att slutföra uppdateringen."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Den sker av sig själv när ingen är inloggad."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Datorn startas om om %d minuter för att slutföra en uppdatering. För att stoppa det, kör: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "När uppdatera"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Uppdateringar startar bara under dessa timmar. Uppdatera nu fungerar när som helst."
+
+msgid "Any time"
+msgstr "När som helst"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "Mellan %s och %s"
+
+msgid "Language of this window"
+msgstr "Språk för det här fönstret"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Bara för dig. Aviseringar följer skrivbordet."
+
+msgid "System default"
+msgstr "Systemets standard"
+
+msgid "Could not save the language."
+msgstr "Kunde inte spara språket."

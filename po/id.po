@@ -1,0 +1,764 @@
+# Indonesian translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-26 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Indonesian\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "ON"
+msgstr "NYALA"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Pengaturan tidak dikenal: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Nilai tidak valid untuk %s: %s"
+
+msgid "Automatic updates"
+msgstr "Pembaruan otomatis"
+
+msgid "Notifications"
+msgstr "Notifikasi"
+
+msgid "Show an icon in the system tray"
+msgstr "Tampilkan ikon di baki sistem"
+
+msgid "Also run cachy-update"
+msgstr "Jalankan juga cachy-update"
+
+msgid "Show the CachyOS restart notice"
+msgstr "Tampilkan pemberitahuan mulai ulang CachyOS"
+
+msgid "Notify when an update starts"
+msgstr "Beri tahu saat pembaruan dimulai"
+
+msgid "Start the progress bar minimized"
+msgstr "Mulai bilah kemajuan dalam keadaan diminimalkan"
+
+msgid "Notify after a successful update"
+msgstr "Beri tahu setelah pembaruan berhasil"
+
+msgid "Notify when something goes wrong"
+msgstr "Beri tahu saat terjadi masalah"
+
+msgid "Postpone while a game is running"
+msgstr "Tunda selama game berjalan"
+
+msgid "Only update on mains power"
+msgstr "Perbarui hanya saat tersambung listrik"
+
+msgid "Update AUR packages"
+msgstr "Perbarui paket AUR"
+
+msgid "Update Flatpaks"
+msgstr "Perbarui Flatpak"
+
+msgid "Update AppImages"
+msgstr "Perbarui AppImage"
+
+msgid "Also rebuild -git packages"
+msgstr "Bangun ulang juga paket -git"
+
+msgid "AUR helper"
+msgstr "Pembantu AUR"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Selesaikan konflik paket secara otomatis"
+
+msgid "Trim the package cache"
+msgstr "Pangkas cache paket"
+
+msgid "Clean the AUR build caches"
+msgstr "Bersihkan cache build AUR"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Hapus paket yang tidak lagi dibutuhkan"
+
+msgid "Never update these packages"
+msgstr "Jangan pernah perbarui paket ini"
+
+msgid "running on battery"
+msgstr "berjalan dengan baterai"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "baterai %d%%, di bawah batas %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "game sedang berjalan (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "game sedang berjalan (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "aplikasi mencegah mode diam (game atau video layar penuh)"
+
+msgid "pacman's database is locked by another process"
+msgstr "basis data pacman dikunci oleh proses lain"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s sedang berjalan"
+
+msgid "Pausing once the current step is done"
+msgstr "Berhenti sejenak setelah langkah saat ini selesai"
+
+msgid "Stopping the update"
+msgstr "Menghentikan pembaruan"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Langkah saat ini diselesaikan dulu. Biarkan komputer tetap menyala sampai saat itu."
+
+msgid "Log"
+msgstr "Log"
+
+msgid "never"
+msgstr "belum pernah"
+
+msgid "just now"
+msgstr "baru saja"
+
+msgid "1 minute ago"
+msgstr "1 menit lalu"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d menit lalu"
+
+msgid "1 hour ago"
+msgstr "1 jam lalu"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d jam lalu"
+
+msgid "1 day ago"
+msgstr "1 hari lalu"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d hari lalu"
+
+msgid "every minute"
+msgstr "setiap menit"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "setiap %d menit"
+
+msgid "every hour"
+msgstr "setiap jam"
+
+#, c-format
+msgid "every %d hours"
+msgstr "setiap %d jam"
+
+msgid "every day"
+msgstr "setiap hari"
+
+#, c-format
+msgid "every %d days"
+msgstr "setiap %d hari"
+
+msgid "every week"
+msgstr "setiap minggu"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "setiap %d minggu"
+
+msgid "The update was stopped before it finished."
+msgstr "Pembaruan dihentikan sebelum selesai."
+
+msgid "Finishing an interrupted update"
+msgstr "Menyelesaikan pembaruan yang terputus"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "Pembaruan terakhir terputus, kemungkinan karena komputer dimatikan. Sekarang sedang diselesaikan."
+
+msgid "Package database locked"
+msgstr "Basis data paket terkunci"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "Berkas kunci pacman tampaknya sisa dari pembaruan yang terputus. Pembaruan dijeda sampai berkas itu dihapus."
+
+msgid "Update failed"
+msgstr "Pembaruan gagal"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Terjadi masalah saat memperbarui. Jalankan 'cachy-auto-update log' untuk detailnya."
+
+msgid "Update stopped"
+msgstr "Pembaruan dihentikan"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Anda bisa mematikan komputer sekarang. Pembaruan akan berjalan lagi nanti."
+
+msgid "System updated"
+msgstr "Sistem diperbarui"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "%d pembaruan telah dipasang."
+
+msgid "Some packages were held back"
+msgstr "Beberapa paket ditahan"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s tidak bisa diperbarui dan dilewati. Semua yang lain sudah terbaru."
+
+msgid "This command has to run as root."
+msgstr "Perintah ini harus dijalankan sebagai root."
+
+msgid "Could not write the configuration file."
+msgstr "Tidak bisa menulis berkas konfigurasi."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update tidak valid; menolak untuk mengaktifkan."
+
+msgid "Could not enable the systemd timer."
+msgstr "Tidak bisa mengaktifkan timer systemd."
+
+msgid "Automatic updates are on."
+msgstr "Pembaruan otomatis menyala."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Pembantu AUR tidak ditemukan. Pasang paru atau yay untuk pembaruan AUR."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "base-devel tidak ada, jadi paket AUR tidak bisa dibangun."
+
+msgid "Automatic updates are off."
+msgstr "Pembaruan otomatis mati."
+
+msgid "Notifications are on."
+msgstr "Notifikasi menyala."
+
+msgid "Notifications are off."
+msgstr "Notifikasi mati."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Penggunaan: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Penggunaan: cachy-auto-update config [list | get KUNCI | set KUNCI NILAI]"
+
+msgid "OFF"
+msgstr "MATI"
+
+msgid "How often"
+msgstr "Seberapa sering"
+
+msgid "Last check"
+msgstr "Pemeriksaan terakhir"
+
+msgid "Last successful update"
+msgstr "Pembaruan berhasil terakhir"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d paket"
+
+msgid "not scheduled"
+msgstr "tidak dijadwalkan"
+
+msgid "unknown"
+msgstr "tidak diketahui"
+
+msgid "Next scheduled run"
+msgstr "Jadwal berikutnya"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "Proses terakhir melaporkan masalah. Lihat 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "Proses terakhir dihentikan sebelum selesai."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "Proses terakhir dibatalkan. Akan berjalan lagi nanti."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Disarankan memulai ulang untuk menyelesaikan pembaruan kernel."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Ditahan: %s"
+
+msgid "Current conditions:"
+msgstr "Kondisi saat ini:"
+
+msgid "on AC power"
+msgstr "tersambung listrik"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "dengan baterai (%d%%, batas %d%%)"
+
+msgid "on battery"
+msgstr "dengan baterai"
+
+msgid "no game detected"
+msgstr "tidak ada game terdeteksi"
+
+msgid "package system is free"
+msgstr "sistem paket bebas"
+
+msgid "No log yet."
+msgstr "Belum ada log."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Penggunaan: cachy-auto-update [perintah]"
+
+msgid "Commands:"
+msgstr "Perintah:"
+
+msgid "Without a command the window opens."
+msgstr "Tanpa perintah, jendela akan terbuka."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Perintah tidak dikenal: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Nyalakan pembaruan otomatis"
+
+msgid "Turn automatic updates off"
+msgstr "Matikan pembaruan otomatis"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Nyalakan atau matikan notifikasi desktop"
+
+msgid "Show the current state and conditions"
+msgstr "Tampilkan status dan kondisi saat ini"
+
+msgid "Run an update now"
+msgstr "Jalankan pembaruan sekarang"
+
+msgid "Show the log of the last run"
+msgstr "Tampilkan log proses terakhir"
+
+msgid "Show or change a setting"
+msgstr "Tampilkan atau ubah pengaturan"
+
+msgid "Show this help"
+msgstr "Tampilkan bantuan ini"
+
+msgid "Show the version"
+msgstr "Tampilkan versi"
+
+msgid "Finishing the installation"
+msgstr "Menyelesaikan pemasangan"
+
+msgid "Updating system packages"
+msgstr "Memperbarui paket sistem"
+
+msgid "Downloading updates"
+msgstr "Mengunduh pembaruan"
+
+msgid "Preparing the update"
+msgstr "Menyiapkan pembaruan"
+
+msgid "Checking for updates"
+msgstr "Memeriksa pembaruan"
+
+msgid "Cleaning up after the update"
+msgstr "Membersihkan setelah pembaruan"
+
+msgid "Package"
+msgstr "Paket"
+
+msgid "Installing updates"
+msgstr "Memasang pembaruan"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "%d paket sedang diperbarui. Biarkan komputer tetap menyala sampai selesai."
+
+msgid "Updating AUR packages"
+msgstr "Memperbarui paket AUR"
+
+msgid "Updating Flatpak apps"
+msgstr "Memperbarui aplikasi Flatpak"
+
+msgid "Updating AppImages"
+msgstr "Memperbarui AppImage"
+
+msgid "Overview"
+msgstr "Ringkasan"
+
+msgid "Schedule"
+msgstr "Jadwal"
+
+msgid "What to update"
+msgstr "Apa yang diperbarui"
+
+msgid "Cleanup"
+msgstr "Pembersihan"
+
+msgid "The update could not be started."
+msgstr "Pembaruan tidak bisa dimulai."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Pembaruan terakhir: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Pembaruan berikutnya: %s"
+
+msgid "The last update had a problem."
+msgstr "Pembaruan terakhir mengalami masalah."
+
+msgid "The update is paused"
+msgstr "Pembaruan dijeda"
+
+msgid "Looking for updates..."
+msgstr "Mencari pembaruan..."
+
+msgid "Not checked for updates yet"
+msgstr "Belum memeriksa pembaruan"
+
+msgid "Everything is up to date"
+msgstr "Semuanya sudah terbaru"
+
+msgid "1 update available"
+msgstr "1 pembaruan tersedia"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d pembaruan tersedia"
+
+msgid "Could not save the setting."
+msgstr "Tidak bisa menyimpan pengaturan."
+
+msgid "The setting was not changed: no permission."
+msgstr "Pengaturan tidak diubah: tidak ada izin."
+
+msgid "Update now"
+msgstr "Perbarui sekarang"
+
+msgid "Update and shut down"
+msgstr "Perbarui lalu matikan"
+
+msgid "Update and restart"
+msgstr "Perbarui lalu mulai ulang"
+
+msgid "More update options"
+msgstr "Opsi pembaruan lainnya"
+
+msgid "Check for updates"
+msgstr "Periksa pembaruan"
+
+msgid "Show log"
+msgstr "Tampilkan log"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+msgid "Click to see what it is doing"
+msgstr "Klik untuk melihat yang sedang dikerjakan"
+
+msgid "Click to update now"
+msgstr "Klik untuk memperbarui sekarang"
+
+msgid "Dismiss"
+msgstr "Tutup"
+
+#, c-format
+msgid "Version %s"
+msgstr "Versi %s"
+
+msgid "Starting the update..."
+msgstr "Memulai pembaruan..."
+
+msgid "Paused"
+msgstr "Dijeda"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d dari %d"
+
+msgid "Update progress"
+msgstr "Kemajuan pembaruan"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Biarkan komputer tetap menyala sampai selesai."
+
+msgid "The computer shuts down when the update is done."
+msgstr "Komputer akan mati setelah pembaruan selesai."
+
+msgid "The computer restarts when the update is done."
+msgstr "Komputer akan mulai ulang setelah pembaruan selesai."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Semua yang lain tetap berjalan. Log menjelaskan apa yang salah."
+
+msgid "It is finished on the next run."
+msgstr "Akan diselesaikan pada proses berikutnya."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Mulai ulang kapan saja Anda sempat. Tidak ada yang mulai ulang dengan sendirinya."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Paket ini tidak bisa diperbarui dan dilewati. Akan dicoba lagi nanti."
+
+msgid "Needs a look"
+msgstr "Perlu diperiksa"
+
+msgid "Update automatically"
+msgstr "Perbarui otomatis"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Pembaruan dipasang di latar belakang, tanpa kata sandi dan tanpa pertanyaan."
+
+msgid "How often to update"
+msgstr "Seberapa sering memperbarui"
+
+msgid "Looking..."
+msgstr "Mencari..."
+
+msgid "On AC power"
+msgstr "Tersambung listrik"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "Dengan baterai (%d%%)"
+
+msgid "On battery"
+msgstr "Dengan baterai"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Pembaruan menunggu sampai komputer tersambung listrik."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Pembaruan menunggu saat baterai di bawah %d%%."
+
+msgid "Updates wait until it is closed."
+msgstr "Pembaruan menunggu sampai itu ditutup."
+
+msgid "No game running"
+msgstr "Tidak ada game berjalan"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Pembaruan menunggu agar tidak mengganggu."
+
+msgid "Package system is free"
+msgstr "Sistem paket bebas"
+
+msgid "Right now"
+msgstr "Saat ini"
+
+msgid "An update waits while any of these is orange"
+msgstr "Pembaruan menunggu selama salah satu dari ini berwarna oranye"
+
+msgid "System packages"
+msgstr "Paket sistem"
+
+msgid "AUR packages"
+msgstr "Paket AUR"
+
+msgid "Flatpaks"
+msgstr "Flatpak"
+
+msgid "AppImages"
+msgstr "AppImage"
+
+msgid "Last update"
+msgstr "Pembaruan terakhir"
+
+msgid "When"
+msgstr "Kapan"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Pemeriksaan berjalan setiap jam dan memperbarui setelah waktu di bawah ini berlalu."
+
+msgid "Wait while"
+msgstr "Tunggu selama"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Juga saat video diputar layar penuh. Dicoba lagi satu jam kemudian."
+
+msgid "Minimum battery level"
+msgstr "Tingkat baterai minimum"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Di bawah ini, laptop dengan baterai akan menunggu."
+
+msgid "No minimum"
+msgstr "Tanpa minimum"
+
+msgid "Automatic"
+msgstr "Otomatis"
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "For example: linux nvidia"
+msgstr "Contoh: linux nvidia"
+
+msgid "Sources"
+msgstr "Sumber"
+
+msgid "Always updated, with pacman."
+msgstr "Selalu diperbarui, dengan pacman."
+
+msgid "Always"
+msgstr "Selalu"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Dibangun dengan paru atau yay. Paket yang gagal dibangun akan ditahan."
+
+msgid "For the whole system and for each user."
+msgstr "Untuk seluruh sistem dan untuk setiap pengguna."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Lewat Gear Lever, selama Anda masuk."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Paket ini sering dibangun ulang dan lebih sering rusak daripada versi rilis."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Saat paket baru menggantikan yang lama, jawab ya alih-alih berhenti."
+
+msgid "Never update"
+msgstr "Jangan pernah perbarui"
+
+msgid "Package names, separated by spaces."
+msgstr "Nama paket, dipisahkan dengan spasi."
+
+msgid "Messages"
+msgstr "Pesan"
+
+msgid "Show notifications"
+msgstr "Tampilkan notifikasi"
+
+msgid "Turns off every message below."
+msgstr "Mematikan semua pesan di bawah."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Dengan bilah kemajuan yang punya tombol Jeda dan Batal."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Bilah menunggu di area notifikasi alih-alih muncul."
+
+msgid "Desktop"
+msgstr "Desktop"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Ikon muncul saat ada pembaruan yang menunggu. Klik untuk membuka jendela ini."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Ikon baki dan pemeriksaan hariannya sendiri. Tidak perlu selama pembaruan terpasang sendiri."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Pemberitahuan muncul di tengah pembaruan, jadi dimatikan."
+
+msgid "None"
+msgstr "Tidak ada"
+
+msgid "1 version"
+msgstr "1 versi"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s versi"
+
+msgid "After each update"
+msgstr "Setelah setiap pembaruan"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Menghapus berkas paket lama. Perangkat lunak terpasang tidak pernah disentuh."
+
+msgid "Cached versions to keep"
+msgstr "Versi dalam cache yang disimpan"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Lebih banyak versi memberi ruang untuk kembali ke versi lama."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Menghapus sisa build paru, yay, dan Shelly. Resepnya tetap ada."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Ini menghapus perangkat lunak terpasang, jadi mati secara bawaan."
+
+msgid "Last run"
+msgstr "Proses terakhir"
+
+msgid "All runs"
+msgstr "Semua proses"
+
+msgid "Which log"
+msgstr "Log yang mana"
+
+msgid "Restart"
+msgstr "Mulai ulang"
+
+msgid "Restart automatically"
+msgstr "Mulai ulang otomatis"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Hanya saat tidak ada yang masuk, dan tidak pernah setelah pembaruan gagal."
+
+msgid "Never"
+msgstr "Tidak pernah"
+
+msgid "After a kernel update"
+msgstr "Setelah pembaruan kernel"
+
+msgid "After every update"
+msgstr "Setelah setiap pembaruan"
+
+msgid "A restart is planned to finish the update."
+msgstr "Mulai ulang dijadwalkan untuk menyelesaikan pembaruan."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Terjadi dengan sendirinya saat tidak ada yang masuk."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Komputer ini akan mulai ulang dalam %d menit untuk menyelesaikan pembaruan. Untuk menghentikannya, jalankan: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Kapan memperbarui"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Pembaruan hanya dimulai pada jam-jam ini. Perbarui sekarang bisa kapan saja."
+
+msgid "Any time"
+msgstr "Kapan saja"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "Antara %s dan %s"
+
+msgid "Language of this window"
+msgstr "Bahasa jendela ini"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Hanya untuk Anda. Notifikasi mengikuti desktop."
+
+msgid "System default"
+msgstr "Bawaan sistem"
+
+msgid "Could not save the language."
+msgstr "Tidak bisa menyimpan bahasa."

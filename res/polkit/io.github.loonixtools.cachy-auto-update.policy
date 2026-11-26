@@ -22,6 +22,16 @@
     <description xml:lang="ja">アップデートの設定を変更</description>
     <description xml:lang="zh_CN">更改更新设置</description>
     <description xml:lang="ko">업데이트 설정 변경</description>
+    <description xml:lang="pl">Zmień ustawienia aktualizacji</description>
+    <description xml:lang="tr">Güncelleme ayarlarını değiştir</description>
+    <description xml:lang="nl">De update-instellingen wijzigen</description>
+    <description xml:lang="uk">Змінити налаштування оновлень</description>
+    <description xml:lang="cs">Změnit nastavení aktualizací</description>
+    <description xml:lang="sv">Ändra uppdateringsinställningarna</description>
+    <description xml:lang="id">Ubah pengaturan pembaruan</description>
+    <description xml:lang="vi">Thay đổi cài đặt cập nhật</description>
+    <description xml:lang="hu">A frissítési beállítások módosítása</description>
+    <description xml:lang="ro">Schimbă setările de actualizare</description>
     <message>Changing the settings of CachyOS Auto-Update needs your password.</message>
     <message xml:lang="de">Zum Ändern der Einstellungen von CachyOS Auto-Update wird Ihr Passwort benötigt.</message>
     <message xml:lang="es">Para cambiar los ajustes de CachyOS Auto-Update se necesita tu contraseña.</message>
@@ -32,6 +42,16 @@
     <message xml:lang="ja">CachyOS Auto-Update の設定を変更するにはパスワードが必要です。</message>
     <message xml:lang="zh_CN">更改 CachyOS Auto-Update 的设置需要你的密码。</message>
     <message xml:lang="ko">CachyOS Auto-Update 설정을 변경하려면 비밀번호가 필요합니다.</message>
+    <message xml:lang="pl">Zmiana ustawień CachyOS Auto-Update wymaga twojego hasła.</message>
+    <message xml:lang="tr">CachyOS Auto-Update ayarlarını değiştirmek için parolanız gerekiyor.</message>
+    <message xml:lang="nl">Voor het wijzigen van de instellingen van CachyOS Auto-Update is je wachtwoord nodig.</message>
+    <message xml:lang="uk">Для зміни налаштувань CachyOS Auto-Update потрібен ваш пароль.</message>
+    <message xml:lang="cs">Ke změně nastavení CachyOS Auto-Update je potřeba vaše heslo.</message>
+    <message xml:lang="sv">Ditt lösenord behövs för att ändra inställningarna för CachyOS Auto-Update.</message>
+    <message xml:lang="id">Mengubah pengaturan CachyOS Auto-Update memerlukan kata sandi Anda.</message>
+    <message xml:lang="vi">Cần mật khẩu của bạn để thay đổi cài đặt của CachyOS Auto-Update.</message>
+    <message xml:lang="hu">A CachyOS Auto-Update beállításainak módosításához meg kell adnia a jelszavát.</message>
+    <message xml:lang="ro">Pentru a schimba setările CachyOS Auto-Update este nevoie de parola ta.</message>
     <defaults>
       <allow_any>auth_admin</allow_any>
       <allow_inactive>auth_admin</allow_inactive>

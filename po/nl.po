@@ -1,0 +1,764 @@
+# Dutch translation for cachy-auto-update.
+# Copyright (C) 2026 Felitendo
+# This file is distributed under the same license as cachy-auto-update.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cachy-auto-update 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/LoonixTools/cachy-auto-update/"
+"issues\n"
+"POT-Creation-Date: 2026-08-08 00:00+0200\n"
+"PO-Revision-Date: 2026-11-26 00:00+0100\n"
+"Last-Translator: cachy-auto-update contributors\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "ON"
+msgstr "AAN"
+
+#, c-format
+msgid "Unknown setting: %s"
+msgstr "Onbekende instelling: %s"
+
+#, c-format
+msgid "Not a valid value for %s: %s"
+msgstr "Geen geldige waarde voor %s: %s"
+
+msgid "Automatic updates"
+msgstr "Automatische updates"
+
+msgid "Notifications"
+msgstr "Meldingen"
+
+msgid "Show an icon in the system tray"
+msgstr "Een pictogram in het systeemvak tonen"
+
+msgid "Also run cachy-update"
+msgstr "Ook cachy-update uitvoeren"
+
+msgid "Show the CachyOS restart notice"
+msgstr "De herstartmelding van CachyOS tonen"
+
+msgid "Notify when an update starts"
+msgstr "Melden wanneer een update begint"
+
+msgid "Start the progress bar minimized"
+msgstr "De voortgangsbalk geminimaliseerd starten"
+
+msgid "Notify after a successful update"
+msgstr "Melden na een geslaagde update"
+
+msgid "Notify when something goes wrong"
+msgstr "Melden wanneer er iets misgaat"
+
+msgid "Postpone while a game is running"
+msgstr "Uitstellen terwijl een spel draait"
+
+msgid "Only update on mains power"
+msgstr "Alleen updaten op netstroom"
+
+msgid "Update AUR packages"
+msgstr "AUR-pakketten updaten"
+
+msgid "Update Flatpaks"
+msgstr "Flatpaks updaten"
+
+msgid "Update AppImages"
+msgstr "AppImages updaten"
+
+msgid "Also rebuild -git packages"
+msgstr "Ook -git-pakketten opnieuw bouwen"
+
+msgid "AUR helper"
+msgstr "AUR-hulpprogramma"
+
+msgid "Resolve package conflicts automatically"
+msgstr "Pakketconflicten automatisch oplossen"
+
+msgid "Trim the package cache"
+msgstr "De pakketcache inkorten"
+
+msgid "Clean the AUR build caches"
+msgstr "De AUR-buildcaches opschonen"
+
+msgid "Remove packages nothing needs any more"
+msgstr "Pakketten verwijderen die niets meer nodig heeft"
+
+msgid "Never update these packages"
+msgstr "Deze pakketten nooit updaten"
+
+msgid "running on battery"
+msgstr "op accu"
+
+#, c-format
+msgid "battery at %d%%, below the %d%% threshold"
+msgstr "accu op %d%%, onder de drempel van %d%%"
+
+msgid "a game is running (GameMode)"
+msgstr "er draait een spel (GameMode)"
+
+#, c-format
+msgid "a game is running (%s)"
+msgstr "er draait een spel (%s)"
+
+msgid "an application is blocking idle (fullscreen game or video)"
+msgstr "een toepassing blokkeert de stand-by (spel of video op volledig scherm)"
+
+msgid "pacman's database is locked by another process"
+msgstr "de database van pacman is vergrendeld door een ander proces"
+
+#, c-format
+msgid "%s is currently running"
+msgstr "%s is nu bezig"
+
+msgid "Pausing once the current step is done"
+msgstr "Pauzeert zodra de huidige stap klaar is"
+
+msgid "Stopping the update"
+msgstr "De update wordt gestopt"
+
+msgid "The current step is finished first. Please leave the computer switched on until then."
+msgstr "Eerst wordt de huidige stap afgemaakt. Laat de computer tot dan aan staan."
+
+msgid "Log"
+msgstr "Logboek"
+
+msgid "never"
+msgstr "nooit"
+
+msgid "just now"
+msgstr "zojuist"
+
+msgid "1 minute ago"
+msgstr "1 minuut geleden"
+
+#, c-format
+msgid "%d minutes ago"
+msgstr "%d minuten geleden"
+
+msgid "1 hour ago"
+msgstr "1 uur geleden"
+
+#, c-format
+msgid "%d hours ago"
+msgstr "%d uur geleden"
+
+msgid "1 day ago"
+msgstr "1 dag geleden"
+
+#, c-format
+msgid "%d days ago"
+msgstr "%d dagen geleden"
+
+msgid "every minute"
+msgstr "elke minuut"
+
+#, c-format
+msgid "every %d minutes"
+msgstr "elke %d minuten"
+
+msgid "every hour"
+msgstr "elk uur"
+
+#, c-format
+msgid "every %d hours"
+msgstr "elke %d uur"
+
+msgid "every day"
+msgstr "elke dag"
+
+#, c-format
+msgid "every %d days"
+msgstr "elke %d dagen"
+
+msgid "every week"
+msgstr "elke week"
+
+#, c-format
+msgid "every %d weeks"
+msgstr "elke %d weken"
+
+msgid "The update was stopped before it finished."
+msgstr "De update is gestopt voordat hij klaar was."
+
+msgid "Finishing an interrupted update"
+msgstr "Een onderbroken update afmaken"
+
+msgid "The last update was cut short, most likely because the machine was switched off. It is being finished now."
+msgstr "De laatste update is afgebroken, waarschijnlijk omdat de computer werd uitgezet. Hij wordt nu afgemaakt."
+
+msgid "Package database locked"
+msgstr "Pakketdatabase vergrendeld"
+
+msgid "pacman's lock file looks left over from an interrupted update. Updates are paused until it is cleared."
+msgstr "Het vergrendelingsbestand van pacman lijkt over te zijn van een onderbroken update. Updates zijn gepauzeerd tot het is verwijderd."
+
+msgid "Update failed"
+msgstr "Update mislukt"
+
+msgid "Something went wrong while updating. Run 'cachy-auto-update log' for details."
+msgstr "Er ging iets mis tijdens het updaten. Voer 'cachy-auto-update log' uit voor details."
+
+msgid "Update stopped"
+msgstr "Update gestopt"
+
+msgid "You can switch off the computer now. The update will run again later."
+msgstr "Je kunt de computer nu uitzetten. De update wordt later opnieuw uitgevoerd."
+
+msgid "System updated"
+msgstr "Systeem bijgewerkt"
+
+#, c-format
+msgid "%d updates were installed."
+msgstr "Er zijn %d updates geïnstalleerd."
+
+msgid "Some packages were held back"
+msgstr "Sommige pakketten zijn tegengehouden"
+
+#, c-format
+msgid "%s could not be updated and was skipped. Everything else is up to date."
+msgstr "%s kon niet worden bijgewerkt en is overgeslagen. Al het andere is bijgewerkt."
+
+msgid "This command has to run as root."
+msgstr "Deze opdracht moet als root worden uitgevoerd."
+
+msgid "Could not write the configuration file."
+msgstr "Kon het configuratiebestand niet schrijven."
+
+msgid "/etc/sudoers.d/cachy-auto-update is invalid; refusing to enable."
+msgstr "/etc/sudoers.d/cachy-auto-update is ongeldig; inschakelen geweigerd."
+
+msgid "Could not enable the systemd timer."
+msgstr "Kon de systemd-timer niet inschakelen."
+
+msgid "Automatic updates are on."
+msgstr "Automatische updates staan aan."
+
+msgid "No AUR helper found. Install paru or yay for AUR updates."
+msgstr "Geen AUR-hulpprogramma gevonden. Installeer paru of yay voor AUR-updates."
+
+msgid "base-devel is missing, so AUR packages cannot be built."
+msgstr "base-devel ontbreekt, dus AUR-pakketten kunnen niet worden gebouwd."
+
+msgid "Automatic updates are off."
+msgstr "Automatische updates staan uit."
+
+msgid "Notifications are on."
+msgstr "Meldingen staan aan."
+
+msgid "Notifications are off."
+msgstr "Meldingen staan uit."
+
+msgid "Usage: cachy-auto-update notifications on|off"
+msgstr "Gebruik: cachy-auto-update notifications on|off"
+
+msgid "Usage: cachy-auto-update config [list | get KEY | set KEY VALUE]"
+msgstr "Gebruik: cachy-auto-update config [list | get SLEUTEL | set SLEUTEL WAARDE]"
+
+msgid "OFF"
+msgstr "UIT"
+
+msgid "How often"
+msgstr "Hoe vaak"
+
+msgid "Last check"
+msgstr "Laatste controle"
+
+msgid "Last successful update"
+msgstr "Laatste geslaagde update"
+
+#, c-format
+msgid "%d packages"
+msgstr "%d pakketten"
+
+msgid "not scheduled"
+msgstr "niet gepland"
+
+msgid "unknown"
+msgstr "onbekend"
+
+msgid "Next scheduled run"
+msgstr "Volgende geplande run"
+
+msgid "The last run reported a problem. See 'cachy-auto-update log'."
+msgstr "De laatste run meldde een probleem. Zie 'cachy-auto-update log'."
+
+msgid "The last run was stopped before it finished."
+msgstr "De laatste run is gestopt voordat hij klaar was."
+
+msgid "The last run was cancelled. It will run again later."
+msgstr "De laatste run is geannuleerd. Hij wordt later opnieuw uitgevoerd."
+
+msgid "A restart is recommended to finish a kernel update."
+msgstr "Een herstart wordt aangeraden om een kernelupdate af te ronden."
+
+#, c-format
+msgid "Held back: %s"
+msgstr "Tegengehouden: %s"
+
+msgid "Current conditions:"
+msgstr "Huidige omstandigheden:"
+
+msgid "on AC power"
+msgstr "op netstroom"
+
+#, c-format
+msgid "on battery (%d%%, threshold %d%%)"
+msgstr "op accu (%d%%, drempel %d%%)"
+
+msgid "on battery"
+msgstr "op accu"
+
+msgid "no game detected"
+msgstr "geen spel gevonden"
+
+msgid "package system is free"
+msgstr "pakketsysteem is vrij"
+
+msgid "No log yet."
+msgstr "Nog geen logboek."
+
+msgid "Usage: cachy-auto-update [command]"
+msgstr "Gebruik: cachy-auto-update [opdracht]"
+
+msgid "Commands:"
+msgstr "Opdrachten:"
+
+msgid "Without a command the window opens."
+msgstr "Zonder opdracht opent het venster."
+
+#, c-format
+msgid "Unknown command: %s"
+msgstr "Onbekende opdracht: %s"
+
+msgid "Turn automatic updates on"
+msgstr "Automatische updates aanzetten"
+
+msgid "Turn automatic updates off"
+msgstr "Automatische updates uitzetten"
+
+msgid "Turn desktop notifications on or off"
+msgstr "Bureaubladmeldingen aan- of uitzetten"
+
+msgid "Show the current state and conditions"
+msgstr "De huidige status en omstandigheden tonen"
+
+msgid "Run an update now"
+msgstr "Nu een update uitvoeren"
+
+msgid "Show the log of the last run"
+msgstr "Het logboek van de laatste run tonen"
+
+msgid "Show or change a setting"
+msgstr "Een instelling tonen of wijzigen"
+
+msgid "Show this help"
+msgstr "Deze hulp tonen"
+
+msgid "Show the version"
+msgstr "De versie tonen"
+
+msgid "Finishing the installation"
+msgstr "De installatie afronden"
+
+msgid "Updating system packages"
+msgstr "Systeempakketten bijwerken"
+
+msgid "Downloading updates"
+msgstr "Updates downloaden"
+
+msgid "Preparing the update"
+msgstr "De update voorbereiden"
+
+msgid "Checking for updates"
+msgstr "Zoeken naar updates"
+
+msgid "Cleaning up after the update"
+msgstr "Opruimen na de update"
+
+msgid "Package"
+msgstr "Pakket"
+
+msgid "Installing updates"
+msgstr "Updates installeren"
+
+#, c-format
+msgid "%d packages are being updated. Please leave the computer switched on until this is done."
+msgstr "Er worden %d pakketten bijgewerkt. Laat de computer aan staan tot dit klaar is."
+
+msgid "Updating AUR packages"
+msgstr "AUR-pakketten bijwerken"
+
+msgid "Updating Flatpak apps"
+msgstr "Flatpak-apps bijwerken"
+
+msgid "Updating AppImages"
+msgstr "AppImages bijwerken"
+
+msgid "Overview"
+msgstr "Overzicht"
+
+msgid "Schedule"
+msgstr "Planning"
+
+msgid "What to update"
+msgstr "Wat updaten"
+
+msgid "Cleanup"
+msgstr "Opschonen"
+
+msgid "The update could not be started."
+msgstr "De update kon niet worden gestart."
+
+#, c-format
+msgid "Last update: %s"
+msgstr "Laatste update: %s"
+
+#, c-format
+msgid "Next update: %s"
+msgstr "Volgende update: %s"
+
+msgid "The last update had a problem."
+msgstr "De laatste update had een probleem."
+
+msgid "The update is paused"
+msgstr "De update is gepauzeerd"
+
+msgid "Looking for updates..."
+msgstr "Zoeken naar updates..."
+
+msgid "Not checked for updates yet"
+msgstr "Nog niet naar updates gezocht"
+
+msgid "Everything is up to date"
+msgstr "Alles is bijgewerkt"
+
+msgid "1 update available"
+msgstr "1 update beschikbaar"
+
+#, c-format
+msgid "%d updates available"
+msgstr "%d updates beschikbaar"
+
+msgid "Could not save the setting."
+msgstr "Kon de instelling niet opslaan."
+
+msgid "The setting was not changed: no permission."
+msgstr "De instelling is niet gewijzigd: geen toestemming."
+
+msgid "Update now"
+msgstr "Nu updaten"
+
+msgid "Update and shut down"
+msgstr "Updaten en uitschakelen"
+
+msgid "Update and restart"
+msgstr "Updaten en herstarten"
+
+msgid "More update options"
+msgstr "Meer updateopties"
+
+msgid "Check for updates"
+msgstr "Zoeken naar updates"
+
+msgid "Show log"
+msgstr "Logboek tonen"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Click to see what it is doing"
+msgstr "Klik om te zien wat het doet"
+
+msgid "Click to update now"
+msgstr "Klik om nu te updaten"
+
+msgid "Dismiss"
+msgstr "Sluiten"
+
+#, c-format
+msgid "Version %s"
+msgstr "Versie %s"
+
+msgid "Starting the update..."
+msgstr "De update starten..."
+
+msgid "Paused"
+msgstr "Gepauzeerd"
+
+#, c-format
+msgid "%d of %d"
+msgstr "%d van %d"
+
+msgid "Update progress"
+msgstr "Voortgang van de update"
+
+msgid "Please leave the computer switched on until this is done."
+msgstr "Laat de computer aan staan tot dit klaar is."
+
+msgid "The computer shuts down when the update is done."
+msgstr "De computer wordt uitgeschakeld als de update klaar is."
+
+msgid "The computer restarts when the update is done."
+msgstr "De computer herstart als de update klaar is."
+
+msgid "Everything else keeps working. The log says what went wrong."
+msgstr "Al het andere blijft werken. Het logboek vertelt wat er misging."
+
+msgid "It is finished on the next run."
+msgstr "Hij wordt bij de volgende run afgemaakt."
+
+msgid "Restart when it suits you. Nothing restarts by itself."
+msgstr "Herstart wanneer het jou uitkomt. Niets herstart vanzelf."
+
+msgid "These could not be updated and were skipped. They are tried again later."
+msgstr "Deze konden niet worden bijgewerkt en zijn overgeslagen. Ze worden later opnieuw geprobeerd."
+
+msgid "Needs a look"
+msgstr "Vraagt aandacht"
+
+msgid "Update automatically"
+msgstr "Automatisch updaten"
+
+msgid "Updates install in the background, with no password and no questions."
+msgstr "Updates worden op de achtergrond geïnstalleerd, zonder wachtwoord en zonder vragen."
+
+msgid "How often to update"
+msgstr "Hoe vaak updaten"
+
+msgid "Looking..."
+msgstr "Zoeken..."
+
+msgid "On AC power"
+msgstr "Op netstroom"
+
+#, c-format
+msgid "On battery (%d%%)"
+msgstr "Op accu (%d%%)"
+
+msgid "On battery"
+msgstr "Op accu"
+
+msgid "Updates wait until the computer is plugged in."
+msgstr "Updates wachten tot de computer is aangesloten."
+
+#, c-format
+msgid "Updates wait below %d%% battery."
+msgstr "Updates wachten onder %d%% accu."
+
+msgid "Updates wait until it is closed."
+msgstr "Updates wachten tot het is gesloten."
+
+msgid "No game running"
+msgstr "Er draait geen spel"
+
+msgid "Updates wait so they do not get in the way."
+msgstr "Updates wachten zodat ze niet in de weg zitten."
+
+msgid "Package system is free"
+msgstr "Pakketsysteem is vrij"
+
+msgid "Right now"
+msgstr "Nu"
+
+msgid "An update waits while any of these is orange"
+msgstr "Een update wacht zolang een van deze oranje is"
+
+msgid "System packages"
+msgstr "Systeempakketten"
+
+msgid "AUR packages"
+msgstr "AUR-pakketten"
+
+msgid "Flatpaks"
+msgstr "Flatpaks"
+
+msgid "AppImages"
+msgstr "AppImages"
+
+msgid "Last update"
+msgstr "Laatste update"
+
+msgid "When"
+msgstr "Wanneer"
+
+msgid "A check runs every hour and updates once the time below has passed."
+msgstr "Elk uur is er een controle, en er wordt geüpdatet zodra de tijd hieronder voorbij is."
+
+msgid "Wait while"
+msgstr "Wachten terwijl"
+
+msgid "Also while a video plays full screen. It tries again an hour later."
+msgstr "Ook terwijl een video op volledig scherm speelt. Een uur later wordt het opnieuw geprobeerd."
+
+msgid "Minimum battery level"
+msgstr "Minimaal accuniveau"
+
+msgid "Below this, a laptop on battery waits."
+msgstr "Daaronder wacht een laptop op accu."
+
+msgid "No minimum"
+msgstr "Geen minimum"
+
+msgid "Automatic"
+msgstr "Automatisch"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "For example: linux nvidia"
+msgstr "Bijvoorbeeld: linux nvidia"
+
+msgid "Sources"
+msgstr "Bronnen"
+
+msgid "Always updated, with pacman."
+msgstr "Altijd bijgewerkt, met pacman."
+
+msgid "Always"
+msgstr "Altijd"
+
+msgid "Built with paru or yay. One that does not build is held back."
+msgstr "Gebouwd met paru of yay. Een pakket dat niet bouwt, wordt tegengehouden."
+
+msgid "For the whole system and for each user."
+msgstr "Voor het hele systeem en voor elke gebruiker."
+
+msgid "Through Gear Lever, while you are logged in."
+msgstr "Via Gear Lever, terwijl je bent aangemeld."
+
+msgid "AUR"
+msgstr "AUR"
+
+msgid "They rebuild often and break more often than released versions."
+msgstr "Ze worden vaak opnieuw gebouwd en gaan vaker stuk dan uitgebrachte versies."
+
+msgid "When a new package replaces an old one, say yes instead of stopping."
+msgstr "Als een nieuw pakket een oud vervangt, ja zeggen in plaats van te stoppen."
+
+msgid "Never update"
+msgstr "Nooit updaten"
+
+msgid "Package names, separated by spaces."
+msgstr "Pakketnamen, gescheiden door spaties."
+
+msgid "Messages"
+msgstr "Berichten"
+
+msgid "Show notifications"
+msgstr "Meldingen tonen"
+
+msgid "Turns off every message below."
+msgstr "Zet elk bericht hieronder uit."
+
+msgid "With a progress bar that has Pause and Cancel."
+msgstr "Met een voortgangsbalk met Pauzeren en Annuleren."
+
+msgid "It waits in the notification area instead of popping up."
+msgstr "Hij wacht in het meldingengebied in plaats van op te duiken."
+
+msgid "Desktop"
+msgstr "Bureaublad"
+
+msgid "It shows when updates are waiting. A click opens this window."
+msgstr "Het toont wanneer er updates wachten. Een klik opent dit venster."
+
+msgid "Its own tray icon and its daily check. Not needed while updates install by themselves."
+msgstr "Een eigen pictogram in het systeemvak en een dagelijkse controle. Niet nodig zolang updates zichzelf installeren."
+
+msgid "It pops up in the middle of an update, so it is off."
+msgstr "Hij duikt op midden in een update, dus staat hij uit."
+
+msgid "None"
+msgstr "Geen"
+
+msgid "1 version"
+msgstr "1 versie"
+
+#, c-format
+msgid "%s versions"
+msgstr "%s versies"
+
+msgid "After each update"
+msgstr "Na elke update"
+
+msgid "Removes old package files. Installed software is never touched."
+msgstr "Verwijdert oude pakketbestanden. Geïnstalleerde software wordt nooit aangeraakt."
+
+msgid "Cached versions to keep"
+msgstr "Te bewaren versies in de cache"
+
+msgid "More versions leave room to go back to an older one."
+msgstr "Meer versies laten ruimte om terug te gaan naar een oudere."
+
+msgid "Removes build leftovers of paru, yay and Shelly. The recipes stay."
+msgstr "Verwijdert bouwresten van paru, yay en Shelly. De recepten blijven."
+
+msgid "This removes installed software, so it is off by default."
+msgstr "Dit verwijdert geïnstalleerde software, dus het staat standaard uit."
+
+msgid "Last run"
+msgstr "Laatste run"
+
+msgid "All runs"
+msgstr "Alle runs"
+
+msgid "Which log"
+msgstr "Welk logboek"
+
+msgid "Restart"
+msgstr "Herstarten"
+
+msgid "Restart automatically"
+msgstr "Automatisch herstarten"
+
+msgid "Only while nobody is logged in, and never after a failed update."
+msgstr "Alleen als niemand is aangemeld, en nooit na een mislukte update."
+
+msgid "Never"
+msgstr "Nooit"
+
+msgid "After a kernel update"
+msgstr "Na een kernelupdate"
+
+msgid "After every update"
+msgstr "Na elke update"
+
+msgid "A restart is planned to finish the update."
+msgstr "Er is een herstart gepland om de update af te ronden."
+
+msgid "It happens by itself once nobody is logged in."
+msgstr "Het gebeurt vanzelf zodra niemand is aangemeld."
+
+#, c-format
+msgid "This computer restarts in %d minutes to finish an update. To stop it, run: sudo shutdown -c"
+msgstr "Deze computer herstart over %d minuten om een update af te ronden. Om dit te stoppen, voer uit: sudo shutdown -c"
+
+msgid "When to update"
+msgstr "Wanneer updaten"
+
+msgid "Updates only start in these hours. Update now works at any time."
+msgstr "Updates beginnen alleen in deze uren. Nu updaten werkt altijd."
+
+msgid "Any time"
+msgstr "Op elk moment"
+
+#, c-format
+msgid "Between %s and %s"
+msgstr "Tussen %s en %s"
+
+msgid "Language of this window"
+msgstr "Taal van dit venster"
+
+msgid "Just for you. Notifications follow the desktop."
+msgstr "Alleen voor jou. Meldingen volgen het bureaublad."
+
+msgid "System default"
+msgstr "Systeemstandaard"
+
+msgid "Could not save the language."
+msgstr "Kon de taal niet opslaan."

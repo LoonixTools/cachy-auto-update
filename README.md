@@ -116,8 +116,9 @@ stays in the notification area and does not pop up. Click the notification icon 
 
 ### Language
 
-The window speaks English, German, Spanish, French, Italian, Brazilian Portuguese, Russian, Japanese,
-Simplified Chinese and Korean. It follows the language of your desktop. To pick another one, open
+The window speaks 20 languages: English, Czech, Dutch, French, German, Hungarian, Indonesian, Italian,
+Japanese, Korean, Polish, Brazilian Portuguese, Romanian, Russian, Simplified Chinese, Spanish, Swedish,
+Turkish, Ukrainian and Vietnamese. It follows the language of your desktop. To pick another one, open
 **Notifications** and choose it under **Language of this window**. It changes at once, also in the
 tray icon, and only for you.
 
